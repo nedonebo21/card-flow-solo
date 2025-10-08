@@ -1,0 +1,9 @@
+@use 'themes/dark' as dark;
+@use 'variables/global' as global;
+@use 'reset';
+
+body {
+   font: var(--font-base-regular);
+   color: var(--color-light-100);
+   background-color: var(--color-dark-900);
+}

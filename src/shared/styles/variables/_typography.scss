@@ -1,0 +1,56 @@
+:root {
+   --font-family-primary: 'Roboto', sans-serif;
+
+   // line heights
+   --line-height-sm: 1.3333;
+   --line-height-base: 1.5;
+   --line-height-lg: 1.7142;
+   --line-height-xl: 1.8;
+
+   // font-sizes
+   --font-size-xs: 0.75rem; // 12px
+   --font-size-sm: 0.875rem; // 14px
+   --font-size-base: 1rem; // 16px
+   --font-size-lg: 1.125rem; // 18px
+   --font-size-xl: 1.25rem; // 20px
+   --font-size-2xl: 1.625rem; // 26px
+
+   // font weights
+   --font-weight-regular: 400;
+   --font-weight-bold: 700;
+
+   // extra small text (12px)
+   --font-xs-regular: var(--font-weight-regular) var(--font-size-xs) / var(--line-height-sm)
+      var(--font-family-primary);
+   --font-xs-bold: var(--font-weight-bold) var(--font-size-xs) / var(--line-height-sm)
+      var(--font-family-primary);
+
+   // small text (14px)
+   --font-sm-regular: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-lg)
+      var(--font-family-primary);
+   --font-sm-bold: var(--font-weight-bold) var(--font-size-sm) / var(--line-height-lg)
+      var(--font-family-primary);
+
+   // base text (16px)
+   --font-base-regular: var(--font-weight-regular) var(--font-size-base) / var(--line-height-base)
+      var(--font-family-primary);
+   --font-base-bold: var(--font-weight-bold) var(--font-size-base) / var(--line-height-base)
+      var(--font-family-primary);
+
+   // large text (18px)
+   --font-lg-regular: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-sm)
+      var(--font-family-primary);
+   --font-lg-bold: var(--font-weight-bold) var(--font-size-lg) / var(--line-height-sm)
+      var(--font-family-primary);
+
+   // extra large text (20px)
+   --font-xl-regular: var(--font-weight-regular) var(--font-size-xl) / var(--line-height-xl)
+      var(--font-family-primary);
+   --font-xl-bold: var(--font-weight-bold) var(--font-size-xl) / var(--line-height-xl)
+      var(--font-family-primary);
+
+   // 2x-extra large text (26px)
+   --font-2xl-regular: var(--font-weight-regular) var(--font-size-2xl) / 1.3846
+      var(--font-family-primary);
+   --font-2xl-bold: var(--font-weight-bold) var(--font-size-2xl) / 1.3846 var(--font-family-primary);
+}
