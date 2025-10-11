@@ -1,0 +1,68 @@
+.typography {
+   margin: 0;
+}
+
+.h1 {
+   font: var(--font-2xl-bold);
+}
+
+.h2 {
+   font: var(--font-xl-bold);
+}
+
+.h3 {
+   font: var(--font-lg-bold);
+}
+
+.h4 {
+   font: var(--font-base-bold);
+}
+
+.body1 {
+   font: var(--font-base-regular);
+}
+
+.body2 {
+   font: var(--font-sm-regular);
+}
+
+.subtitle1 {
+   font: var(--font-base-bold);
+}
+
+.subtitle2 {
+   font: var(--font-sm-bold);
+}
+
+.caption,
+.error,
+.warning {
+   font: var(--font-xs-regular);
+}
+
+.overline {
+   font: var(--font-xs-bold);
+}
+
+.link1,
+.link2 {
+   cursor: pointer;
+   color: var(--color-info-500);
+   text-decoration: underline;
+}
+
+.link1 {
+   font: var(--font-sm-regular);
+}
+
+.link2 {
+   font: var(--font-xs-regular);
+}
+
+.error {
+   color: var(--color-danger-500);
+}
+
+.warning {
+   color: var(--color-warning-500);
+}
