@@ -48,7 +48,7 @@ const classes = ({
    className?: string
 }) => clsx(styles.button, styles[variant], styles[weight], styles[color], className)
 
-export const Typography = <T extends ElementType>({
+export const Typography = <T extends ElementType = ElementType>({
    as,
    variant = 'body1',
    weight = 'regular',
