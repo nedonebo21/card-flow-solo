@@ -62,6 +62,7 @@ export const SecondaryWithIcon: Story = {
 }
 
 export const FullWidth: Story = {
+   parameters: { layout: 'padded' },
    args: {
       variant: 'primary',
       children: 'Full Width',

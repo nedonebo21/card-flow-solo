@@ -1,6 +1,18 @@
 import type { ComponentProps, ElementType, ReactNode } from 'react'
 
+import { clsx } from 'clsx'
+
 import styles from './button.module.scss'
+
+const buttonVariants = ({
+   variant = 'primary',
+   fullWidth = false,
+   className,
+}: {
+   variant?: 'primary' | 'secondary' | 'link'
+   fullWidth?: boolean
+   className?: string
+}) => clsx(styles.button, styles[variant], fullWidth && styles.fullWidth, className)
 
 export type ButtonOwnProps<T extends ElementType = ElementType> = {
    as?: T
@@ -21,9 +33,5 @@ export const Button = <T extends ElementType = 'button'>({
 }: ButtonProps<T>) => {
    const Component = as || 'button'
 
-   const classes = [styles.button, styles[variant], fullWidth && styles.fullWidth, className]
-      .filter(Boolean)
-      .join(' ')
-
-   return <Component className={classes} {...rest} />
+   return <Component {...rest} className={buttonVariants({ variant, fullWidth, className })} />
 }
