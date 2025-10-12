@@ -36,7 +36,7 @@ const styles: CSSProperties = {
    gap: 10,
 }
 
-export const AllTypography: Story = {
+export const All: Story = {
    args: { children: 'Example' },
    render: () => (
       <div style={styles}>
