@@ -15,10 +15,12 @@ export type CheckboxProps = {
    label?: string
 } & RadixCheckboxProps
 
-export const Checkbox = ({ className, label, children, checked, ...rest }: CheckboxProps) => {
+export const Checkbox = ({ className, label, children, checked, id, ...rest }: CheckboxProps) => {
+   const checkboxId = id || rest.name || `checkbox-${Math.random().toString(36).slice(2, 9)}`
+
    return (
       <label className={styles.checkboxWrapper}>
-         <RadixCheckbox {...rest} className={clsx(styles.checkbox, className)}>
+         <RadixCheckbox {...rest} id={checkboxId} className={clsx(styles.checkbox, className)}>
             <span className={styles.checkboxIndicator}>
                {checked && (
                   <CheckIcon width={14} height={11} className={styles.checkboxIndicator} />
@@ -28,7 +30,8 @@ export const Checkbox = ({ className, label, children, checked, ...rest }: Check
          {(label || children) && (
             <Typography
                variant={'body2'}
-               as={'span'}
+               as={'label'}
+               htmlFor={checkboxId}
                className={styles.checkboxLabel}
                aria-disabled={!!rest.disabled}
             >
