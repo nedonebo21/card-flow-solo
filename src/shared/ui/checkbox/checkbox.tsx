@@ -28,7 +28,7 @@ export const Checkbox = ({
    const checkboxId = id ?? `checkbox-${generatedId}`
 
    return (
-      <label className={styles.checkboxWrapper}>
+      <div className={styles.checkboxWrapper}>
          <RadixCheckbox.Root
             id={checkboxId}
             className={clsx(styles.checkbox, className)}
@@ -52,6 +52,6 @@ export const Checkbox = ({
                {label || children}
             </Typography>
          )}
-      </label>
+      </div>
    )
 }

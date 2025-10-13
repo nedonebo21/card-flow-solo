@@ -1,8 +1,25 @@
+.checkboxLabel {
+   cursor: pointer;
+   user-select: none;
+   padding-left: 11px;
+
+   &[aria-disabled='true'] {
+      color: var(--color-dark-100);
+   }
+}
+
 .checkboxWrapper {
    cursor: pointer;
    display: flex;
-   gap: 11px;
    align-items: flex-start;
+
+   &:has(.checkbox:disabled) {
+      cursor: not-allowed;
+
+      .checkboxLabel {
+         cursor: not-allowed;
+      }
+   }
 }
 
 .checkbox {
@@ -43,7 +60,6 @@
    }
 
    &:disabled {
-      cursor: not-allowed;
       opacity: 0.5;
 
       &:hover {
@@ -74,13 +90,4 @@
    z-index: 1;
    display: flex;
    color: var(--color-dark-900);
-}
-
-.checkboxLabel {
-   user-select: none;
-
-   &[aria-disabled='true'] {
-      cursor: not-allowed;
-      color: var(--color-dark-100);
-   }
 }
