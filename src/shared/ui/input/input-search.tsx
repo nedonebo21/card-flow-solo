@@ -33,16 +33,18 @@ export const InputSearch = memo(
          [handleSearch, onKeyDown]
       )
 
+      const showClearButton = endIcon && value
+
       const SearchButton = () => (
          <button className={styles.iconWrapper} onClick={handleSearch} type={'button'}>
             <SearchIcon width={20} height={20} fill={'currentColor'} />
          </button>
       )
-      const ClearButton = () => (
+      const ClearButton = showClearButton ? (
          <button className={styles.iconWrapper} onClick={handleClear} type={'button'}>
             <CloseIcon width={20} height={20} />
          </button>
-      )
+      ) : null
 
       return (
          <Input
@@ -51,7 +53,7 @@ export const InputSearch = memo(
             value={value}
             onKeyDown={handleKeyDown}
             onChange={onChange}
-            endIcon={<ClearButton />}
+            endIcon={ClearButton}
             startIcon={<SearchButton />}
          />
       )
