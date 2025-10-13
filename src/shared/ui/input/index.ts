@@ -1,0 +1,4 @@
+export { Input } from './input'
+export { InputPassword } from './input-password'
+export { InputSearch } from './input-search'
+export { InputEmail } from './input-email'
