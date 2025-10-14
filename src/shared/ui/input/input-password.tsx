@@ -16,7 +16,7 @@ import styles from './input.module.scss'
 type InputPasswordProps = Omit<ComponentProps<typeof Input>, 'type' | 'endIcon'>
 
 export const InputPassword = memo(
-   ({ value, onChange, spellCheck = false, ...rest }: InputPasswordProps) => {
+   ({ spellCheck = false, className, ...rest }: InputPasswordProps) => {
       const [showPassword, setShowPassword] = useState(false)
       const [isCapslock, setIsCapslock] = useState(false)
 
@@ -50,12 +50,11 @@ export const InputPassword = memo(
       return (
          <>
             <Input
-               {...rest}
+               className={className}
                spellCheck={spellCheck}
-               value={value}
+               {...rest}
                onKeyUp={handleCapslock}
                onKeyDown={handleCapslock}
-               onChange={onChange}
                type={showPassword ? 'text' : 'password'}
                endIcon={passwordToggleButton}
             />

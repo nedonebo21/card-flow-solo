@@ -11,7 +11,16 @@ interface InputSearchProps extends Omit<ComponentProps<typeof Input>, 'type' | '
 }
 
 export const InputSearch = memo(
-   ({ value, onChange, onClear, endIcon, onSearch, onKeyDown, ...rest }: InputSearchProps) => {
+   ({
+      value,
+      onChange,
+      onClear,
+      endIcon,
+      onSearch,
+      onKeyDown,
+      className,
+      ...rest
+   }: InputSearchProps) => {
       const handleSearch = useCallback(() => {
          onSearch?.(String(value))
       }, [onSearch, value])
@@ -40,21 +49,22 @@ export const InputSearch = memo(
             <SearchIcon width={20} height={20} fill={'currentColor'} />
          </button>
       )
-      const ClearButton = showClearButton ? (
+      const ClearButton = () => (
          <button className={styles.iconWrapper} onClick={handleClear} type={'button'}>
             <CloseIcon width={20} height={20} />
          </button>
-      ) : null
+      )
 
       return (
          <Input
+            className={className}
+            value={value}
+            onChange={onChange}
             {...rest}
             type={'search'}
-            value={value}
             onKeyDown={handleKeyDown}
-            onChange={onChange}
-            endIcon={ClearButton}
             startIcon={<SearchButton />}
+            endIcon={showClearButton ? <ClearButton /> : endIcon}
          />
       )
    }

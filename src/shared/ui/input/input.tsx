@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import { type ComponentProps, type ReactNode, useId } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -21,11 +21,11 @@ export const Input = ({
    startIcon,
    endIcon,
    className = '',
-   value,
    id,
    ...rest
 }: InputProps) => {
-   const inputId = id || rest.name || `input-${Math.random().toString(36).slice(2, 9)}`
+   const generatedId = useId()
+   const inputId = id ?? `input-${generatedId}`
 
    const isError = error && errorMessage
 
@@ -45,10 +45,9 @@ export const Input = ({
             {startIcon && <span className={styles.startIcon}>{startIcon}</span>}
 
             <input
-               {...rest}
-               value={value}
-               id={inputId}
                className={clsx(styles.input, error && styles.error, className)}
+               {...rest}
+               id={inputId}
             />
 
             {endIcon && <span className={styles.endIcon}>{endIcon}</span>}
