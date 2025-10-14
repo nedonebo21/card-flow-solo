@@ -1,7 +1,5 @@
-import type { CheckboxProps as RadixCheckboxProps } from '@radix-ui/react-checkbox'
-
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
-import { type ReactNode, useId } from 'react'
+import { type ComponentProps, useId } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -10,20 +8,13 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './checkbox.module.scss'
 
-export type CheckboxProps = {
-   children?: ReactNode
-   label?: string
-} & RadixCheckboxProps
-
 export const Checkbox = ({
    className,
-   label,
-   children,
-   checked,
-   id,
    disabled,
+   id,
+   label,
    ...rest
-}: CheckboxProps) => {
+}: ComponentProps<typeof RadixCheckbox.Root> & { label?: string }) => {
    const generatedId = useId()
    const checkboxId = id ?? `checkbox-${generatedId}`
 
@@ -41,15 +32,15 @@ export const Checkbox = ({
                </RadixCheckbox.CheckboxIndicator>
             </span>
          </RadixCheckbox.Root>
-         {(label || children) && (
+         {label && (
             <Typography
                variant={'body2'}
                as={'label'}
                htmlFor={checkboxId}
                className={styles.checkboxLabel}
-               aria-disabled={!!disabled}
+               aria-disabled={disabled}
             >
-               {label || children}
+               {label}
             </Typography>
          )}
       </div>
