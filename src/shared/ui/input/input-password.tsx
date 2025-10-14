@@ -20,6 +20,8 @@ export const InputPassword = memo(
       const [showPassword, setShowPassword] = useState(false)
       const [isCapslock, setIsCapslock] = useState(false)
 
+      const type = showPassword ? 'text' : 'password'
+
       const togglePassword = useCallback(() => {
          setShowPassword(prev => !prev)
       }, [])
@@ -55,7 +57,7 @@ export const InputPassword = memo(
                {...rest}
                onKeyUp={handleCapslock}
                onKeyDown={handleCapslock}
-               type={showPassword ? 'text' : 'password'}
+               type={type}
                endIcon={passwordToggleButton}
             />
             {isCapslock && <Typography variant={'warning'}>Caps Lock включен</Typography>}
