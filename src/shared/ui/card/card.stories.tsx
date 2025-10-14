@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import type { Button } from '@/shared/ui/button'
-
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 
@@ -13,7 +11,7 @@ const meta = {
    argTypes: {
       as: { control: 'select', options: ['div', 'section', 'article', 'form', 'main', 'aside'] },
    },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof Card>
 
 export default meta
 

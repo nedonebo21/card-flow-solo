@@ -1,16 +1,24 @@
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import type { ComponentProps, ElementType, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 
 import styles from './card.module.scss'
 
-type CardProps<T extends ElementType = ElementType> = {
+export type CardOwnProps<T extends ElementType = ElementType> = {
    as?: T
    className?: string
    children?: ReactNode
-} & ComponentPropsWithoutRef<T>
+} & ComponentProps<'div'>
 
-export const Card = ({ as, className, children, ...rest }: CardProps) => {
+export type CardProps<T extends ElementType = ElementType> = CardOwnProps<T> &
+   Omit<ComponentProps<T>, keyof CardOwnProps>
+
+export const Card = <T extends ElementType = 'div'>({
+   as,
+   className,
+   children,
+   ...rest
+}: CardProps<T>) => {
    const Component = as || 'div'
 
    return (
