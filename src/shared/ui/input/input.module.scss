@@ -34,6 +34,12 @@
    color: var(--color-light-100);
 }
 
+.inputWrapper:has(.input.error) .iconWrapper,
+.inputWrapper:has(.input.error) .startIcon,
+.inputWrapper:has(.input.error) .endIcon {
+   color: var(--color-danger-300);
+}
+
 .inputWrapper .iconWrapper:not(:has(.input:disabled)):hover {
    cursor: pointer;
    transform: scale(1.1);
@@ -44,13 +50,8 @@
    color: var(--color-light-100);
 }
 
-.inputWrapper:not(:focus-within, :has(.input:disabled)):hover {
-   border-color: var(--color-dark-100);
-   background-color: var(--color-dark-700);
-}
-
-.inputWrapper:focus-within:not(:has(.input:disabled)):hover {
-   background-color: var(--color-dark-700);
+.inputWrapper:has(.input.error) {
+   border-color: var(--color-danger-300);
 }
 
 .inputWrapper .input {
@@ -69,10 +70,6 @@
    transition: all 0.2s ease 0s;
 }
 
-.inputWrapper .input::placeholder {
-   font: var(--font-base-regular);
-}
-
 .inputWrapper .input:focus-visible {
    color: var(--color-light-100);
 }
@@ -81,9 +78,26 @@
    cursor: default;
 }
 
-.inputWrapper .error {
-   border-color: var(--color-danger-300);
+.inputWrapper:has(.input.error) .input {
    color: var(--color-danger-300);
+}
+
+.inputWrapper:not(:focus-within, :has(.input:disabled)):hover {
+   border-color: var(--color-dark-100);
+   background-color: var(--color-dark-700);
+}
+
+.inputWrapper:has(.input.error):hover {
+   border-color: var(--color-danger-300);
+   background-color: var(--color-dark-700);
+}
+
+.inputWrapper:focus-within:not(:has(.input:disabled)):hover {
+   background-color: var(--color-dark-700);
+}
+
+.inputWrapper .input::placeholder {
+   font: var(--font-base-regular);
 }
 
 .inputWrapper .error::placeholder {

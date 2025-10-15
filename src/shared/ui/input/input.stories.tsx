@@ -68,3 +68,13 @@ export const Disabled: Story = {
       />
    ),
 }
+
+export const Error: Story = {
+   render: () => (
+      <Input
+         error
+         value={'Value'}
+         startIcon={<PencilIcon fill={'currentColor'} width={20} height={20} />}
+      />
+   ),
+}
