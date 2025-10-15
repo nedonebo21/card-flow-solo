@@ -27,8 +27,6 @@ export const Input = ({
    const generatedId = useId()
    const inputId = id ?? `input-${generatedId}`
 
-   const isError = error && errorMessage
-
    return (
       <>
          {label && (
@@ -52,7 +50,7 @@ export const Input = ({
 
             {endIcon && <span className={styles.endIcon}>{endIcon}</span>}
          </div>
-         {isError && <Typography variant={'error'}>{errorMessage}</Typography>}
+         {error && <Typography variant={'error'}>{errorMessage ?? 'invalid value'}</Typography>}
       </>
    )
 }
