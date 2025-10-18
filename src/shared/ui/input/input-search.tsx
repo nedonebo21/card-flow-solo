@@ -1,71 +1,44 @@
-import { type KeyboardEvent, type ChangeEvent, type ComponentProps, useCallback, memo } from 'react'
+import type { InputProps } from '@/shared/ui/input/input'
+
+import { memo, useMemo } from 'react'
 
 import { CloseIcon, SearchIcon } from '@/shared/ui/icons'
 import { Input } from '@/shared/ui/input/input'
 
 import styles from './input.module.scss'
 
-interface InputSearchProps extends Omit<ComponentProps<typeof Input>, 'type' | 'startIcon'> {
-   onSearch?: (value: string) => void
+type InputSearchProps = {
    onClear?: () => void
-}
+} & Omit<InputProps, 'type' | 'startIcon' | 'endIcon'>
 
-export const InputSearch = memo(
-   ({
-      value,
-      onChange,
-      onClear,
-      endIcon,
-      onSearch,
-      onKeyDown,
-      className,
-      ...rest
-   }: InputSearchProps) => {
-      const handleSearch = useCallback(() => {
-         onSearch?.(String(value))
-      }, [onSearch, value])
+export const InputSearch = memo(({ onClear, className, disabled, ...rest }: InputSearchProps) => {
+   const showClearButton = !!onClear && !!rest?.value
 
-      const handleClear = useCallback(() => {
-         const e = { target: { value: '' } } as ChangeEvent<HTMLInputElement>
-
-         onChange?.(e)
-         onClear?.()
-      }, [onChange, onClear])
-
-      const handleKeyDown = useCallback(
-         (e: KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === 'Enter') {
-               handleSearch()
-            }
-            onKeyDown?.(e)
-         },
-         [handleSearch, onKeyDown]
-      )
-
-      const showClearButton = endIcon && value
-
-      const SearchButton = () => (
-         <button className={styles.iconWrapper} onClick={handleSearch} type={'button'}>
-            <SearchIcon width={20} height={20} fill={'currentColor'} />
-         </button>
-      )
-      const ClearButton = () => (
-         <button className={styles.iconWrapper} onClick={handleClear} type={'button'}>
-            <CloseIcon width={20} height={20} />
-         </button>
-      )
+   const clearButton = useMemo(() => {
+      if (!showClearButton) {
+         return null
+      }
 
       return (
-         <Input
-            className={className}
-            value={value}
-            onChange={onChange}
-            {...rest}
-            type={'search'}
-            onKeyDown={handleKeyDown}
-            startIcon={<SearchButton />}
-            endIcon={showClearButton ? <ClearButton /> : endIcon}
-         />
+         <button
+            className={styles.iconWrapper}
+            disabled={disabled}
+            onClick={onClear}
+            type={'button'}
+         >
+            <CloseIcon width={20} height={20} color={'currentColor'} />
+         </button>
       )
-   }
-)
+   }, [disabled, showClearButton, onClear])
+
+   return (
+      <Input
+         className={className}
+         disabled={disabled}
+         {...rest}
+         type={'search'}
+         startIcon={<SearchIcon width={20} height={20} color={'currentColor'} />}
+         endIcon={clearButton}
+      />
+   )
+})
