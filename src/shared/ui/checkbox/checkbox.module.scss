@@ -11,7 +11,7 @@
 .checkboxWrapper {
    cursor: pointer;
    display: flex;
-   align-items: flex-start;
+   align-items: center;
 
    &:has(.checkbox:disabled) {
       cursor: not-allowed;
