@@ -1,11 +1,4 @@
-import {
-   type ComponentProps,
-   type KeyboardEvent,
-   memo,
-   useCallback,
-   useMemo,
-   useState,
-} from 'react'
+import { type ComponentProps, type KeyboardEvent, memo, useCallback, useState } from 'react'
 
 import { EyeIcon, EyeOffIcon } from '@/shared/ui/icons'
 import { Input } from '@/shared/ui/input/input'
@@ -16,9 +9,9 @@ import styles from './input.module.scss'
 type InputPasswordProps = Omit<ComponentProps<typeof Input>, 'type' | 'endIcon'>
 
 export const InputPassword = memo(
-   ({ spellCheck = false, className, ...rest }: InputPasswordProps) => {
+   ({ spellCheck = false, className, disabled, ...rest }: InputPasswordProps) => {
       const [showPassword, setShowPassword] = useState(false)
-      const [isCapslock, setIsCapslock] = useState(false)
+      const [isCapslockOn, setIsCapslockOn] = useState(false)
 
       const type = showPassword ? 'text' : 'password'
 
@@ -26,27 +19,23 @@ export const InputPassword = memo(
          setShowPassword(prev => !prev)
       }, [])
 
-      const handleCapslock = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-         setIsCapslock(e.getModifierState('CapsLock'))
+      const handleCapslockOn = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+         setIsCapslockOn(e.getModifierState('CapsLock'))
       }, [])
 
-      const passwordToggleButton = useMemo(
-         () =>
-            showPassword ? (
-               <button className={styles.iconWrapper} type={'button'}>
-                  <EyeOffIcon
-                     width={20}
-                     height={20}
-                     fill={'currentColor'}
-                     onClick={togglePassword}
-                  />
-               </button>
+      const passwordToggleButton = (
+         <button
+            disabled={disabled}
+            className={styles.iconWrapper}
+            type={'button'}
+            onClick={togglePassword}
+         >
+            {showPassword ? (
+               <EyeOffIcon width={20} height={20} color={'currentColor'} />
             ) : (
-               <button className={styles.iconWrapper} type={'button'}>
-                  <EyeIcon width={20} height={20} fill={'currentColor'} onClick={togglePassword} />
-               </button>
-            ),
-         [showPassword, togglePassword]
+               <EyeIcon width={20} height={20} color={'currentColor'} />
+            )}
+         </button>
       )
 
       return (
@@ -55,12 +44,14 @@ export const InputPassword = memo(
                className={className}
                spellCheck={spellCheck}
                {...rest}
-               onKeyUp={handleCapslock}
-               onKeyDown={handleCapslock}
+               onKeyDown={e => {
+                  rest.onKeyDown?.(e)
+                  handleCapslockOn(e)
+               }}
                type={type}
                endIcon={passwordToggleButton}
             />
-            {isCapslock && <Typography variant={'warning'}>Caps Lock включен</Typography>}
+            {isCapslockOn && <Typography variant={'warning'}>Caps Lock включен</Typography>}
          </>
       )
    }
