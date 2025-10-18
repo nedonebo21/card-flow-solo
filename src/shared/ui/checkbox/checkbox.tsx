@@ -8,23 +8,30 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './checkbox.module.scss'
 
+type CheckboxProps = {
+   label?: string
+   wrapperProps?: ComponentProps<'div'>
+} & Omit<ComponentProps<typeof RadixCheckbox.Root>, 'asChild' | 'children'>
+
 export const Checkbox = ({
    className,
    disabled,
    id,
    label,
+   wrapperProps,
    ...rest
-}: ComponentProps<typeof RadixCheckbox.Root> & { label?: string }) => {
+}: CheckboxProps) => {
    const generatedId = useId()
    const checkboxId = id ?? `checkbox-${generatedId}`
 
    return (
-      <div className={styles.checkboxWrapper}>
+      <div className={clsx(styles.checkboxWrapper, wrapperProps?.className)} {...wrapperProps}>
          <RadixCheckbox.Root
             id={checkboxId}
             className={clsx(styles.checkbox, className)}
             disabled={disabled}
             {...rest}
+            asChild={undefined}
          >
             <span className={styles.checkboxIndicator}>
                <RadixCheckbox.CheckboxIndicator>
@@ -32,7 +39,7 @@ export const Checkbox = ({
                </RadixCheckbox.CheckboxIndicator>
             </span>
          </RadixCheckbox.Root>
-         {label && (
+         {!!label && (
             <Typography
                variant={'body2'}
                as={'label'}
