@@ -1,5 +1,7 @@
+import type { ComponentProps } from 'react'
+
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
-import { type ComponentProps, useId } from 'react'
+import { useId } from 'react'
 
 import { clsx } from 'clsx'
 
