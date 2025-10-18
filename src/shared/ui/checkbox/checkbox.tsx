@@ -30,6 +30,7 @@ export const Checkbox = ({
             id={checkboxId}
             className={clsx(styles.checkbox, className)}
             disabled={disabled}
+            aria-disabled={disabled}
             {...rest}
             asChild={undefined}
          >
