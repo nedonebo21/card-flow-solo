@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { CloseIcon, PencilIcon, TrashIcon } from '@/shared/ui/icons'
+import { PencilIcon, TrashIcon } from '@/shared/ui/icons'
 import { Input, InputEmail, InputPassword, InputSearch } from '@/shared/ui/input'
 
 const meta = {
@@ -41,7 +41,6 @@ export const SearchWithClear: Story = {
             value={value}
             onClear={() => setValue('')}
             onChange={e => setValue(e.target.value)}
-            endIcon={<CloseIcon fill={'currentColor'} width={20} height={20} />}
          />
       )
    },
@@ -72,9 +71,9 @@ export const Disabled: Story = {
 export const Error: Story = {
    render: () => (
       <Input
-         error
+         errorMessage={'Invalid Value'}
          value={'Value'}
-         startIcon={<PencilIcon fill={'currentColor'} width={20} height={20} />}
+         startIcon={<PencilIcon color={'currentColor'} width={20} height={20} />}
       />
    ),
 }
