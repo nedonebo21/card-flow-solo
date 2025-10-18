@@ -1,4 +1,8 @@
-import { type ComponentProps, type KeyboardEvent, memo, useCallback, useState } from 'react'
+import type { KeyboardEvent } from 'react'
+
+import type { InputProps } from '@/shared/ui/input/input'
+
+import { memo, useCallback, useState } from 'react'
 
 import { EyeIcon, EyeOffIcon } from '@/shared/ui/icons'
 import { Input } from '@/shared/ui/input/input'
@@ -6,7 +10,7 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './input.module.scss'
 
-type InputPasswordProps = Omit<ComponentProps<typeof Input>, 'type' | 'endIcon'>
+type InputPasswordProps = Omit<InputProps, 'type' | 'endIcon'>
 
 export const InputPassword = memo(
    ({ spellCheck = false, className, disabled, ...rest }: InputPasswordProps) => {
