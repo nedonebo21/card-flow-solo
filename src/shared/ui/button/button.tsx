@@ -26,7 +26,7 @@ export const Button = <T extends ElementType = 'button'>({
       {
          [styles.primary]: variant === 'primary',
          [styles.secondary]: variant === 'secondary',
-         fullWidth,
+         'full-width': fullWidth,
       },
       className
    )
