@@ -8,6 +8,30 @@ body {
    background-color: var(--color-dark-900);
 }
 
+.full-width {
+   width: 100%;
+}
+
+.no-wrap {
+   white-space: nowrap;
+}
+
+.align-left {
+   text-align: left;
+}
+
+.align-right {
+   text-align: right;
+}
+
+.align-center {
+   text-align: center;
+}
+
+.align-justify {
+   text-align: justify;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

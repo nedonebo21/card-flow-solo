@@ -9,6 +9,6 @@ export default defineConfig([
    ...vite,
    storybook.configs['flat/recommended'],
    {
-      ignores: ['.storybook/**/*.{js,ts,tsx}'],
-   },
+      ignores: ['.storybook/**/*.{js,ts,tsx}']
+   }
 ])
