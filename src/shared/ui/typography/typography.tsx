@@ -31,7 +31,7 @@ export type TypographyOwnProps<T extends ElementType = ElementType> = {
    variant?: TypographyVariant
    weight?: TypographyWeight
    color?: TypographyColor
-} & ComponentProps<'span'>
+}
 
 export type TypographyProps<T extends ElementType> = TypographyOwnProps<T> &
    Omit<ComponentProps<T>, keyof TypographyOwnProps>
@@ -48,7 +48,7 @@ const classes = ({
    className?: string
 }) => clsx(styles.button, styles[variant], styles[weight], styles[color], className)
 
-export const Typography = <T extends ElementType>({
+export const Typography = <T extends ElementType = (typeof variantMapping)['body1']>({
    as,
    variant = 'body1',
    weight = 'regular',
