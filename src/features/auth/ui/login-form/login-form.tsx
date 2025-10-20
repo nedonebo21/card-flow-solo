@@ -3,15 +3,15 @@ import type { SubmitHandler } from 'react-hook-form'
 
 import type { FormValues } from '@/features/auth/model'
 
-import { useController, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
+import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { loginSchema } from '@/features/auth/model'
 import { Button } from '@/shared/ui/button'
-import { Checkbox } from '@/shared/ui/checkbox'
+import { ControlledCheckbox } from '@/shared/ui/forms'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
-
 type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<FormValues>
 }
@@ -30,10 +30,6 @@ export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPro
       onSubmitFormProps?.(data, e)
    }
 
-   const {
-      field: { value: checked, onChange: onCheckedChange },
-   } = useController({ control, name: 'rememberMe', defaultValue: false })
-
    return (
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <InputEmail {...register('email')} label={'Email'} errorMessage={errors.email?.message} />
@@ -42,8 +38,10 @@ export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPro
             label={'Password'}
             errorMessage={errors.password?.message}
          />
-         <Checkbox onCheckedChange={onCheckedChange} checked={checked} label={'Remember me'} />
+         <ControlledCheckbox control={control} name={'rememberMe'} label={'Remember me'} />
          <Button type={'submit'}>Submit</Button>
+
+         {import.meta.env.DEV && <DevTool control={control} />}
       </form>
    )
 }
