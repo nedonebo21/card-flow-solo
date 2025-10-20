@@ -1,24 +1,30 @@
 import type { ComponentProps } from 'react'
+import type { SubmitHandler } from 'react-hook-form'
 
-import { type SubmitHandler, useController } from 'react-hook-form'
-import { useForm } from 'react-hook-form'
+import type { FormValues } from '@/features/auth/model'
 
+import { useController, useForm } from 'react-hook-form'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { loginSchema } from '@/features/auth/model'
 import { Button } from '@/shared/ui/button'
 import { Checkbox } from '@/shared/ui/checkbox'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
-
-type FormValues = {
-   email: string
-   password: string
-   rememberMe: boolean
-}
 
 type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<FormValues>
 }
 
 export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormProps) => {
-   const { register, handleSubmit, control } = useForm<FormValues>()
+   const {
+      register,
+      handleSubmit,
+      control,
+      formState: { errors },
+   } = useForm<FormValues>({
+      resolver: zodResolver(loginSchema),
+   })
 
    const onSubmit: typeof onSubmitFormProps = (data, e) => {
       onSubmitFormProps?.(data, e)
@@ -30,8 +36,12 @@ export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPro
 
    return (
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
-         <InputEmail {...register('email')} label={'Email'} />
-         <InputPassword {...register('password')} label={'Password'} />
+         <InputEmail {...register('email')} label={'Email'} errorMessage={errors.email?.message} />
+         <InputPassword
+            {...register('password')}
+            label={'Password'}
+            errorMessage={errors.password?.message}
+         />
          <Checkbox onCheckedChange={onCheckedChange} checked={checked} label={'Remember me'} />
          <Button type={'submit'}>Submit</Button>
       </form>
