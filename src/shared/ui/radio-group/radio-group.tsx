@@ -17,6 +17,7 @@ type RadioGroupProps = {
    options: RadioOption[]
    orientation?: 'horizontal' | 'vertical'
    wrapperProps?: ComponentProps<'div'>
+   errorMessage?: string
 } & Omit<ComponentProps<typeof RadixRadioGroup.Root>, 'asChild' | 'children'>
 
 export const RadioGroup = ({
@@ -25,10 +26,13 @@ export const RadioGroup = ({
    orientation = 'vertical',
    wrapperProps,
    options,
+   errorMessage,
    ...rest
 }: RadioGroupProps) => {
    const generatedId = useId()
    const groupId = id ?? `radio-group-${generatedId}`
+
+   const isError = errorMessage && errorMessage?.length > 0
 
    return (
       <div className={clsx(styles.radioGroupWrapper, wrapperProps?.className)} {...wrapperProps}>
@@ -54,6 +58,11 @@ export const RadioGroup = ({
                </RadixRadioGroup.Item>
             ))}
          </RadixRadioGroup.Root>
+         {isError && (
+            <Typography variant={'error'} className={styles.errorMessage}>
+               {errorMessage}
+            </Typography>
+         )}
       </div>
    )
 }
