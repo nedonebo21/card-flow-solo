@@ -9,8 +9,8 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { loginSchema } from '@/features/auth/model'
+import { ControlledCheckbox } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
-import { ControlledCheckbox } from '@/shared/ui/forms'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
 type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<FormValues>
