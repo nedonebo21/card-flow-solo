@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { useState } from 'react'
+
 import { RadioGroup } from '@/shared/ui/radio-group'
 
 const meta = {
@@ -22,20 +24,67 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const defaultOptions = [
-   { value: 'default', label: 'Default' },
-   { value: 'comfortable', label: 'Comfortable' },
-   { value: 'compact', label: 'Compact' },
+const options = [
+   { value: '1', label: 'Default' },
+   { value: '2', label: 'Comfortable' },
+   { value: '3', label: 'Compact' },
 ]
 
 export const Vertical: Story = {
-   args: { options: defaultOptions, orientation: 'vertical' },
+   args: { options },
+   render: () => {
+      const [selected, setSelected] = useState('1')
+
+      return <RadioGroup options={options} value={selected} onValueChange={setSelected} />
+   },
 }
 
 export const Horizontal: Story = {
-   args: { options: defaultOptions, orientation: 'horizontal' },
+   args: { options },
+   render: () => {
+      const [selected, setSelected] = useState('2')
+
+      return (
+         <RadioGroup
+            options={options}
+            orientation={'horizontal'}
+            value={selected}
+            onValueChange={setSelected}
+         />
+      )
+   },
+}
+
+export const WithError: Story = {
+   args: { options },
+   render: () => {
+      const [selected, setSelected] = useState('2')
+
+      return (
+         <RadioGroup
+            errorMessage={'Error!'}
+            options={options}
+            orientation={'vertical'}
+            value={selected}
+            onValueChange={setSelected}
+         />
+      )
+   },
 }
 
 export const Disabled: Story = {
-   args: { options: defaultOptions, orientation: 'vertical', disabled: true },
+   args: { options },
+   render: () => {
+      const [selected, setSelected] = useState('3')
+
+      return (
+         <RadioGroup
+            disabled
+            options={options}
+            orientation={'vertical'}
+            value={selected}
+            onValueChange={setSelected}
+         />
+      )
+   },
 }
