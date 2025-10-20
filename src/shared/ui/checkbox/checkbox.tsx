@@ -10,7 +10,7 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './checkbox.module.scss'
 
-type CheckboxProps = {
+export type CheckboxProps = {
    label?: string
    wrapperProps?: ComponentProps<'div'>
 } & Omit<ComponentProps<typeof RadixCheckbox.Root>, 'asChild' | 'children'>
