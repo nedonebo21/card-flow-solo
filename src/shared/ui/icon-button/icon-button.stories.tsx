@@ -34,3 +34,12 @@ export const Disabled: Story = {
       return <IconButton disabled icon={<TrashIcon />} />
    },
 }
+
+export const AsLink: Story = {
+   args: {
+      icon: <TrashIcon />,
+   },
+   render: () => {
+      return <IconButton as={'a'} href={'google.com'} icon={<TrashIcon />} />
+   },
+}
