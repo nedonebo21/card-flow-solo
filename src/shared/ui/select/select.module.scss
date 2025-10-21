@@ -1,0 +1,75 @@
+.selectTrigger {
+   user-select: none;
+
+   display: flex;
+   gap: 10px;
+   align-items: center;
+   justify-content: space-between;
+
+   width: 100%;
+   padding: 6px 12px;
+   border: 1px solid var(--color-dark-300);
+   border-radius: 2px;
+
+   color: var(--color-light-100);
+
+   outline: none;
+
+   &:disabled {
+      cursor: not-allowed;
+      color: var(--color-dark-300);
+   }
+
+   &:focus-visible {
+      border-color: var(--color-info-700);
+   }
+
+   &:hover:not(:disabled) {
+      border-color: var(--color-dark-100);
+      background-color: var(--color-dark-500);
+   }
+
+   &[data-state='open'] {
+      border-radius: 2px 2px 0 0;
+   }
+}
+
+.selectContent {
+   width: var(--radix-select-trigger-width);
+   border: 1px solid var(--color-dark-300);
+   border-top-color: transparent;
+   border-radius: 0 0 2px 2px;
+
+   background-color: inherit;
+}
+
+.selectItem {
+   user-select: none;
+   padding: 6px 12px;
+   outline: none;
+
+   &:hover {
+      cursor: pointer;
+      color: var(--color-primary-300);
+      background: var(--color-primary-900, rgb(56 39 102 / 100%));
+   }
+}
+
+.iconWrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.selectIcon {
+   transform: rotate(-180deg);
+   transition: all 0.2s ease;
+}
+
+.openedSelectIcon {
+   transform: rotate(0deg);
+}
+
+.selectLabel {
+   color: var(--color-dark-100);
+}
