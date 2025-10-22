@@ -1,7 +1,6 @@
 import type { ComponentProps } from 'react'
 
 import * as RadixSelect from '@radix-ui/react-select'
-import { forwardRef } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -10,60 +9,76 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './select.module.scss'
 
-export type SelectItem = {
+export type SelectOption = {
    value: string
    label: string
+   disabled?: boolean
 }
 
 export type SelectProps = {
    label?: string
    placeholder?: string
-   items: SelectItem[]
+   options: SelectOption[]
    wrapperProps?: ComponentProps<'div'>
    className?: string
+   errorMessage?: string
 } & Omit<ComponentProps<typeof RadixSelect.Root>, 'children' | 'asChild'>
 
-export const Select = forwardRef<HTMLButtonElement, SelectProps>(
-   ({ label, placeholder, items, wrapperProps, className, open, value, ...rest }, ref) => {
-      const selectedItem = items.find(item => item.value === value)
-      const placeholderText = placeholder ?? selectedItem?.label ?? items[0].label
+export const Select = ({
+   label,
+   placeholder,
+   options,
+   wrapperProps,
+   errorMessage,
+   open,
+   ...rest
+}: SelectProps) => {
+   const isError = !!errorMessage && errorMessage?.length > 0
 
-      return (
-         <div className={clsx(styles.selectWrapper, wrapperProps?.className)} {...wrapperProps}>
-            {!!label && (
-               <Typography variant={'body2'} as={'label'} className={styles.selectLabel}>
-                  {label}
-               </Typography>
-            )}
-            <RadixSelect.Root open={open} value={value} {...rest}>
-               <RadixSelect.Trigger ref={ref} className={styles.selectTrigger}>
-                  <RadixSelect.Value placeholder={placeholderText} />
-                  <RadixSelect.Icon className={styles.iconWrapper}>
-                     <ChevronUpIcon
-                        className={clsx(styles.selectIcon, open && styles.openedSelectIcon)}
-                        color={'currentColor'}
-                        width={16}
-                        height={16}
-                     />
-                  </RadixSelect.Icon>
-               </RadixSelect.Trigger>
-               <RadixSelect.Portal>
-                  <RadixSelect.Content className={styles.selectContent} position={'popper'}>
-                     <RadixSelect.Viewport className={styles.selectViewport}>
-                        {items.map(item => (
-                           <RadixSelect.Item
-                              key={item.value}
-                              value={item.value}
-                              className={styles.selectItem}
-                           >
-                              <RadixSelect.ItemText>{item.label}</RadixSelect.ItemText>
-                           </RadixSelect.Item>
-                        ))}
-                     </RadixSelect.Viewport>
-                  </RadixSelect.Content>
-               </RadixSelect.Portal>
-            </RadixSelect.Root>
-         </div>
-      )
-   }
-)
+   return (
+      <div {...wrapperProps} className={clsx(wrapperProps?.className)}>
+         {!!label && (
+            <Typography variant={'body2'} as={'label'} className={styles.selectLabel}>
+               {label}
+            </Typography>
+         )}
+         <RadixSelect.Root open={open} {...rest}>
+            <RadixSelect.Trigger className={clsx(styles.selectTrigger, isError && styles.error)}>
+               <RadixSelect.Value
+                  className={styles.selectValue}
+                  placeholder={placeholder ?? 'Select'}
+               />
+               <RadixSelect.Icon className={styles.iconWrapper}>
+                  <ChevronUpIcon
+                     className={clsx(styles.selectIcon, open && styles.openedSelectIcon)}
+                     width={16}
+                     height={16}
+                  />
+               </RadixSelect.Icon>
+            </RadixSelect.Trigger>
+            <RadixSelect.Portal>
+               <RadixSelect.Content
+                  className={clsx(styles.selectContent, isError && styles.error)}
+                  position={'popper'}
+               >
+                  <RadixSelect.ScrollUpButton />
+                  <RadixSelect.Viewport className={styles.selectViewport}>
+                     {options.map(option => (
+                        <RadixSelect.Item
+                           key={option.value}
+                           value={option.value}
+                           disabled={!!option.disabled}
+                           className={styles.selectItem}
+                        >
+                           <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
+                        </RadixSelect.Item>
+                     ))}
+                  </RadixSelect.Viewport>
+                  <RadixSelect.ScrollDownButton />
+               </RadixSelect.Content>
+            </RadixSelect.Portal>
+         </RadixSelect.Root>
+         {isError && <Typography variant={'error'}>{errorMessage}</Typography>}
+      </div>
+   )
+}
