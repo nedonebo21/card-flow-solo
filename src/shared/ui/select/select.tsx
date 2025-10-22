@@ -67,7 +67,7 @@ export const Select = ({
                         <RadixSelect.Item
                            key={option.value}
                            value={option.value}
-                           disabled={!!option.disabled}
+                           disabled={option.disabled}
                            className={styles.selectItem}
                         >
                            <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
