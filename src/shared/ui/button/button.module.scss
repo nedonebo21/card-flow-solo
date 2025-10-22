@@ -21,46 +21,71 @@
    &.fullWidth {
       width: 100%;
    }
+}
 
-   &.primary {
-      background-color: var(--color-primary-500);
-      box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+.primary {
+   background-color: var(--color-primary-500);
+   box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
 
-      &:hover {
-         background-color: var(--color-primary-300);
-      }
-
-      &:active {
-         background-color: var(--color-primary-700);
-      }
-
-      &:disabled {
-         background-color: var(--color-primary-900);
-      }
+   &:hover {
+      background-color: var(--color-primary-300);
    }
 
-   &.secondary {
+   &:active {
+      background-color: var(--color-primary-700);
+   }
+
+   &:disabled {
+      background-color: var(--color-primary-900);
+   }
+}
+
+.secondary {
+   background-color: var(--color-dark-300);
+   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+
+   &:hover {
+      background-color: var(--color-dark-100);
+   }
+
+   &:active {
+      background-color: var(--color-dark-500);
+   }
+
+   &:disabled {
       background-color: var(--color-dark-300);
-      box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
+   }
+}
 
-      &:hover {
-         background-color: var(--color-dark-100);
-      }
+.primary,
+.secondary {
+   &:disabled {
+      cursor: not-allowed;
+      color: var(--color-light-900);
+   }
+}
 
-      &:active {
-         background-color: var(--color-dark-500);
-      }
+.icon {
+   padding: 6px;
+   border-radius: 50%;
+}
 
-      &:disabled {
-         background-color: var(--color-dark-300);
-      }
+.ghost {
+   transition: all 0.2s ease;
+
+   &:disabled {
+      cursor: not-allowed;
+      color: var(--color-dark-300);
    }
 
-   &.primary,
-   &.secondary {
-      &:disabled {
-         cursor: not-allowed;
-         color: var(--color-light-900);
-      }
+   &:not(:disabled):hover {
+      background-color: var(--color-dark-500);
+      box-shadow: 0 0 0 2px var(--color-dark-500);
+   }
+
+   &:not(:disabled):active,
+   &:not(:disabled):focus-visible {
+      background-color: var(--color-dark-300);
+      box-shadow: 0 0 0 2px var(--color-dark-300);
    }
 }
