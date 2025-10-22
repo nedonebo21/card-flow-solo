@@ -50,14 +50,14 @@ export const Default: Story = {
 
 export const Demo: Story = {
    args: {
-      totalCount: 550,
+      totalCount: 100,
       pageSize: 10,
       siblingCount: 1,
       currentPage: 1,
       onPageChange: () => {},
       onPageSizeChange: () => {},
    },
-   render: args => {
+   render: _args => {
       const [currentPage, setCurrentPage] = useState(1)
       const [pageSize, setPageSize] = useState(10)
 
@@ -87,8 +87,7 @@ export const Demo: Story = {
                })}
             </ul>
             <Pagination
-               {...args}
-               totalCount={args.totalCount ?? 550}
+               totalCount={data.length}
                pageSize={pageSize}
                siblingCount={1}
                currentPage={currentPage}
