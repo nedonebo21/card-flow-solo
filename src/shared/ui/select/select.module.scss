@@ -22,18 +22,25 @@
       color: var(--color-dark-300);
    }
 
-   &:focus-visible {
+   &:hover {
+      background-color: var(--color-dark-500);
+   }
+
+   &:not(.error):focus-visible {
       border-color: var(--color-info-700);
    }
 
-   &:hover:not(:disabled) {
+   &:not(.error):hover:not(:disabled) {
       border-color: var(--color-dark-100);
-      background-color: var(--color-dark-500);
    }
 
    &[data-state='open'] {
       border-radius: 2px 2px 0 0;
    }
+}
+
+.selectViewport {
+   max-height: 200px;
 }
 
 .selectContent {
@@ -42,7 +49,7 @@
    border-top-color: transparent;
    border-radius: 0 0 2px 2px;
 
-   background-color: inherit;
+   background-color: var(--color-dark-900);
 }
 
 .selectItem {
@@ -51,7 +58,12 @@
    outline: none;
    transition: all 0.2s ease;
 
-   &:hover {
+   &[data-disabled] {
+      cursor: not-allowed;
+      color: var(--color-dark-300);
+   }
+
+   &:not([data-disabled]):hover {
       cursor: pointer;
       color: var(--color-primary-300);
       background: var(--color-primary-900, rgb(56 39 102 / 100%));
@@ -75,4 +87,8 @@
 
 .selectLabel {
    color: var(--color-dark-100);
+}
+
+.error {
+   border-color: var(--color-danger-500);
 }
