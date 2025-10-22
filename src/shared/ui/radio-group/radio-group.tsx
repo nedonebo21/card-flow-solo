@@ -1,5 +1,6 @@
+import type { ComponentProps } from 'react'
+
 import * as RadixRadioGroup from '@radix-ui/react-radio-group'
-import { type ComponentProps, useId } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -15,7 +16,6 @@ type RadioOption = {
 
 type RadioGroupProps = {
    options: RadioOption[]
-   orientation?: 'horizontal' | 'vertical'
    wrapperProps?: ComponentProps<'div'>
    errorMessage?: string
 } & Omit<ComponentProps<typeof RadixRadioGroup.Root>, 'asChild' | 'children'>
@@ -23,39 +23,38 @@ type RadioGroupProps = {
 export const RadioGroup = ({
    className,
    id,
+   disabled,
    orientation = 'vertical',
    wrapperProps,
    options,
    errorMessage,
    ...rest
 }: RadioGroupProps) => {
-   const generatedId = useId()
-   const groupId = id ?? `radio-group-${generatedId}`
-
-   const isError = errorMessage && errorMessage?.length > 0
+   const isError = !!errorMessage && errorMessage?.length > 0
 
    return (
-      <div className={clsx(styles.radioGroupWrapper, wrapperProps?.className)} {...wrapperProps}>
+      <div {...wrapperProps} className={clsx(wrapperProps?.className)}>
          <RadixRadioGroup.Root
-            id={groupId}
             className={clsx(styles.radioGroup, styles[orientation], className)}
+            disabled={disabled}
             {...rest}
             asChild={undefined}
          >
             {options.map(option => (
-               <RadixRadioGroup.Item
-                  key={option.value}
-                  className={styles.radioItem}
-                  value={option.value}
-                  disabled={option.disabled}
-               >
-                  <span className={styles.radioIndicatorWrapper}>
-                     <RadixRadioGroup.Indicator className={styles.radioIndicator} />
-                  </span>
+               <label key={option.value} className={styles.label} aria-disabled={disabled}>
+                  <RadixRadioGroup.Item
+                     value={option.value}
+                     disabled={option.disabled}
+                     className={styles.radioItem}
+                  >
+                     <span className={styles.radioIndicatorWrapper}>
+                        <RadixRadioGroup.Indicator className={styles.radioIndicator} />
+                     </span>
+                  </RadixRadioGroup.Item>
                   <Typography variant={'body2'} as={'span'} className={styles.radioLabel}>
                      {option.label}
                   </Typography>
-               </RadixRadioGroup.Item>
+               </label>
             ))}
          </RadixRadioGroup.Root>
          {isError && (
