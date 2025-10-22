@@ -26,62 +26,71 @@
    }
 }
 
-.radioGroupWrapper {
-   .radioGroup {
-      display: flex;
-      gap: 12px;
-   }
+.radioGroup {
+   display: flex;
+   gap: 12px;
+}
 
-   .horizontal {
-      flex-direction: row;
-      gap: 22px;
-   }
+.horizontal {
+   flex-direction: row;
+   gap: 22px;
+}
 
-   .vertical {
-      flex-direction: column;
-   }
+.vertical {
+   flex-direction: column;
+}
 
-   .radioItem {
-      cursor: pointer;
+.label {
+   cursor: pointer;
 
-      display: flex;
-      gap: 12px;
-      align-items: center;
+   display: flex;
+   gap: 12px;
+   align-items: center;
 
-      outline: none;
+   outline: none;
 
-      transition: all 0.2s ease;
+   transition: all 0.2s ease;
 
-      &:disabled {
+   &[aria-disabled='true'],
+   &:has(.radioItem:disabled) {
+      cursor: not-allowed;
+
+      .radioIndicatorWrapper {
+         pointer-events: none;
          cursor: not-allowed;
-
-         .radioIndicatorWrapper {
-            border: 2px solid var(--color-primary-900);
-         }
-
-         .radioIndicator {
-            background-color: var(--color-primary-900);
-         }
-
-         .radioLabel {
-            cursor: not-allowed;
-            color: var(--color-light-900);
-         }
+         border: 2px solid var(--color-primary-900);
       }
 
-      &:not(:disabled):focus-visible .radioIndicatorWrapper {
-         background: var(--color-dark-700, rgb(23 23 23));
+      .radioIndicator {
+         pointer-events: none;
+         cursor: not-allowed;
+         background-color: var(--color-primary-900);
       }
 
-      &:not(:disabled):hover .radioIndicatorWrapper {
-         background-color: var(--color-dark-500, rgb(51 51 51));
-         box-shadow: 0 0 0 8px var(--color-dark-500);
+      .radioLabel {
+         pointer-events: none;
+         cursor: not-allowed;
+         color: var(--color-light-900);
       }
 
-      &:not(:disabled):active .radioIndicatorWrapper {
-         background-color: var(--color-primary-900, rgb(56 39 102 / 100%));
-         box-shadow: 0 0 0 8px var(--color-primary-900);
+      .radioItem {
+         pointer-events: none;
+         cursor: not-allowed;
       }
+   }
+
+   &:not([aria-disabled='true'], :has(.radioItem:disabled)):focus-visible .radioIndicatorWrapper {
+      background: var(--color-dark-700, rgb(23 23 23));
+   }
+
+   &:not([aria-disabled='true'], :has(.radioItem:disabled)):hover .radioIndicatorWrapper {
+      background-color: var(--color-dark-500, rgb(51 51 51));
+      box-shadow: 0 0 0 8px var(--color-dark-500);
+   }
+
+   &:not([aria-disabled='true'], :has(.radioItem:disabled)):active .radioIndicatorWrapper {
+      background-color: var(--color-primary-900, rgb(56 39 102 / 100%));
+      box-shadow: 0 0 0 8px var(--color-primary-900);
    }
 }
 
