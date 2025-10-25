@@ -20,6 +20,7 @@ export const Slider = ({
    values,
    min = 1,
    max = 15,
+   disabled,
    ...rest
 }: SliderProps) => {
    const [minValue, maxValue] = values
@@ -63,14 +64,16 @@ export const Slider = ({
          <div className={clsx(styles.sliderInput, 'align-center')}>
             <Input
                name={'min'}
+               disabled={disabled}
                value={minValue}
                onBlur={handleBlur}
                onChange={e => handleMinValueChange(e.target.value)}
             />
          </div>
          <RadixSlider.Root
-            className={clsx(styles.sliderRoot, className)}
+            className={clsx(styles.sliderRoot, disabled && styles.disabled, className)}
             onValueChange={onValueChange}
+            disabled={disabled}
             value={values}
             min={resolvedMin}
             max={resolvedMax}
@@ -79,15 +82,16 @@ export const Slider = ({
             {...rest}
             asChild={undefined}
          >
-            <RadixSlider.Track className={styles.sliderTrack}>
-               <RadixSlider.Range className={styles.sliderRange} />
+            <RadixSlider.Track aria-disabled={disabled} className={styles.sliderTrack}>
+               <RadixSlider.Range aria-disabled={disabled} className={styles.sliderRange} />
             </RadixSlider.Track>
-            <RadixSlider.Thumb className={styles.sliderThumb} />
-            <RadixSlider.Thumb className={styles.sliderThumb} />
+            <RadixSlider.Thumb aria-disabled={disabled} className={styles.sliderThumb} />
+            <RadixSlider.Thumb aria-disabled={disabled} className={styles.sliderThumb} />
          </RadixSlider.Root>
          <div className={styles.sliderInput}>
             <Input
                name={'max'}
+               disabled={disabled}
                value={maxValue}
                onBlur={handleBlur}
                onChange={e => handleMaxValueChange(e.target.value)}
