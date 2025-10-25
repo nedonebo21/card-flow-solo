@@ -60,7 +60,7 @@ export const Slider = ({
    }
 
    return (
-      <form className={styles.sliderWrapper}>
+      <div className={styles.sliderWrapper}>
          <div className={clsx(styles.sliderInput, 'align-center')}>
             <Input
                name={'min'}
@@ -97,6 +97,6 @@ export const Slider = ({
                onChange={e => handleMaxValueChange(e.target.value)}
             />
          </div>
-      </form>
+      </div>
    )
 }
