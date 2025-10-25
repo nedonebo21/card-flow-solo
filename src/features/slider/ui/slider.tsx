@@ -25,9 +25,6 @@ export const Slider = ({
 }: SliderProps) => {
    const [minValue, maxValue] = values
 
-   const resolvedMax = maxValue > max ? maxValue : max
-   const resolvedMin = minValue < min ? minValue : min
-
    const handleMinValueChange = (value: string) => {
       const newMinValue = Number(value)
 
@@ -49,11 +46,15 @@ export const Slider = ({
    }
 
    const handleBlur = () => {
-      let newMin = Math.max(resolvedMin, minValue)
-      const newMax = Math.min(resolvedMax, maxValue)
+      let newMin = Math.max(min, minValue)
+      let newMax = Math.min(max, maxValue)
 
       if (newMin >= newMax) {
          newMin = newMax - 1
+      }
+
+      if (newMax > max) {
+         newMax = max
       }
 
       onValueChange([newMin, newMax])
@@ -75,8 +76,8 @@ export const Slider = ({
             onValueChange={onValueChange}
             disabled={disabled}
             value={values}
-            min={resolvedMin}
-            max={resolvedMax}
+            min={min}
+            max={max}
             step={1}
             minStepsBetweenThumbs={1}
             {...rest}
