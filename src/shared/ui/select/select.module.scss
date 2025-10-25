@@ -81,6 +81,10 @@
    transition: all 0.2s ease;
 }
 
+[data-state='open'] .selectIcon {
+   transform: rotate(0deg);
+}
+
 .openedSelectIcon {
    transform: rotate(0deg);
 }

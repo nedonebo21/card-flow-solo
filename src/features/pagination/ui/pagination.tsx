@@ -1,9 +1,9 @@
-import type { ChangeEvent } from 'react'
-
 import { clsx } from 'clsx'
 
 import { DOTS, usePagination } from '@/features/pagination/hooks'
+import { Button } from '@/shared/ui/button'
 import { ChevronRightIcon } from '@/shared/ui/icons'
+import { Select } from '@/shared/ui/select'
 import { Typography } from '@/shared/ui/typography'
 
 import styles from './pagination.module.scss'
@@ -28,6 +28,13 @@ export const Pagination = ({
    pageSize,
 }: PaginationProps) => {
    const paginationRange = usePagination({ currentPage, totalCount, siblingCount, pageSize })
+   const pageSizeOptions = [
+      { value: '10', label: '10' },
+      { value: '20', label: '20' },
+      { value: '30', label: '30' },
+      { value: '50', label: '50' },
+      { value: '100', label: '100' },
+   ]
 
    if (currentPage === 0 || paginationRange.length < 2) {
       return null
@@ -45,26 +52,25 @@ export const Pagination = ({
       }
    }
 
-   const handlePageSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-      onPageSizeChange?.(Number(e.target.value))
+   const handlePageSizeChange = (value: string) => {
+      onPageSizeChange?.(Number(value))
    }
 
    const lastPage = paginationRange[paginationRange.length - 1] as number
-   const pageSizeOptions = [10, 20, 30, 50, 100]
 
    return (
       <div className={clsx(styles.paginationContainer, className)}>
          <div className={styles.paginationWrapper}>
             <ul className={styles.pagination}>
-               <li
-                  className={clsx(
-                     styles.arrow,
-                     styles.leftArrow,
-                     currentPage === 1 && styles.disabled
-                  )}
-                  onClick={handlePrevPage}
-               >
-                  <ChevronRightIcon color={'currentColor'} width={16} height={16} />
+               <li className={clsx(styles.arrow, styles.leftArrow)}>
+                  <Button
+                     disabled={currentPage === 1}
+                     variant={'ghost'}
+                     size={'icon'}
+                     onClick={handlePrevPage}
+                  >
+                     <ChevronRightIcon width={16} height={16} />
+                  </Button>
                </li>
                {paginationRange.map((pageNum, index) => {
                   if (pageNum === DOTS) {
@@ -77,7 +83,7 @@ export const Pagination = ({
 
                   return (
                      <li
-                        key={pageNum}
+                        key={`page-${pageNum}`}
                         className={clsx(
                            styles.paginationItem,
                            pageNum === currentPage && styles.selected
@@ -88,29 +94,25 @@ export const Pagination = ({
                      </li>
                   )
                })}
-               <li
-                  className={clsx(
-                     styles.arrow,
-                     styles.rightArrow,
-                     currentPage === lastPage && styles.disabled
-                  )}
-                  onClick={handleNextPage}
-               >
-                  <ChevronRightIcon color={'currentColor'} width={16} height={16} />
+               <li className={clsx(styles.arrow, styles.rightArrow)}>
+                  <Button
+                     disabled={currentPage === lastPage}
+                     variant={'ghost'}
+                     size={'icon'}
+                     onClick={handleNextPage}
+                  >
+                     <ChevronRightIcon width={16} height={16} />
+                  </Button>
                </li>
             </ul>
          </div>
          <div className={styles.itemsCountWrapper}>
             <Typography variant={'body2'}>Показать</Typography>
-            <select onChange={handlePageSizeChange} className={styles.paginationSelect}>
-               {pageSizeOptions.map(size => {
-                  return (
-                     <option key={size} value={size}>
-                        {size}
-                     </option>
-                  )
-               })}
-            </select>
+            <Select
+               options={pageSizeOptions}
+               placeholder={pageSizeOptions[0].label}
+               onValueChange={handlePageSizeChange}
+            />
             <Typography variant={'body2'}>на странице</Typography>
          </div>
       </div>
