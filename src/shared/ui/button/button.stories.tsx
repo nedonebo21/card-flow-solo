@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 
 import { Button } from '@/shared/ui/button'
-import { LogOutIcon } from '@/shared/ui/icons'
+import { LogOutIcon, TrashIcon } from '@/shared/ui/icons'
 
 const meta = {
    title: 'UI/Button',
@@ -75,5 +75,13 @@ export const AsLink: Story = {
       variant: 'primary',
       children: 'Link That Looks Like A Button',
       as: 'a',
+   },
+}
+
+export const IconButton: Story = {
+   args: {
+      variant: 'ghost',
+      size: 'icon',
+      children: <TrashIcon width={16} height={16} />,
    },
 }
