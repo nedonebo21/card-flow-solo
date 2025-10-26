@@ -58,13 +58,16 @@ export const Pagination = ({
 
    const lastPage = paginationRange[paginationRange.length - 1] as number
 
+   const isPrevDisabled = currentPage === 1
+   const isNextDisabled = currentPage === lastPage
+
    return (
       <div className={clsx(styles.paginationContainer, className)}>
          <div className={styles.paginationWrapper}>
             <ul className={styles.pagination}>
                <li className={clsx(styles.arrow, styles.leftArrow)}>
                   <Button
-                     disabled={currentPage === 1}
+                     disabled={isPrevDisabled}
                      variant={'ghost'}
                      size={'icon'}
                      onClick={handlePrevPage}
@@ -96,7 +99,7 @@ export const Pagination = ({
                })}
                <li className={clsx(styles.arrow, styles.rightArrow)}>
                   <Button
-                     disabled={currentPage === lastPage}
+                     disabled={isNextDisabled}
                      variant={'ghost'}
                      size={'icon'}
                      onClick={handleNextPage}
