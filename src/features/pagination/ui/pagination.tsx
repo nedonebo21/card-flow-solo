@@ -14,7 +14,7 @@ type PaginationProps = {
    className?: string
    onPageChange: (page: number) => void
    onPageSizeChange: (size: number) => void
-   pageSizeOptions: number[]
+   pageSizeOptions?: number[]
    totalCount: number
    siblingCount?: number
    currentPage: number
