@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import { clsx } from 'clsx'
 
 import { DOTS, usePagination } from '@/features/pagination/hooks'
@@ -12,6 +14,7 @@ type PaginationProps = {
    className?: string
    onPageChange: (page: number) => void
    onPageSizeChange: (size: number) => void
+   pageSizeOptions: number[]
    totalCount: number
    siblingCount?: number
    currentPage: number
@@ -24,17 +27,19 @@ export const Pagination = ({
    onPageSizeChange,
    totalCount,
    siblingCount = 1,
+   pageSizeOptions = [10, 20, 30, 50, 100],
    currentPage,
    pageSize,
 }: PaginationProps) => {
    const paginationRange = usePagination({ currentPage, totalCount, siblingCount, pageSize })
-   const pageSizeOptions = [
-      { value: '10', label: '10' },
-      { value: '20', label: '20' },
-      { value: '30', label: '30' },
-      { value: '50', label: '50' },
-      { value: '100', label: '100' },
-   ]
+
+   const options = useMemo(
+      () =>
+         pageSizeOptions.map(size => {
+            return { value: size.toString(), label: size.toString() }
+         }),
+      [pageSizeOptions]
+   )
 
    if (currentPage === 0 || paginationRange.length < 2) {
       return null
@@ -112,8 +117,8 @@ export const Pagination = ({
          <div className={styles.itemsCountWrapper}>
             <Typography variant={'body2'}>Показать</Typography>
             <Select
-               options={pageSizeOptions}
-               placeholder={pageSizeOptions[0].label}
+               options={options}
+               placeholder={options[0].label}
                onValueChange={handlePageSizeChange}
             />
             <Typography variant={'body2'}>на странице</Typography>
