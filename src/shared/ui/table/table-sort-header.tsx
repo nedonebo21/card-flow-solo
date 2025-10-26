@@ -59,7 +59,7 @@ export const TableSortHeader = ({ columns, sort, onSort, ...rest }: TableSortHea
                   textAlign={'left'}
                   onClick={handleSort(key, sortable)}
                >
-                  <span className={styles.title}>{title}</span>
+                  {title}
                   {sort && sort.key === key && (
                      <span className={styles.arrowWrapper}>
                         {sort.direction === 'asc' ? (
