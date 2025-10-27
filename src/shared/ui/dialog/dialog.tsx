@@ -35,32 +35,18 @@ const DialogTrigger = ({ className, ...rest }: DialogTrigger) => {
    )
 }
 
-const DialogPortal = RadixDialog.Portal
-
-type DialogOverlayProps = Omit<ComponentProps<typeof RadixDialog.Overlay>, 'asChild' | 'children'>
-
-const DialogOverlay = ({ className, ...rest }: DialogOverlayProps) => {
-   return (
-      <RadixDialog.Overlay
-         className={clsx(styles.overlay, className)}
-         {...rest}
-         asChild={undefined}
-      />
-   )
-}
-
 type DialogContentProps = {
    children: ReactNode
 } & Omit<ComponentProps<typeof RadixDialog.Content>, 'asChild' | 'children'>
 
 const DialogContent = ({ children, className, ...rest }: DialogContentProps) => {
    return (
-      <DialogPortal>
-         <DialogOverlay />
+      <RadixDialog.Portal>
+         <RadixDialog.Overlay />
          <RadixDialog.Content {...rest} asChild={undefined}>
             <Card className={clsx(styles.container, className)}>{children}</Card>
          </RadixDialog.Content>
-      </DialogPortal>
+      </RadixDialog.Portal>
    )
 }
 
