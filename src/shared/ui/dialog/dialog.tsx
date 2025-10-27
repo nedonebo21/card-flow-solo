@@ -25,15 +25,13 @@ type DialogTrigger = {
    children: ReactNode
 } & Omit<ComponentProps<typeof RadixDialog.Trigger>, 'asChild' | 'children'>
 
-const DialogTrigger = ({ children, className, ...rest }: DialogTrigger) => {
+const DialogTrigger = ({ className, ...rest }: DialogTrigger) => {
    return (
       <RadixDialog.Trigger
          className={clsx(styles.trigger, className)}
          {...rest}
          asChild={undefined}
-      >
-         {children}
-      </RadixDialog.Trigger>
+      />
    )
 }
 
@@ -68,10 +66,11 @@ const DialogContent = ({ children, className, ...rest }: DialogContentProps) => 
 
 type DialogHeaderProps = {
    children: ReactNode
+   className?: string
 }
 
-const DialogHeader = ({ children }: DialogHeaderProps) => {
-   return <div className={styles.header}>{children}</div>
+const DialogHeader = ({ className, ...rest }: DialogHeaderProps) => {
+   return <div className={clsx(styles.header, className)} {...rest} />
 }
 
 type DialogBodyProps = {
@@ -79,16 +78,17 @@ type DialogBodyProps = {
    children: ReactNode
 }
 
-const DialogBody = ({ children, className }: DialogBodyProps) => {
-   return <div className={clsx(styles.content, className)}>{children}</div>
+const DialogBody = ({ className, ...rest }: DialogBodyProps) => {
+   return <div className={clsx(styles.content, className)} {...rest} />
 }
 
 type DialogFooter = {
    children: ReactNode
+   className?: string
 }
 
-const DialogFooter = ({ children }: DialogFooter) => {
-   return <div className={styles.footer}>{children}</div>
+const DialogFooter = ({ className, ...rest }: DialogFooter) => {
+   return <div className={clsx(styles.footer, className)} {...rest} />
 }
 
 type DialogCloseProps = {
@@ -96,11 +96,9 @@ type DialogCloseProps = {
    className?: string
 } & Omit<ComponentProps<typeof RadixDialog.Close>, 'asChild' | 'children'>
 
-const DialogClose = ({ children, className, ...rest }: DialogCloseProps) => {
+const DialogClose = ({ className, ...rest }: DialogCloseProps) => {
    return (
-      <RadixDialog.Close className={clsx(styles.close, className)} {...rest} asChild={undefined}>
-         {children}
-      </RadixDialog.Close>
+      <RadixDialog.Close className={clsx(styles.close, className)} {...rest} asChild={undefined} />
    )
 }
 
