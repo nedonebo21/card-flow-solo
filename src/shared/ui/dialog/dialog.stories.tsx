@@ -13,7 +13,7 @@ import { Typography } from '@/shared/ui/typography'
 const meta = {
    title: 'UI/Dialog',
    component: Dialog,
-   parameters: { layout: 'centered' },
+   parameters: { layout: 'centered', docs: { source: { type: 'code' } } },
    tags: ['autodocs'],
 } satisfies Meta<typeof Dialog>
 
