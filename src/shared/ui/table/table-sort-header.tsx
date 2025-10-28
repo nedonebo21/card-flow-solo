@@ -3,7 +3,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { clsx } from 'clsx'
 
 import { ChevronUpIcon } from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography'
+import { TableHeadCell, TableRow } from '@/shared/ui/table/table'
 
 import styles from './table.module.scss'
 
@@ -27,7 +27,13 @@ type TableSortHeaderProps = Omit<
    'children'
 >
 
-export const TableSortHeader = ({ columns, sort, onSort, ...rest }: TableSortHeaderProps) => {
+export const TableSortHeader = ({
+   columns,
+   sort,
+   onSort,
+   className,
+   ...rest
+}: TableSortHeaderProps) => {
    const handleSort = (key: string, sortable?: boolean) => () => {
       if (!onSort || !sortable) {
          return
@@ -48,15 +54,12 @@ export const TableSortHeader = ({ columns, sort, onSort, ...rest }: TableSortHea
    }
 
    return (
-      <thead className={styles.thead} {...rest}>
-         <tr className={styles.tr}>
+      <thead className={clsx(styles.thead, className)} {...rest}>
+         <TableRow>
             {columns.map(({ title, key, sortable }) => (
-               <Typography
+               <TableHeadCell
                   key={key}
-                  className={clsx(styles.th, sortable && styles.sortable)}
-                  variant={'subtitle2'}
-                  as={'th'}
-                  textAlign={'left'}
+                  className={clsx(null, sortable && styles.sortable)}
                   onClick={handleSort(key, sortable)}
                >
                   {title}
@@ -69,9 +72,9 @@ export const TableSortHeader = ({ columns, sort, onSort, ...rest }: TableSortHea
                         )}
                      </span>
                   )}
-               </Typography>
+               </TableHeadCell>
             ))}
-         </tr>
+         </TableRow>
       </thead>
    )
 }

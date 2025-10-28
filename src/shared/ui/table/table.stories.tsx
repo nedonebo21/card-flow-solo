@@ -7,8 +7,7 @@ import { useMemo, useState } from 'react'
 import { formatDate } from '@/shared/lib/date'
 import { Button } from '@/shared/ui/button'
 import { CirclePlayIcon, PencilIcon, TrashIcon } from '@/shared/ui/icons'
-import { TableSortHeader } from '@/shared/ui/table'
-import { Typography } from '@/shared/ui/typography'
+import { Table, TableBody, TableCell, TableRow, TableSortHeader } from '@/shared/ui/table'
 
 import styles from './table.module.scss'
 
@@ -92,22 +91,16 @@ export const WithSort: Story = {
       console.log(sortedString)
 
       return (
-         <table className={styles.table}>
+         <Table>
             <TableSortHeader columns={columns} sort={sort} onSort={setSort} />
-            <tbody className={styles.tbody}>
+            <TableBody>
                {data.map(item => (
-                  <Typography
-                     key={item.title}
-                     variant={'body2'}
-                     as={'tr'}
-                     textAlign={'left'}
-                     className={styles.tr}
-                  >
-                     <td className={styles.td}>{item.title}</td>
-                     <td className={styles.td}>{item.cardsCount}</td>
-                     <td className={styles.td}>{formatDate(new Date(item.updated))}</td>
-                     <td className={styles.td}>{item.createdBy}</td>
-                     <td className={styles.icons}>
+                  <TableRow key={item.title}>
+                     <TableCell>{item.title}</TableCell>
+                     <TableCell>{item.cardsCount}</TableCell>
+                     <TableCell>{formatDate(new Date(item.updated))}</TableCell>
+                     <TableCell>{item.createdBy}</TableCell>
+                     <TableCell className={styles.icons}>
                         <Button variant={'ghost'} size={'icon'}>
                            <CirclePlayIcon width={16} height={16} />
                         </Button>
@@ -117,11 +110,11 @@ export const WithSort: Story = {
                         <Button variant={'ghost'} size={'icon'}>
                            <TrashIcon width={16} height={16} />
                         </Button>
-                     </td>
-                  </Typography>
+                     </TableCell>
+                  </TableRow>
                ))}
-            </tbody>
-         </table>
+            </TableBody>
+         </Table>
       )
    },
 }
