@@ -14,7 +14,7 @@ type RadioOption = {
    disabled?: boolean
 }
 
-type RadioGroupProps = {
+export type RadioGroupProps = {
    options: RadioOption[]
    wrapperProps?: ComponentProps<'div'>
    errorMessage?: string
