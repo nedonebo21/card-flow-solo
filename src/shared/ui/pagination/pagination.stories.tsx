@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useMemo, useState } from 'react'
 
-import { Pagination } from '@/features/pagination/ui/pagination'
+import { Pagination } from '@/shared/ui/pagination'
 import { Typography } from '@/shared/ui/typography'
 
 const meta = {

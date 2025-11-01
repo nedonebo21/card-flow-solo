@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { clsx } from 'clsx'
 
-import { DOTS, usePagination } from '@/features/pagination/hooks'
+import { DOTS, usePagination } from '@/shared/lib/hooks'
 import { Button } from '@/shared/ui/button'
 import { ChevronRightIcon } from '@/shared/ui/icons'
 import { Select } from '@/shared/ui/select'
