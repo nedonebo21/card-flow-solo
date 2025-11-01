@@ -9,7 +9,7 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { loginSchema } from '@/features/auth/model'
-import { ControlledCheckbox } from '@/shared/forms'
+import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
 type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
@@ -18,12 +18,16 @@ type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
 
 export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormProps) => {
    const {
-      register,
       handleSubmit,
       control,
       formState: { errors },
    } = useForm<FormValues>({
       resolver: zodResolver(loginSchema),
+      defaultValues: {
+         email: '',
+         password: '',
+         rememberMe: false,
+      },
    })
 
    const onSubmit: typeof onSubmitFormProps = (data, e) => {
@@ -32,9 +36,17 @@ export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPro
 
    return (
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
-         <InputEmail {...register('email')} label={'Email'} errorMessage={errors.email?.message} />
-         <InputPassword
-            {...register('password')}
+         <ControlledInput
+            InputComponent={InputEmail}
+            control={control}
+            name={'email'}
+            label={'Email'}
+            errorMessage={errors.email?.message}
+         />
+         <ControlledInput
+            InputComponent={InputPassword}
+            control={control}
+            name={'password'}
             label={'Password'}
             errorMessage={errors.password?.message}
          />
