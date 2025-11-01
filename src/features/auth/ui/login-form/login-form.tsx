@@ -12,6 +12,7 @@ import { loginSchema } from '@/features/auth/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
+
 type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<FormValues>
 }

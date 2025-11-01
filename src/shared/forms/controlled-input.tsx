@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
-import type { UseControllerProps, FieldValues } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
 
+import type { UseControllerProps } from '@/shared/lib/types'
 import type { InputProps } from '@/shared/ui/input'
 
 import { useController } from 'react-hook-form'

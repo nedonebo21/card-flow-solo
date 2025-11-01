@@ -1,5 +1,6 @@
-import type { FieldValues, UseControllerProps } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
 
+import type { UseControllerProps } from '@/shared/lib/types'
 import type { RadioGroupProps } from '@/shared/ui/radio-group'
 
 import { useController } from 'react-hook-form'
