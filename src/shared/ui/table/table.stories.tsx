@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import type { Column, Sort } from '@/shared/ui/table'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 import { formatDate } from '@/shared/lib/date'
 import { Button } from '@/shared/ui/button'
@@ -80,13 +80,13 @@ export const WithSort: Story = {
    render: () => {
       const [sort, setSort] = useState<Sort>(null)
 
-      const sortedString = useMemo(() => {
-         if (!sort) {
-            return null
-         }
-
-         return `${sort.key}-${sort.direction}`
-      }, [sort])
+      // const sortedString = useMemo(() => {
+      //    if (!sort) {
+      //       return null
+      //    }
+      //
+      //    return `${sort.key}-${sort.direction}`
+      // }, [sort])
 
       return (
          <Table>
