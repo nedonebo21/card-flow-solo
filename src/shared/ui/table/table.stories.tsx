@@ -88,8 +88,6 @@ export const WithSort: Story = {
          return `${sort.key}-${sort.direction}`
       }, [sort])
 
-      console.log(sortedString)
-
       return (
          <Table>
             <TableSortHeader columns={columns} sort={sort} onSort={setSort} />
