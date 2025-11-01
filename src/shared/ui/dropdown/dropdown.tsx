@@ -10,15 +10,10 @@ import styles from './dropdown.module.scss'
 
 type DropdownProps = {
    children: ReactNode
-   className?: string
 } & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild' | 'children'>
 
-const Dropdown = ({ className, ...rest }: DropdownProps) => {
-   return (
-      <div className={clsx(styles.wrapper, className)}>
-         <RadixDropdown.Root {...rest} />
-      </div>
-   )
+const Dropdown = ({ ...rest }: DropdownProps) => {
+   return <RadixDropdown.Root {...rest} />
 }
 
 type DropdownTriggerProps = {
