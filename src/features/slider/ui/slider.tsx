@@ -1,0 +1,103 @@
+import type { ComponentProps } from 'react'
+
+import * as RadixSlider from '@radix-ui/react-slider'
+
+import { clsx } from 'clsx'
+
+import { Input } from '@/shared/ui/input'
+
+import styles from './slider.module.scss'
+
+type SliderProps = {
+   className?: string
+   values: number[]
+   onValueChange: (value: number[]) => void
+} & Omit<ComponentProps<typeof RadixSlider.Root>, 'asChild' | 'value' | 'onValueChange'>
+
+export const Slider = ({
+   className,
+   onValueChange,
+   values,
+   min = 1,
+   max = 15,
+   disabled,
+   ...rest
+}: SliderProps) => {
+   const [minValue, maxValue] = values
+
+   const handleMinValueChange = (value: string) => {
+      const newMinValue = Number(value)
+
+      if (isNaN(newMinValue)) {
+         return
+      }
+
+      onValueChange([newMinValue, maxValue])
+   }
+
+   const handleMaxValueChange = (value: string) => {
+      const newMaxValue = Number(value)
+
+      if (isNaN(newMaxValue)) {
+         return
+      }
+
+      onValueChange([minValue, newMaxValue])
+   }
+
+   const handleBlur = () => {
+      let newMin = Math.max(min, minValue)
+      let newMax = Math.min(max, maxValue)
+
+      if (newMin >= newMax) {
+         newMin = newMax - 1
+      }
+
+      if (newMax > max) {
+         newMax = max
+      }
+
+      onValueChange([newMin, newMax])
+   }
+
+   return (
+      <div className={styles.sliderWrapper}>
+         <div className={clsx(styles.sliderInput, 'align-center')}>
+            <Input
+               name={'min'}
+               disabled={disabled}
+               value={minValue}
+               onBlur={handleBlur}
+               onChange={e => handleMinValueChange(e.target.value)}
+            />
+         </div>
+         <RadixSlider.Root
+            className={clsx(styles.sliderRoot, disabled && styles.disabled, className)}
+            onValueChange={onValueChange}
+            disabled={disabled}
+            value={values}
+            min={min}
+            max={max}
+            step={1}
+            minStepsBetweenThumbs={1}
+            {...rest}
+            asChild={undefined}
+         >
+            <RadixSlider.Track aria-disabled={disabled} className={styles.sliderTrack}>
+               <RadixSlider.Range aria-disabled={disabled} className={styles.sliderRange} />
+            </RadixSlider.Track>
+            <RadixSlider.Thumb aria-disabled={disabled} className={styles.sliderThumb} />
+            <RadixSlider.Thumb aria-disabled={disabled} className={styles.sliderThumb} />
+         </RadixSlider.Root>
+         <div className={styles.sliderInput}>
+            <Input
+               name={'max'}
+               disabled={disabled}
+               value={maxValue}
+               onBlur={handleBlur}
+               onChange={e => handleMaxValueChange(e.target.value)}
+            />
+         </div>
+      </div>
+   )
+}
