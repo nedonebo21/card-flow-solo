@@ -42,7 +42,7 @@ export const NewPasswordForm = ({ onSubmit: onSubmitFormProps, ...rest }: NewPas
          <Card className={styles.wrapper}>
             <div className={styles.header}>
                <Typography variant={'h1'} className={styles.title}>
-                  Forgot your password?
+                  Create new password
                </Typography>
             </div>
             <div className={styles.content}>
