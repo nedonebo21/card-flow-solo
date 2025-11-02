@@ -17,14 +17,11 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './new-password.module.scss'
 
-type ForgotPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
+type NewPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<NewPasswordValues>
 }
 
-export const NewPasswordForm = ({
-   onSubmit: onSubmitFormProps,
-   ...rest
-}: ForgotPasswordFormProps) => {
+export const NewPasswordForm = ({ onSubmit: onSubmitFormProps, ...rest }: NewPasswordFormProps) => {
    const {
       handleSubmit,
       control,
