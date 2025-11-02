@@ -42,10 +42,10 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPr
    return (
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
-            <Typography className={styles.title} variant={'h1'}>
-               Sign Up
-            </Typography>
-            <div className={styles.inputs}>
+            <div className={styles.header}>
+               <Typography variant={'h1'}>Sign Up</Typography>
+            </div>
+            <div className={styles.content}>
                <ControlledInput
                   InputComponent={InputEmail}
                   control={control}
@@ -69,10 +69,10 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPr
                   errorMessage={errors.confirmedPassword?.message}
                />
             </div>
-            <Button fullWidth type={'submit'}>
-               Sign Up
-            </Button>
             <div className={styles.footer}>
+               <Button fullWidth type={'submit'}>
+                  Sign Up
+               </Button>
                <Typography className={styles.footerText} variant={'body2'}>
                   Already have an account?
                </Typography>
