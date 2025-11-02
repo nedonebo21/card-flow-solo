@@ -7,6 +7,7 @@ import { LoginForm } from '@/features/auth/ui/login-form'
 const meta = {
    title: 'Auth/LoginForm',
    component: LoginForm,
+   parameters: { layout: 'centered' },
    tags: ['autodocs'],
    args: {
       onSubmit: fn(),

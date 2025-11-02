@@ -1,0 +1,53 @@
+.wrapper {
+   padding: 25px 36px;
+}
+
+.title {
+   margin-bottom: 27px;
+}
+
+.inputs {
+   display: grid;
+   gap: 24px;
+   margin-bottom: 12px;
+}
+
+.fields {
+   margin-bottom: 66px;
+}
+
+.options {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(2, 1fr);
+   column-gap: 16px;
+}
+
+.forgotPassword {
+   grid-column: -1;
+   grid-row: 2;
+
+   &:hover {
+      text-decoration: underline;
+   }
+}
+
+.footer {
+   display: grid;
+   gap: 7px;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.footerText {
+   color: var(--color-light-900, rgb(195 193 199 / 100%));
+}
+
+.footerLink {
+   color: var(--color-primary-500);
+   text-decoration: underline !important;
+
+   &:hover {
+      text-decoration: none !important;
+   }
+}
