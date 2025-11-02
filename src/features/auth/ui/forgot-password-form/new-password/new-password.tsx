@@ -41,9 +41,7 @@ export const NewPasswordForm = ({ onSubmit: onSubmitFormProps, ...rest }: NewPas
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
-               <Typography variant={'h1'} className={styles.title}>
-                  Create new password
-               </Typography>
+               <Typography variant={'h1'}>Create new password</Typography>
             </div>
             <div className={styles.content}>
                <ControlledInput
