@@ -42,10 +42,10 @@ export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormPro
    return (
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
-            <Typography variant={'h1'} className={styles.title}>
-               Sign In
-            </Typography>
-            <div className={styles.fields}>
+            <div className={styles.header}>
+               <Typography variant={'h1'}>Sign In</Typography>
+            </div>
+            <div className={styles.content}>
                <div className={styles.inputs}>
                   <ControlledInput
                      InputComponent={InputEmail}
