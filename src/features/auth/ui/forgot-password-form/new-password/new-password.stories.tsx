@@ -5,7 +5,7 @@ import { fn } from 'storybook/test'
 import { NewPasswordForm } from '@/features/auth/ui/forgot-password-form/new-password/new-password'
 
 const meta = {
-   title: 'Auth/ForgotPasswordForm',
+   title: 'Auth/NewPasswordForm',
    parameters: { layout: ['centered'] },
    component: NewPasswordForm,
    tags: ['autodocs'],
@@ -17,4 +17,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const NewPassword: Story = {}
+export const Default: Story = {}
