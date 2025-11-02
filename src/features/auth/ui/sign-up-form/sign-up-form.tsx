@@ -17,11 +17,11 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './sign-up-form.module.scss'
 
-type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
+type SignUpFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<SignUpValues>
 }
 
-export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormProps) => {
+export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormProps) => {
    const {
       handleSubmit,
       control,

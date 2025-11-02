@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { fn } from 'storybook/test'
 
-import { SignUpForm } from '@/features/auth/ui/sign-up-form/sign-up-form'
+import { SignUpForm } from './sign-up-form'
 
 const meta = {
    title: 'Auth/SignUpFrom',
