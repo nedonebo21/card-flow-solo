@@ -7,6 +7,7 @@ import { Dropdown } from '@/shared/ui/dropdown/dropdown'
 import {
    CirclePlayIcon,
    LogOutIcon,
+   MoreVerticalIcon,
    PencilIcon,
    TrashIcon,
    UserFilledIcon,
@@ -32,7 +33,15 @@ export const Default: Story = {
       const [isOpen, setIsOpen] = useState(false)
 
       return (
-         <Dropdown open={isOpen} onOpenChange={setIsOpen}>
+         <Dropdown
+            open={isOpen}
+            onOpenChange={setIsOpen}
+            trigger={
+               <Button variant={'ghost'} size={'icon'}>
+                  <MoreVerticalIcon width={24} height={24} />
+               </Button>
+            }
+         >
             <Dropdown.Item>
                <Button variant={'ghost'}>
                   <CirclePlayIcon width={16} height={16} />
@@ -66,22 +75,19 @@ export const ProfileDemo: Story = {
             open={isOpen}
             onOpenChange={setIsOpen}
             trigger={
-               <Button variant={'ghost'} size={'icon'}>
-                  <TrashIcon width={36} height={36} />
-               </Button>
+               <div className={styles.avatar}>
+                  <img
+                     src={'https://i.pinimg.com/736x/ac/c7/7f/acc77fc9e4be6f7f83de39486ff221f0.jpg'}
+                     alt={'userAvatar'}
+                  />
+               </div>
             }
          >
-            <Dropdown.Label>
-               <TrashIcon width={36} height={36} />
-               <div className={styles.info}>
-                  <Typography variant={'subtitle2'} as={'span'} textAlign={'left'}>
-                     Ivan
-                  </Typography>
-                  <Typography variant={'caption'} className={styles.email} textAlign={'left'}>
-                     example@example.com
-                  </Typography>
-               </div>
-            </Dropdown.Label>
+            <Dropdown.Label
+               avatarUrl={'https://i.pinimg.com/736x/ac/c7/7f/acc77fc9e4be6f7f83de39486ff221f0.jpg'}
+               nickname={'Ivan'}
+               email={'example@domain.com'}
+            />
             <Dropdown.Item>
                <Button variant={'ghost'}>
                   <UserFilledIcon width={16} height={16} />

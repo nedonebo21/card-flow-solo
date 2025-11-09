@@ -4,9 +4,8 @@ import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
 import { clsx } from 'clsx'
 
-import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
-import { MoreVerticalIcon } from '@/shared/ui/icons'
+import { Typography } from '@/shared/ui/typography'
 
 import styles from './dropdown.module.scss'
 
@@ -16,11 +15,7 @@ type DropdownProps = {
 
 const Dropdown = ({
    children,
-   trigger = (
-      <Button variant={'ghost'} size={'icon'}>
-         <MoreVerticalIcon width={24} height={24} />
-      </Button>
-   ),
+   trigger = <div className={styles.avatar}></div>,
    ...rest
 }: DropdownProps) => {
    return (
@@ -41,10 +36,30 @@ const Dropdown = ({
    )
 }
 
-type DropdownLabelProps = Omit<ComponentProps<typeof RadixDropdown.Label>, 'asChild'>
+type DropdownLabelProps = {
+   email: string
+   nickname: string
+   avatarUrl?: string
+} & Omit<ComponentProps<typeof RadixDropdown.Label>, 'asChild'>
 
-const DropdownLabel = ({ className, ...rest }: DropdownLabelProps) => {
-   return <RadixDropdown.Label className={clsx(styles.label)} {...rest} />
+const DropdownLabel = ({ className, avatarUrl, nickname, email, ...rest }: DropdownLabelProps) => {
+   const hasAvatar = !!avatarUrl && avatarUrl.length > 0
+
+   return (
+      <RadixDropdown.Label className={clsx(styles.label)} {...rest}>
+         <div className={styles.avatar}>
+            {hasAvatar && <img src={avatarUrl} alt={'userAvatar'} />}
+         </div>
+         <div className={styles.info}>
+            <Typography variant={'subtitle2'} as={'span'} textAlign={'left'}>
+               {nickname}
+            </Typography>
+            <Typography variant={'caption'} className={styles.email} textAlign={'left'}>
+               {email}
+            </Typography>
+         </div>
+      </RadixDropdown.Label>
+   )
 }
 
 type DropdownItemProps = Omit<ComponentProps<typeof RadixDropdown.Item>, 'asChild'>
