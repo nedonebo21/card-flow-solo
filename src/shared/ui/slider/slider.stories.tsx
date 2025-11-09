@@ -34,15 +34,3 @@ export const Default: Story = {
       return <Slider onValueCommit={onValueCommit} values={range} min={1} max={30} />
    },
 }
-
-export const Disabled: Story = {
-   render: _args => {
-      const [range, setRange] = useState([10, 20])
-
-      const onValueCommit = (newValues: number[]) => {
-         setRange(newValues)
-      }
-
-      return <Slider disabled onValueCommit={onValueCommit} values={range} min={1} max={30} />
-   },
-}
