@@ -1,3 +1,4 @@
-export { TableHeadCell, TableCell, TableBody, Table, TableRow } from './table'
+export { TableHeadCell, TableCell, TableBody, Table, TableRow, TableHeader } from './table'
 export { TableSortHeader } from './table-sort-header'
-export type { Sort, Column } from './table-sort-header'
+export type { Sort } from './table-sort-header'
+export type { Column } from './table'

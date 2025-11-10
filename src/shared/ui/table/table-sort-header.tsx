@@ -1,17 +1,14 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
+import type { Column } from './table'
+
 import { clsx } from 'clsx'
 
 import { ChevronUpIcon } from '@/shared/ui/icons'
-import { TableHeadCell, TableRow } from '@/shared/ui/table/table'
 
 import styles from './table.module.scss'
 
-export type Column = {
-   key: string
-   title: string
-   sortable: boolean
-}
+import { TableHeadCell, TableRow } from './table'
 
 export type Sort = {
    key: string

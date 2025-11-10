@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps, ReactNode, ComponentPropsWithoutRef } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -6,12 +6,37 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './table.module.scss'
 
+export type Column = {
+   key: string
+   title: string
+   sortable: boolean
+}
+
 type TableProps = {
    children: ReactNode
 } & Omit<ComponentProps<'table'>, 'children'>
 
 export const Table = ({ className, ...rest }: TableProps) => {
    return <table className={clsx(styles.table, className)} {...rest} />
+}
+
+type TableSortHeaderProps = Omit<
+   ComponentPropsWithoutRef<'thead'> & {
+      columns: Column[]
+   },
+   'children'
+>
+
+export const TableHeader = ({ columns, className, ...rest }: TableSortHeaderProps) => {
+   return (
+      <thead className={clsx(styles.thead, className)} {...rest}>
+         <TableRow>
+            {columns.map(({ title, key }) => (
+               <TableHeadCell key={key}>{title}</TableHeadCell>
+            ))}
+         </TableRow>
+      </thead>
+   )
 }
 
 type TableHeadCellProps = {
