@@ -1,9 +1,10 @@
-import { useMemo } from 'react'
+import { type ComponentProps, useMemo } from 'react'
 
 import { clsx } from 'clsx'
 
 import { Button } from '@/shared/ui/button'
 import { ChevronRightIcon } from '@/shared/ui/icons'
+import { PaginationNavItem } from '@/shared/ui/pagination/pagination-nav-item'
 import { Select } from '@/shared/ui/select'
 import { Typography } from '@/shared/ui/typography'
 
@@ -12,7 +13,6 @@ import styles from './pagination.module.scss'
 import { DOTS, usePagination } from './use-pagination'
 
 type PaginationProps = {
-   className?: string
    onPageChange: (page: number) => void
    onPageSizeChange: (size: number) => void
    pageSizeOptions?: number[]
@@ -20,7 +20,7 @@ type PaginationProps = {
    siblingCount?: number
    currentPage: number
    pageSize: number
-}
+} & Omit<ComponentProps<'div'>, 'children'>
 
 export const Pagination = ({
    className,
@@ -41,10 +41,6 @@ export const Pagination = ({
          }),
       [pageSizeOptions]
    )
-
-   if (currentPage === 0 || paginationRange.length < 2) {
-      return null
-   }
 
    const handleNextPage = () => {
       if (currentPage < lastPage) {
@@ -82,6 +78,8 @@ export const Pagination = ({
                   </Button>
                </li>
                {paginationRange.map((pageNum, index) => {
+                  const isCurrent = pageNum === currentPage
+
                   if (pageNum === DOTS) {
                      return (
                         <li key={`dots-${index}`} className={styles.paginationDots}>
@@ -91,16 +89,13 @@ export const Pagination = ({
                   }
 
                   return (
-                     <li
+                     <PaginationNavItem
                         key={`page-${pageNum}`}
-                        className={clsx(
-                           styles.paginationItem,
-                           pageNum === currentPage && styles.selected
-                        )}
+                        className={clsx(styles.paginationItem, isCurrent && styles.selected)}
                         onClick={() => onPageChange(pageNum)}
                      >
                         {pageNum}
-                     </li>
+                     </PaginationNavItem>
                   )
                })}
                <li className={clsx(styles.arrow, styles.rightArrow)}>

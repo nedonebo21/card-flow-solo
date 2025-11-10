@@ -61,7 +61,10 @@ export const Demo: Story = {
       const [currentPage, setCurrentPage] = useState(1)
       const [pageSize, setPageSize] = useState(10)
 
-      const data = useMemo(() => Array.from({ length: 550 }, (_, i) => `item-${i + 1}`), [])
+      const data = useMemo(
+         () => Array.from({ length: _args.totalCount }, (_, i) => `item-${i + 1}`),
+         [_args.totalCount]
+      )
 
       const startIndex = (currentPage - 1) * pageSize
       const endIndex = startIndex + pageSize
