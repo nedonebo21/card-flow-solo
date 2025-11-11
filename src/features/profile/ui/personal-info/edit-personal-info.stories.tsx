@@ -2,33 +2,28 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { fn } from 'storybook/test'
-
-import { PersonalInfo } from './personal-info'
+import { EditPersonalInfo } from './edit-personal-info'
 
 const meta = {
-   title: 'Profile/PersonalInfo',
+   title: 'Profile/EditPersonalInfo',
    parameters: { layout: ['centered'] },
-   component: PersonalInfo,
+   component: EditPersonalInfo,
    tags: ['autodocs'],
    args: {
-      onSubmit: fn(),
-   },
-} satisfies Meta<typeof PersonalInfo>
-
-export default meta
-type Story = StoryObj<typeof meta>
-
-export const Default: Story = {
-   args: {
+      avatarUrl: '',
       nickname: '',
       email: '',
-      avatarUrl: '',
       isEditMode: false,
       onEditModeChange: () => {},
       onNicknameChange: () => {},
       onAvatarChange: () => {},
    },
+} satisfies Meta<typeof EditPersonalInfo>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
    render: () => {
       const [isEditMode, setIsEditMode] = useState(false)
       const [nickname, setNickname] = useState('Mega User')
@@ -49,7 +44,7 @@ export const Default: Story = {
       }
 
       return (
-         <PersonalInfo
+         <EditPersonalInfo
             nickname={nickname}
             email={'example@domain.com'}
             isEditMode={isEditMode}

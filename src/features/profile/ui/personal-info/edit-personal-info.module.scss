@@ -63,6 +63,12 @@
    color: var(--color-dark-100);
 }
 
+.buttons {
+   display: flex;
+   gap: 10px;
+   align-items: center;
+}
+
 .footer {
    display: flex;
    justify-content: center;

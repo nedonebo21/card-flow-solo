@@ -1,1 +1,1 @@
-export { PersonalInfo } from './personal-info'
+export { EditPersonalInfo } from './edit-personal-info'
