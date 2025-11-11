@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { avatarSchema } from '@/features/profile/model'
 import { Button } from '@/shared/ui/button'
 import { PencilIcon } from '@/shared/ui/icons'
+import { Typography } from '@/shared/ui/typography'
 
 import styles from '@/features/profile/ui/personal-info/edit-personal-info.module.scss'
 
@@ -21,7 +22,13 @@ type Props = {
 }
 
 export const EditAvatar = ({ avatarUrl, onSubmit }: Props) => {
-   const { control, register, handleSubmit, setValue } = useForm<AvatarFormValues>({
+   const {
+      control,
+      register,
+      handleSubmit,
+      setValue,
+      formState: { errors },
+   } = useForm<AvatarFormValues>({
       resolver: zodResolver(avatarSchema),
    })
 
@@ -43,21 +50,25 @@ export const EditAvatar = ({ avatarUrl, onSubmit }: Props) => {
    }
 
    const hasAvatar = avatarUrl.length > 0
+   const isError = !!errors.avatar?.message
 
    return (
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.avatar}>
-         <div className={styles.avatarIcon}>
-            {hasAvatar && <img src={avatarUrl} alt={'avatar'} />}
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+         <div className={styles.avatar}>
+            <div className={styles.avatarIcon}>
+               {hasAvatar && <img src={avatarUrl} alt={'avatar'} />}
+            </div>
+            <Button
+               className={styles.avatarEdit}
+               onClick={handleEditAvatarClick}
+               variant={'ghost'}
+               size={'icon'}
+               type={'button'}
+            >
+               <PencilIcon width={16} height={16} />
+            </Button>
          </div>
-         <Button
-            className={styles.avatarEdit}
-            onClick={handleEditAvatarClick}
-            variant={'ghost'}
-            size={'icon'}
-            type={'button'}
-         >
-            <PencilIcon width={16} height={16} />
-         </Button>
+         {isError && <Typography variant={'error'}>{errors.avatar?.message}</Typography>}
          <input
             {...register('avatar')}
             type={'file'}

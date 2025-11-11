@@ -21,6 +21,11 @@
    margin-bottom: 6px;
 }
 
+.form {
+   display: flex;
+   flex-direction: column;
+}
+
 .avatarIcon {
    width: 96px;
    height: 96px;
