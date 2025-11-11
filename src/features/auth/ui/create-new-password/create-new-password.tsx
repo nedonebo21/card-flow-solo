@@ -15,13 +15,16 @@ import { Card } from '@/shared/ui/card'
 import { InputPassword } from '@/shared/ui/input'
 import { Typography } from '@/shared/ui/typography'
 
-import styles from './new-password.module.scss'
+import styles from './create-new-password.module.scss'
 
 type NewPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<NewPasswordValues>
 }
 
-export const NewPasswordForm = ({ onSubmit: onSubmitFormProps, ...rest }: NewPasswordFormProps) => {
+export const CreateNewPassword = ({
+   onSubmit: onSubmitFormProps,
+   ...rest
+}: NewPasswordFormProps) => {
    const {
       handleSubmit,
       control,

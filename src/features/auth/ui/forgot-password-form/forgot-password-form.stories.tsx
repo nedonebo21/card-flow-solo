@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 
 import { ForgotPasswordForm } from '@/features/auth/ui/forgot-password-form'
+import { CheckEmail } from '@/features/auth/ui/forgot-password-form/check-email'
 
 const meta = {
    title: 'Auth/ForgotPasswordForm',
@@ -18,3 +19,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+export const CheckEmailCard: Story = {
+   render: () => {
+      return <CheckEmail email={'example@domain.com'} />
+   },
+}
