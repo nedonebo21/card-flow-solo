@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+//TODO add object custom errors + проверка на пробелы в начале и конце пароля, мин кол-во пароля + текст ошибки
 export const loginSchema = z.object({
    email: z.email('Enter a valid email address').transform(email => email.trim()),
    password: z
