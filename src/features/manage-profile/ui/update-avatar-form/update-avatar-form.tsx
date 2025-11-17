@@ -1,7 +1,5 @@
-import type { ChangeEvent } from 'react'
+import type { ChangeEvent, ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
-
-import type { AvatarFormValues } from '@/features/profile/model'
 
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
@@ -9,27 +7,30 @@ import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { avatarSchema } from '@/features/profile/model'
 import { Button } from '@/shared/ui/button'
 import { PencilIcon } from '@/shared/ui/icons'
 import { Typography } from '@/shared/ui/typography'
 
-import styles from '@/features/profile/ui/personal-info/edit-personal-info.module.scss'
+import styles from './update-avatar-form.module.scss'
 
-type Props = {
+import { type UpdateAvatarFormValues, VALID_FILE_FORMATS } from '../../model/update-avatar-schema'
+import { updateAvatarSchema } from '../../model/update-avatar-schema'
+
+type UpdateAvatarFormProps = {
    avatarUrl: string
-   onSubmit: SubmitHandler<AvatarFormValues>
-}
+   onSubmit?: SubmitHandler<UpdateAvatarFormValues>
+   isEditMode: boolean
+} & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const EditAvatar = ({ avatarUrl, onSubmit }: Props) => {
+export const UpdateAvatarForm = ({ avatarUrl, isEditMode, ...rest }: UpdateAvatarFormProps) => {
    const {
       control,
       register,
       handleSubmit,
       setValue,
       formState: { errors },
-   } = useForm<AvatarFormValues>({
-      resolver: zodResolver(avatarSchema),
+   } = useForm<UpdateAvatarFormValues>({
+      resolver: zodResolver(updateAvatarSchema),
    })
 
    const fileInputRef = useRef<HTMLInputElement>(null)
@@ -39,14 +40,18 @@ export const EditAvatar = ({ avatarUrl, onSubmit }: Props) => {
    }
 
    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files
+      const file = e.target.files?.[0]
 
-      if (files && files.length > 0) {
-         setValue('avatar', files)
-         setTimeout(() => {
-            handleSubmit(onSubmit)()
-         }, 0)
+      if (!file) {
+         return
       }
+
+      setValue('avatar', file)
+      handleSubmit(onSubmit)()
+   }
+
+   const onSubmit: SubmitHandler<UpdateAvatarFormValues> = (data, e) => {
+      rest?.onSubmit?.(data, e)
    }
 
    const hasAvatar = avatarUrl.length > 0
@@ -58,21 +63,23 @@ export const EditAvatar = ({ avatarUrl, onSubmit }: Props) => {
             <div className={styles.avatarIcon}>
                {hasAvatar && <img src={avatarUrl} alt={'avatar'} />}
             </div>
-            <Button
-               className={styles.avatarEdit}
-               onClick={handleEditAvatarClick}
-               variant={'ghost'}
-               size={'icon'}
-               type={'button'}
-            >
-               <PencilIcon width={16} height={16} />
-            </Button>
+            {!isEditMode && (
+               <Button
+                  className={styles.avatarEdit}
+                  onClick={handleEditAvatarClick}
+                  variant={'ghost'}
+                  size={'icon'}
+                  type={'button'}
+               >
+                  <PencilIcon width={16} height={16} />
+               </Button>
+            )}
          </div>
          {isError && <Typography variant={'error'}>{errors.avatar?.message}</Typography>}
          <input
             {...register('avatar')}
             type={'file'}
-            accept={'image/*'}
+            accept={VALID_FILE_FORMATS.values.join(',')}
             ref={fileInputRef}
             onChange={handleFileChange}
             style={{ display: 'none' }}
