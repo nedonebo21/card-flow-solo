@@ -52,7 +52,14 @@ export const WithCancel: Story = {
       ]
 
       return (
-         <Dialog open={isOpen} onOpenChange={setIsOpen} heading={'Title'} showCancelButton>
+         <Dialog
+            open={isOpen}
+            onOpenChange={setIsOpen}
+            heading={'Title'}
+            showCancelButton
+            cancelButtonLabel={'Delete Account'}
+            confirmButtonLabel={'Confirm action'}
+         >
             <Select options={options} />
             <Input label={'Input'} placeholder={'input'} />
             <Input label={'Input'} placeholder={'input'} />

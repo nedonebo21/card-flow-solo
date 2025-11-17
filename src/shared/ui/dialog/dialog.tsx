@@ -16,6 +16,8 @@ type DialogProps = {
    trigger?: ReactNode
    heading: string
    showCancelButton?: boolean
+   cancelButtonLabel?: string
+   confirmButtonLabel?: string
 } & Omit<ComponentProps<typeof RadixDialog.Root>, 'asChild'>
 
 export const Dialog = ({
@@ -23,19 +25,23 @@ export const Dialog = ({
    children,
    trigger = <Button>Open Modal</Button>,
    heading,
-   showCancelButton,
+   showCancelButton = false,
+   cancelButtonLabel = 'Cancel',
+   confirmButtonLabel = 'Confirm',
    ...rest
 }: DialogProps) => {
    return (
       <RadixDialog.Root {...rest}>
-         <RadixDialog.Trigger className={styles.trigger}>{trigger}</RadixDialog.Trigger>
+         <RadixDialog.Trigger className={styles.trigger} asChild>
+            {trigger}
+         </RadixDialog.Trigger>
          <RadixDialog.Portal>
             <RadixDialog.Overlay />
             <RadixDialog.Content {...rest} asChild={undefined}>
                <Card className={clsx(styles.container, className)}>
                   <div className={styles.header}>
                      <Typography variant={'h3'}>{heading}</Typography>
-                     <RadixDialog.Close>
+                     <RadixDialog.Close asChild>
                         <Button variant={'ghost'} size={'icon'}>
                            <CloseIcon width={20} height={20} />
                         </Button>
@@ -45,10 +51,10 @@ export const Dialog = ({
                   <div className={clsx(styles.footer, showCancelButton && styles.footerCancel)}>
                      {showCancelButton && (
                         <RadixDialog.Close>
-                           <Button variant={'secondary'}>Button Secondary</Button>
+                           <Button variant={'secondary'}>{cancelButtonLabel}</Button>
                         </RadixDialog.Close>
                      )}
-                     <Button>Button Primary</Button>
+                     <Button>{confirmButtonLabel}</Button>
                   </div>
                </Card>
             </RadixDialog.Content>
