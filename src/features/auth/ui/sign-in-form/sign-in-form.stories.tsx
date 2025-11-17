@@ -2,17 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { fn } from 'storybook/test'
 
-import { LoginForm } from '@/features/auth/ui/login-form'
+import { SignInForm } from '@/features/auth/ui/sign-in-form'
 
 const meta = {
-   title: 'Auth/LoginForm',
-   component: LoginForm,
+   title: 'Auth/SignInForm',
+   component: SignInForm,
    parameters: { layout: 'centered' },
    tags: ['autodocs'],
    args: {
       onSubmit: fn(),
    },
-} satisfies Meta<typeof LoginForm>
+} satisfies Meta<typeof SignInForm>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { FormValues } from '../../model/login-schema'
+import type { SignInFormValues } from '../../model/sign-in-schema'
 
 import { useForm } from 'react-hook-form'
 
@@ -14,21 +14,21 @@ import { Card } from '@/shared/ui/card'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
 import { Typography } from '@/shared/ui/typography'
 
-import styles from './login-form.module.scss'
+import styles from './sign-in-form.module.scss'
 
-import { loginSchema } from '../../model/login-schema'
+import { signInSchema } from '../../model/sign-in-schema'
 
-type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
-   onSubmit?: SubmitHandler<FormValues>
+type SignInFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
+   onSubmit?: SubmitHandler<SignInFormValues>
 }
 
-export const LoginForm = ({ onSubmit: onSubmitFormProps, ...rest }: LoginFormProps) => {
+export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormProps) => {
    const {
       handleSubmit,
       control,
       formState: { errors },
-   } = useForm<FormValues>({
-      resolver: zodResolver(loginSchema),
+   } = useForm<SignInFormValues>({
+      resolver: zodResolver(signInSchema),
       defaultValues: {
          email: '',
          password: '',
