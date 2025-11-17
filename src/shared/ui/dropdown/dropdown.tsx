@@ -11,20 +11,24 @@ import styles from './dropdown.module.scss'
 
 type DropdownProps = {
    trigger?: ReactNode
+   alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
 } & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild'>
 
 const Dropdown = ({
    children,
    trigger = <div className={styles.avatar}></div>,
+   alignItems = 'end',
    ...rest
 }: DropdownProps) => {
    return (
       <RadixDropdown.Root {...rest}>
-         <RadixDropdown.Trigger className={styles.trigger}>{trigger}</RadixDropdown.Trigger>
+         <RadixDropdown.Trigger className={styles.trigger} asChild>
+            {trigger}
+         </RadixDropdown.Trigger>
          <RadixDropdown.Portal>
             <RadixDropdown.Content
                sideOffset={1}
-               align={'end'}
+               align={alignItems}
                className={styles.container}
                {...rest}
             >
@@ -65,7 +69,12 @@ const DropdownLabel = ({ className, avatarUrl, nickname, email, ...rest }: Dropd
 type DropdownItemProps = Omit<ComponentProps<typeof RadixDropdown.Item>, 'asChild'>
 
 const DropdownItem = ({ className, ...rest }: DropdownItemProps) => {
-   return <RadixDropdown.Item className={clsx(styles.item, className)} {...rest} />
+   return (
+      <>
+         <RadixDropdown.Separator className={styles.separator} />
+         <RadixDropdown.Item className={clsx(styles.item, className)} {...rest} />
+      </>
+   )
 }
 
 Dropdown.Label = DropdownLabel
