@@ -4,6 +4,7 @@ import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
 import { clsx } from 'clsx'
 
+import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 
@@ -12,22 +13,30 @@ import styles from './dropdown.module.scss'
 type DropdownProps = {
    trigger?: ReactNode
    alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
+   sideOffset?: ComponentProps<typeof RadixDropdown.Content>['sideOffset']
 } & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild'>
 
 const Dropdown = ({
    children,
-   trigger = <div className={styles.avatar}></div>,
+   trigger,
    alignItems = 'end',
+   sideOffset = 1,
    ...rest
 }: DropdownProps) => {
+   const buttonVariant = trigger ? 'ghost' : 'primary'
+   const buttonSize = trigger ? 'icon' : 'default'
+   const buttonClassname = trigger ? styles.triggerIcon : styles.triggerDefault
+
    return (
       <RadixDropdown.Root {...rest}>
          <RadixDropdown.Trigger className={styles.trigger} asChild>
-            {trigger}
+            <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
+               {trigger ?? 'Open Dropdown'}
+            </Button>
          </RadixDropdown.Trigger>
          <RadixDropdown.Portal>
             <RadixDropdown.Content
-               sideOffset={1}
+               sideOffset={sideOffset}
                align={alignItems}
                className={styles.container}
                {...rest}
