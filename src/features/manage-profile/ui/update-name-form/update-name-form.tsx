@@ -1,66 +1,65 @@
-import type { NicknameFormValues } from '@/features/profile/model'
+import type { ComponentProps } from 'react'
+import type { SubmitHandler } from 'react-hook-form'
 
-import { type SubmitHandler, useWatch } from 'react-hook-form'
+import type { UpdateNameFormValues } from '../../model/update-name-schema'
+
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { nicknameSchema } from '@/features/profile/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 
-import styles from '@/features/profile/ui/personal-info/edit-personal-info.module.scss'
+import styles from './update-name-form.module.scss'
+
+import { updateNameSchema } from '../../model/update-name-schema'
 
 type Props = {
-   nickname: string
-   onSubmit: SubmitHandler<NicknameFormValues>
+   username: string
+   onSubmit?: SubmitHandler<UpdateNameFormValues>
    onCancel: () => void
-}
+} & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const EditNickname = ({ nickname, onSubmit, onCancel }: Props) => {
+export const UpdateNameForm = ({ username, onCancel, ...rest }: Props) => {
    const {
       handleSubmit,
       control,
       formState: { errors, isDirty },
-   } = useForm<NicknameFormValues>({
-      resolver: zodResolver(nicknameSchema),
+   } = useForm<UpdateNameFormValues>({
+      resolver: zodResolver(updateNameSchema),
+      mode: 'onChange',
       defaultValues: {
-         nickname,
+         name: username ?? '',
       },
    })
 
-   const currentNickname = useWatch({
-      control,
-      name: 'nickname',
-      defaultValue: nickname,
-   })
-
-   const maxLength = nicknameSchema.shape.nickname.maxLength
+   const onSubmit: SubmitHandler<UpdateNameFormValues> = (data, e) => {
+      rest?.onSubmit?.(data, e)
+   }
 
    return (
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
          <ControlledInput
             control={control}
-            name={'nickname'}
-            label={`Nickname ${currentNickname.length}/${maxLength}`}
-            errorMessage={errors.nickname?.message}
+            name={'name'}
+            label={`Nickname`}
+            errorMessage={errors.name?.message}
          />
          <div className={styles.buttons}>
             <Button
                onClick={onCancel}
                variant={'secondary'}
-               className={styles.save}
+               className={styles.cancel}
                fullWidth
                type={'button'}
             >
-               Back
+               Cancel
             </Button>
             <Button className={styles.save} disabled={!isDirty} fullWidth type={'submit'}>
                Save Changes
             </Button>
          </div>
-
          {import.meta.env.DEV && <DevTool control={control} />}
       </form>
    )
