@@ -2,13 +2,14 @@ import { useMemo } from 'react'
 
 import { clsx } from 'clsx'
 
-import { DOTS, usePagination } from '@/shared/lib/hooks'
 import { Button } from '@/shared/ui/button'
 import { ChevronRightIcon } from '@/shared/ui/icons'
 import { Select } from '@/shared/ui/select'
 import { Typography } from '@/shared/ui/typography'
 
 import styles from './pagination.module.scss'
+
+import { DOTS, usePagination } from './use-pagination'
 
 type PaginationProps = {
    className?: string

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { Slider } from '@/features/slider/ui/slider'
+import { Slider } from '@/shared/ui/slider/slider'
 
 const meta = {
    title: 'Navigation/Slider',
