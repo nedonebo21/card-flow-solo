@@ -65,10 +65,27 @@
 }
 
 .avatar {
+   user-select: none;
+
    width: 36px;
    height: 36px;
    border-radius: 50%;
-   background-color: var(--color-dark-100);
+
+   outline: none;
+   box-shadow: none;
+
+   img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+   }
+}
+
+.triggerIcon {
+   user-select: none;
+   width: 36px;
+   height: 36px;
+   border-radius: 50%;
 
    img {
       width: 36px;
