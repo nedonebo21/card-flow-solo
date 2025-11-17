@@ -1,0 +1,41 @@
+.wrapper {
+   display: flex;
+   flex-direction: column;
+   width: 420px;
+   padding: 33px 36px 41px;
+}
+
+.header {
+   margin-bottom: 27px;
+}
+
+.content {
+   display: flex;
+   flex-direction: column;
+}
+
+.editable {
+   display: flex;
+   gap: 6px;
+   align-items: center;
+   justify-content: center;
+}
+
+.nickname {
+   margin-left: 28px;
+}
+
+.nicknameEdit {
+   padding: 4px;
+   border-radius: 4px;
+}
+
+.email {
+   margin-bottom: 13px;
+   color: var(--color-dark-100);
+}
+
+.footer {
+   display: flex;
+   justify-content: center;
+}
