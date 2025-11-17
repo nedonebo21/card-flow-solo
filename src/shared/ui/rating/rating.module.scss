@@ -1,0 +1,9 @@
+.wrapper {
+   display: flex;
+   gap: 10px;
+   align-items: center;
+}
+
+.selected {
+   color: var(--color-warning-300);
+}
