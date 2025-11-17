@@ -1,17 +1,18 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { FormValues } from '@/features/auth/model'
+import type { FormValues } from '../../model/login-schema'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { loginSchema } from '@/features/auth/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { InputEmail, InputPassword } from '@/shared/ui/input'
+
+import { loginSchema } from '../../model/login-schema'
 
 type LoginFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<FormValues>

@@ -1,8 +1,10 @@
 import { z } from 'zod'
 
+import { emailSchema, passwordSchema } from './auth-shemas'
+
 export const loginSchema = z.object({
-   email: z.email(),
-   password: z.string().min(3),
+   email: emailSchema,
+   password: passwordSchema,
    rememberMe: z.boolean().optional(),
 })
 
