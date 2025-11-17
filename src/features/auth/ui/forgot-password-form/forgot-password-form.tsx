@@ -1,14 +1,13 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { ForgotPasswordValues } from '@/features/auth/model'
+import type { ForgotPasswordFormValues } from '../../model/forgot-password-schema'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { forgotPasswordSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
@@ -17,8 +16,10 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './forgot-password-form.module.scss'
 
+import { forgotPasswordSchema } from '../../model/forgot-password-schema'
+
 type ForgotPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
-   onSubmit?: SubmitHandler<ForgotPasswordValues>
+   onSubmit?: SubmitHandler<ForgotPasswordFormValues>
 }
 
 export const ForgotPasswordForm = ({
@@ -29,7 +30,7 @@ export const ForgotPasswordForm = ({
       handleSubmit,
       control,
       formState: { errors },
-   } = useForm<ForgotPasswordValues>({
+   } = useForm<ForgotPasswordFormValues>({
       resolver: zodResolver(forgotPasswordSchema),
       defaultValues: {
          email: '',

@@ -1,10 +1,9 @@
 import { z } from 'zod'
 
+import { passwordSchema } from '../model/auth-shemas'
+
 export const newPasswordSchema = z.object({
-   password: z
-      .string()
-      .min(3, 'Password must be longer than 3 characters')
-      .refine(pass => !pass.includes(' '), 'Password cannot contains space`s'),
+   password: passwordSchema,
 })
 
-export type NewPasswordValues = z.infer<typeof newPasswordSchema>
+export type NewPasswordFormValues = z.infer<typeof newPasswordSchema>

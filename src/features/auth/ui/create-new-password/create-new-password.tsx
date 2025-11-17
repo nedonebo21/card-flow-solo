@@ -1,14 +1,13 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { NewPasswordValues } from '@/features/auth/model'
+import type { NewPasswordFormValues } from '../../model/new-password-schema'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { newPasswordSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
@@ -17,8 +16,10 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './create-new-password.module.scss'
 
+import { newPasswordSchema } from '../../model/new-password-schema'
+
 type NewPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
-   onSubmit?: SubmitHandler<NewPasswordValues>
+   onSubmit?: SubmitHandler<NewPasswordFormValues>
 }
 
 export const CreateNewPassword = ({
@@ -29,7 +30,7 @@ export const CreateNewPassword = ({
       handleSubmit,
       control,
       formState: { errors },
-   } = useForm<NewPasswordValues>({
+   } = useForm<NewPasswordFormValues>({
       resolver: zodResolver(newPasswordSchema),
       defaultValues: {
          password: '',

@@ -1,7 +1,9 @@
 import { z } from 'zod'
 
+import { emailSchema } from '../model/auth-shemas'
+
 export const forgotPasswordSchema = z.object({
-   email: z.email('Enter a valid email address').trim(),
+   email: emailSchema,
 })
 
-export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>
+export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>

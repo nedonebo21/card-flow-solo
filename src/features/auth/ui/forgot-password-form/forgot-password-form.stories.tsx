@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { fn } from 'storybook/test'
 
-import { ForgotPasswordForm } from '@/features/auth/ui/forgot-password-form'
-import { CheckEmail } from '@/features/auth/ui/forgot-password-form/check-email'
+import { ForgotPasswordForm, CheckEmail } from '@/features/auth/ui/forgot-password-form'
 
 const meta = {
    title: 'Auth/ForgotPasswordForm',
