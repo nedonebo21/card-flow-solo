@@ -1,17 +1,16 @@
 import { z } from 'zod'
 
+import { emailSchema, passwordSchema } from './../model/auth-shemas'
+
 export const signUpSchema = z
    .object({
-      email: z.email('Enter a valid email address').transform(email => email.trim()),
-      password: z
-         .string()
-         .min(3, 'Password must be longer than 3 characters')
-         .refine(pass => !pass.includes(' '), 'Password cannot contains space`s'),
-      confirmedPassword: z.string().min(3),
+      email: emailSchema,
+      password: passwordSchema,
+      confirm: z.string().min(3),
    })
-   .refine(data => data.confirmedPassword === data.password, {
+   .refine(data => data.confirm === data.password, {
       message: 'Passwords must be match',
-      path: ['confirmedPassword'],
+      path: ['confirm'],
    })
 
-export type SignUpValues = z.infer<typeof signUpSchema>
+export type SignUpFormValues = z.infer<typeof signUpSchema>

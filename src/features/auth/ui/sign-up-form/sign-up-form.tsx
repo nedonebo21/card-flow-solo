@@ -1,14 +1,13 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { SignUpValues } from '@/features/auth/model'
+import type { SignUpFormValues } from '../../model/sign-up-schema'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { signUpSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
@@ -17,8 +16,10 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './sign-up-form.module.scss'
 
+import { signUpSchema } from '../../model/sign-up-schema'
+
 type SignUpFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
-   onSubmit?: SubmitHandler<SignUpValues>
+   onSubmit?: SubmitHandler<SignUpFormValues>
 }
 
 export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormProps) => {
@@ -26,12 +27,12 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
       handleSubmit,
       control,
       formState: { errors },
-   } = useForm<SignUpValues>({
+   } = useForm<SignUpFormValues>({
       resolver: zodResolver(signUpSchema),
       defaultValues: {
          email: '',
          password: '',
-         confirmedPassword: '',
+         confirm: '',
       },
    })
 
@@ -64,9 +65,9 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
                <ControlledInput
                   InputComponent={InputPassword}
                   control={control}
-                  name={'confirmedPassword'}
+                  name={'confirm'}
                   label={'Confirm Password'}
-                  errorMessage={errors.confirmedPassword?.message}
+                  errorMessage={errors.confirm?.message}
                />
             </div>
             <div className={styles.footer}>
