@@ -34,7 +34,7 @@ export const Default: Story = {
          <Dropdown
             open={isOpen}
             onOpenChange={setIsOpen}
-            trigger={<MoreVerticalIcon width={24} height={24} />}
+            triggerIcon={<MoreVerticalIcon width={24} height={24} />}
          >
             <Dropdown.Item>
                <Button variant={'ghost'}>
@@ -98,7 +98,7 @@ export const ProfileDemo: Story = {
          <Dropdown
             open={isOpen}
             onOpenChange={setIsOpen}
-            trigger={
+            triggerIcon={
                <img
                   src={'https://i.pinimg.com/736x/ac/c7/7f/acc77fc9e4be6f7f83de39486ff221f0.jpg'}
                   alt={'userAvatar'}

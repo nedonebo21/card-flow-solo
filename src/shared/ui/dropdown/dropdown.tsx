@@ -11,27 +11,27 @@ import { Typography } from '@/shared/ui/typography'
 import styles from './dropdown.module.scss'
 
 type DropdownProps = {
-   trigger?: ReactNode
+   triggerIcon?: ReactNode
    alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
    sideOffset?: ComponentProps<typeof RadixDropdown.Content>['sideOffset']
 } & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild'>
 
 const Dropdown = ({
    children,
-   trigger,
+   triggerIcon,
    alignItems = 'end',
    sideOffset = 1,
    ...rest
 }: DropdownProps) => {
-   const buttonVariant = trigger ? 'ghost' : 'primary'
-   const buttonSize = trigger ? 'icon' : 'default'
-   const buttonClassname = trigger ? styles.triggerIcon : styles.triggerDefault
+   const buttonVariant = triggerIcon ? 'ghost' : 'primary'
+   const buttonSize = triggerIcon ? 'icon' : 'default'
+   const buttonClassname = triggerIcon ? styles.triggerIcon : styles.triggerDefault
 
    return (
       <RadixDropdown.Root {...rest}>
          <RadixDropdown.Trigger className={styles.trigger} asChild>
             <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
-               {trigger ?? 'Open Dropdown'}
+               {triggerIcon ?? 'Open Dropdown'}
             </Button>
          </RadixDropdown.Trigger>
          <RadixDropdown.Portal>
