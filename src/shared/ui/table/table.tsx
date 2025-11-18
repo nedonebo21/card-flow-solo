@@ -6,12 +6,6 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './table.module.scss'
 
-export type Column = {
-   key: string
-   title: string
-   sortable: boolean
-}
-
 type TableProps = {
    children: ReactNode
 } & Omit<ComponentProps<'table'>, 'children'>
@@ -20,21 +14,14 @@ export const Table = ({ className, ...rest }: TableProps) => {
    return <table className={clsx(styles.table, className)} {...rest} />
 }
 
-type TableSortHeaderProps = Omit<
-   ComponentPropsWithoutRef<'thead'> & {
-      columns: Column[]
-   },
-   'children'
->
+type TableHeaderProps = {
+   children: ReactNode
+} & Omit<ComponentPropsWithoutRef<'thead'>, 'children'>
 
-export const TableHeader = ({ columns, className, ...rest }: TableSortHeaderProps) => {
+export const TableHeader = ({ className, children, ...rest }: TableHeaderProps) => {
    return (
       <thead className={clsx(styles.thead, className)} {...rest}>
-         <TableRow>
-            {columns.map(({ title, key }) => (
-               <TableHeadCell key={key}>{title}</TableHeadCell>
-            ))}
-         </TableRow>
+         <TableRow>{children}</TableRow>
       </thead>
    )
 }

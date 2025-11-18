@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import type { Sort, Column } from '@/shared/ui/table'
+import type { Column } from '@/shared/ui/table/table-sort-header'
 
 import { useState } from 'react'
 
@@ -8,6 +8,7 @@ import { formatDate } from '@/shared/lib/date'
 import { Button } from '@/shared/ui/button'
 import { CirclePlayIcon, PencilIcon, TrashIcon } from '@/shared/ui/icons'
 import { Rating } from '@/shared/ui/rating'
+import { type Sort, TableHeadCell } from '@/shared/ui/table'
 import {
    Table,
    TableBody,
@@ -125,28 +126,6 @@ export const DecksTableWithSort: Story = {
    },
 }
 
-const cardsColumns: Column[] = [
-   {
-      key: 'question',
-      title: 'Question',
-      sortable: true,
-   },
-   {
-      key: 'answer',
-      title: 'Answer',
-      sortable: true,
-   },
-   {
-      key: 'updated',
-      title: 'Last Updated',
-      sortable: true,
-   },
-   {
-      key: 'grade',
-      title: 'Grade',
-      sortable: true,
-   },
-]
 const cardsData = [
    {
       question: 'How "This" works in JavaScript?',
@@ -178,7 +157,12 @@ export const CardsTable: Story = {
    render: () => {
       return (
          <Table>
-            <TableHeader columns={cardsColumns} />
+            <TableHeader>
+               <TableHeadCell>Question</TableHeadCell>
+               <TableHeadCell>Answer</TableHeadCell>
+               <TableHeadCell>Updated</TableHeadCell>
+               <TableHeadCell>Grade</TableHeadCell>
+            </TableHeader>
             <TableBody>
                {cardsData.map(item => (
                   <TableRow key={item.question}>
