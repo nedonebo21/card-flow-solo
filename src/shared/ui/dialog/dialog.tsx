@@ -4,95 +4,61 @@ import * as RadixDialog from '@radix-ui/react-dialog'
 
 import { clsx } from 'clsx'
 
+import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
+import { CloseIcon } from '@/shared/ui/icons'
+import { Typography } from '@/shared/ui/typography'
 
 import styles from './dialog.module.scss'
 
 type DialogProps = {
    className?: string
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDialog.Root>, 'asChild' | 'children'>
+   trigger?: ReactNode
+   heading: string
+   showCancelButton?: boolean
+   cancelButtonLabel?: string
+   confirmButtonLabel?: string
+} & Omit<ComponentProps<typeof RadixDialog.Root>, 'asChild'>
 
-const Dialog = ({ className, children, ...rest }: DialogProps) => {
+export const Dialog = ({
+   className,
+   children,
+   trigger = <Button>Open Modal</Button>,
+   heading,
+   showCancelButton = false,
+   cancelButtonLabel = 'Cancel',
+   confirmButtonLabel = 'Confirm',
+   ...rest
+}: DialogProps) => {
    return (
-      <div className={clsx(styles.wrapper, className)}>
-         <RadixDialog.Root {...rest}>{children}</RadixDialog.Root>
-      </div>
+      <RadixDialog.Root {...rest}>
+         <RadixDialog.Trigger className={styles.trigger} asChild>
+            {trigger}
+         </RadixDialog.Trigger>
+         <RadixDialog.Portal>
+            <RadixDialog.Overlay />
+            <RadixDialog.Content {...rest} asChild={undefined}>
+               <Card className={clsx(styles.container, className)}>
+                  <div className={styles.header}>
+                     <Typography variant={'h3'}>{heading}</Typography>
+                     <RadixDialog.Close asChild>
+                        <Button variant={'ghost'} size={'icon'}>
+                           <CloseIcon width={20} height={20} />
+                        </Button>
+                     </RadixDialog.Close>
+                  </div>
+                  <div className={styles.content}>{children}</div>
+                  <div className={clsx(styles.footer, showCancelButton && styles.footerCancel)}>
+                     {showCancelButton && (
+                        <RadixDialog.Close>
+                           <Button variant={'secondary'}>{cancelButtonLabel}</Button>
+                        </RadixDialog.Close>
+                     )}
+                     <Button>{confirmButtonLabel}</Button>
+                  </div>
+               </Card>
+            </RadixDialog.Content>
+         </RadixDialog.Portal>
+      </RadixDialog.Root>
    )
 }
-
-type DialogTrigger = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDialog.Trigger>, 'asChild' | 'children'>
-
-const DialogTrigger = ({ className, ...rest }: DialogTrigger) => {
-   return (
-      <RadixDialog.Trigger
-         className={clsx(styles.trigger, className)}
-         {...rest}
-         asChild={undefined}
-      />
-   )
-}
-
-type DialogContentProps = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDialog.Content>, 'asChild' | 'children'>
-
-const DialogContent = ({ children, className, ...rest }: DialogContentProps) => {
-   return (
-      <RadixDialog.Portal>
-         <RadixDialog.Overlay />
-         <RadixDialog.Content {...rest} asChild={undefined}>
-            <Card className={clsx(styles.container, className)}>{children}</Card>
-         </RadixDialog.Content>
-      </RadixDialog.Portal>
-   )
-}
-
-type DialogHeaderProps = {
-   children: ReactNode
-   className?: string
-}
-
-const DialogHeader = ({ className, ...rest }: DialogHeaderProps) => {
-   return <div className={clsx(styles.header, className)} {...rest} />
-}
-
-type DialogBodyProps = {
-   className?: string
-   children: ReactNode
-}
-
-const DialogBody = ({ className, ...rest }: DialogBodyProps) => {
-   return <div className={clsx(styles.content, className)} {...rest} />
-}
-
-type DialogFooter = {
-   children: ReactNode
-   className?: string
-}
-
-const DialogFooter = ({ className, ...rest }: DialogFooter) => {
-   return <div className={clsx(styles.footer, className)} {...rest} />
-}
-
-type DialogCloseProps = {
-   children: ReactNode
-   className?: string
-} & Omit<ComponentProps<typeof RadixDialog.Close>, 'asChild' | 'children'>
-
-const DialogClose = ({ className, ...rest }: DialogCloseProps) => {
-   return (
-      <RadixDialog.Close className={clsx(styles.close, className)} {...rest} asChild={undefined} />
-   )
-}
-
-Dialog.Trigger = DialogTrigger
-Dialog.Content = DialogContent
-Dialog.Header = DialogHeader
-Dialog.Body = DialogBody
-Dialog.Footer = DialogFooter
-Dialog.Close = DialogClose
-
-export { Dialog }

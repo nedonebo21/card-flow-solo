@@ -16,11 +16,17 @@
    left: 50%;
    transform: translate(-50%, -50%);
 
+   display: flex;
+   flex-direction: column;
+
+   min-width: 542px;
+
    animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .header {
    display: flex;
+   flex-shrink: 0;
    gap: 24px;
    align-items: center;
    justify-content: space-between;
@@ -50,18 +56,26 @@
 }
 
 .content {
+   overflow-y: auto;
    display: grid;
+   flex: 1 1 auto;
    gap: 24px;
+
    padding: 24px;
 }
 
 .footer {
    display: flex;
+   flex-shrink: 0;
    gap: 24px;
    align-items: center;
-   justify-content: center;
+   justify-content: end;
 
    padding: 12px 24px 36px;
+}
+
+.footerCancel {
+   justify-content: space-between;
 }
 
 .footerSecondary {

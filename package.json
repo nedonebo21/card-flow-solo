@@ -9,7 +9,7 @@
       "preview": "vite preview",
       "format": "prettier --write src",
       "lint": "eslint . --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix \"src/{,*/}*.{scss,css}\" --allow-empty-input",
-      "storybook": "storybook dev -p 6006",
+      "storybook": "storybook dev -p 6006 --no-open",
       "build-storybook": "storybook build",
       "icons:generate": "node scripts/generate-icons-index.mjs prettier --write src/shared/ui/icons/index.ts"
    },
