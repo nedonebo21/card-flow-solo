@@ -70,6 +70,16 @@
    border-radius: 50%;
 }
 
+.link {
+   padding: 0;
+   color: var(--color-primary-500);
+   text-decoration: underline;
+
+   &:hover {
+      text-decoration: none;
+   }
+}
+
 .ghost {
    gap: 6px;
    transition: all 0.2s ease;

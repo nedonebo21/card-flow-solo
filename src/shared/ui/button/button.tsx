@@ -7,7 +7,7 @@ import styles from './button.module.scss'
 export type ButtonOwnProps<T extends ElementType = ElementType> = {
    as?: T
    children: ReactNode
-   variant?: 'primary' | 'secondary' | 'ghost'
+   variant?: 'primary' | 'secondary' | 'ghost' | 'link'
    size?: 'default' | 'icon'
    fullWidth?: boolean
 }
@@ -29,6 +29,7 @@ export const Button = <T extends ElementType = 'button'>({
          [styles.primary]: variant === 'primary',
          [styles.secondary]: variant === 'secondary',
          [styles.ghost]: variant === 'ghost',
+         [styles.link]: variant === 'link',
          [styles.default]: size === 'default',
          [styles.icon]: size === 'icon',
          'full-width': fullWidth,
