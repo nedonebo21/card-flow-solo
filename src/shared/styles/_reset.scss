@@ -10,11 +10,25 @@
    }
 }
 
+a {
+   color: inherit;
+
+   &:visited {
+      color: inherit;
+   }
+
+   &:link,
+   &:visited,
+   &:hover {
+      text-decoration: none;
+   }
+}
+
 :active,
 :focus,
 a:active,
 a:focus {
-   /* outline: none; */
+   outline: none;
 }
 
 html,
@@ -57,20 +71,6 @@ button {
    &::-moz-focus-inner {
       padding: 0;
       border: 0;
-   }
-}
-
-a {
-   color: inherit;
-
-   &:visited {
-      color: inherit;
-   }
-
-   &:link,
-   &:visited,
-   &:hover {
-      text-decoration: none;
    }
 }
 

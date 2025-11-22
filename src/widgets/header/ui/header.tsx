@@ -1,5 +1,7 @@
 import type { ComponentProps } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { clsx } from 'clsx'
 
 import { Button } from '@/shared/ui/button'
@@ -15,7 +17,9 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
          <div className={clsx(styles.wrapper, 'container')}>
             <LogoIcon width={120} height={24} />
             <div className={styles.actions}>
-               <Button variant={'secondary'}>Sign In</Button>
+               <Button variant={'secondary'} as={Link} to={'/sign-in'}>
+                  Sign In
+               </Button>
             </div>
          </div>
       </header>

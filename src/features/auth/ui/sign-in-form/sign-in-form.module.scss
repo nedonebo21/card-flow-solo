@@ -1,9 +1,6 @@
 .wrapper {
    display: flex;
    flex-direction: column;
-
-   max-width: 460px;
-   margin-inline: auto;
    padding: 33px 36px 25px;
 }
 
@@ -52,13 +49,4 @@
 
 .footerText {
    color: var(--color-light-900, rgb(195 193 199 / 100%));
-}
-
-.footerLink {
-   color: var(--color-primary-500);
-   text-decoration: underline !important;
-
-   &:hover {
-      text-decoration: none !important;
-   }
 }

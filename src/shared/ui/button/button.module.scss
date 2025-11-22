@@ -72,11 +72,11 @@
 
 .link {
    padding: 0;
-   color: var(--color-primary-500);
-   text-decoration: underline;
+   color: var(--color-primary-500) !important;
+   text-decoration: underline !important;
 
    &:hover {
-      text-decoration: none;
+      text-decoration: none !important;
    }
 }
 

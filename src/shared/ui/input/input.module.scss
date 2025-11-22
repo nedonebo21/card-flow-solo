@@ -1,4 +1,6 @@
 .inputWrapper {
+   cursor: text;
+
    display: flex;
    gap: 8px;
    align-items: center;
@@ -14,7 +16,7 @@
 }
 
 .iconWrapper {
-   cursor: default;
+   cursor: text;
 
    display: flex;
    align-items: center;

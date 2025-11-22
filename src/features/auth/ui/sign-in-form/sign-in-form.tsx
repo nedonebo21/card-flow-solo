@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { SignInFormValues } from '../../model/sign-in-schema'
 
 import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,6 +17,7 @@ import { Typography } from '@/shared/ui/typography'
 
 import styles from './sign-in-form.module.scss'
 
+import { useSignInMutation } from '../../api/auth-api'
 import { signInSchema } from '../../model/sign-in-schema'
 
 type SignInFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
@@ -36,8 +38,20 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
       },
    })
 
-   const onSubmit: typeof onSubmitFormProps = (data, e) => {
-      onSubmitFormProps?.(data, e)
+   const [signIn, { isError }] = useSignInMutation()
+   const navigate = useNavigate()
+
+   const onSubmit: typeof onSubmitFormProps = async (data, e) => {
+      if (onSubmitFormProps) {
+         await onSubmitFormProps(data, e)
+      } else {
+         try {
+            await signIn(data).unwrap()
+            navigate('/')
+         } catch (error) {
+            console.error(error)
+         }
+      }
    }
 
    return (
@@ -63,6 +77,9 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      label={'Password'}
                      errorMessage={errors.password?.message}
                   />
+                  <Typography variant={'error'}>
+                     {isError ? 'Invalid email or password' : ''}
+                  </Typography>
                </div>
                <div className={styles.options}>
                   <ControlledCheckbox control={control} name={'rememberMe'} label={'Remember me'} />
@@ -83,9 +100,9 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                <Typography className={styles.footerText} variant={'body2'}>
                   Don&#39;t have an account?
                </Typography>
-               <Typography className={styles.footerLink} variant={'h4'} as={'a'} href={'#'}>
+               <Button variant={'link'} as={Link} to={'/sign-up'}>
                   Sign Up
-               </Typography>
+               </Button>
             </div>
          </Card>
 
