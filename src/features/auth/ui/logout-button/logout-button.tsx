@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui'
 import { LogOutIcon } from '@/shared/ui/icons'
 
 type LogoutButtonProps = {
