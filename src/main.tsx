@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { App } from '@/App'
+import { App } from '@/app/app'
 
 import '@/shared/styles/index.scss'
 import '@fontsource/roboto/400.css'
