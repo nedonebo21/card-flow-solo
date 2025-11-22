@@ -4,10 +4,7 @@ import * as RadixDialog from '@radix-ui/react-dialog'
 
 import { clsx } from 'clsx'
 
-import { Button } from '@/shared/ui/button'
-import { Card } from '@/shared/ui/card'
-import { CloseIcon } from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography'
+import { Button, Card, Typography, CloseIcon } from '@/shared/ui'
 
 import styles from './dialog.module.scss'
 

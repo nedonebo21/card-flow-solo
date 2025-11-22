@@ -2,12 +2,11 @@ import { type ComponentProps, useMemo } from 'react'
 
 import { clsx } from 'clsx'
 
-import { PaginationNavItem } from '@/shared/ui/pagination/pagination-nav-item'
-import { Select } from '@/shared/ui/select'
-import { Typography } from '@/shared/ui/typography'
+import { Typography, Select } from '@/shared/ui'
 
 import styles from './pagination.module.scss'
 
+import { PaginationNavItem } from './pagination-nav-item'
 import { usePagination } from './use-pagination'
 
 type PaginationProps = {

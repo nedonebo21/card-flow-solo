@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { fn } from 'storybook/test'
 
-import { Button } from '@/shared/ui/button'
-import { LogOutIcon, TrashIcon } from '@/shared/ui/icons'
+import { LogOutIcon, TrashIcon, Button } from '@/shared/ui'
 
 const meta = {
    title: 'UI/Button',

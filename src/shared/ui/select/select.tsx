@@ -4,8 +4,7 @@ import * as RadixSelect from '@radix-ui/react-select'
 
 import { clsx } from 'clsx'
 
-import { ChevronUpIcon } from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography'
+import { Typography, ChevronUpIcon } from '@/shared/ui'
 
 import styles from './select.module.scss'
 

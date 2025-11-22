@@ -9,10 +9,7 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { ControlledInput } from '@/shared/forms'
-import { Button } from '@/shared/ui/button'
-import { Card } from '@/shared/ui/card'
-import { InputEmail } from '@/shared/ui/input'
-import { Typography } from '@/shared/ui/typography'
+import { Button, Card, InputEmail, Typography } from '@/shared/ui'
 
 import styles from './forgot-password-form.module.scss'
 

@@ -1,4 +1,4 @@
-import { StartFilledIcon } from '@/shared/ui/icons'
+import { StartFilledIcon } from '@/shared/ui'
 
 import styles from './rating.module.scss'
 

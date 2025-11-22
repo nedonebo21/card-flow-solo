@@ -1,6 +1,6 @@
-import type { InputProps } from '@/shared/ui/input/input'
+import type { InputProps } from './input'
 
-import { Input } from '@/shared/ui/input/input'
+import { Input } from './input'
 
 type InputEmailProps = Omit<InputProps, 'type'>
 

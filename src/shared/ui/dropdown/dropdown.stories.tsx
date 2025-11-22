@@ -2,17 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { Button } from '@/shared/ui/button'
-import { Dropdown } from '@/shared/ui/dropdown/dropdown'
 import {
+   Button,
+   Dropdown,
+   Typography,
    CirclePlayIcon,
    LogOutIcon,
    MoreVerticalIcon,
    PencilIcon,
    TrashIcon,
    UserFilledIcon,
-} from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography'
+} from '@/shared/ui'
 
 const meta = {
    title: 'UI/Dropdown',

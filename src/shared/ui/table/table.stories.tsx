@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import type { Column } from '@/shared/ui/table/table-sort-header'
+import type { Sort, Column } from '@/shared/ui'
 
 import { useState } from 'react'
 
-import { formatDate } from '@/shared/lib/date'
-import { Button } from '@/shared/ui/button'
-import { CirclePlayIcon, PencilIcon, TrashIcon } from '@/shared/ui/icons'
-import { Rating } from '@/shared/ui/rating'
-import { type Sort, TableHeadCell } from '@/shared/ui/table'
+import { formatDate } from '@/shared/lib'
+import { Button, Rating, CirclePlayIcon, PencilIcon, TrashIcon } from '@/shared/ui'
 import {
+   TableHeadCell,
    Table,
    TableBody,
    TableCell,

@@ -4,9 +4,7 @@ import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
 import { clsx } from 'clsx'
 
-import { Button } from '@/shared/ui/button'
-import { Card } from '@/shared/ui/card'
-import { Typography } from '@/shared/ui/typography'
+import { Button, Card, Typography } from '@/shared/ui'
 
 import styles from './dropdown.module.scss'
 

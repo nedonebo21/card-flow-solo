@@ -1,6 +1,6 @@
-import type { User } from '@/entities/user/model/user.types'
+import type { User } from '@/entities/user'
 
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 
 export const userApi = baseApi.injectEndpoints({
    endpoints: builder => ({

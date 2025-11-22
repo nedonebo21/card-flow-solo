@@ -7,9 +7,8 @@ import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { Button } from '@/shared/ui/button'
+import { Button, Typography } from '@/shared/ui'
 import { PencilIcon } from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography'
 
 import styles from './update-avatar-form.module.scss'
 

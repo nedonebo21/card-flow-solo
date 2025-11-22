@@ -1,11 +1,11 @@
 import type { ComponentType } from 'react'
 import type { Control, FieldValues, UseControllerProps } from 'react-hook-form'
 
-import type { InputProps } from '@/shared/ui/input'
+import type { InputProps } from '@/shared/ui'
 
 import { useController } from 'react-hook-form'
 
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui'
 
 export type ControlledInputProps<T extends FieldValues> = Omit<UseControllerProps<T>, 'control'> & {
    control: Control<T>

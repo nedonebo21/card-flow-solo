@@ -4,7 +4,7 @@ import * as RadixRadioGroup from '@radix-ui/react-radio-group'
 
 import { clsx } from 'clsx'
 
-import { Typography } from '@/shared/ui/typography'
+import { Typography } from '@/shared/ui'
 
 import styles from './radio-group.module.scss'
 

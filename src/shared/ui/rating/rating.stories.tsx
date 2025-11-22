@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { Rating } from '@/shared/ui/rating'
+import { Rating } from '@/shared/ui'
 
 const meta = {
    title: 'UI/Rating',

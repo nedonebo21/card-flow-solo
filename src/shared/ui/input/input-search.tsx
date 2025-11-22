@@ -1,11 +1,12 @@
-import type { InputProps } from '@/shared/ui/input/input'
+import type { InputProps } from './input'
 
 import { memo, useMemo } from 'react'
 
-import { CloseIcon, SearchIcon } from '@/shared/ui/icons'
-import { Input } from '@/shared/ui/input/input'
+import { CloseIcon, SearchIcon } from '@/shared/ui'
 
 import styles from './input.module.scss'
+
+import { Input } from './input'
 
 type InputSearchProps = {
    onClear?: () => void

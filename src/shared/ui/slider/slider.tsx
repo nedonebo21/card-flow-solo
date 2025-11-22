@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { clsx } from 'clsx'
 
-import { Input } from '@/shared/ui/input'
+import { Input } from '@/shared/ui'
 
 import styles from './slider.module.scss'
 

@@ -5,8 +5,7 @@ import { useId } from 'react'
 
 import { clsx } from 'clsx'
 
-import { CheckIcon } from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography'
+import { CheckIcon, Typography } from '@/shared/ui'
 
 import styles from './checkbox.module.scss'
 

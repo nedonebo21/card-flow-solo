@@ -10,10 +10,7 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
-import { Button } from '@/shared/ui/button'
-import { Card } from '@/shared/ui/card'
-import { InputEmail, InputPassword } from '@/shared/ui/input'
-import { Typography } from '@/shared/ui/typography'
+import { Button, Card, InputEmail, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './sign-in-form.module.scss'
 

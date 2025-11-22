@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { Select } from '@/shared/ui/select'
+import { Select } from '@/shared/ui'
 
 const meta = {
    title: 'UI/Select',

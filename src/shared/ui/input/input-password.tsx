@@ -1,14 +1,14 @@
 import type { KeyboardEvent } from 'react'
 
-import type { InputProps } from '@/shared/ui/input/input'
+import type { InputProps } from './input'
 
 import { memo, useCallback, useState } from 'react'
 
-import { EyeIcon, EyeOffIcon } from '@/shared/ui/icons'
-import { Input } from '@/shared/ui/input/input'
-import { Typography } from '@/shared/ui/typography'
+import { EyeIcon, EyeOffIcon, Typography } from '@/shared/ui'
 
 import styles from './input.module.scss'
+
+import { Input } from './input'
 
 type InputPasswordProps = Omit<InputProps, 'type' | 'endIcon'>
 

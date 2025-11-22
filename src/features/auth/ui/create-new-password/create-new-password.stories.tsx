@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { fn } from 'storybook/test'
 
-import { CreateNewPassword } from '@/features/auth/ui/create-new-password/create-new-password'
+import { CreateNewPassword } from '@/features/auth/ui/create-new-password'
 
 const meta = {
    title: 'Auth/NewPasswordForm',

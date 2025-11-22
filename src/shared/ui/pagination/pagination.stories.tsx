@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useMemo, useState } from 'react'
 
-import { Pagination } from '@/shared/ui/pagination'
-import { Typography } from '@/shared/ui/typography'
+import { Pagination, Typography } from '@/shared/ui'
 
 const meta = {
    title: 'Navigation/Pagination',

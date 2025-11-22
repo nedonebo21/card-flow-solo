@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode, ComponentPropsWithoutRef } from 'react'
 
 import { clsx } from 'clsx'
 
-import { Typography } from '@/shared/ui/typography'
+import { Typography } from '@/shared/ui'
 
 import styles from './table.module.scss'
 

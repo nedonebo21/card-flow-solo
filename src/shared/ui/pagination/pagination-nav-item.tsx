@@ -2,8 +2,7 @@ import type { ComponentProps } from 'react'
 
 import { clsx } from 'clsx'
 
-import { Button } from '@/shared/ui/button'
-import { ChevronRightIcon } from '@/shared/ui/icons'
+import { Button, ChevronRightIcon } from '@/shared/ui'
 
 import styles from './pagination.module.scss'
 

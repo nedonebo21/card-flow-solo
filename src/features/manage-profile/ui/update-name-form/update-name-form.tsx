@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateNameFormValues } from '../../model/update-name-schema'
+import type { UpdateNameFormValues } from '@/features/manage-profile'
 
 import { useForm } from 'react-hook-form'
 
@@ -9,7 +9,7 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { ControlledInput } from '@/shared/forms'
-import { Button } from '@/shared/ui/button'
+import { Button } from '@/shared/ui'
 
 import styles from './update-name-form.module.scss'
 
