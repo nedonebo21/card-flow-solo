@@ -1,6 +1,7 @@
-import type { ComponentProps } from 'react'
+import type { ComponentProps, KeyboardEvent } from 'react'
 
 import * as RadixSlider from '@radix-ui/react-slider'
+import { useEffect, useState } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -11,19 +12,36 @@ import styles from './slider.module.scss'
 type SliderProps = {
    className?: string
    values: number[]
-   onValueChange: (value: number[]) => void
-} & Omit<ComponentProps<typeof RadixSlider.Root>, 'asChild' | 'value' | 'onValueChange'>
+   onValueCommit: (value: number[]) => void
+} & Omit<
+   ComponentProps<typeof RadixSlider.Root>,
+   'asChild' | 'value' | 'onValueChange' | 'onValueCommit'
+>
 
 export const Slider = ({
    className,
-   onValueChange,
+   onValueCommit,
    values,
    min = 1,
    max = 15,
    disabled,
    ...rest
 }: SliderProps) => {
-   const [minValue, maxValue] = values
+   const [localValues, setLocalValues] = useState(values)
+   const [localMin, localMax] = localValues
+
+   useEffect(() => {
+      setLocalValues(values)
+   }, [values])
+
+   const handleValueChange = (newValues: number[]) => {
+      setLocalValues(newValues)
+   }
+
+   const handleValueCommit = (newValues: number[]) => {
+      setLocalValues(newValues)
+      onValueCommit(newValues)
+   }
 
    const handleMinValueChange = (value: string) => {
       const newMinValue = Number(value)
@@ -32,7 +50,7 @@ export const Slider = ({
          return
       }
 
-      onValueChange([newMinValue, maxValue])
+      setLocalValues([newMinValue, localMax])
    }
 
    const handleMaxValueChange = (value: string) => {
@@ -42,40 +60,49 @@ export const Slider = ({
          return
       }
 
-      onValueChange([minValue, newMaxValue])
+      setLocalValues([localMin, newMaxValue])
    }
 
-   const handleBlur = () => {
-      let newMin = Math.max(min, minValue)
-      let newMax = Math.min(max, maxValue)
+   const handleCommitInput = () => {
+      let newMin = Math.max(min, localMin)
+      let newMax = Math.min(max, localMax)
 
       if (newMin >= newMax) {
-         newMin = newMax - 1
+         newMin = newMax
       }
 
       if (newMax > max) {
          newMax = max
       }
 
-      onValueChange([newMin, newMax])
+      setLocalValues([newMin, newMax])
+      onValueCommit([newMin, newMax])
+   }
+
+   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+         ;(e.target as HTMLInputElement).blur()
+      }
    }
 
    return (
-      <div className={styles.sliderWrapper}>
+      <nav className={styles.sliderWrapper}>
          <div className={clsx(styles.sliderInput, 'align-center')}>
             <Input
                name={'min'}
                disabled={disabled}
-               value={minValue}
-               onBlur={handleBlur}
+               value={localMin}
+               onBlur={handleCommitInput}
+               onKeyDown={handleKeyDown}
                onChange={e => handleMinValueChange(e.target.value)}
             />
          </div>
          <RadixSlider.Root
             className={clsx(styles.sliderRoot, disabled && styles.disabled, className)}
-            onValueChange={onValueChange}
+            onValueChange={handleValueChange}
+            onValueCommit={handleValueCommit}
             disabled={disabled}
-            value={values}
+            value={localValues}
             min={min}
             max={max}
             step={1}
@@ -93,11 +120,12 @@ export const Slider = ({
             <Input
                name={'max'}
                disabled={disabled}
-               value={maxValue}
-               onBlur={handleBlur}
+               value={localMax}
+               onBlur={handleCommitInput}
+               onKeyDown={handleKeyDown}
                onChange={e => handleMaxValueChange(e.target.value)}
             />
          </div>
-      </div>
+      </nav>
    )
 }

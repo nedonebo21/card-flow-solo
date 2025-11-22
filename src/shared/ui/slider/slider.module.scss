@@ -51,6 +51,8 @@
 }
 
 .sliderThumb {
+   cursor: pointer;
+
    display: block;
 
    width: 20px;
@@ -60,10 +62,16 @@
 
    background-color: var(--color-light-100);
 
-   transition: border-color 0.2s ease 0s;
+   transition:
+      transform 0.2s ease 0s,
+      border-color 0.2s ease 0s;
 
    &:focus {
       outline: none;
+   }
+
+   &:active {
+      transform: scale(0.9);
    }
 
    &:not([aria-disabled='true']):hover {
