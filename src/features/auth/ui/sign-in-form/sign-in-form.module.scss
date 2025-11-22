@@ -34,10 +34,8 @@
 .forgotPassword {
    grid-column: -1;
    grid-row: 2;
-
-   &:hover {
-      text-decoration: underline;
-   }
+   font-weight: 400;
+   color: var(--color-light-100) !important;
 }
 
 .footer {

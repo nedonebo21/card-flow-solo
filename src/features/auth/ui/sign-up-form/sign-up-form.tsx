@@ -4,10 +4,12 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { SignUpFormValues } from '../../model/sign-up-schema'
 
 import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { useSignUpMutation } from '@/features/auth/api/auth-api'
 import { ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
@@ -36,8 +38,20 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
       },
    })
 
-   const onSubmit: typeof onSubmitFormProps = (data, e) => {
-      onSubmitFormProps?.(data, e)
+   const [signUp, { isLoading }] = useSignUpMutation()
+   const navigate = useNavigate()
+
+   const onSubmit: typeof onSubmitFormProps = async (data, e) => {
+      if (onSubmitFormProps) {
+         await onSubmitFormProps?.(data, e)
+      } else {
+         try {
+            await signUp({ email: data.email, password: data.password }).unwrap()
+            navigate('/')
+         } catch (error) {
+            console.error(error)
+         }
+      }
    }
 
    return (
@@ -71,15 +85,15 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
                />
             </div>
             <div className={styles.footer}>
-               <Button fullWidth type={'submit'}>
+               <Button disabled={isLoading} fullWidth type={'submit'}>
                   Sign Up
                </Button>
                <Typography className={styles.footerText} variant={'body2'}>
                   Already have an account?
                </Typography>
-               <Typography className={styles.footerLink} variant={'h4'} as={'a'} href={'#'}>
+               <Button variant={'link'} as={Link} to={'/sign-in'}>
                   Sign In
-               </Typography>
+               </Button>
             </div>
          </Card>
 

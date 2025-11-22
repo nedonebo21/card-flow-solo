@@ -28,13 +28,3 @@
    margin-top: 20px;
    color: var(--color-light-900, rgb(195 193 199 / 100%));
 }
-
-.footerLink {
-   margin-top: 7px;
-   color: var(--color-primary-500);
-   text-decoration: underline !important;
-
-   &:hover {
-      text-decoration: none !important;
-   }
-}

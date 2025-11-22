@@ -38,7 +38,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
       },
    })
 
-   const [signIn, { isError }] = useSignInMutation()
+   const [signIn, { isError, isLoading }] = useSignInMutation()
    const navigate = useNavigate()
 
    const onSubmit: typeof onSubmitFormProps = async (data, e) => {
@@ -83,17 +83,17 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                </div>
                <div className={styles.options}>
                   <ControlledCheckbox control={control} name={'rememberMe'} label={'Remember me'} />
-                  <Typography
+                  <Button
                      className={styles.forgotPassword}
-                     variant={'body2'}
-                     as={'a'}
-                     href={'#'}
+                     variant={'link'}
+                     as={Link}
+                     to={'/forgot-password'}
                   >
                      Forgot password?
-                  </Typography>
+                  </Button>
                </div>
             </div>
-            <Button fullWidth type={'submit'}>
+            <Button disabled={isLoading} fullWidth type={'submit'}>
                Sign In
             </Button>
             <div className={styles.footer}>
