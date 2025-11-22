@@ -1,13 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import type { Column, Sort } from '@/shared/ui/table'
+import type { Column } from '@/shared/ui/table/table-sort-header'
 
 import { useState } from 'react'
 
 import { formatDate } from '@/shared/lib/date'
 import { Button } from '@/shared/ui/button'
 import { CirclePlayIcon, PencilIcon, TrashIcon } from '@/shared/ui/icons'
-import { Table, TableBody, TableCell, TableRow, TableSortHeader } from '@/shared/ui/table'
+import { Rating } from '@/shared/ui/rating'
+import { type Sort, TableHeadCell } from '@/shared/ui/table'
+import {
+   Table,
+   TableBody,
+   TableCell,
+   TableRow,
+   TableSortHeader,
+   TableHeader,
+} from '@/shared/ui/table'
 
 import styles from './table.module.scss'
 
@@ -76,7 +85,7 @@ const data = [
    },
 ]
 
-export const WithSort: Story = {
+export const DecksTableWithSort: Story = {
    render: () => {
       const [sort, setSort] = useState<Sort>(null)
 
@@ -98,6 +107,71 @@ export const WithSort: Story = {
                      <TableCell>{item.cardsCount}</TableCell>
                      <TableCell>{formatDate(new Date(item.updated))}</TableCell>
                      <TableCell>{item.createdBy}</TableCell>
+                     <TableCell className={styles.icons}>
+                        <Button variant={'ghost'} size={'icon'}>
+                           <CirclePlayIcon width={16} height={16} />
+                        </Button>
+                        <Button variant={'ghost'} size={'icon'}>
+                           <PencilIcon width={16} height={16} />
+                        </Button>
+                        <Button variant={'ghost'} size={'icon'}>
+                           <TrashIcon width={16} height={16} />
+                        </Button>
+                     </TableCell>
+                  </TableRow>
+               ))}
+            </TableBody>
+         </Table>
+      )
+   },
+}
+
+const cardsData = [
+   {
+      question: 'How "This" works in JavaScript?',
+      answer: 'This is how "This" works in JavaScript',
+      updated: '2023-07-07',
+      grade: 4,
+   },
+   {
+      question: 'How "This" works in JavaScript?',
+      answer: 'This is how "This" works in JavaScript',
+      updated: '2023-07-07',
+      grade: 5,
+   },
+   {
+      question: 'How "This" works in JavaScript?',
+      answer: 'This is how "This" works in JavaScript',
+      updated: '2023-07-07',
+      grade: 2,
+   },
+   {
+      question: 'How "This" works in JavaScript?',
+      answer: 'This is how "This" works in JavaScript',
+      updated: '2023-07-07',
+      grade: 3,
+   },
+]
+
+export const CardsTable: Story = {
+   render: () => {
+      return (
+         <Table>
+            <TableHeader>
+               <TableHeadCell>Question</TableHeadCell>
+               <TableHeadCell>Answer</TableHeadCell>
+               <TableHeadCell>Updated</TableHeadCell>
+               <TableHeadCell>Grade</TableHeadCell>
+            </TableHeader>
+            <TableBody>
+               {cardsData.map(item => (
+                  <TableRow key={item.question}>
+                     <TableCell>{item.question}</TableCell>
+                     <TableCell>{item.answer}</TableCell>
+                     <TableCell>{formatDate(new Date(item.updated))}</TableCell>
+                     <TableCell>
+                        <Rating value={item.grade} />
+                     </TableCell>
                      <TableCell className={styles.icons}>
                         <Button variant={'ghost'} size={'icon'}>
                            <CirclePlayIcon width={16} height={16} />

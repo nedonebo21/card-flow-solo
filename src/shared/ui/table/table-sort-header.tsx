@@ -3,9 +3,10 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { clsx } from 'clsx'
 
 import { ChevronUpIcon } from '@/shared/ui/icons'
-import { TableHeadCell, TableRow } from '@/shared/ui/table/table'
 
 import styles from './table.module.scss'
+
+import { TableHeadCell, TableRow } from './table'
 
 export type Column = {
    key: string

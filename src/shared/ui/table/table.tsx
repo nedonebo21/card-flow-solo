@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps, ReactNode, ComponentPropsWithoutRef } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -12,6 +12,18 @@ type TableProps = {
 
 export const Table = ({ className, ...rest }: TableProps) => {
    return <table className={clsx(styles.table, className)} {...rest} />
+}
+
+type TableHeaderProps = {
+   children: ReactNode
+} & Omit<ComponentPropsWithoutRef<'thead'>, 'children'>
+
+export const TableHeader = ({ className, children, ...rest }: TableHeaderProps) => {
+   return (
+      <thead className={clsx(styles.thead, className)} {...rest}>
+         <TableRow>{children}</TableRow>
+      </thead>
+   )
 }
 
 type TableHeadCellProps = {
