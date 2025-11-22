@@ -4,69 +4,88 @@ import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
 import { clsx } from 'clsx'
 
+import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
+import { Typography } from '@/shared/ui/typography'
 
 import styles from './dropdown.module.scss'
 
 type DropdownProps = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild' | 'children'>
+   triggerIcon?: ReactNode
+   alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
+   sideOffset?: ComponentProps<typeof RadixDropdown.Content>['sideOffset']
+} & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild'>
 
-const Dropdown = ({ ...rest }: DropdownProps) => {
-   return <RadixDropdown.Root {...rest} />
-}
+const Dropdown = ({
+   children,
+   triggerIcon,
+   alignItems = 'end',
+   sideOffset = 1,
+   ...rest
+}: DropdownProps) => {
+   const buttonVariant = triggerIcon ? 'ghost' : 'primary'
+   const buttonSize = triggerIcon ? 'icon' : 'default'
+   const buttonClassname = triggerIcon ? styles.triggerIcon : styles.triggerDefault
 
-type DropdownTriggerProps = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDropdown.Trigger>, 'children' | 'asChild'>
-
-export const DropdownTrigger = ({ className, ...rest }: DropdownTriggerProps) => {
    return (
-      <RadixDropdown.Trigger
-         className={clsx(styles.trigger, className)}
-         {...rest}
-         asChild={undefined}
-      />
-   )
-}
-
-type DropdownContentProps = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDropdown.Content>, 'asChild' | 'children'>
-
-export const DropdownContent = ({ className, children, ...rest }: DropdownContentProps) => {
-   return (
-      <RadixDropdown.Portal>
-         <RadixDropdown.Content sideOffset={1} align={'end'} className={styles.container} {...rest}>
-            <Card className={clsx(styles.content, className)}>{children}</Card>
-            <RadixDropdown.Arrow className={styles.arrow} />
-         </RadixDropdown.Content>
-      </RadixDropdown.Portal>
+      <RadixDropdown.Root {...rest}>
+         <RadixDropdown.Trigger className={styles.trigger} asChild>
+            <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
+               {triggerIcon ?? 'Open Dropdown'}
+            </Button>
+         </RadixDropdown.Trigger>
+         <RadixDropdown.Portal>
+            <RadixDropdown.Content
+               sideOffset={sideOffset}
+               align={alignItems}
+               className={styles.container}
+               {...rest}
+            >
+               <Card className={styles.content}>{children}</Card>
+               <RadixDropdown.Arrow className={styles.arrow} />
+            </RadixDropdown.Content>
+         </RadixDropdown.Portal>
+      </RadixDropdown.Root>
    )
 }
 
 type DropdownLabelProps = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDropdown.Label>, 'asChild' | 'children'>
+   email: string
+   nickname: string
+   avatarUrl?: string
+} & Omit<ComponentProps<typeof RadixDropdown.Label>, 'asChild'>
 
-const DropdownLabel = ({ className, ...rest }: DropdownLabelProps) => {
-   return <RadixDropdown.Label className={clsx(styles.label)} {...rest} />
-}
+const DropdownLabel = ({ className, avatarUrl, nickname, email, ...rest }: DropdownLabelProps) => {
+   const hasAvatar = !!avatarUrl && avatarUrl.length > 0
 
-type DropdownItemProps = {
-   children: ReactNode
-} & Omit<ComponentProps<typeof RadixDropdown.Item>, 'asChild' | 'children'>
-
-const DropdownItem = ({ className, children, ...rest }: DropdownItemProps) => {
    return (
-      <RadixDropdown.Item className={clsx(styles.item, className)} {...rest}>
-         {children}
-      </RadixDropdown.Item>
+      <RadixDropdown.Label className={clsx(styles.label)} {...rest}>
+         <div className={styles.avatar}>
+            {hasAvatar && <img src={avatarUrl} alt={'userAvatar'} />}
+         </div>
+         <div className={styles.info}>
+            <Typography variant={'subtitle2'} as={'span'} textAlign={'left'}>
+               {nickname}
+            </Typography>
+            <Typography variant={'caption'} className={styles.email} textAlign={'left'}>
+               {email}
+            </Typography>
+         </div>
+      </RadixDropdown.Label>
    )
 }
 
-Dropdown.Trigger = DropdownTrigger
-Dropdown.Content = DropdownContent
+type DropdownItemProps = Omit<ComponentProps<typeof RadixDropdown.Item>, 'asChild'>
+
+const DropdownItem = ({ className, ...rest }: DropdownItemProps) => {
+   return (
+      <>
+         <RadixDropdown.Separator className={styles.separator} />
+         <RadixDropdown.Item className={clsx(styles.item, className)} {...rest} />
+      </>
+   )
+}
+
 Dropdown.Label = DropdownLabel
 Dropdown.Item = DropdownItem
 
