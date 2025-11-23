@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { Tabs } from '@/shared/ui/tabs'
+import { Tabs } from './tabs'
 
 const meta = {
    title: 'UI/Tabs',

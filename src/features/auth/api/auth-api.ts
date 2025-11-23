@@ -1,8 +1,6 @@
-import type { SignInFormValues } from '../model/sign-in-schema'
+import type { SignInFormValues, SignUpFormValues } from '@/features/auth/model'
 
-import type { SignUpFormValues } from '@/features/auth/model/sign-up-schema'
-
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 
 export const authApi = baseApi.injectEndpoints({
    endpoints: builder => ({

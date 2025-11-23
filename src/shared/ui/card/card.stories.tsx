@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Typography } from '@/shared/ui'
-import { Card } from '@/shared/ui/card'
+
+import { Card } from './card'
 
 const meta = {
    title: 'UI/Card',

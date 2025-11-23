@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { useMeQuery } from '@/entities/user'
+import { useMeQuery } from '@/entities/user/api'
 
 export const PrivateRoutes = () => {
    const { isLoading, isError } = useMeQuery()

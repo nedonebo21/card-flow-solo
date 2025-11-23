@@ -7,7 +7,6 @@ export type { CheckboxProps } from './checkbox'
 export { Checkbox } from './checkbox'
 export type { RadioGroupProps } from './radio-group'
 export { RadioGroup } from './radio-group'
-export type { Column, Sort } from './table'
 export {
    TableHeader,
    Table,

@@ -1,19 +1,18 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { NewPasswordFormValues } from '../../model/new-password-schema'
+import type { NewPasswordFormValues } from '@/features/auth/model'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { newPasswordSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './create-new-password.module.scss'
-
-import { newPasswordSchema } from '../../model/new-password-schema'
 
 type NewPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<NewPasswordFormValues>

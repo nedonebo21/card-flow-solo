@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { action } from 'storybook/actions'
 
-import { Slider } from '@/shared/ui/slider/slider'
+import { Slider } from './slider'
 
 const meta = {
    title: 'Navigation/Slider',

@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { Checkbox, Dialog, Input, Select } from '@/shared/ui'
+import { Checkbox, Input, Select } from '@/shared/ui'
+
+import { Dialog } from './dialog'
 
 const meta = {
    title: 'UI/Dialog',

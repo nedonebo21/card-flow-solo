@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useState } from 'react'
 
-import { PencilIcon, TrashIcon, Input, InputEmail, InputPassword, InputSearch } from '@/shared/ui'
+import { PencilIcon, TrashIcon, Input, InputSearch, InputPassword, InputEmail } from '@/shared/ui'
 
 const meta = {
    title: 'UI/Input',

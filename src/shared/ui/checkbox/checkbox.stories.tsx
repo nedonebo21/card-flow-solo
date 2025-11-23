@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { useArgs } from 'storybook/preview-api'
 
-import { Checkbox } from '@/shared/ui/checkbox'
+import { Checkbox } from './checkbox'
 
 const meta = {
    title: 'UI/Checkbox',

@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import {
    Button,
-   Dropdown,
    Typography,
    CirclePlayIcon,
    LogOutIcon,
@@ -13,6 +12,8 @@ import {
    TrashIcon,
    UserFilledIcon,
 } from '@/shared/ui'
+
+import { Dropdown } from './dropdown'
 
 const meta = {
    title: 'UI/Dropdown',

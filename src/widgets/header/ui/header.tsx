@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { clsx } from 'clsx'
 
-import { useMeQuery } from '@/entities/user'
+import { useMeQuery } from '@/entities/user/api'
 import { Button, LogoIcon } from '@/shared/ui'
 
 import styles from './header.module.scss'

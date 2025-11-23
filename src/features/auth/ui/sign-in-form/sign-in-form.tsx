@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { SignInFormValues } from '../../model/sign-in-schema'
+import type { SignInFormValues } from '@/features/auth/model'
 
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,13 +9,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { useSignInMutation } from '@/features/auth/api'
+import { signInSchema } from '@/features/auth/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './sign-in-form.module.scss'
-
-import { useSignInMutation } from '../../api/auth-api'
-import { signInSchema } from '../../model/sign-in-schema'
 
 type SignInFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<SignInFormValues>

@@ -1,14 +1,14 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateAvatarFormValues, UpdateNameFormValues } from '@/features/manage-profile'
+import type { UpdateAvatarFormValues, UpdateNameFormValues } from '@/features/manage-profile/model'
 
 import { useState } from 'react'
 
 import { clsx } from 'clsx'
 
-import { LogoutButton } from '@/features/auth'
-import { UpdateAvatarForm, UpdateNameForm } from '@/features/manage-profile'
+import { LogoutButton } from '@/features/auth/ui'
+import { UpdateAvatarForm, UpdateNameForm } from '@/features/manage-profile/ui'
 import { Button, Card, Typography, PencilIcon } from '@/shared/ui'
 
 import styles from './view-personal-info.module.scss'

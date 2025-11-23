@@ -1,19 +1,18 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { ForgotPasswordFormValues } from '../../model/forgot-password-schema'
+import type { ForgotPasswordFormValues } from '@/features/auth/model'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { forgotPasswordSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, Typography } from '@/shared/ui'
 
 import styles from './forgot-password-form.module.scss'
-
-import { forgotPasswordSchema } from '../../model/forgot-password-schema'
 
 type ForgotPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<ForgotPasswordFormValues>

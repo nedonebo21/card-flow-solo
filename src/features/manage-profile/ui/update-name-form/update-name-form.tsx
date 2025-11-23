@@ -1,19 +1,18 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateNameFormValues } from '@/features/manage-profile'
+import type { UpdateNameFormValues } from '@/features/manage-profile/model'
 
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { updateNameSchema } from '@/features/manage-profile/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button } from '@/shared/ui'
 
 import styles from './update-name-form.module.scss'
-
-import { updateNameSchema } from '../../model/update-name-schema'
 
 type Props = {
    username: string

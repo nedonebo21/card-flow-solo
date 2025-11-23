@@ -1,5 +1,4 @@
-import { Button, Card, Typography } from '@/shared/ui'
-import { CheckEmailIcon } from '@/shared/ui/icons'
+import { Button, Card, Typography, CheckEmailIcon } from '@/shared/ui'
 
 import styles from './check-email.module.scss'
 

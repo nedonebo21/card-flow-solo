@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { SignUpFormValues } from '../../model/sign-up-schema'
+import type { SignUpFormValues } from '@/features/auth/model'
 
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,13 +9,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useSignUpMutation } from '@/features/auth/api/auth-api'
+import { useSignUpMutation } from '@/features/auth/api'
+import { signUpSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './sign-up-form.module.scss'
-
-import { signUpSchema } from '../../model/sign-up-schema'
 
 type SignUpFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<SignUpFormValues>

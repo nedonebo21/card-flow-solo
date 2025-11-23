@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { CSSProperties } from 'react'
 
-import { Typography, type TypographyOwnProps } from '@/shared/ui/typography/typography'
+import type { TypographyOwnProps } from './typography'
+
+import { Typography } from '@/shared/ui/typography'
 
 const meta = {
    title: 'Typography',
