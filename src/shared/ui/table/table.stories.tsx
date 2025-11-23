@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import type { Column, Sort } from '@/shared/ui/table/table-sort-header'
+import type { Column, Sort } from './table-sort-header'
 
 import { useState } from 'react'
 

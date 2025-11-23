@@ -11,7 +11,7 @@ import { TableHeadCell, TableRow } from './table'
 export type Column = {
    key: string
    title: string
-   sortable: boolean
+   sortable?: boolean
 }
 
 export type Sort = {
@@ -35,8 +35,8 @@ export const TableSortHeader = ({
    className,
    ...rest
 }: TableSortHeaderProps) => {
-   const handleSort = (key: string, sortable?: boolean) => () => {
-      if (!onSort || !sortable) {
+   const handleSort = (key: string) => () => {
+      if (!onSort) {
          return
       }
 
@@ -61,7 +61,7 @@ export const TableSortHeader = ({
                <TableHeadCell
                   key={key}
                   className={clsx(null, sortable && styles.sortable)}
-                  onClick={handleSort(key, sortable)}
+                  onClick={handleSort(key)}
                >
                   {title}
                   {sort && sort.key === key && (

@@ -16,10 +16,12 @@ export {
    TableHeadCell,
    TableSortHeader,
 } from './table'
+export type { Sort } from './table'
 export { Rating } from './rating'
 export { Select } from './select'
 export { Tabs } from './tabs'
 export { Pagination } from './pagination'
 export { Dropdown } from './dropdown'
 export { Dialog } from './dialog'
+export { Slider } from './slider'
 export * from './icons'

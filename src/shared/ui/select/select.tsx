@@ -30,6 +30,7 @@ export const Select = ({
    wrapperProps,
    errorMessage,
    open,
+   className,
    ...rest
 }: SelectProps) => {
    const isError = !!errorMessage && errorMessage?.length > 0
@@ -42,7 +43,9 @@ export const Select = ({
             </Typography>
          )}
          <RadixSelect.Root open={open} {...rest}>
-            <RadixSelect.Trigger className={clsx(styles.selectTrigger, isError && styles.error)}>
+            <RadixSelect.Trigger
+               className={clsx(styles.selectTrigger, isError && styles.error, className)}
+            >
                <RadixSelect.Value
                   className={styles.selectValue}
                   placeholder={placeholder ?? 'Select'}
@@ -67,7 +70,7 @@ export const Select = ({
                            key={option.value}
                            value={option.value}
                            disabled={option.disabled}
-                           className={styles.selectItem}
+                           className={clsx(styles.selectItem, className)}
                         >
                            <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
                         </RadixSelect.Item>

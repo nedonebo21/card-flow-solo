@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps } from 'react'
 
 import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
@@ -9,7 +9,8 @@ import { Button, Card, Typography } from '@/shared/ui'
 import styles from './dropdown.module.scss'
 
 type DropdownProps = {
-   triggerIcon?: ReactNode
+   triggerIcon?: string | null
+   name?: string
    alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
    sideOffset?: ComponentProps<typeof RadixDropdown.Content>['sideOffset']
 } & Omit<ComponentProps<typeof RadixDropdown.Root>, 'asChild'>
@@ -19,17 +20,20 @@ const Dropdown = ({
    triggerIcon,
    alignItems = 'end',
    sideOffset = 1,
+   name,
    ...rest
 }: DropdownProps) => {
    const buttonVariant = triggerIcon ? 'ghost' : 'primary'
    const buttonSize = triggerIcon ? 'icon' : 'default'
    const buttonClassname = triggerIcon ? styles.triggerIcon : styles.triggerDefault
 
+   const defaultAvatar = name?.[0].toUpperCase()
+
    return (
       <RadixDropdown.Root {...rest}>
          <RadixDropdown.Trigger className={styles.trigger} asChild>
             <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
-               {triggerIcon ?? 'Open Dropdown'}
+               {triggerIcon ? <img src={triggerIcon} alt={'avatar'} /> : <div>{defaultAvatar}</div>}
             </Button>
          </RadixDropdown.Trigger>
          <RadixDropdown.Portal>
@@ -55,11 +59,16 @@ type DropdownLabelProps = {
 
 const DropdownLabel = ({ className, avatarUrl, nickname, email, ...rest }: DropdownLabelProps) => {
    const hasAvatar = !!avatarUrl && avatarUrl.length > 0
+   const defaultAvatar = nickname?.[0].toUpperCase()
 
    return (
       <RadixDropdown.Label className={clsx(styles.label)} {...rest}>
          <div className={styles.avatar}>
-            {hasAvatar && <img src={avatarUrl} alt={'userAvatar'} />}
+            {hasAvatar ? (
+               <img src={avatarUrl} alt={'userAvatar'} />
+            ) : (
+               <div className={styles.avatarIcon}>{defaultAvatar}</div>
+            )}
          </div>
          <div className={styles.info}>
             <Typography variant={'subtitle2'} as={'span'} textAlign={'left'}>

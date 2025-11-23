@@ -15,6 +15,7 @@ type DialogProps = {
    showCancelButton?: boolean
    cancelButtonLabel?: string
    confirmButtonLabel?: string
+   confirmButtonFormId?: string
 } & Omit<ComponentProps<typeof RadixDialog.Root>, 'asChild'>
 
 export const Dialog = ({
@@ -25,8 +26,11 @@ export const Dialog = ({
    showCancelButton = false,
    cancelButtonLabel = 'Cancel',
    confirmButtonLabel = 'Confirm',
+   confirmButtonFormId,
    ...rest
 }: DialogProps) => {
+   const isConfirmButtonSubmit = !!confirmButtonFormId
+
    return (
       <RadixDialog.Root {...rest}>
          <RadixDialog.Trigger className={styles.trigger} asChild>
@@ -37,21 +41,30 @@ export const Dialog = ({
             <RadixDialog.Content {...rest} asChild={undefined}>
                <Card className={clsx(styles.container, className)}>
                   <div className={styles.header}>
-                     <Typography variant={'h3'}>{heading}</Typography>
+                     <Typography variant={'h3'} as={RadixDialog.Title}>
+                        {heading}
+                     </Typography>
                      <RadixDialog.Close asChild>
                         <Button variant={'ghost'} size={'icon'}>
                            <CloseIcon width={20} height={20} />
                         </Button>
                      </RadixDialog.Close>
                   </div>
-                  <div className={styles.content}>{children}</div>
-                  <div className={clsx(styles.footer, showCancelButton && styles.footerCancel)}>
-                     {showCancelButton && (
-                        <RadixDialog.Close>
-                           <Button variant={'secondary'}>{cancelButtonLabel}</Button>
-                        </RadixDialog.Close>
-                     )}
-                     <Button>{confirmButtonLabel}</Button>
+                  <div className={clsx(styles.main, 'thin-scroll-container')}>
+                     <div className={styles.content}>{children}</div>
+                     <div className={clsx(styles.footer, showCancelButton && styles.footerCancel)}>
+                        {showCancelButton && (
+                           <RadixDialog.Close asChild>
+                              <Button variant={'secondary'}>{cancelButtonLabel}</Button>
+                           </RadixDialog.Close>
+                        )}
+                        <Button
+                           type={isConfirmButtonSubmit ? 'submit' : 'button'}
+                           form={isConfirmButtonSubmit ? confirmButtonFormId : undefined}
+                        >
+                           {confirmButtonLabel}
+                        </Button>
+                     </div>
                   </div>
                </Card>
             </RadixDialog.Content>

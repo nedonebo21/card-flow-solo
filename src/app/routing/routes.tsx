@@ -1,9 +1,10 @@
-import { createBrowserRouter, type RouteObject } from 'react-router-dom'
+import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
 
 import { Layout } from '@/app/layout/layout'
 import { PrivateRoutes } from '@/app/routing/private-routes'
 import { SignIn } from '@/pages/auth/ui/sign-in/sign-in'
 import { SignUp } from '@/pages/auth/ui/sign-up/sign-up'
+import { DecksList } from '@/pages/decks/ui/decks-list/decks-list'
 
 const publicRoutes: RouteObject[] = [
    {
@@ -19,7 +20,11 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
    {
       path: '/',
-      element: <div>Hello</div>,
+      element: <Navigate to={'/decks'} />,
+   },
+   {
+      path: '/decks',
+      element: <DecksList />,
    },
 ]
 

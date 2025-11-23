@@ -1,4 +1,4 @@
-import type { User } from '@/entities/user/model'
+import type { User } from '../model'
 
 import { baseApi } from '@/shared/api'
 

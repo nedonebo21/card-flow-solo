@@ -1,15 +1,24 @@
-import type { SignInFormValues, SignUpFormValues } from '@/features/auth/model'
+import type { AuthResponse, SignInFormValues, SignUpFormValues } from '../model'
 
 import { baseApi } from '@/shared/api'
 
 export const authApi = baseApi.injectEndpoints({
    endpoints: builder => ({
-      signIn: builder.mutation<void, SignInFormValues>({
+      signIn: builder.mutation<AuthResponse, SignInFormValues>({
          query: body => ({
             body,
             method: 'POST',
             url: `v1/auth/login`,
          }),
+         async onQueryStarted(_, { queryFulfilled }) {
+            try {
+               const { data } = await queryFulfilled
+
+               localStorage.setItem('accessToken', data?.accessToken)
+            } catch (error) {
+               console.error(error)
+            }
+         },
          invalidatesTags: ['Me'],
       }),
       signUp: builder.mutation<void, Omit<SignUpFormValues, 'confirm'>>({
@@ -20,7 +29,23 @@ export const authApi = baseApi.injectEndpoints({
          }),
          invalidatesTags: ['Me'],
       }),
+      logout: builder.mutation<any, void>({
+         query: () => ({
+            method: 'POST',
+            url: `v1/auth/logout`,
+         }),
+         invalidatesTags: ['Me'],
+         async onQueryStarted(_, { queryFulfilled }) {
+            try {
+               await queryFulfilled
+
+               localStorage.removeItem('accessToken')
+            } catch (error) {
+               console.error(error)
+            }
+         },
+      }),
    }),
 })
 
-export const { useSignInMutation, useSignUpMutation } = authApi
+export const { useSignInMutation, useSignUpMutation, useLogoutMutation } = authApi

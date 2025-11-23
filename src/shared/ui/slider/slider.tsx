@@ -90,6 +90,7 @@ export const Slider = ({
          <div className={clsx(styles.sliderInput, 'align-center')}>
             <Input
                name={'min'}
+               wrapperProps={{ className: styles.input }}
                disabled={disabled}
                value={localMin}
                onBlur={handleCommitInput}
@@ -119,6 +120,7 @@ export const Slider = ({
          <div className={styles.sliderInput}>
             <Input
                name={'max'}
+               wrapperProps={{ className: styles.input }}
                disabled={disabled}
                value={localMax}
                onBlur={handleCommitInput}

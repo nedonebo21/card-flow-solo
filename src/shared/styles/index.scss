@@ -8,6 +8,31 @@ body {
    background-color: var(--color-dark-900);
 }
 
+body::-webkit-scrollbar,
+.thin-scroll-container::-webkit-scrollbar {
+   width: 8px;
+   height: 8px;
+}
+
+body::-webkit-scrollbar-track,
+.thin-scroll-container::-webkit-scrollbar-track {
+   background: transparent;
+}
+
+body::-webkit-scrollbar-thumb,
+.thin-scroll-container::-webkit-scrollbar-thumb {
+   border: 2px solid transparent;
+   border-radius: 4px;
+   background-color: var(--color-dark-100);
+   transition: background-color 0.2s ease;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.thin-scroll-container::-webkit-scrollbar-thumb:hover {
+   cursor: pointer;
+   background-color: var(--color-dark-500);
+}
+
 main {
    display: flex;
    flex: 1;
@@ -45,6 +70,10 @@ main {
    max-width: 1240px;
    margin-inline: auto;
    padding: 0 16px;
+}
+
+.margin-bottom {
+   padding-bottom: 56px;
 }
 
 input:-webkit-autofill,

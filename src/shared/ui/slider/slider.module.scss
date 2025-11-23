@@ -23,6 +23,11 @@
    height: 20px;
 }
 
+.input {
+   padding: 2px;
+   text-align: center;
+}
+
 .sliderWrapper:has(.sliderRoot.disabled) {
    cursor: not-allowed;
 }

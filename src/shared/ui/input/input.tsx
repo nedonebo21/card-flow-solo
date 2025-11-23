@@ -13,6 +13,7 @@ export type InputProps = {
    errorMessage?: string
    startIcon?: ReactNode
    endIcon?: ReactNode
+   wrapperProps?: ComponentProps<'label'>
 } & ComponentProps<'input'>
 
 export const Input = ({
@@ -21,16 +22,19 @@ export const Input = ({
    startIcon,
    endIcon,
    className,
+   wrapperProps,
    id,
    ...rest
 }: InputProps) => {
    const generatedId = useId()
    const inputId = id ?? `input-${generatedId}`
 
+   const { className: wrapperClassName, ...restWrapperProps } = wrapperProps || {}
+
    const isError = errorMessage && errorMessage?.length > 0
 
    return (
-      <div>
+      <div className={className}>
          {!!label && (
             <Typography
                htmlFor={inputId}
@@ -41,14 +45,10 @@ export const Input = ({
                {label}
             </Typography>
          )}
-         <label className={styles.inputWrapper}>
+         <label className={clsx(styles.inputWrapper, wrapperClassName)} {...restWrapperProps}>
             {!!startIcon && <span className={styles.iconWrapper}>{startIcon}</span>}
 
-            <input
-               className={clsx(styles.input, isError && styles.error, className)}
-               {...rest}
-               id={inputId}
-            />
+            <input className={clsx(styles.input, isError && styles.error)} {...rest} id={inputId} />
 
             {!!endIcon && <span className={styles.iconWrapper}>{endIcon}</span>}
          </label>

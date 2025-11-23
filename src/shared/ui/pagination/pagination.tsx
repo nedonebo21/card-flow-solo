@@ -43,18 +43,23 @@ export const Pagination = ({
       onPageSizeChange(Number(value))
    }
 
+   const shouldDisplayNav = totalCount > 1
+
    return (
       <div className={clsx(styles.paginationContainer, className)}>
          <div className={styles.paginationWrapper}>
-            <PaginationNavItem
-               paginationRange={paginationRange}
-               currentPage={currentPage}
-               onPageChange={onPageChange}
-            />
+            {shouldDisplayNav && (
+               <PaginationNavItem
+                  paginationRange={paginationRange}
+                  currentPage={currentPage}
+                  onPageChange={onPageChange}
+               />
+            )}
          </div>
          <div className={styles.itemsCountWrapper}>
             <Typography variant={'body2'}>Показать</Typography>
             <Select
+               className={styles.select}
                options={options}
                placeholder={options[0].label}
                onValueChange={handlePageSizeChange}
