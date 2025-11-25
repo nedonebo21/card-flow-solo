@@ -4,7 +4,7 @@ import { Layout } from '@/app/layout/layout'
 import { PrivateRoutes } from '@/app/routing/private-routes'
 import { SignIn } from '@/pages/auth/ui/sign-in/sign-in'
 import { SignUp } from '@/pages/auth/ui/sign-up/sign-up'
-import { DecksList } from '@/pages/decks/ui/decks-list/decks-list'
+import { Decks } from '@/pages/decks/ui/decks/decks'
 
 const publicRoutes: RouteObject[] = [
    {
@@ -24,7 +24,7 @@ const privateRoutes: RouteObject[] = [
    },
    {
       path: '/decks',
-      element: <DecksList />,
+      element: <Decks />,
    },
 ]
 

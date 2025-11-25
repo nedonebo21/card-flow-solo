@@ -31,6 +31,19 @@ export const decksApi = baseApi.injectEndpoints({
          },
          invalidatesTags: ['Decks'],
       }),
+      updateDeck: builder.mutation<
+         Omit<Deck, 'author' | 'isFavorite'>,
+         { id: string; body: FormData }
+      >({
+         query: ({ body, id }) => {
+            return {
+               url: `v1/decks/${id}`,
+               method: 'PATCH',
+               body,
+            }
+         },
+         invalidatesTags: ['Decks'],
+      }),
       deleteDeck: builder.mutation<Omit<Deck, 'author' | 'isFavorite'>, string>({
          query: id => {
             return {
@@ -48,4 +61,5 @@ export const {
    useGetDeckByIdQuery,
    useCreateDeckMutation,
    useDeleteDeckMutation,
+   useUpdateDeckMutation,
 } = decksApi

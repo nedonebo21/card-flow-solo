@@ -16,6 +16,8 @@ type DialogProps = {
    cancelButtonLabel?: string
    confirmButtonLabel?: string
    confirmButtonFormId?: string
+   onConfirm?: () => void
+   isConfirmDisabled?: boolean
 } & Omit<ComponentProps<typeof RadixDialog.Root>, 'asChild'>
 
 export const Dialog = ({
@@ -27,9 +29,15 @@ export const Dialog = ({
    cancelButtonLabel = 'Cancel',
    confirmButtonLabel = 'Confirm',
    confirmButtonFormId,
+   onConfirm,
+   isConfirmDisabled = false,
    ...rest
 }: DialogProps) => {
    const isConfirmButtonSubmit = !!confirmButtonFormId
+
+   const handleConfirm = () => {
+      onConfirm?.()
+   }
 
    return (
       <RadixDialog.Root {...rest}>
@@ -59,8 +67,10 @@ export const Dialog = ({
                            </RadixDialog.Close>
                         )}
                         <Button
+                           disabled={isConfirmDisabled}
                            type={isConfirmButtonSubmit ? 'submit' : 'button'}
                            form={isConfirmButtonSubmit ? confirmButtonFormId : undefined}
+                           onClick={handleConfirm}
                         >
                            {confirmButtonLabel}
                         </Button>

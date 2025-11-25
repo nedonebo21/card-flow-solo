@@ -11,7 +11,7 @@ const MAX_SIZE = {
    label: '10 MB',
 }
 
-export const createDeckSchema = z.object({
+export const deckFormSchema = z.object({
    cover: z
       .custom<File>(file => file instanceof File, {
          message: 'Image is required',
@@ -29,4 +29,4 @@ export const createDeckSchema = z.object({
    isPrivate: z.boolean().optional(),
 })
 
-export type CreateDeckFormValues = z.infer<typeof createDeckSchema>
+export type DeckFormValues = z.infer<typeof deckFormSchema>

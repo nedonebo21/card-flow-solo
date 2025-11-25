@@ -31,7 +31,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
                   <Dropdown name={name} triggerIcon={hasAvatar ? avatar : null}>
                      <Dropdown.Label email={email} nickname={name} avatarUrl={userData?.avatar} />
                      <Dropdown.Item>
-                        <Button variant={'ghost'}>
+                        <Button variant={'ghost'} as={Link} to={'/profile'}>
                            <UserFilledIcon width={16} height={16} />
                            <Typography variant={'caption'}>My Profile</Typography>
                         </Button>

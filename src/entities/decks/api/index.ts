@@ -3,4 +3,5 @@ export {
    useGetDeckByIdQuery,
    useDeleteDeckMutation,
    useCreateDeckMutation,
+   useUpdateDeckMutation,
 } from './decks-api'

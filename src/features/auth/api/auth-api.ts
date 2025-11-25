@@ -29,12 +29,11 @@ export const authApi = baseApi.injectEndpoints({
          }),
          invalidatesTags: ['Me'],
       }),
-      logout: builder.mutation<any, void>({
+      logout: builder.mutation<unknown, void>({
          query: () => ({
             method: 'POST',
             url: `v1/auth/logout`,
          }),
-         invalidatesTags: ['Me'],
          async onQueryStarted(_, { queryFulfilled }) {
             try {
                await queryFulfilled
@@ -44,6 +43,7 @@ export const authApi = baseApi.injectEndpoints({
                console.error(error)
             }
          },
+         invalidatesTags: ['Me'],
       }),
    }),
 })

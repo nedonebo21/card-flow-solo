@@ -1,30 +1,31 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { DeckFormValues } from '../../model'
+import type { DeckFormValues } from '@/features/decks/model'
 
 import { useState } from 'react'
 
-import { useCreateDeckMutation } from '@/entities/decks/api'
+import { useUpdateDeckMutation } from '@/entities/decks/api'
 import { useDeckForm, VALID_FILE_FORMATS } from '@/features/decks/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
-import { Button, Dialog, ImageIcon, CropImageDialog } from '@/shared/ui'
+import { Button, Dialog, ImageIcon, PencilIcon, CropImageDialog } from '@/shared/ui'
 
-import styles from './create-deck.module.scss'
+import styles from '@/features/decks/ui/create-deck/create-deck.module.scss'
 
-type CreateDeckFormProps = {
+type UpdateDeckProps = {
    onSubmit?: SubmitHandler<DeckFormValues>
-} & Omit<ComponentProps<'form'>, 'onSubmit'>
-
-export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckFormProps) => {
-   const [createDeck] = useCreateDeckMutation()
+   id: string
+   name: string
+} & Omit<ComponentProps<'form'>, 'onSubmit' | 'id'>
+export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, name, ...rest }: UpdateDeckProps) => {
+   const [updateDeck] = useUpdateDeckMutation()
    const [isOpen, setIsOpen] = useState(false)
 
    const {
       form: {
          handleSubmit,
          control,
-         formState: { errors },
+         formState: { errors, isDirty },
          register,
          reset,
       },
@@ -37,7 +38,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
       handleFileChange,
       handleCropComplete,
       handleCropDialogOpenChange,
-   } = useDeckForm()
+   } = useDeckForm({ defaultName: name })
 
    const onSubmit: SubmitHandler<DeckFormValues> = async (data, e) => {
       const formData = new FormData()
@@ -53,7 +54,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
          await onSubmitFormProps(data, e)
       } else {
          try {
-            await createDeck(formData)
+            await updateDeck({ id, body: formData })
          } catch (error) {
             console.error(error)
          }
@@ -64,25 +65,32 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
       setIsOpen(open)
       if (!open) {
          reset({
-            name: '',
+            name,
             isPrivate: false,
             cover: undefined,
          })
       }
    }
 
+   const isConfirmDisabled = !isDirty
+
    return (
       <>
-         <form id={'create-deck-form'} onSubmit={handleSubmit(onSubmit)} {...rest}>
+         <form id={'update-deck-form'} onSubmit={handleSubmit(onSubmit)} {...rest}>
             <Dialog
                open={isOpen}
                onOpenChange={handleOpenChange}
-               trigger={<Button>New Deck</Button>}
-               heading={'Add New Deck'}
-               confirmButtonLabel={'Add New Pack'}
+               trigger={
+                  <Button variant={'ghost'} size={'icon'}>
+                     <PencilIcon width={16} height={16} />
+                  </Button>
+               }
+               heading={'Edit Deck'}
+               confirmButtonLabel={'Confirm changes'}
                showCancelButton
                cancelButtonLabel={'Cancel'}
-               confirmButtonFormId={'create-deck-form'}
+               confirmButtonFormId={'update-deck-form'}
+               isConfirmDisabled={isConfirmDisabled}
             >
                {isCoverSelect && (
                   <img
@@ -104,7 +112,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
                   variant={'secondary'}
                >
                   <ImageIcon width={16} height={16} />
-                  {isCoverSelect ? 'Change Image' : 'Upload Image'}
+                  {isCoverSelect ? 'Change Image' : 'Update Image'}
                </Button>
                <input
                   {...register('cover')}

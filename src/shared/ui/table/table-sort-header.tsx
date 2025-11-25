@@ -22,7 +22,7 @@ export type Sort = {
 type TableSortHeaderProps = Omit<
    ComponentPropsWithoutRef<'thead'> & {
       columns: Column[]
-      sort?: Sort
+      sort: Sort
       onSort?: (sort: Sort) => void
    },
    'children'

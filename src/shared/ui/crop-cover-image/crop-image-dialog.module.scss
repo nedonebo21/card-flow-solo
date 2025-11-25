@@ -1,0 +1,21 @@
+.crop {
+   position: relative;
+
+   overflow: hidden;
+
+   width: 306px;
+   height: 306px;
+   margin-inline: auto;
+
+   background: #333;
+
+   .reactEasyCrop_Container {
+      position: absolute;
+      inset: 0;
+   }
+
+   .reactEasyCrop_CropArea {
+      border: 2px solid white;
+      box-shadow: 0 0 0 9999em rgb(0 0 0 / 50%);
+   }
+}
