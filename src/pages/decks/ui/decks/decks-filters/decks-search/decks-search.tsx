@@ -1,5 +1,6 @@
 import type { ChangeEvent } from 'react'
 
+import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { InputSearch } from '@/shared/ui'
@@ -9,12 +10,23 @@ import styles from './decks-search.module.scss'
 export const DecksSearch = () => {
    const [searchParams, setSearchParams] = useSearchParams()
    const name = searchParams.get('name')
-   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-      searchParams.set('name', e.target.value)
-      setSearchParams(searchParams)
-   }
+
+   const handleNameChange = useCallback(
+      (e: ChangeEvent<HTMLInputElement>) => {
+         const newName = e.target.value
+
+         if (newName.length < 1) {
+            searchParams.delete('name')
+         } else {
+            searchParams.set('name', e.target.value)
+         }
+         setSearchParams(searchParams)
+      },
+      [searchParams, setSearchParams]
+   )
+
    const handleClear = () => {
-      searchParams.set('name', '')
+      searchParams.delete('name')
       setSearchParams(searchParams)
    }
 
@@ -22,7 +34,7 @@ export const DecksSearch = () => {
       <InputSearch
          className={styles.input}
          placeholder={'...'}
-         value={name ?? undefined}
+         value={name ?? ''}
          onChange={handleNameChange}
          onClear={handleClear}
       />
