@@ -7,10 +7,10 @@ import {
    Typography,
    CirclePlayIcon,
    LogOutIcon,
-   MoreVerticalIcon,
    PencilIcon,
    TrashIcon,
    UserFilledIcon,
+   MoreVerticalIcon,
 } from '@/shared/ui'
 
 import { Dropdown } from './dropdown'
@@ -35,7 +35,7 @@ export const Default: Story = {
          <Dropdown
             open={isOpen}
             onOpenChange={setIsOpen}
-            triggerIcon={<MoreVerticalIcon width={24} height={24} />}
+            triggerButton={<MoreVerticalIcon width={18} height={18} />}
          >
             <Dropdown.Item>
                <Button variant={'ghost'}>
@@ -96,16 +96,7 @@ export const ProfileDemo: Story = {
       const [isOpen, setIsOpen] = useState(false)
 
       return (
-         <Dropdown
-            open={isOpen}
-            onOpenChange={setIsOpen}
-            triggerIcon={
-               <img
-                  src={'https://i.pinimg.com/736x/ac/c7/7f/acc77fc9e4be6f7f83de39486ff221f0.jpg'}
-                  alt={'userAvatar'}
-               />
-            }
-         >
+         <Dropdown open={isOpen} onOpenChange={setIsOpen} name={'Ivan'}>
             <Dropdown.Label
                avatarUrl={'https://i.pinimg.com/736x/ac/c7/7f/acc77fc9e4be6f7f83de39486ff221f0.jpg'}
                nickname={'Ivan'}

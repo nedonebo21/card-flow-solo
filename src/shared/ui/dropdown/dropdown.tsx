@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
@@ -10,6 +10,7 @@ import styles from './dropdown.module.scss'
 
 type DropdownProps = {
    triggerIcon?: string | null
+   triggerButton?: ReactNode
    name?: string
    alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
    sideOffset?: ComponentProps<typeof RadixDropdown.Content>['sideOffset']
@@ -18,14 +19,15 @@ type DropdownProps = {
 const Dropdown = ({
    children,
    triggerIcon,
+   triggerButton,
    alignItems = 'end',
    sideOffset = 1,
    name,
    ...rest
 }: DropdownProps) => {
-   const buttonVariant = triggerIcon ? 'ghost' : 'primary'
-   const buttonSize = triggerIcon ? 'icon' : 'default'
-   const buttonClassname = triggerIcon ? styles.triggerIcon : styles.triggerDefault
+   const buttonVariant = triggerIcon || triggerButton ? 'ghost' : 'primary'
+   const buttonSize = triggerIcon || triggerButton ? 'icon' : 'default'
+   const buttonClassname = triggerIcon || triggerButton ? styles.triggerIcon : styles.triggerDefault
 
    const defaultAvatar = name?.[0].toUpperCase()
 
@@ -33,7 +35,9 @@ const Dropdown = ({
       <RadixDropdown.Root {...rest}>
          <RadixDropdown.Trigger className={styles.trigger} asChild>
             <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
-               {triggerIcon ? <img src={triggerIcon} alt={'avatar'} /> : <div>{defaultAvatar}</div>}
+               {triggerIcon && <img src={triggerIcon} alt={'avatar'} />}
+               {triggerButton}
+               {!triggerIcon && !triggerButton && <div>{defaultAvatar}</div>}
             </Button>
          </RadixDropdown.Trigger>
          <RadixDropdown.Portal>
