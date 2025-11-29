@@ -3,9 +3,9 @@ import type { SubmitHandler } from 'react-hook-form'
 
 import type { DeckFormValues } from '@/features/decks/model'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { useUpdateDeckMutation } from '@/entities/decks/api'
+import { useGetDeckByIdQuery, useUpdateDeckMutation } from '@/entities/decks/api'
 import { useDeckForm, VALID_FILE_FORMATS } from '@/features/decks/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button, Dialog, ImageIcon, PencilIcon, CropImageDialog } from '@/shared/ui'
@@ -15,11 +15,14 @@ import styles from '@/features/decks/ui/create-deck/create-deck.module.scss'
 type UpdateDeckProps = {
    onSubmit?: SubmitHandler<DeckFormValues>
    id: string
-   name: string
 } & Omit<ComponentProps<'form'>, 'onSubmit' | 'id'>
-export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, name, ...rest }: UpdateDeckProps) => {
-   const [updateDeck] = useUpdateDeckMutation()
+export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, ...rest }: UpdateDeckProps) => {
+   const [updateDeck, { isLoading }] = useUpdateDeckMutation()
+
    const [isOpen, setIsOpen] = useState(false)
+   const [hasCoverChanged, setHasCoverChanged] = useState(false)
+
+   const { data: deck } = useGetDeckByIdQuery({ id }, { skip: !isOpen })
 
    const {
       form: {
@@ -28,6 +31,7 @@ export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, name, ...rest }: U
          formState: { errors, isDirty },
          register,
          reset,
+         watch,
       },
       coverPreviewUrl,
       isCropperOpen,
@@ -38,7 +42,26 @@ export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, name, ...rest }: U
       handleFileChange,
       handleCropComplete,
       handleCropDialogOpenChange,
-   } = useDeckForm({ defaultName: name })
+   } = useDeckForm({ defaultName: deck?.name ?? '', defaultIsPrivate: deck?.isPrivate ?? false })
+
+   const coverFile = watch('cover')
+
+   useEffect(() => {
+      if (coverFile instanceof File) {
+         setHasCoverChanged(true)
+      }
+   }, [coverFile])
+
+   useEffect(() => {
+      if (deck && isOpen) {
+         reset({
+            name: deck?.name,
+            isPrivate: deck?.isPrivate,
+            cover: undefined,
+         })
+         setHasCoverChanged(false)
+      }
+   }, [deck, isOpen, reset])
 
    const onSubmit: SubmitHandler<DeckFormValues> = async (data, e) => {
       const formData = new FormData()
@@ -54,7 +77,8 @@ export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, name, ...rest }: U
          await onSubmitFormProps(data, e)
       } else {
          try {
-            await updateDeck({ id, body: formData })
+            await updateDeck({ id, body: formData }).unwrap()
+            setIsOpen(false)
          } catch (error) {
             console.error(error)
          }
@@ -65,14 +89,15 @@ export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, name, ...rest }: U
       setIsOpen(open)
       if (!open) {
          reset({
-            name,
-            isPrivate: false,
+            name: deck?.name,
+            isPrivate: deck?.isPrivate,
             cover: undefined,
          })
+         setHasCoverChanged(false)
       }
    }
 
-   const isConfirmDisabled = !isDirty
+   const isConfirmDisabled = (!isDirty && !hasCoverChanged) || isLoading
 
    return (
       <>

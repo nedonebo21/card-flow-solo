@@ -38,9 +38,9 @@ export const Decks = () => {
    })
 
    const handleClearFilter = useCallback(() => {
-      searchParams.set('name', '')
-      searchParams.set('min', '0')
-      searchParams.set('max', '100')
+      searchParams.delete('name')
+      searchParams.delete('min')
+      searchParams.delete('max')
       setSearchParams(searchParams)
    }, [searchParams, setSearchParams])
 

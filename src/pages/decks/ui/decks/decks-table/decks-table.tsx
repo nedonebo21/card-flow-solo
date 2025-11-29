@@ -56,14 +56,17 @@ export const DecksTable = ({ decks, userId }: DecksTableProps) => {
       setSearchParams(searchParams)
    }
 
+   if (!decks || decks.length === 0) {
+      return (
+         <div className={styles.empty}>
+            <Typography variant={'warning'}>Decks not found</Typography>
+         </div>
+      )
+   }
+
    return (
       <Table>
          <TableSortHeader columns={DECK_COLUMNS} sort={sort} onSort={handleSort} />
-         {(!decks || decks.length === 0) && (
-            <div className={styles.empty}>
-               <Typography variant={'warning'}>Decks not found</Typography>
-            </div>
-         )}
          <TableBody>
             {decks?.map(deck => {
                const coverUrl = deck.cover ?? DefaultCover
@@ -88,7 +91,7 @@ export const DecksTable = ({ decks, userId }: DecksTableProps) => {
                         </Button>
                         {isOwner && (
                            <>
-                              <UpdateDeck name={deck.name} id={deck.id} />
+                              <UpdateDeck id={deck.id} />
                               <DeleteDeck id={deck.id} />
                            </>
                         )}

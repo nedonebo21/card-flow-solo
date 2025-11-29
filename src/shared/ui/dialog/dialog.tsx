@@ -46,7 +46,7 @@ export const Dialog = ({
          </RadixDialog.Trigger>
          <RadixDialog.Portal>
             <RadixDialog.Overlay />
-            <RadixDialog.Content {...rest} asChild={undefined}>
+            <RadixDialog.Content>
                <Card className={clsx(styles.container, className)}>
                   <div className={styles.header}>
                      <Typography variant={'h3'} as={RadixDialog.Title}>
