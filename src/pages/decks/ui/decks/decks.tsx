@@ -21,6 +21,8 @@ export const Decks = () => {
          min: Number(searchParams.get('min')) || 0,
          max: Number(searchParams.get('max')) || 100,
          orderBy: searchParams.get('orderBy') || null,
+         page: Number(searchParams.get('page')) || 1,
+         perPage: Number(searchParams.get('perPage')) || 10,
       }),
       [searchParams]
    )
@@ -33,6 +35,8 @@ export const Decks = () => {
       name: queryParams.name,
       maxCardsCount: queryParams.max,
       minCardsCount: queryParams.min,
+      currentPage: queryParams.page,
+      itemsPerPage: queryParams.perPage,
       authorId,
       orderBy: queryParams.orderBy,
    })
