@@ -17,7 +17,7 @@ type CreateDeckFormProps = {
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
 export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckFormProps) => {
-   const [createDeck] = useCreateDeckMutation()
+   const [createDeck, { isLoading }] = useCreateDeckMutation()
    const [isOpen, setIsOpen] = useState(false)
 
    const {
@@ -54,6 +54,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
       } else {
          try {
             await createDeck(formData)
+            setIsOpen(false)
          } catch (error) {
             console.error(error)
          }
@@ -83,6 +84,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
                showCancelButton
                cancelButtonLabel={'Cancel'}
                confirmButtonFormId={'create-deck-form'}
+               isConfirmDisabled={isLoading}
             >
                {isCoverSelect && (
                   <img
