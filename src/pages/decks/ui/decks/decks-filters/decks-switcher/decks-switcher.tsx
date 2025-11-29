@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { Tabs, Typography } from '@/shared/ui'
@@ -9,10 +10,18 @@ export const DecksSwitcher = () => {
 
    const show = searchParams.get('show') || 'all'
 
-   const setShow = (show: string) => {
-      searchParams.set('show', show)
-      setSearchParams(searchParams)
-   }
+   const setShow = useCallback(
+      (show: string) => {
+         if (show === 'all') {
+            searchParams.delete('show')
+         } else {
+            searchParams.set('show', show)
+         }
+
+         setSearchParams(searchParams)
+      },
+      [searchParams, setSearchParams]
+   )
 
    return (
       <Tabs onValueChange={setShow} value={show ?? undefined}>
