@@ -3,7 +3,7 @@ import type { Sort } from '@/shared/ui'
 
 import { Link, useSearchParams } from 'react-router-dom'
 
-import { DeleteDeckButton, UpdateDeck } from '@/features/decks/ui'
+import { DeleteDeck, UpdateDeck } from '@/features/decks/ui'
 import { DECK_COLUMNS } from '@/pages/decks/model'
 import { formatDate } from '@/shared/lib'
 import {
@@ -89,7 +89,7 @@ export const DecksTable = ({ decks, userId }: DecksTableProps) => {
                         {isOwner && (
                            <>
                               <UpdateDeck name={deck.name} id={deck.id} />
-                              <DeleteDeckButton id={deck.id} />
+                              <DeleteDeck id={deck.id} />
                            </>
                         )}
                      </TableCell>
