@@ -28,10 +28,10 @@ type DecksTableProps = {
 export const DecksTable = ({ decks, userId }: DecksTableProps) => {
    const [searchParams, setSearchParams] = useSearchParams()
 
-   const orderByString = searchParams.get('orderBy') || 'null'
+   const orderByString = searchParams.get('orderBy') || null
 
    const sort: Sort = (() => {
-      if (!orderByString || orderByString === 'null') {
+      if (!orderByString) {
          return null
       }
 
