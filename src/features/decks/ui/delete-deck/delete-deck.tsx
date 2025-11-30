@@ -1,6 +1,8 @@
 import { type ComponentProps, useState } from 'react'
 
-import { useDeleteDeckMutation } from '@/entities/decks/api'
+import { toast } from 'sonner'
+
+import { useDeleteDeckMutation, useGetDeckByIdQuery } from '@/entities/decks/api'
 import { Button, Dialog, TrashIcon, Typography } from '@/shared/ui'
 
 type DeleteDeck = {
@@ -9,6 +11,7 @@ type DeleteDeck = {
 
 export const DeleteDeck = ({ onDelete, id, ...rest }: DeleteDeck) => {
    const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+   const { data: deckData } = useGetDeckByIdQuery({ id })
    const [isOpen, setIsOpen] = useState(false)
 
    const handleOpenChange = () => {
@@ -21,6 +24,7 @@ export const DeleteDeck = ({ onDelete, id, ...rest }: DeleteDeck) => {
       }
       deleteDeck(id)
       setIsOpen(false)
+      toast.success(`Deck '${deckData?.name}' deleted successfully`)
    }
 
    return (

@@ -5,6 +5,8 @@ import type { DeckFormValues } from '../../model'
 
 import { useState } from 'react'
 
+import { toast } from 'sonner'
+
 import { useCreateDeckMutation } from '@/entities/decks/api'
 import { useDeckForm, VALID_FILE_FORMATS } from '@/features/decks/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
@@ -55,6 +57,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
          try {
             await createDeck(formData)
             setIsOpen(false)
+            toast.success(`Deck '${data.name}' created successfully`)
          } catch (error) {
             console.error(error)
          }
