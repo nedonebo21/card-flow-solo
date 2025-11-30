@@ -1,6 +1,7 @@
 import type { AuthResponse, SignInFormValues, SignUpFormValues } from '../model'
 
 import { baseApi } from '@/shared/api'
+import { ACCESS_TOKEN } from '@/shared/constants'
 
 export const authApi = baseApi.injectEndpoints({
    endpoints: builder => ({
@@ -14,7 +15,7 @@ export const authApi = baseApi.injectEndpoints({
             try {
                const { data } = await queryFulfilled
 
-               localStorage.setItem('accessToken', data?.accessToken)
+               localStorage.setItem(ACCESS_TOKEN, data?.accessToken)
             } catch (error) {
                console.error(error)
             }
@@ -38,7 +39,7 @@ export const authApi = baseApi.injectEndpoints({
             try {
                await queryFulfilled
 
-               localStorage.removeItem('accessToken')
+               localStorage.removeItem(ACCESS_TOKEN)
             } catch (error) {
                console.error(error)
             }

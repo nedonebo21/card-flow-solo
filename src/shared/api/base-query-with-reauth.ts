@@ -4,17 +4,21 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { Mutex } from 'async-mutex'
 
+import { ACCESS_TOKEN } from '@/shared/constants'
+
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
-   baseUrl: 'https://api.flashcards.andrii.es',
+   baseUrl: import.meta.env.VITE_BASE_URL,
    credentials: 'include',
    prepareHeaders: headers => {
-      const token = localStorage.getItem('accessToken')
+      const token = localStorage.getItem(ACCESS_TOKEN)
 
       if (token) {
          headers.set('Authorization', `Bearer ${token}`)
       }
+
+      headers.set('API-KEY', import.meta.env.VITE_API_KEY)
 
       return headers
    },
