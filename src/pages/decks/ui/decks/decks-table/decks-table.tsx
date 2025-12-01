@@ -7,6 +7,7 @@ import { DeleteDeck, UpdateDeck } from '@/features/decks/ui'
 import { DECK_COLUMNS } from '@/pages/decks/model'
 import { formatDate } from '@/shared/lib'
 import {
+   Loader,
    Button,
    CirclePlayIcon,
    Table,
@@ -23,9 +24,10 @@ import styles from './decks-table.module.scss'
 type DecksTableProps = {
    decks?: Deck[]
    userId?: string
+   isLoading?: boolean
 }
 
-export const DecksTable = ({ decks, userId }: DecksTableProps) => {
+export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
    const [searchParams, setSearchParams] = useSearchParams()
 
    const orderByString = searchParams.get('orderBy') || null
@@ -56,12 +58,8 @@ export const DecksTable = ({ decks, userId }: DecksTableProps) => {
       setSearchParams(searchParams)
    }
 
-   if (!decks || decks.length === 0) {
-      return (
-         <div className={styles.empty}>
-            <Typography variant={'warning'}>Decks not found</Typography>
-         </div>
-      )
+   if (isLoading) {
+      return <Loader />
    }
 
    return (

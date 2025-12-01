@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps, ReactNode, MouseEvent } from 'react'
 
 import * as RadixDropdown from '@radix-ui/react-dropdown-menu'
 
@@ -86,13 +86,27 @@ const DropdownLabel = ({ className, avatarUrl, nickname, email, ...rest }: Dropd
    )
 }
 
-type DropdownItemProps = Omit<ComponentProps<typeof RadixDropdown.Item>, 'asChild'>
+type DropdownItemProps = { asChild?: boolean } & Omit<
+   ComponentProps<typeof RadixDropdown.Item>,
+   'asChild'
+>
 
-const DropdownItem = ({ className, ...rest }: DropdownItemProps) => {
+const DropdownItem = ({ className, onClick, asChild, ...rest }: DropdownItemProps) => {
+   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
+      onClick?.(e)
+   }
+
    return (
       <>
          <RadixDropdown.Separator className={styles.separator} />
-         <RadixDropdown.Item className={clsx(styles.item, className)} {...rest} />
+         <RadixDropdown.Item
+            className={clsx(styles.item, className)}
+            onClick={handleClick}
+            asChild={asChild}
+            {...rest}
+         />
       </>
    )
 }

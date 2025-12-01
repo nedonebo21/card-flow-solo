@@ -1,0 +1,45 @@
+.wrapper {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   margin-bottom: 27px;
+}
+
+.linkContainer {
+   display: flex;
+}
+
+.link {
+   color: var(--color-light-100) !important;
+   text-decoration: none !important;
+
+   &:hover {
+      text-decoration: underline !important;
+   }
+}
+
+.learnContainer {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.cardCover {
+   width: 600px;
+   height: 200px;
+   object-fit: cover;
+}
+
+.deckActions {
+   display: flex;
+   gap: 10px;
+}
+
+.update {
+   width: 100%;
+   padding: 12px 6px;
+
+   & > * {
+      padding: 0;
+   }
+}

@@ -1,0 +1,21 @@
+.answer {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.question {
+   overflow: hidden;
+   max-width: 200px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+
+.expanded {
+   max-width: 200px;
+}
+
+.row {
+   display: flex;
+   gap: 8px;
+}

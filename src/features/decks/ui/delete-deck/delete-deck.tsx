@@ -1,17 +1,28 @@
 import { type ComponentProps, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { toast } from 'sonner'
 
-import { useDeleteDeckMutation, useGetDeckByIdQuery } from '@/entities/decks/api'
+import { useDeleteDeckMutation } from '@/entities/decks/api'
 import { Button, Dialog, TrashIcon, Typography } from '@/shared/ui'
 
-type DeleteDeck = {
+type DeleteDeckProps = {
    id: string
+   deckName?: string
+   redirectOnDelete?: boolean
 } & Omit<ComponentProps<typeof Button>, 'onClick'>
 
-export const DeleteDeck = ({ onDelete, id, ...rest }: DeleteDeck) => {
+export const DeleteDeck = ({
+   onDelete,
+   id,
+   size = 'icon',
+   label,
+   deckName,
+   redirectOnDelete,
+   ...rest
+}: DeleteDeckProps) => {
    const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
-   const { data: deckData } = useGetDeckByIdQuery({ id })
+   const navigate = useNavigate()
    const [isOpen, setIsOpen] = useState(false)
 
    const handleOpenChange = () => {
@@ -24,7 +35,11 @@ export const DeleteDeck = ({ onDelete, id, ...rest }: DeleteDeck) => {
       }
       deleteDeck(id)
       setIsOpen(false)
-      toast.success(`Deck '${deckData?.name}' deleted successfully`)
+
+      if (redirectOnDelete) {
+         navigate('/')
+      }
+      toast.success(`Deck '${deckName}' deleted successfully`)
    }
 
    return (
@@ -34,8 +49,9 @@ export const DeleteDeck = ({ onDelete, id, ...rest }: DeleteDeck) => {
          isConfirmDisabled={isLoading}
          showCancelButton
          trigger={
-            <Button variant={'ghost'} size={'icon'} {...rest}>
+            <Button variant={'ghost'} size={size} {...rest}>
                <TrashIcon width={16} height={16} />
+               {label ? <Typography variant={'caption'}>{label}</Typography> : ''}
             </Button>
          }
          onOpenChange={handleOpenChange}

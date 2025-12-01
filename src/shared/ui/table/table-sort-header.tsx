@@ -57,12 +57,8 @@ export const TableSortHeader = ({
    return (
       <thead className={clsx(styles.thead, className)} {...rest}>
          <TableRow>
-            {columns.map(({ title, key, sortable }) => (
-               <TableHeadCell
-                  key={key}
-                  className={clsx(null, sortable && styles.sortable)}
-                  onClick={handleSort(key)}
-               >
+            {columns.map(({ title, key }) => (
+               <TableHeadCell key={key} className={styles.sortable} onClick={handleSort(key)}>
                   {title}
                   {sort && sort.key === key && (
                      <span className={styles.arrowWrapper}>

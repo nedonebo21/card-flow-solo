@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
+import { useDebounce } from 'use-debounce'
+
 import { useGetDecksQuery } from '@/entities/decks/api'
 import { useMeQuery } from '@/entities/user/api'
 
@@ -27,12 +29,14 @@ export const Decks = () => {
       [searchParams]
    )
 
+   const [debouncedName] = useDebounce(queryParams.name, 500)
+
    const { data: userData } = useMeQuery()
    const currentUserId = userData?.id
    const authorId = queryParams.show === 'my' ? currentUserId : ''
 
-   const { data } = useGetDecksQuery({
-      name: queryParams.name,
+   const { data, isLoading } = useGetDecksQuery({
+      name: debouncedName,
       maxCardsCount: queryParams.max,
       minCardsCount: queryParams.min,
       currentPage: queryParams.page,
@@ -55,7 +59,7 @@ export const Decks = () => {
          <DecksHeader />
          <DecksFilters onClear={handleClearFilter} />
          <div className={styles.decks}>
-            <DecksTable decks={decks} userId={currentUserId} />
+            <DecksTable decks={decks} isLoading={isLoading} userId={currentUserId} />
             <DecksPagination totalCount={data?.pagination.totalItems ?? 10} />
          </div>
       </div>

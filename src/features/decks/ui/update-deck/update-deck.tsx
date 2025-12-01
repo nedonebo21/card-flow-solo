@@ -8,15 +8,23 @@ import { useEffect, useState } from 'react'
 import { useGetDeckByIdQuery, useUpdateDeckMutation } from '@/entities/decks/api'
 import { useDeckForm, VALID_FILE_FORMATS } from '@/features/decks/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
-import { Button, Dialog, ImageIcon, PencilIcon, CropImageDialog } from '@/shared/ui'
+import { Button, Dialog, ImageIcon, PencilIcon, CropImageDialog, Typography } from '@/shared/ui'
 
-import styles from '@/features/decks/ui/create-deck/create-deck.module.scss'
+import styles from './update-deck.module.scss'
 
 type UpdateDeckProps = {
    onSubmit?: SubmitHandler<DeckFormValues>
    id: string
+   size?: 'default' | 'icon'
+   label?: string
 } & Omit<ComponentProps<'form'>, 'onSubmit' | 'id'>
-export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, ...rest }: UpdateDeckProps) => {
+export const UpdateDeck = ({
+   onSubmit: onSubmitFormProps,
+   id,
+   size = 'icon',
+   label,
+   className,
+}: UpdateDeckProps) => {
    const [updateDeck, { isLoading }] = useUpdateDeckMutation()
 
    const [isOpen, setIsOpen] = useState(false)
@@ -101,22 +109,23 @@ export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, ...rest }: UpdateD
 
    return (
       <>
-         <form id={'update-deck-form'} onSubmit={handleSubmit(onSubmit)} {...rest}>
-            <Dialog
-               open={isOpen}
-               onOpenChange={handleOpenChange}
-               trigger={
-                  <Button variant={'ghost'} size={'icon'}>
-                     <PencilIcon width={16} height={16} />
-                  </Button>
-               }
-               heading={'Edit Deck'}
-               confirmButtonLabel={'Confirm changes'}
-               showCancelButton
-               cancelButtonLabel={'Cancel'}
-               confirmButtonFormId={'update-deck-form'}
-               isConfirmDisabled={isConfirmDisabled}
-            >
+         <Dialog
+            open={isOpen}
+            onOpenChange={handleOpenChange}
+            trigger={
+               <Button variant={'ghost'} size={size} className={className}>
+                  <PencilIcon width={16} height={16} />
+                  {label ? <Typography variant={'caption'}>{label}</Typography> : ''}
+               </Button>
+            }
+            heading={'Edit Deck'}
+            confirmButtonLabel={'Confirm changes'}
+            showCancelButton
+            cancelButtonLabel={'Cancel'}
+            confirmButtonFormId={'update-deck-form'}
+            isConfirmDisabled={isConfirmDisabled}
+         >
+            <form id={'update-deck-form'} className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                {isCoverSelect && (
                   <img
                      className={styles.cover}
@@ -148,8 +157,8 @@ export const UpdateDeck = ({ onSubmit: onSubmitFormProps, id, ...rest }: UpdateD
                   style={{ display: 'none' }}
                />
                <ControlledCheckbox control={control} name={'isPrivate'} label={'Private Pack'} />
-            </Dialog>
-         </form>
+            </form>
+         </Dialog>
          {originalCoverUrl && (
             <CropImageDialog
                open={isCropperOpen}
