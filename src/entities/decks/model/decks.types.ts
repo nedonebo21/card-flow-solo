@@ -14,6 +14,11 @@ export type GetDecksArgs = {
    itemsPerPage?: number
 }
 
+export type GetCardsCount = {
+   min: number
+   max: number
+}
+
 type Pagination = {
    totalItems: number
    currentPage: number

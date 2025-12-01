@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
+import { useGetCardsCountQuery } from '@/entities/decks/api/decks-api'
 import { Slider, Typography } from '@/shared/ui'
 
 import styles from './decks-slider.module.scss'
@@ -8,20 +9,25 @@ import styles from './decks-slider.module.scss'
 export const DecksSlider = () => {
    const [searchParams, setSearchParams] = useSearchParams()
 
-   const min = Number(searchParams.get('min')) || 0
-   const max = Number(searchParams.get('max')) || 100
+   const { data } = useGetCardsCountQuery()
+
+   const minCards = data?.min
+   const maxCards = data?.max
+
+   const minCount = Number(searchParams.get('min')) || minCards || 0
+   const maxCount = Number(searchParams.get('max')) || maxCards || 100
 
    const setRange = useCallback(
       (range: number[]) => {
          const [newMin, newMax] = range
 
-         if (newMin !== 0) {
+         if (newMin !== minCards) {
             searchParams.set('min', newMin.toString())
          } else {
             searchParams.delete('min')
          }
 
-         if (newMax !== 100) {
+         if (newMax !== maxCards) {
             searchParams.set('max', newMax.toString())
          } else {
             searchParams.delete('max')
@@ -29,18 +35,20 @@ export const DecksSlider = () => {
 
          setSearchParams(searchParams)
       },
-      [searchParams, setSearchParams]
+      [searchParams, setSearchParams, minCards, maxCards]
    )
-
-   const minCards = 0
-   const maxCards = 100
 
    return (
       <div>
          <Typography className={styles.label} textAlign={'left'} variant={'body2'}>
             Number of cards
          </Typography>
-         <Slider values={[min, max]} min={minCards} max={maxCards} onValueCommit={setRange} />
+         <Slider
+            values={[minCount, maxCount]}
+            min={minCards}
+            max={maxCards}
+            onValueCommit={setRange}
+         />
       </div>
    )
 }

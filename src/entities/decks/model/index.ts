@@ -1,1 +1,1 @@
-export type { GetDecksResponse, GetDecksArgs, Deck } from './decks.types'
+export type { GetDecksResponse, GetDecksArgs, Deck, GetCardsCount } from './decks.types'

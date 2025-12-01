@@ -1,4 +1,4 @@
-import type { Deck, GetDecksArgs, GetDecksResponse } from '../model'
+import type { Deck, GetDecksArgs, GetDecksResponse, GetCardsCount } from '../model'
 
 import { baseApi } from '@/shared/api'
 
@@ -53,6 +53,14 @@ export const decksApi = baseApi.injectEndpoints({
          },
          invalidatesTags: ['Decks'],
       }),
+      getCardsCount: builder.query<GetCardsCount, void>({
+         query: () => {
+            return {
+               url: `/v2/decks/min-max-cards`,
+            }
+         },
+         providesTags: ['Decks'],
+      }),
    }),
 })
 
@@ -62,4 +70,5 @@ export const {
    useCreateDeckMutation,
    useDeleteDeckMutation,
    useUpdateDeckMutation,
+   useGetCardsCountQuery,
 } = decksApi
