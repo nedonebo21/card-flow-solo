@@ -76,6 +76,12 @@ main {
    padding-bottom: 56px;
 }
 
+.cover {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

@@ -19,6 +19,15 @@ export type CardsPagination = {
    totalItems?: number
 }
 
+export type AddCardArgs = {
+   answer: string
+   question: string
+   answerImg?: string
+   answerVideo?: string
+   questionImg?: string
+   questionVideo?: string
+}
+
 export type Card = {
    grade: number
    id: string

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { useGetDeckByIdQuery } from '@/entities/decks/api'
 import { useMeQuery } from '@/entities/user/api'
+import { AddNewCard } from '@/features/cards/ui'
 import { DeleteDeck, UpdateDeck } from '@/features/decks/ui'
 import {
    ArrowLeftIcon,
@@ -62,7 +63,7 @@ export const CardsHeader = () => {
                )}
             </div>
             {isOwner ? (
-               <Button>Add New Card</Button>
+               <AddNewCard deckId={deckId} />
             ) : (
                <Button as={Link} to={`/decks/${deckId}/learn`}>
                   Learn to pack

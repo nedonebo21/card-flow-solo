@@ -1,1 +1,1 @@
-export { useGetCardsQuery } from './cards-api'
+export { useGetCardsQuery, useAddCardMutation } from './cards-api'

@@ -12,8 +12,6 @@ import { useDeckForm, VALID_FILE_FORMATS } from '@/features/decks/model'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button, Dialog, ImageIcon, CropImageDialog } from '@/shared/ui'
 
-import styles from './create-deck.module.scss'
-
 type CreateDeckFormProps = {
    onSubmit?: SubmitHandler<DeckFormValues>
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
@@ -41,7 +39,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
       handleCropDialogOpenChange,
    } = useDeckForm()
 
-   const onSubmit: SubmitHandler<DeckFormValues> = async (data, e) => {
+   const onSubmit: typeof onSubmitFormProps = async (data, e) => {
       const formData = new FormData()
 
       formData.append('name', data.name)
@@ -91,7 +89,7 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
             >
                {isCoverSelect && (
                   <img
-                     className={styles.cover}
+                     className={'cover'}
                      src={coverPreviewUrl ?? undefined}
                      alt={'Cover Preview'}
                   />
