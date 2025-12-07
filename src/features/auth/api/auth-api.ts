@@ -1,4 +1,10 @@
-import type { AuthResponse, SignInFormValues, SignUpFormValues } from '../model'
+import type {
+   AuthResponse,
+   RecoverArgs,
+   ResetPasswordArgs,
+   SignInFormValues,
+   SignUpFormValues,
+} from '../model'
 
 import { baseApi } from '@/shared/api'
 import { ACCESS_TOKEN } from '@/shared/constants'
@@ -46,7 +52,29 @@ export const authApi = baseApi.injectEndpoints({
          },
          invalidatesTags: ['Me'],
       }),
+      recoverPassword: builder.mutation<unknown, RecoverArgs>({
+         query: body => ({
+            method: 'POST',
+            url: '/v1/auth/recover-password',
+            body,
+         }),
+         invalidatesTags: ['Me'],
+      }),
+      resetPassword: builder.mutation<unknown, ResetPasswordArgs>({
+         query: ({ password, token }) => ({
+            method: 'POST',
+            url: `/v1/auth/reset-password/${token}`,
+            body: { password },
+         }),
+         invalidatesTags: ['Me'],
+      }),
    }),
 })
 
-export const { useSignInMutation, useSignUpMutation, useLogoutMutation } = authApi
+export const {
+   useSignInMutation,
+   useSignUpMutation,
+   useLogoutMutation,
+   useRecoverPasswordMutation,
+   useResetPasswordMutation,
+} = authApi

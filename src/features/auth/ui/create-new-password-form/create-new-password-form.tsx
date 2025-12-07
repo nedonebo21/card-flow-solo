@@ -4,21 +4,24 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { NewPasswordFormValues } from '@/features/auth/model'
 
 import { useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
+import { useResetPasswordMutation } from '@/features/auth/api/auth-api'
 import { newPasswordSchema } from '@/features/auth/model'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputPassword, Typography } from '@/shared/ui'
 
-import styles from './create-new-password.module.scss'
+import styles from './create-new-password-form.module.scss'
 
 type NewPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<NewPasswordFormValues>
 }
 
-export const CreateNewPassword = ({
+export const CreateNewPasswordForm = ({
    onSubmit: onSubmitFormProps,
    ...rest
 }: NewPasswordFormProps) => {
@@ -33,8 +36,24 @@ export const CreateNewPassword = ({
       },
    })
 
-   const onSubmit: typeof onSubmitFormProps = (data, e) => {
-      onSubmitFormProps?.(data, e)
+   const { token } = useParams<{ token: string }>()
+
+   const navigate = useNavigate()
+
+   const [resetPassword] = useResetPasswordMutation()
+
+   const onSubmit: typeof onSubmitFormProps = async (data, e) => {
+      if (onSubmitFormProps) {
+         onSubmitFormProps(data, e)
+      } else {
+         try {
+            await resetPassword({ password: data.password, token: token || '' })
+            toast.success('Password has successfully reset')
+            navigate('/')
+         } catch (error) {
+            console.error(error)
+         }
+      }
    }
 
    return (

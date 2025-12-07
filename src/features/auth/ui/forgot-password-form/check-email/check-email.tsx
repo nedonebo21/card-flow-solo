@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Button, Card, Typography, CheckEmailIcon } from '@/shared/ui'
 
 import styles from './check-email.module.scss'
@@ -20,7 +22,9 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
                We’ve sent an Email with instructions to {email}
             </Typography>
          </div>
-         <Button>Back to Sign In</Button>
+         <Button as={Link} to={'/sign-in'}>
+            Back to Sign In
+         </Button>
       </Card>
    )
 }

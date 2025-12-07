@@ -1,7 +1,11 @@
-import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
+import type { RouteObject } from 'react-router-dom'
+
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import { Layout } from '@/app/layout/layout'
 import { PrivateRoutes } from '@/app/routing/private-routes'
+import { CreateNewPassword } from '@/pages/auth/ui/create-new-password/create-new-password'
+import { ForgotPassword } from '@/pages/auth/ui/forgot-password/forgot-password'
 import { SignIn } from '@/pages/auth/ui/sign-in/sign-in'
 import { SignUp } from '@/pages/auth/ui/sign-up/sign-up'
 import { Cards } from '@/pages/cards/ui/cards'
@@ -16,6 +20,14 @@ const publicRoutes: RouteObject[] = [
    {
       path: '/sign-up',
       element: <SignUp />,
+   },
+   {
+      path: '/forgot-password',
+      element: <ForgotPassword />,
+   },
+   {
+      path: '/create-new-password/:token',
+      element: <CreateNewPassword />,
    },
 ]
 

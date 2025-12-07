@@ -1,14 +1,17 @@
-import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
 import type { ForgotPasswordFormValues } from '@/features/auth/model'
 
+import { type ComponentProps, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { useRecoverPasswordMutation } from '@/features/auth/api'
 import { forgotPasswordSchema } from '@/features/auth/model'
+import { CheckEmail } from '@/features/auth/ui'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, Typography } from '@/shared/ui'
 
@@ -33,11 +36,32 @@ export const ForgotPasswordForm = ({
       },
    })
 
-   const onSubmit: typeof onSubmitFormProps = (data, e) => {
-      onSubmitFormProps?.(data, e)
+   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false)
+   const [submittedEmail, setSubmittedEmail] = useState('')
+
+   const [recoverPassword] = useRecoverPasswordMutation()
+
+   const onSubmit: typeof onSubmitFormProps = async (data, e) => {
+      if (onSubmitFormProps) {
+         onSubmitFormProps(data, e)
+      } else {
+         try {
+            await recoverPassword({
+               email: data.email,
+               subject: 'Password Recover',
+               html: `<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173/create-new-password/##token##">here</a> to recover your password</p>`,
+            }).unwrap()
+            setIsEmailSubmitted(true)
+            setSubmittedEmail(data.email)
+         } catch (error) {
+            console.error(error)
+         }
+      }
    }
 
-   return (
+   return isEmailSubmitted ? (
+      <CheckEmail email={submittedEmail} />
+   ) : (
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
@@ -65,7 +89,12 @@ export const ForgotPasswordForm = ({
                <Typography className={styles.footerText} variant={'body2'}>
                   Did you remember your password?
                </Typography>
-               <Typography className={styles.footerLink} variant={'body1'} as={'a'} href={'#'}>
+               <Typography
+                  className={styles.footerLink}
+                  variant={'body1'}
+                  as={Link}
+                  to={'/sign-in'}
+               >
                   Try logging in
                </Typography>
             </div>
