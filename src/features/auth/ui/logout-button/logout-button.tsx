@@ -1,5 +1,7 @@
 import type { ComponentProps } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import { useLogoutMutation } from '@/features/auth/api'
 import { Button, Typography } from '@/shared/ui'
 import { LogOutIcon } from '@/shared/ui/icons'
@@ -11,11 +13,18 @@ type LogoutButtonProps = {
 export const LogoutButton = ({ onLogout, variant = 'secondary', ...rest }: LogoutButtonProps) => {
    const [logout] = useLogoutMutation()
 
-   const handleLogout = () => {
+   const navigate = useNavigate()
+
+   const handleLogout = async () => {
       if (onLogout) {
          onLogout()
       } else {
-         logout()
+         try {
+            await logout().unwrap()
+            navigate('/')
+         } catch (error) {
+            console.error(error)
+         }
       }
    }
 
