@@ -22,6 +22,7 @@ type ViewPersonalInfoProps = {
    email?: string
    isEmailVerified?: boolean
    onSubmit?: SubmitHandler<{ name?: string; avatar?: File }>
+   onLogout?: () => void
 } & Omit<ComponentProps<'section'>, 'onSubmit'>
 
 export const ViewPersonalInfo = ({
@@ -31,6 +32,7 @@ export const ViewPersonalInfo = ({
    email,
    onSubmit,
    isEmailVerified,
+   onLogout,
    ...rest
 }: ViewPersonalInfoProps) => {
    const [isEditMode, setIsEditMode] = useState(false)
@@ -113,7 +115,7 @@ export const ViewPersonalInfo = ({
                      )}
                   </Typography>
                   <div className={styles.footer}>
-                     <LogoutButton>
+                     <LogoutButton onLogout={onLogout}>
                         <Typography variant={'subtitle2'}>Sign Out</Typography>
                      </LogoutButton>
                   </div>
