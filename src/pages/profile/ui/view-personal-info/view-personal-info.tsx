@@ -4,21 +4,24 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { UpdateAvatarFormValues, UpdateNameFormValues } from '@/features/manage-profile/model'
 
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { clsx } from 'clsx'
+import { toast } from 'sonner'
 
+import { useUpdateUserMutation } from '@/entities/user/api'
 import { LogoutButton } from '@/features/auth/ui'
 import { UpdateAvatarForm, UpdateNameForm } from '@/features/manage-profile/ui'
-import { Button, Card, Typography, PencilIcon } from '@/shared/ui'
+import { Button, Card, Typography, PencilIcon, CheckIcon } from '@/shared/ui'
 
 import styles from './view-personal-info.module.scss'
 
 type ViewPersonalInfoProps = {
-   avatarUrl: string
-   username: string
-   email: string
+   avatarUrl?: string
+   username?: string
+   email?: string
+   isEmailVerified?: boolean
    onSubmit?: SubmitHandler<{ name?: string; avatar?: File }>
-   onLogout?: () => void
 } & Omit<ComponentProps<'section'>, 'onSubmit'>
 
 export const ViewPersonalInfo = ({
@@ -27,7 +30,7 @@ export const ViewPersonalInfo = ({
    username,
    email,
    onSubmit,
-   onLogout,
+   isEmailVerified,
    ...rest
 }: ViewPersonalInfoProps) => {
    const [isEditMode, setIsEditMode] = useState(false)
@@ -40,13 +43,32 @@ export const ViewPersonalInfo = ({
       setIsEditMode(false)
    }
 
-   const handleNicknameSubmit: SubmitHandler<UpdateNameFormValues> = (data, e) => {
-      onSubmit?.(data, e)
-      setIsEditMode(false)
+   const [updateUser] = useUpdateUserMutation()
+
+   const handleNicknameSubmit: SubmitHandler<UpdateNameFormValues> = async (data, e) => {
+      if (onSubmit) {
+         await onSubmit(data, e)
+      } else {
+         try {
+            await updateUser({ name: data.name }).unwrap()
+            setIsEditMode(false)
+         } catch (error) {
+            console.error(error)
+         }
+      }
    }
 
-   const handleAvatarSubmit: SubmitHandler<UpdateAvatarFormValues> = (data, e) => {
-      onSubmit?.(data, e)
+   const handleAvatarSubmit: SubmitHandler<UpdateAvatarFormValues> = async (data, e) => {
+      if (onSubmit) {
+         await onSubmit(data, e)
+      } else {
+         try {
+            await updateUser({ avatar: data.avatar }).unwrap()
+            toast.success('Avatar has been changed')
+         } catch (error) {
+            console.error(error)
+         }
+      }
    }
 
    return (
@@ -57,7 +79,7 @@ export const ViewPersonalInfo = ({
          <div className={styles.content}>
             <UpdateAvatarForm
                isEditMode={isEditMode}
-               avatarUrl={avatarUrl}
+               avatarUrl={avatarUrl ?? ''}
                onSubmit={handleAvatarSubmit}
             />
             {!isEditMode ? (
@@ -77,14 +99,28 @@ export const ViewPersonalInfo = ({
                   </div>
                   <Typography className={styles.email} variant={'body2'}>
                      {email}
+                     {isEmailVerified ? (
+                        <CheckIcon width={16} height={16} />
+                     ) : (
+                        <Typography
+                           className={styles.confirm}
+                           as={Link}
+                           to={'/verify-email'}
+                           variant={'error'}
+                        >
+                           Подтвердить
+                        </Typography>
+                     )}
                   </Typography>
                   <div className={styles.footer}>
-                     <LogoutButton onLogout={onLogout} />
+                     <LogoutButton>
+                        <Typography variant={'subtitle2'}>Sign Out</Typography>
+                     </LogoutButton>
                   </div>
                </>
             ) : (
                <UpdateNameForm
-                  username={username}
+                  username={username ?? ''}
                   onSubmit={handleNicknameSubmit}
                   onCancel={handleCancel}
                />

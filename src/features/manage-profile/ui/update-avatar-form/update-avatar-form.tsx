@@ -21,7 +21,12 @@ type UpdateAvatarFormProps = {
    isEditMode: boolean
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const UpdateAvatarForm = ({ avatarUrl, isEditMode, ...rest }: UpdateAvatarFormProps) => {
+export const UpdateAvatarForm = ({
+   avatarUrl,
+   onSubmit: onSubmitFormProps,
+   isEditMode,
+   ...rest
+}: UpdateAvatarFormProps) => {
    const {
       control,
       register,
@@ -50,14 +55,14 @@ export const UpdateAvatarForm = ({ avatarUrl, isEditMode, ...rest }: UpdateAvata
    }
 
    const onSubmit: SubmitHandler<UpdateAvatarFormValues> = (data, e) => {
-      rest?.onSubmit?.(data, e)
+      onSubmitFormProps?.(data, e)
    }
 
    const hasAvatar = avatarUrl.length > 0
    const isError = !!errors.avatar?.message
 
    return (
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form} {...rest}>
          <div className={styles.avatar}>
             <div className={styles.avatarIcon}>
                {hasAvatar && <img src={avatarUrl} alt={'avatar'} />}

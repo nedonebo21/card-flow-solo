@@ -11,6 +11,7 @@ import { SignUp } from '@/pages/auth/ui/sign-up/sign-up'
 import { Cards } from '@/pages/cards/ui/cards'
 import { Decks } from '@/pages/decks/ui/decks/decks'
 import { Learn } from '@/pages/learn/ui/learn'
+import { Profile } from '@/pages/profile/ui/profile'
 
 const publicRoutes: RouteObject[] = [
    {
@@ -47,6 +48,10 @@ const privateRoutes: RouteObject[] = [
    {
       path: '/decks/:id/learn',
       element: <Learn />,
+   },
+   {
+      path: '/profile',
+      element: <Profile />,
    },
 ]
 

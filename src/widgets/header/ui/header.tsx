@@ -37,7 +37,9 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
                         </Button>
                      </Dropdown.Item>
                      <Dropdown.Item>
-                        <LogoutButton variant={'ghost'} />
+                        <LogoutButton variant={'ghost'}>
+                           <Typography variant={'caption'}>Sign Out</Typography>
+                        </LogoutButton>
                      </Dropdown.Item>
                   </Dropdown>
                ) : (

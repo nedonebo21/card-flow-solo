@@ -33,7 +33,7 @@ export const UpdateNameForm = ({ username, onCancel, ...rest }: Props) => {
       },
    })
 
-   const onSubmit: SubmitHandler<UpdateNameFormValues> = (data, e) => {
+   const onSubmit: SubmitHandler<UpdateNameFormValues> = async (data, e) => {
       rest?.onSubmit?.(data, e)
    }
 

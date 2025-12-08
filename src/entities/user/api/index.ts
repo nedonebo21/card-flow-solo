@@ -1,1 +1,1 @@
-export { userApi, useMeQuery } from './user-api'
+export { userApi, useMeQuery, useUpdateUserMutation } from './user-api'
