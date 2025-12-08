@@ -7,3 +7,7 @@ export type { ForgotPasswordFormValues } from './forgot-password-schema'
 export { newPasswordSchema } from './new-password-schema'
 export type { NewPasswordFormValues } from './new-password-schema'
 export type { AuthResponse, RecoverArgs, ResetPasswordArgs } from './auth.types'
+
+export type { VerifyEmailFormValues } from './verify-email-schema'
+export { verifyEmailSchema } from './verify-email-schema'
+export type { SendVerifyEmailArgs } from './auth.types'

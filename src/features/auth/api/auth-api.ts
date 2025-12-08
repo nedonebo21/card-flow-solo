@@ -2,6 +2,7 @@ import type {
    AuthResponse,
    RecoverArgs,
    ResetPasswordArgs,
+   SendVerifyEmailArgs,
    SignInFormValues,
    SignUpFormValues,
 } from '../model'
@@ -68,6 +69,24 @@ export const authApi = baseApi.injectEndpoints({
          }),
          invalidatesTags: ['Me'],
       }),
+      sendVerifyEmail: builder.mutation<unknown, SendVerifyEmailArgs>({
+         query: body => {
+            return {
+               method: 'POST',
+               url: 'v1/auth/resend-verification-email',
+               body,
+            }
+         },
+      }),
+      verifyEmail: builder.mutation<unknown, { code: string }>({
+         query: body => {
+            return {
+               method: 'POST',
+               url: 'v1/auth/verify-email',
+               body,
+            }
+         },
+      }),
    }),
 })
 
@@ -77,4 +96,6 @@ export const {
    useLogoutMutation,
    useRecoverPasswordMutation,
    useResetPasswordMutation,
+   useSendVerifyEmailMutation,
+   useVerifyEmailMutation,
 } = authApi

@@ -99,10 +99,12 @@ export const ViewPersonalInfo = ({
                         <PencilIcon width={16} height={16} />
                      </Button>
                   </div>
-                  <Typography className={styles.email} variant={'body2'}>
-                     {email}
+                  <div className={styles.verify}>
+                     <Typography variant={'caption'} className={styles.email}>
+                        {email}
+                     </Typography>
                      {isEmailVerified ? (
-                        <CheckIcon width={16} height={16} />
+                        <CheckIcon className={styles.confirmed} width={8} height={8} />
                      ) : (
                         <Typography
                            className={styles.confirm}
@@ -110,10 +112,10 @@ export const ViewPersonalInfo = ({
                            to={'/verify-email'}
                            variant={'error'}
                         >
-                           Подтвердить
+                           Confirm
                         </Typography>
                      )}
-                  </Typography>
+                  </div>
                   <div className={styles.footer}>
                      <LogoutButton onLogout={onLogout}>
                         <Typography variant={'subtitle2'}>Sign Out</Typography>

@@ -8,6 +8,7 @@ import { CreateNewPassword } from '@/pages/auth/ui/create-new-password/create-ne
 import { ForgotPassword } from '@/pages/auth/ui/forgot-password/forgot-password'
 import { SignIn } from '@/pages/auth/ui/sign-in/sign-in'
 import { SignUp } from '@/pages/auth/ui/sign-up/sign-up'
+import { VerifyEmail } from '@/pages/auth/ui/verify-email/verify-email'
 import { Cards } from '@/pages/cards/ui/cards'
 import { Decks } from '@/pages/decks/ui/decks/decks'
 import { Learn } from '@/pages/learn/ui/learn'
@@ -52,6 +53,10 @@ const privateRoutes: RouteObject[] = [
    {
       path: '/profile',
       element: <Profile />,
+   },
+   {
+      path: '/verify-email',
+      element: <VerifyEmail />,
    },
 ]
 
