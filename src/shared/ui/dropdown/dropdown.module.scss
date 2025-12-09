@@ -125,10 +125,10 @@
 
 .email {
    color: var(--color-dark-100);
-  overflow: hidden;
-  max-width: 160px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+   overflow: hidden;
+   max-width: 160px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
 }
 
 .item[data-disabled] {

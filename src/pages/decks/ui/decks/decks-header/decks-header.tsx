@@ -1,4 +1,4 @@
-import { CreateDeck } from '@/features/decks/ui'
+import { CreateDeck } from '@/features/manage-decks'
 import { Typography } from '@/shared/ui'
 
 import styles from './decks-header.module.scss'

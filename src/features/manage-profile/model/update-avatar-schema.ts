@@ -1,11 +1,7 @@
 import { z } from 'zod'
 
-const FILE_FORMATS = ['jpeg', 'jpg', 'png', 'webp']
+import { VALID_FILE_FORMATS } from '@/shared/constants'
 
-export const VALID_FILE_FORMATS = {
-   labels: FILE_FORMATS.join(', ').toUpperCase(),
-   values: FILE_FORMATS.map(format => `image/${format}`),
-}
 const MAX_SIZE = {
    value: 10 * 1024 * 1024,
    label: '10 MB',

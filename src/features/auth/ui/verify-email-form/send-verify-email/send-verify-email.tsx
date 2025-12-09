@@ -1,8 +1,9 @@
 import { toast } from 'sonner'
 
-import { useMeQuery } from '@/entities/user/api'
-import { useSendVerifyEmailMutation } from '@/features/auth/api'
+import { useMeQuery } from '@/entities/user'
 import { Button } from '@/shared/ui'
+
+import { useSendVerifyEmailMutation } from '../../../api/auth-api'
 
 export const SendVerifyEmail = () => {
    const { data } = useMeQuery()

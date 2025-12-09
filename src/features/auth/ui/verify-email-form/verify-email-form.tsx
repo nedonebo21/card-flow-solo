@@ -1,22 +1,23 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { VerifyEmailFormValues } from '@/features/auth/model'
+import type { VerifyEmailFormValues } from '../../model/verify-email-schema'
 
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useMeQuery } from '@/entities/user/api'
-import { useVerifyEmailMutation } from '@/features/auth/api'
-import { verifyEmailSchema } from '@/features/auth/model'
+import { useMeQuery } from '@/entities/user'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, CheckEmailIcon, Typography } from '@/shared/ui'
 
 import styles from './verify-email-form.module.scss'
 
-import { SendVerifyEmail } from './send-verify-email'
+import { useVerifyEmailMutation } from '../../api/auth-api'
+import { verifyEmailSchema } from '../../model/verify-email-schema'
+import { SendVerifyEmail } from './send-verify-email/send-verify-email'
 
 type VerifyEmailFormProps = {
    onSubmit?: SubmitHandler<VerifyEmailFormValues>
@@ -52,7 +53,7 @@ export const VerifyEmailForm = ({
       } else {
          try {
             await verifyEmail({ code: data.code }).unwrap()
-            navigate('/profile')
+            navigate(ROUTE_PATHS.PROFILE)
          } catch (error) {
             console.error(error)
          }

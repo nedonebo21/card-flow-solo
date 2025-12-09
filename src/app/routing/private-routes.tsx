@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { useMeQuery } from '@/entities/user/api'
+import { useMeQuery } from '@/entities/user'
 import { ROUTE_PATHS } from '@/shared/constants'
 import { Loader } from '@/shared/ui'
 

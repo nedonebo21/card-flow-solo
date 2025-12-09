@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { SignUpFormValues } from '@/features/auth/model'
+import type { SignUpFormValues } from '../../model/sign-up-schema'
 
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,12 +9,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useSignUpMutation } from '@/features/auth/api'
-import { signUpSchema } from '@/features/auth/model'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './sign-up-form.module.scss'
+
+import { useSignUpMutation } from '../../api/auth-api'
+import { signUpSchema } from '../../model/sign-up-schema'
 
 type SignUpFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<SignUpFormValues>
@@ -43,7 +45,7 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
       } else {
          try {
             await signUp({ email: data.email, password: data.password }).unwrap()
-            navigate('/')
+            navigate(ROUTE_PATHS.HOME)
          } catch (error) {
             console.error(error)
          }
@@ -87,7 +89,7 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
                <Typography className={styles.footerText} variant={'body2'}>
                   Already have an account?
                </Typography>
-               <Button variant={'link'} as={Link} to={'/sign-in'}>
+               <Button variant={'link'} as={Link} to={ROUTE_PATHS.SIGN_IN}>
                   Sign In
                </Button>
             </div>

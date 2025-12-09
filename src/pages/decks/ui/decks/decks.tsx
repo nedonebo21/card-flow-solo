@@ -3,15 +3,15 @@ import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from 'use-debounce'
 
-import { useGetDecksQuery } from '@/entities/decks/api'
-import { useMeQuery } from '@/entities/user/api'
+import { useGetDecksQuery } from '@/entities/deck'
+import { useMeQuery } from '@/entities/user'
 
 import styles from './decks.module.scss'
 
-import { DecksFilters } from './decks-filters'
-import { DecksHeader } from './decks-header'
-import { DecksPagination } from './decks-pagination'
-import { DecksTable } from './decks-table'
+import { DecksFilters } from './decks-filters/decks-filters'
+import { DecksHeader } from './decks-header/decks-header'
+import { DecksPagination } from './decks-pagination/decks-pagination'
+import { DecksTable } from './decks-table/decks-table'
 
 export const Decks = () => {
    const [searchParams, setSearchParams] = useSearchParams()

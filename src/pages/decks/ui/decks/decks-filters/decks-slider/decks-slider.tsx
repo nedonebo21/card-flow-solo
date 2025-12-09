@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { useGetCardsCountQuery } from '@/entities/decks/api/decks-api'
+import { useGetCardsCountQuery } from '@/entities/deck/api/decks-api'
 import { Slider, Typography } from '@/shared/ui'
 
 import styles from './decks-slider.module.scss'

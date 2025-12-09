@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateAvatarFormValues, UpdateNameFormValues } from '@/features/manage-profile/model'
+import type { UpdateAvatarFormValues, UpdateNameFormValues } from '@/features/manage-profile'
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -9,9 +9,10 @@ import { Link } from 'react-router-dom'
 import { clsx } from 'clsx'
 import { toast } from 'sonner'
 
-import { useUpdateUserMutation } from '@/entities/user/api'
-import { LogoutButton } from '@/features/auth/ui'
-import { UpdateAvatarForm, UpdateNameForm } from '@/features/manage-profile/ui'
+import { useUpdateUserMutation } from '@/entities/user'
+import { LogoutButton } from '@/features/auth'
+import { UpdateAvatarForm, UpdateNameForm } from '@/features/manage-profile'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { Button, Card, Typography, PencilIcon, CheckIcon } from '@/shared/ui'
 
 import styles from './view-personal-info.module.scss'
@@ -109,7 +110,7 @@ export const ViewPersonalInfo = ({
                         <Typography
                            className={styles.confirm}
                            as={Link}
-                           to={'/verify-email'}
+                           to={ROUTE_PATHS.VERIFY_EMAIL}
                            variant={'error'}
                         >
                            Confirm

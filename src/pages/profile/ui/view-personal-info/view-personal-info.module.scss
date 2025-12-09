@@ -1,62 +1,62 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 420px;
-  padding: 33px 36px 41px;
+   display: flex;
+   flex-direction: column;
+   width: 420px;
+   padding: 33px 36px 41px;
 }
 
 .header {
-  margin-bottom: 27px;
+   margin-bottom: 27px;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
 .editable {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
+   display: flex;
+   gap: 6px;
+   align-items: center;
+   justify-content: center;
 }
 
 .nickname {
-  margin-left: 28px;
+   margin-left: 28px;
 }
 
 .nicknameEdit {
-  padding: 4px;
-  border-radius: 4px;
+   padding: 4px;
+   border-radius: 4px;
 }
 
 .email {
-  color: var(--color-dark-100);
+   color: var(--color-dark-100);
 }
 
 .verify {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
+   display: flex;
+   gap: 8px;
+   align-items: center;
+   justify-content: center;
 
-  margin-bottom: 13px;
+   margin-bottom: 13px;
 }
 
 .confirm {
-  transition: opacity 0.2s ease 0s;
+   transition: opacity 0.2s ease 0s;
 
-  &:hover {
-    opacity: 0.9;
-  }
+   &:hover {
+      opacity: 0.9;
+   }
 }
 
 .confirmed {
-  margin-bottom: 3px;
-  color: #22e584;
+   margin-bottom: 3px;
+   color: #22e584;
 }
 
 .footer {
-  display: flex;
-  justify-content: center;
+   display: flex;
+   justify-content: center;
 }

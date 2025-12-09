@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { SignInFormValues } from '@/features/auth/model'
+import type { SignInFormValues } from '../../model/sign-in-schema'
 
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,12 +9,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useSignInMutation } from '@/features/auth/api'
-import { signInSchema } from '@/features/auth/model'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledCheckbox, ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './sign-in-form.module.scss'
+
+import { useSignInMutation } from '../../api/auth-api'
+import { signInSchema } from '../../model/sign-in-schema'
 
 type SignInFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<SignInFormValues>
@@ -43,7 +45,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
       } else {
          try {
             await signIn(data).unwrap()
-            navigate('/')
+            navigate(ROUTE_PATHS.HOME)
          } catch (error) {
             console.error(error)
          }
@@ -83,7 +85,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      className={styles.forgotPassword}
                      variant={'link'}
                      as={Link}
-                     to={'/forgot-password'}
+                     to={ROUTE_PATHS.FORGOT_PASSWORD}
                   >
                      Forgot password?
                   </Button>
@@ -96,7 +98,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                <Typography className={styles.footerText} variant={'body2'}>
                   Don&#39;t have an account?
                </Typography>
-               <Button variant={'link'} as={Link} to={'/sign-up'}>
+               <Button variant={'link'} as={Link} to={ROUTE_PATHS.SIGN_UP}>
                   Sign Up
                </Button>
             </div>

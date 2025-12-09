@@ -2,9 +2,9 @@ import { Button, TrashIcon } from '@/shared/ui'
 
 import styles from './decks-filters.module.scss'
 
-import { DecksSearch } from './decks-search'
-import { DecksSlider } from './decks-slider'
-import { DecksSwitcher } from './decks-switcher'
+import { DecksSearch } from './decks-search/decks-search'
+import { DecksSlider } from './decks-slider/decks-slider'
+import { DecksSwitcher } from './decks-switcher/decks-switcher'
 
 type DecksFiltersProps = {
    onClear: () => void

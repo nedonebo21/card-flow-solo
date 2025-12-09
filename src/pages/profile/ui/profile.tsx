@@ -1,6 +1,6 @@
-import { useMeQuery } from '@/entities/user/api'
+import { useMeQuery } from '@/entities/user'
 
-import { ViewPersonalInfo } from './view-personal-info'
+import { ViewPersonalInfo } from './view-personal-info/view-personal-info'
 
 export const Profile = () => {
    const { data } = useMeQuery()

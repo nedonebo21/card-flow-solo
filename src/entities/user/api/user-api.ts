@@ -1,4 +1,4 @@
-import type { User } from '../model'
+import type { User } from '../model/user.types'
 
 import { baseApi } from '@/shared/api'
 

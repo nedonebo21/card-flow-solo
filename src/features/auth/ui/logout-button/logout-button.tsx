@@ -2,9 +2,11 @@ import type { ComponentProps } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { useLogoutMutation } from '@/features/auth/api'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { Button } from '@/shared/ui'
 import { LogOutIcon } from '@/shared/ui/icons'
+
+import { useLogoutMutation } from '../../api/auth-api'
 
 type LogoutButtonProps = {
    onLogout?: () => void
@@ -26,7 +28,7 @@ export const LogoutButton = ({
       } else {
          try {
             await logout().unwrap()
-            navigate('/')
+            navigate(ROUTE_PATHS.HOME)
          } catch (error) {
             console.error(error)
          }

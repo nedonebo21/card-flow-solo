@@ -1,11 +1,10 @@
-import type { Deck } from '@/entities/decks/model'
+import type { Deck } from '@/entities/deck'
 import type { Sort } from '@/shared/ui'
 
 import { Link, useSearchParams } from 'react-router-dom'
 
-import { DeleteDeck, UpdateDeck } from '@/features/decks/ui'
-import { DECK_COLUMNS } from '@/pages/decks/model'
-import { formatDate } from '@/shared/lib'
+import { DeleteDeck, UpdateDeck } from '@/features/manage-decks'
+import { formatDate, routeHelpers } from '@/shared/lib'
 import {
    Loader,
    Button,
@@ -20,6 +19,8 @@ import {
 import { DefaultCover } from '@/shared/ui/images'
 
 import styles from './decks-table.module.scss'
+
+import { DECK_COLUMNS } from '../../../model/decks-columns'
 
 type DecksTableProps = {
    decks?: Deck[]
@@ -73,7 +74,7 @@ export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
                return (
                   <TableRow key={deck.id}>
                      <TableCell>
-                        <Link to={`/decks/${deck.id}`} className={styles.link}>
+                        <Link to={routeHelpers.createDeckPath(deck.id)} className={styles.link}>
                            <img className={styles.cover} src={coverUrl} alt={'deckCover'} />
                            <Typography className={styles.name} variant={'body2'} as={'span'}>
                               {deck.name}

@@ -3,9 +3,9 @@ import type {
    RecoverArgs,
    ResetPasswordArgs,
    SendVerifyEmailArgs,
-   SignInFormValues,
-   SignUpFormValues,
-} from '../model'
+} from '../model/auth.types'
+import type { SignInFormValues } from '../model/sign-in-schema'
+import type { SignUpFormValues } from '../model/sign-up-schema'
 
 import { baseApi } from '@/shared/api'
 import { ACCESS_TOKEN } from '@/shared/constants'

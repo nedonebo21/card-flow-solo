@@ -1,21 +1,24 @@
+import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { ForgotPasswordFormValues } from '@/features/auth/model'
+import type { ForgotPasswordFormValues } from '../../model/forgot-password-schema'
 
-import { type ComponentProps, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useRecoverPasswordMutation } from '@/features/auth/api'
-import { forgotPasswordSchema } from '@/features/auth/model'
-import { CheckEmail } from '@/features/auth/ui'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputEmail, Typography } from '@/shared/ui'
 
 import styles from './forgot-password-form.module.scss'
+
+import { useRecoverPasswordMutation } from '../../api/auth-api'
+import { forgotPasswordSchema } from '../../model/forgot-password-schema'
+import { CheckEmail } from './check-email/check-email'
 
 type ForgotPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<ForgotPasswordFormValues>
@@ -49,7 +52,7 @@ export const ForgotPasswordForm = ({
             await recoverPassword({
                email: data.email,
                subject: 'Password Recover',
-               html: `<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173/create-new-password/##token##">here</a> to recover your password</p>`,
+               html: `<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173$/create-new-password/##token##">here</a> to recover your password</p>`,
             }).unwrap()
             setIsEmailSubmitted(true)
             setSubmittedEmail(data.email)
@@ -93,7 +96,7 @@ export const ForgotPasswordForm = ({
                   className={styles.footerLink}
                   variant={'body1'}
                   as={Link}
-                  to={'/sign-in'}
+                  to={ROUTE_PATHS.SIGN_IN}
                >
                   Try logging in
                </Typography>

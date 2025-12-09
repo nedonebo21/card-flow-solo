@@ -1,7 +1,7 @@
 import type { ChangeEvent, ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateAvatarFormValues } from '@/features/manage-profile/model'
+import type { UpdateAvatarFormValues } from '../../model/update-avatar-schema'
 
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
@@ -9,11 +9,13 @@ import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { updateAvatarSchema, VALID_FILE_FORMATS } from '@/features/manage-profile/model'
+import { VALID_FILE_FORMATS } from '@/shared/constants'
 import { Button, Typography } from '@/shared/ui'
 import { PencilIcon } from '@/shared/ui/icons'
 
 import styles from './update-avatar-form.module.scss'
+
+import { updateAvatarSchema } from '../../model/update-avatar-schema'
 
 type UpdateAvatarFormProps = {
    avatarUrl: string

@@ -1,16 +1,26 @@
-import type { Card } from '@/entities/cards/model'
+import type { Card } from '@/entities/card'
+import type { Sort } from '@/shared/ui'
 
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { clsx } from 'clsx'
 
-import { CARDS_COLUMNS } from '@/pages/cards/model'
 import { formatDate } from '@/shared/lib'
-import { type Sort, Typography } from '@/shared/ui'
-import { Button, Rating, Table, TableBody, TableCell, TableRow, TableSortHeader } from '@/shared/ui'
+import {
+   Typography,
+   Button,
+   Rating,
+   Table,
+   TableBody,
+   TableCell,
+   TableRow,
+   TableSortHeader,
+} from '@/shared/ui'
 
 import styles from './cards-table.module.scss'
+
+import { CARDS_COLUMNS } from '../../model/cards-columns'
 
 type CardsTableProps = {
    cards: Card[]

@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { NewPasswordFormValues } from '@/features/auth/model'
+import type { NewPasswordFormValues } from '../../model/new-password-schema'
 
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -11,11 +11,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 
 import { useResetPasswordMutation } from '@/features/auth/api/auth-api'
-import { newPasswordSchema } from '@/features/auth/model'
+import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
 import { Button, Card, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './create-new-password-form.module.scss'
+
+import { newPasswordSchema } from '../../model/new-password-schema'
 
 type NewPasswordFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
    onSubmit?: SubmitHandler<NewPasswordFormValues>
@@ -49,7 +51,7 @@ export const CreateNewPasswordForm = ({
          try {
             await resetPassword({ password: data.password, token: token || '' })
             toast.success('Password has successfully reset')
-            navigate('/')
+            navigate(ROUTE_PATHS.HOME)
          } catch (error) {
             console.error(error)
          }

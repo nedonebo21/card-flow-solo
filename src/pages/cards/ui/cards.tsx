@@ -3,14 +3,14 @@ import { useParams, useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from 'use-debounce'
 
-import { useGetCardsQuery } from '@/entities/cards/api'
+import { useGetCardsQuery } from '@/entities/card'
 
 import styles from './cards.module.scss'
 
-import { CardsHeader } from './cards-header'
-import { CardsPagination } from './cards-pagination'
-import { CardsSearch } from './cards-search'
-import { CardsTable } from './cards-table'
+import { CardsHeader } from './cards-header/cards-header'
+import { CardsPagination } from './cards-pagination/cards-pagination'
+import { CardsSearch } from './cards-search/cards-search'
+import { CardsTable } from './cards-table/cards-table'
 
 export const Cards = () => {
    const { id } = useParams()
