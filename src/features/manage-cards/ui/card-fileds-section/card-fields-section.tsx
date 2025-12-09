@@ -1,7 +1,7 @@
 import type { ChangeEvent } from 'react'
 import type { Control, UseFormRegister } from 'react-hook-form'
 
-import type { AddNewCardFormValues } from '../../model/add-new-card-schema'
+import type { CardFormValues } from '../../model/card-form-schema'
 
 import { useRef, useState } from 'react'
 
@@ -10,8 +10,8 @@ import { ControlledInput } from '@/shared/forms'
 import { Button, CropImageDialog, ImageIcon } from '@/shared/ui'
 
 type CardFieldsSectionProps = {
-   control: Control<AddNewCardFormValues>
-   register: UseFormRegister<AddNewCardFormValues>
+   control: Control<CardFormValues>
+   register: UseFormRegister<CardFormValues>
    errorMessage?: string
    inputName: 'question' | 'answer'
    imageFieldName: 'questionImg' | 'answerImg'

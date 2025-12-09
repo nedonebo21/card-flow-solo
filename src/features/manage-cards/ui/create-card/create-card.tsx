@@ -1,32 +1,32 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { AddNewCardFormValues } from '../model/add-new-card-schema'
+import type { CardFormValues } from '../../model/card-form-schema'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useAddCardMutation } from '@/entities/card'
+import { useCreateCardMutation } from '@/entities/card'
 import { Button, Dialog } from '@/shared/ui'
 
-import { addNewCardSchema } from '../model/add-new-card-schema'
-import { CardFieldsSection } from './card-fileds-section/card-fields-section'
+import { cardFormSchema } from '../../model/card-form-schema'
+import { CardFieldsSection } from '../card-fileds-section/card-fields-section'
 
 type AddNewCardProps = {
-   onSubmit?: SubmitHandler<AddNewCardFormValues>
+   onSubmit?: SubmitHandler<CardFormValues>
    deckId: string
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const AddNewCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: AddNewCardProps) => {
+export const CreateCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: AddNewCardProps) => {
    const {
       handleSubmit,
       register,
       control,
       formState: { errors },
-   } = useForm<AddNewCardFormValues>({
-      resolver: zodResolver(addNewCardSchema),
+   } = useForm<CardFormValues>({
+      resolver: zodResolver(cardFormSchema),
       defaultValues: {
          answer: '',
          question: '',
@@ -35,7 +35,7 @@ export const AddNewCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: Add
       },
    })
 
-   const [addCard] = useAddCardMutation()
+   const [addCard] = useCreateCardMutation()
 
    const [isOpen, setIsOpen] = useState(false)
 

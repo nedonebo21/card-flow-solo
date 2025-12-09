@@ -3,7 +3,7 @@ import { z } from 'zod'
 const MIN_LENGTH = 3
 const MAX_LENGTH = 500
 
-export const addNewCardSchema = z.object({
+export const cardFormSchema = z.object({
    answer: z
       .string()
       .min(MIN_LENGTH, `Answer should be more than ${MIN_LENGTH} characters`)
@@ -16,4 +16,4 @@ export const addNewCardSchema = z.object({
    answerImg: z.string(),
 })
 
-export type AddNewCardFormValues = z.infer<typeof addNewCardSchema>
+export type CardFormValues = z.infer<typeof cardFormSchema>

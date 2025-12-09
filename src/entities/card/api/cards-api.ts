@@ -1,4 +1,10 @@
-import type { GetCardsResponse, GetCardsArgs, AddCardArgs, Card } from '../model/cards.types'
+import type {
+   GetCardsResponse,
+   GetCardsArgs,
+   CreateCardArgs,
+   Card,
+   UpdateCardArgs,
+} from '../model/cards.types'
 
 import { baseApi } from '@/shared/api'
 
@@ -13,7 +19,7 @@ export const cardsApi = baseApi.injectEndpoints({
          },
          providesTags: ['Cards'],
       }),
-      addCard: builder.mutation<Card, { body: AddCardArgs; id: string }>({
+      createCard: builder.mutation<Card, { body: CreateCardArgs; id: string }>({
          query: ({ body, id }) => {
             return {
                url: `/v1/decks/${id}/cards`,
@@ -23,7 +29,40 @@ export const cardsApi = baseApi.injectEndpoints({
          },
          invalidatesTags: ['Cards'],
       }),
+      deleteCard: builder.mutation<unknown, string>({
+         query: id => {
+            return {
+               url: `/v1/cards/${id}`,
+               method: 'DELETE',
+            }
+         },
+         invalidatesTags: ['Cards'],
+      }),
+      updateCard: builder.mutation<unknown, { id: string; body: UpdateCardArgs }>({
+         query: ({ body, id }) => {
+            return {
+               url: `/v1/cards/${id}`,
+               method: 'PATCH',
+               body,
+            }
+         },
+         invalidatesTags: ['Cards'],
+      }),
+      getCardById: builder.query<Card, { id: string }>({
+         query: ({ id }) => {
+            return {
+               url: `/v1/cards/${id}`,
+            }
+         },
+         providesTags: ['Cards'],
+      }),
    }),
 })
 
-export const { useGetCardsQuery, useAddCardMutation } = cardsApi
+export const {
+   useGetCardsQuery,
+   useCreateCardMutation,
+   useDeleteCardMutation,
+   useUpdateCardMutation,
+   useGetCardByIdQuery,
+} = cardsApi

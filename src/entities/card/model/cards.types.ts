@@ -19,7 +19,14 @@ export type CardsPagination = {
    totalItems?: number
 }
 
-export type AddCardArgs = {
+export type UpdateCardArgs = {
+   questionImg?: string
+   answerImg?: string
+   question?: string
+   answer?: string
+}
+
+export type CreateCardArgs = {
    answer: string
    question: string
    answerImg?: string

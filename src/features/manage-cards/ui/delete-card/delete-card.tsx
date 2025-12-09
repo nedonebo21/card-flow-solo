@@ -5,26 +5,26 @@ import { useNavigate } from 'react-router-dom'
 
 import { toast } from 'sonner'
 
-import { useDeleteDeckMutation } from '@/entities/deck'
+import { useDeleteCardMutation } from '@/entities/card'
 import { ROUTE_PATHS } from '@/shared/constants'
 import { Button, Dialog, TrashIcon, Typography } from '@/shared/ui'
 
-type DeleteDeckProps = {
+type DeleteCardProps = {
    id: string
-   deckName?: string
+   cardName?: string
    redirectOnDelete?: boolean
 } & Omit<ComponentProps<typeof Button>, 'onClick'>
 
-export const DeleteDeck = ({
+export const DeleteCard = ({
    onDelete,
    id,
    size = 'icon',
    label,
-   deckName,
+   cardName,
    redirectOnDelete,
    ...rest
-}: DeleteDeckProps) => {
-   const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
+}: DeleteCardProps) => {
+   const [deleteCard, { isLoading }] = useDeleteCardMutation()
    const navigate = useNavigate()
    const [isOpen, setIsOpen] = useState(false)
 
@@ -32,17 +32,21 @@ export const DeleteDeck = ({
       setIsOpen(prev => !prev)
    }
 
-   const handleDelete = () => {
+   const handleDelete = async () => {
       if (!!id && id.length < 0) {
          return
+      } else {
+         try {
+            await deleteCard(id).unwrap()
+            setIsOpen(false)
+            toast.success(`Deck '${cardName}' deleted successfully`)
+            if (redirectOnDelete) {
+               navigate(ROUTE_PATHS.HOME)
+            }
+         } catch (error) {
+            console.error(error)
+         }
       }
-      deleteDeck(id).unwrap()
-      setIsOpen(false)
-
-      if (redirectOnDelete) {
-         navigate(ROUTE_PATHS.HOME)
-      }
-      toast.success(`Deck '${deckName}' deleted successfully`)
    }
 
    return (
@@ -61,7 +65,7 @@ export const DeleteDeck = ({
          open={isOpen}
       >
          <Typography variant={'body2'} textAlign={'left'}>
-            Are you sure you want to delete this deck?
+            Are you sure you want to delete this card?
          </Typography>
       </Dialog>
    )

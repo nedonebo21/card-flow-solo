@@ -6,6 +6,8 @@ import { useSearchParams } from 'react-router-dom'
 
 import { clsx } from 'clsx'
 
+import { useMeQuery } from '@/entities/user'
+import { DeleteCard, UpdateCard } from '@/features/manage-cards'
 import { formatDate } from '@/shared/lib'
 import {
    Typography,
@@ -30,6 +32,8 @@ export const CardsTable = ({ cards }: CardsTableProps) => {
    const [searchParams, setSearchParams] = useSearchParams()
 
    const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({})
+   const { data } = useMeQuery()
+   const userId = data?.id ?? ''
 
    const orderByString = searchParams.get('orderBy') || null
 
@@ -75,6 +79,7 @@ export const CardsTable = ({ cards }: CardsTableProps) => {
             {cards.map(card => {
                const isExpanded = expandedRows[card.id]
                const shouldButtonShow = isLongQuestion(card.question)
+               const isOwner = userId === card.userId
 
                return (
                   <TableRow key={card.id}>
@@ -99,6 +104,12 @@ export const CardsTable = ({ cards }: CardsTableProps) => {
                      <TableCell>
                         <Rating value={card.grade ?? 0} />
                      </TableCell>
+                     {isOwner && (
+                        <TableCell className={styles.actions}>
+                           <UpdateCard id={card.id} />
+                           <DeleteCard id={card.id} cardName={card.question} />
+                        </TableCell>
+                     )}
                   </TableRow>
                )
             })}
