@@ -35,7 +35,7 @@ export const CreateCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: Add
       },
    })
 
-   const [addCard] = useCreateCardMutation()
+   const [addCard, { isLoading }] = useCreateCardMutation()
 
    const [isOpen, setIsOpen] = useState(false)
 
@@ -63,6 +63,7 @@ export const CreateCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: Add
             open={isOpen}
             onOpenChange={handleOpenChange}
             showCancelButton
+            isConfirmDisabled={isLoading}
             confirmButtonLabel={'Add Card'}
             confirmButtonFormId={'add-card-form'}
             cancelButtonLabel={'Cancel'}
