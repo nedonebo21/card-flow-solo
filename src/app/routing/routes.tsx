@@ -4,58 +4,59 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import { Layout } from '@/app/layout/layout'
 import { PrivateRoutes } from '@/app/routing/private-routes'
-import { CreateNewPassword } from '@/pages/auth/ui/create-new-password/create-new-password'
-import { ForgotPassword } from '@/pages/auth/ui/forgot-password/forgot-password'
-import { SignIn } from '@/pages/auth/ui/sign-in/sign-in'
-import { SignUp } from '@/pages/auth/ui/sign-up/sign-up'
-import { VerifyEmail } from '@/pages/auth/ui/verify-email/verify-email'
-import { Cards } from '@/pages/cards/ui/cards'
-import { Decks } from '@/pages/decks/ui/decks/decks'
-import { Learn } from '@/pages/learn/ui/learn'
-import { Profile } from '@/pages/profile/ui/profile'
+import { Cards } from '@/pages/cards'
+import { CreateNewPassword } from '@/pages/create-new-password'
+import { Decks } from '@/pages/decks'
+import { ForgotPassword } from '@/pages/forgot-password'
+import { Learn } from '@/pages/learn'
+import { Profile } from '@/pages/profile'
+import { SignIn } from '@/pages/sign-in'
+import { SignUp } from '@/pages/sign-up'
+import { VerifyEmail } from '@/pages/verify-email'
+import { ROUTE_PATHS } from '@/shared/constants'
 
 const publicRoutes: RouteObject[] = [
    {
-      path: '/sign-in',
+      path: ROUTE_PATHS.SIGN_IN,
       element: <SignIn />,
    },
    {
-      path: '/sign-up',
+      path: ROUTE_PATHS.SIGN_UP,
       element: <SignUp />,
    },
    {
-      path: '/forgot-password',
+      path: ROUTE_PATHS.FORGOT_PASSWORD,
       element: <ForgotPassword />,
    },
    {
-      path: '/create-new-password/:token',
+      path: ROUTE_PATHS.CREATE_NEW_PASSWORD,
       element: <CreateNewPassword />,
    },
 ]
 
 const privateRoutes: RouteObject[] = [
    {
-      path: '/',
-      element: <Navigate to={'/decks'} />,
+      path: ROUTE_PATHS.HOME,
+      element: <Navigate to={ROUTE_PATHS.DECKS} />,
    },
    {
-      path: '/decks',
+      path: ROUTE_PATHS.DECKS,
       element: <Decks />,
    },
    {
-      path: '/decks/:id',
+      path: ROUTE_PATHS.DECKS_BY_ID,
       element: <Cards />,
    },
    {
-      path: '/decks/:id/learn',
+      path: ROUTE_PATHS.LEARN,
       element: <Learn />,
    },
    {
-      path: '/profile',
+      path: ROUTE_PATHS.PROFILE,
       element: <Profile />,
    },
    {
-      path: '/verify-email',
+      path: ROUTE_PATHS.VERIFY_EMAIL,
       element: <VerifyEmail />,
    },
 ]
