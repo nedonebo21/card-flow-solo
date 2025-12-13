@@ -4,6 +4,7 @@ import type {
    CreateCardArgs,
    Card,
    UpdateCardArgs,
+   SaveCardGradeArgs,
 } from '../model/cards.types'
 
 import { baseApi } from '@/shared/api'
@@ -56,6 +57,24 @@ export const cardsApi = baseApi.injectEndpoints({
          },
          providesTags: ['Cards'],
       }),
+      getRandomCard: builder.query<Card, { id: string }>({
+         query: ({ id }) => {
+            return {
+               url: `/v1/decks/${id}/learn`,
+            }
+         },
+         providesTags: ['Cards'],
+      }),
+      saveCardGrade: builder.mutation<Card, { id: string; body: SaveCardGradeArgs }>({
+         query: ({ body, id }) => {
+            return {
+               url: `/v1/decks/${id}/learn`,
+               method: 'POST',
+               body,
+            }
+         },
+         invalidatesTags: ['Cards'],
+      }),
    }),
 })
 
@@ -65,4 +84,6 @@ export const {
    useDeleteCardMutation,
    useUpdateCardMutation,
    useGetCardByIdQuery,
+   useGetRandomCardQuery,
+   useSaveCardGradeMutation,
 } = cardsApi

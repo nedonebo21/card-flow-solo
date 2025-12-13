@@ -35,6 +35,11 @@ export type CreateCardArgs = {
    questionVideo?: string
 }
 
+export type SaveCardGradeArgs = {
+   cardId: string
+   grade: number
+}
+
 export type Card = {
    grade: number
    id: string

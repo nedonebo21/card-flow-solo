@@ -31,5 +31,16 @@ export const ControlledRadioGroup = <T extends FieldValues>({
       defaultValue,
    })
 
-   return <RadioGroup {...{ ...rest, value, onValueChange: onChange, id: name }} />
+   return (
+      <RadioGroup
+         {...rest}
+         value={value?.toString()}
+         onValueChange={stringValue => {
+            const numericValue = Number(stringValue)
+
+            onChange(numericValue)
+         }}
+         id={name}
+      />
+   )
 }

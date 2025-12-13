@@ -4,6 +4,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 
 import { useGetCardsQuery } from '@/entities/card'
+import { Loader } from '@/shared/ui'
 
 import styles from './cards.module.scss'
 
@@ -29,7 +30,7 @@ export const Cards = () => {
 
    const [debouncedQuestion] = useDebounce(queryParams.question, 500)
 
-   const { data } = useGetCardsQuery({
+   const { data, isLoading } = useGetCardsQuery({
       id: id ?? '',
       question: debouncedQuestion,
       orderBy: queryParams.orderBy,
@@ -39,9 +40,13 @@ export const Cards = () => {
    const cards = data?.items ?? []
    const totalCount = data?.pagination?.totalItems ?? 0
 
+   if (isLoading) {
+      return <Loader />
+   }
+
    return (
       <div className={styles.wrapper}>
-         <CardsHeader />
+         <CardsHeader deckId={id} />
          <CardsSearch />
          <CardsTable cards={cards} />
          <CardsPagination totalCount={totalCount} />
