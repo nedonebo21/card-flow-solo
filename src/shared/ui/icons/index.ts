@@ -10,6 +10,7 @@ export { default as Error404Icon } from './svg/error-404.svg?react';
 export { default as EyeOffIcon } from './svg/eye-off.svg?react';
 export { default as EyeIcon } from './svg/eye.svg?react';
 export { default as FunnelIcon } from './svg/funnel.svg?react';
+export { default as HeartOutlineIcon } from './svg/heart-outline.svg?react';
 export { default as ImageIcon } from './svg/image.svg?react';
 export { default as LoaderIcon } from './svg/loader.svg?react';
 export { default as LogOutIcon } from './svg/log-out.svg?react';

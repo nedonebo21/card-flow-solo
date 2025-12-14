@@ -3,7 +3,7 @@ import type { Sort } from '@/shared/ui'
 
 import { Link, useSearchParams } from 'react-router-dom'
 
-import { DeleteDeck, UpdateDeck } from '@/features/manage-decks'
+import { DeleteDeck, ToggleDeckFavorite, UpdateDeck } from '@/features/manage-decks'
 import { formatDate, routeHelpers } from '@/shared/lib'
 import {
    Loader,
@@ -85,9 +85,19 @@ export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
                      <TableCell>{formatDate(new Date(deck.updated))}</TableCell>
                      <TableCell>{deck.author.name}</TableCell>
                      <TableCell className={styles.icons}>
-                        <Button variant={'ghost'} size={'icon'}>
+                        <Button
+                           as={Link}
+                           to={routeHelpers.createLearnPath(deck.id)}
+                           variant={'ghost'}
+                           size={'icon'}
+                        >
                            <CirclePlayIcon width={16} height={16} />
                         </Button>
+                        <ToggleDeckFavorite
+                           id={deck.id}
+                           deckName={deck.name}
+                           isFavorite={deck.isFavorite}
+                        />
                         {isOwner && (
                            <>
                               <UpdateDeck id={deck.id} />

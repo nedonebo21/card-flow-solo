@@ -48,7 +48,7 @@ export const decksApi = baseApi.injectEndpoints({
          query: id => {
             return {
                url: `v1/decks/${id}`,
-               method: 'Delete',
+               method: 'DELETE',
             }
          },
          invalidatesTags: ['Decks'],
@@ -61,6 +61,24 @@ export const decksApi = baseApi.injectEndpoints({
          },
          providesTags: ['Decks'],
       }),
+      addDeckFavorite: builder.mutation<unknown, string>({
+         query: id => {
+            return {
+               url: `/v1/decks/${id}/favorite`,
+               method: 'POST',
+            }
+         },
+         invalidatesTags: ['Decks'],
+      }),
+      deleteDeckFromFavorite: builder.mutation<unknown, string>({
+         query: id => {
+            return {
+               url: `/v1/decks/${id}/favorite`,
+               method: 'DELETE',
+            }
+         },
+         invalidatesTags: ['Decks'],
+      }),
    }),
 })
 
@@ -71,4 +89,6 @@ export const {
    useDeleteDeckMutation,
    useUpdateDeckMutation,
    useGetCardsCountQuery,
+   useAddDeckFavoriteMutation,
+   useDeleteDeckFromFavoriteMutation,
 } = decksApi

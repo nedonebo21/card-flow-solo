@@ -34,6 +34,7 @@ export const Decks = () => {
    const { data: userData } = useMeQuery()
    const currentUserId = userData?.id
    const authorId = queryParams.show === 'my' ? currentUserId : ''
+   const favoritedBy = queryParams.show === 'favorite' ? currentUserId : ''
 
    const { data, isLoading } = useGetDecksQuery({
       name: debouncedName,
@@ -41,6 +42,7 @@ export const Decks = () => {
       minCardsCount: queryParams.min,
       currentPage: queryParams.page,
       itemsPerPage: queryParams.perPage,
+      favoritedBy,
       authorId,
       orderBy: queryParams.orderBy,
    })

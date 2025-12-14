@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { Tabs, Typography } from '@/shared/ui'
+import { HeartOutlineIcon, Tabs, Typography } from '@/shared/ui'
 
 import styles from './decks-switcher.module.scss'
 
@@ -29,6 +29,9 @@ export const DecksSwitcher = () => {
             Show decks cards
          </Typography>
          <Tabs.List className={styles.tabs}>
+            <Tabs.Trigger className={styles.favorite} value={'favorite'}>
+               <HeartOutlineIcon />
+            </Tabs.Trigger>
             <Tabs.Trigger value={'my'}>My Cards</Tabs.Trigger>
             <Tabs.Trigger value={'all'}>All Cards</Tabs.Trigger>
          </Tabs.List>
