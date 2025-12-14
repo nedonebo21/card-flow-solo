@@ -6,6 +6,7 @@ import { clsx } from 'clsx'
 
 import { useMeQuery } from '@/entities/user'
 import { DeleteCard, UpdateCard } from '@/features/manage-cards'
+import { CARDS_COLUMNS } from '@/shared/constants'
 import { formatDate, useTableSort } from '@/shared/lib'
 import {
    Typography,
@@ -16,17 +17,17 @@ import {
    TableCell,
    TableRow,
    TableSortHeader,
+   CardsTableSkeletons,
 } from '@/shared/ui'
 
 import styles from './cards-table.module.scss'
 
-import { CARDS_COLUMNS } from '../../model/cards-columns'
-
 type CardsTableProps = {
    cards: Card[]
+   isLoading: boolean
 }
 
-export const CardsTable = ({ cards }: CardsTableProps) => {
+export const CardsTable = ({ cards, isLoading }: CardsTableProps) => {
    const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({})
    const { data } = useMeQuery()
    const userId = data?.id ?? ''
@@ -41,6 +42,10 @@ export const CardsTable = ({ cards }: CardsTableProps) => {
    }
 
    const isLongQuestion = (question: string) => question.length > 30
+
+   if (isLoading) {
+      return <CardsTableSkeletons />
+   }
 
    return (
       <Table>

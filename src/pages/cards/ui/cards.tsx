@@ -4,7 +4,6 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 
 import { useGetCardsQuery } from '@/entities/card'
-import { Loader } from '@/shared/ui'
 
 import styles from './cards.module.scss'
 
@@ -40,15 +39,11 @@ export const Cards = () => {
    const cards = data?.items ?? []
    const totalCount = data?.pagination?.totalItems ?? 0
 
-   if (isLoading) {
-      return <Loader />
-   }
-
    return (
       <div className={styles.wrapper}>
          <CardsHeader deckId={id} />
          <CardsSearch />
-         <CardsTable cards={cards} />
+         <CardsTable isLoading={isLoading} cards={cards} />
          <CardsPagination totalCount={totalCount} />
       </div>
    )

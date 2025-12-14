@@ -3,9 +3,9 @@ import type { Deck } from '@/entities/deck'
 import { Link } from 'react-router-dom'
 
 import { DeleteDeck, ToggleDeckFavorite, UpdateDeck } from '@/features/manage-decks'
+import { DECK_COLUMNS } from '@/shared/constants'
 import { formatDate, routeHelpers, useTableSort } from '@/shared/lib'
 import {
-   Loader,
    Button,
    CirclePlayIcon,
    Table,
@@ -14,12 +14,11 @@ import {
    TableRow,
    TableSortHeader,
    Typography,
+   DecksTableSkeletons,
 } from '@/shared/ui'
 import { DefaultCover } from '@/shared/ui/images'
 
 import styles from './decks-table.module.scss'
-
-import { DECK_COLUMNS } from '../../../model/decks-columns'
 
 type DecksTableProps = {
    decks?: Deck[]
@@ -31,7 +30,7 @@ export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
    const { sort, handleSort } = useTableSort()
 
    if (isLoading) {
-      return <Loader />
+      return <DecksTableSkeletons />
    }
 
    return (
