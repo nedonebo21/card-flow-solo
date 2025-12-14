@@ -1,14 +1,12 @@
 import type { Card } from '@/entities/card'
-import type { Sort } from '@/shared/ui'
 
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 
 import { clsx } from 'clsx'
 
 import { useMeQuery } from '@/entities/user'
 import { DeleteCard, UpdateCard } from '@/features/manage-cards'
-import { formatDate } from '@/shared/lib'
+import { formatDate, useTableSort } from '@/shared/lib'
 import {
    Typography,
    Button,
@@ -29,39 +27,11 @@ type CardsTableProps = {
 }
 
 export const CardsTable = ({ cards }: CardsTableProps) => {
-   const [searchParams, setSearchParams] = useSearchParams()
-
    const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({})
    const { data } = useMeQuery()
    const userId = data?.id ?? ''
 
-   const orderByString = searchParams.get('orderBy') || null
-
-   const sort: Sort = (() => {
-      if (!orderByString) {
-         return null
-      }
-
-      const parts = orderByString.split('-')
-
-      if (parts.length === 2) {
-         return {
-            key: parts[0],
-            direction: parts[1] as 'asc' | 'desc',
-         }
-      }
-
-      return null
-   })()
-
-   const handleSort = (newSort: Sort) => {
-      if (!newSort) {
-         searchParams.delete('orderBy')
-      } else {
-         searchParams.set('orderBy', `${newSort.key}-${newSort.direction}`)
-      }
-      setSearchParams(searchParams)
-   }
+   const { sort, handleSort } = useTableSort()
 
    const toggleRowExpansion = (cardId: string) => {
       setExpandedRows(prev => ({

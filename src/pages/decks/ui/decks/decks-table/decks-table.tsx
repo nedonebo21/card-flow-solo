@@ -1,10 +1,9 @@
 import type { Deck } from '@/entities/deck'
-import type { Sort } from '@/shared/ui'
 
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { DeleteDeck, ToggleDeckFavorite, UpdateDeck } from '@/features/manage-decks'
-import { formatDate, routeHelpers } from '@/shared/lib'
+import { formatDate, routeHelpers, useTableSort } from '@/shared/lib'
 import {
    Loader,
    Button,
@@ -29,35 +28,7 @@ type DecksTableProps = {
 }
 
 export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
-   const [searchParams, setSearchParams] = useSearchParams()
-
-   const orderByString = searchParams.get('orderBy') || null
-
-   const sort: Sort = (() => {
-      if (!orderByString) {
-         return null
-      }
-
-      const parts = orderByString.split('-')
-
-      if (parts.length === 2) {
-         return {
-            key: parts[0],
-            direction: parts[1] as 'asc' | 'desc',
-         }
-      }
-
-      return null
-   })()
-
-   const handleSort = (newSort: Sort) => {
-      if (!newSort) {
-         searchParams.delete('orderBy')
-      } else {
-         searchParams.set('orderBy', `${newSort.key}-${newSort.direction}`)
-      }
-      setSearchParams(searchParams)
-   }
+   const { sort, handleSort } = useTableSort()
 
    if (isLoading) {
       return <Loader />
