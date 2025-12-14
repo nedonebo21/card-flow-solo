@@ -10,4 +10,5 @@ export const ROUTE_PATHS = {
    DECKS_BY_ID: '/decks/:id',
    LEARN: '/decks/:id/learn',
    PROFILE: '/profile',
+   ERROR_404: '/*',
 } as const

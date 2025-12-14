@@ -7,6 +7,7 @@ import { PrivateRoutes } from '@/app/routing/private-routes'
 import { Cards } from '@/pages/cards'
 import { CreateNewPassword } from '@/pages/create-new-password'
 import { Decks } from '@/pages/decks'
+import { Error404 } from '@/pages/error-404'
 import { ForgotPassword } from '@/pages/forgot-password'
 import { Learn } from '@/pages/learn'
 import { Profile } from '@/pages/profile'
@@ -31,6 +32,10 @@ const publicRoutes: RouteObject[] = [
    {
       path: ROUTE_PATHS.CREATE_NEW_PASSWORD,
       element: <CreateNewPassword />,
+   },
+   {
+      path: ROUTE_PATHS.ERROR_404,
+      element: <Error404 />,
    },
 ]
 
@@ -58,6 +63,10 @@ const privateRoutes: RouteObject[] = [
    {
       path: ROUTE_PATHS.VERIFY_EMAIL,
       element: <VerifyEmail />,
+   },
+   {
+      path: ROUTE_PATHS.ERROR_404,
+      element: <Error404 />,
    },
 ]
 
