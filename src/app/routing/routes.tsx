@@ -4,6 +4,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 
 import { Layout } from '@/app/layout/layout'
 import { PrivateRoutes } from '@/app/routing/private-routes'
+import { PublicRoutes } from '@/app/routing/public-routes'
 import { Cards } from '@/pages/cards'
 import { CreateNewPassword } from '@/pages/create-new-password'
 import { Decks } from '@/pages/decks'
@@ -18,24 +19,29 @@ import { ROUTE_PATHS } from '@/shared/constants'
 
 const publicRoutes: RouteObject[] = [
    {
-      path: ROUTE_PATHS.SIGN_IN,
-      element: <SignIn />,
-   },
-   {
-      path: ROUTE_PATHS.SIGN_UP,
-      element: <SignUp />,
-   },
-   {
-      path: ROUTE_PATHS.FORGOT_PASSWORD,
-      element: <ForgotPassword />,
-   },
-   {
-      path: ROUTE_PATHS.CREATE_NEW_PASSWORD,
-      element: <CreateNewPassword />,
-   },
-   {
-      path: ROUTE_PATHS.ERROR_404,
-      element: <Error404 />,
+      element: <PublicRoutes />,
+      children: [
+         {
+            path: ROUTE_PATHS.SIGN_IN,
+            element: <SignIn />,
+         },
+         {
+            path: ROUTE_PATHS.SIGN_UP,
+            element: <SignUp />,
+         },
+         {
+            path: ROUTE_PATHS.FORGOT_PASSWORD,
+            element: <ForgotPassword />,
+         },
+         {
+            path: ROUTE_PATHS.CREATE_NEW_PASSWORD,
+            element: <CreateNewPassword />,
+         },
+         {
+            path: ROUTE_PATHS.ERROR_404,
+            element: <Error404 />,
+         },
+      ],
    },
 ]
 
