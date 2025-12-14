@@ -1,16 +1,16 @@
 import type { ChangeEvent, ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateAvatarFormValues } from '../../model/update-avatar-schema'
+import type { UpdateAvatarFormValues } from '@/features/manage-profile'
 
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { VALID_FILE_FORMATS } from '@/shared/constants'
-import { Button, Typography } from '@/shared/ui'
+import { Button, CropImageDialog, Typography } from '@/shared/ui'
 import { PencilIcon } from '@/shared/ui/icons'
 
 import styles from './update-avatar-form.module.scss'
@@ -39,6 +39,9 @@ export const UpdateAvatarForm = ({
       resolver: zodResolver(updateAvatarSchema),
    })
 
+   const [originalImageUrl, setOriginalImageUrl] = useState<string | null>('')
+   const [isCropperOpen, setIsCropperOpen] = useState(false)
+
    const fileInputRef = useRef<HTMLInputElement>(null)
 
    const handleEditAvatarClick = () => {
@@ -52,8 +55,41 @@ export const UpdateAvatarForm = ({
          return
       }
 
-      setValue('avatar', file)
-      handleSubmit(onSubmit)()
+      const imageUrl = URL.createObjectURL(file)
+
+      setOriginalImageUrl(imageUrl)
+      setIsCropperOpen(true)
+   }
+
+   const handleCropComplete = async (croppedImageUrl: string) => {
+      try {
+         const response = await fetch(croppedImageUrl)
+         const blob = await response.blob()
+
+         const file = new File([blob], 'avatar.jpg', {
+            type: blob.type,
+            lastModified: Date.now(),
+         })
+
+         setValue('avatar', file)
+         await handleSubmit(onSubmit)()
+      } catch (error) {
+         console.error('Error processing cropped image:', error)
+      } finally {
+         setIsCropperOpen(false)
+         if (originalImageUrl) {
+            URL.revokeObjectURL(originalImageUrl)
+            setOriginalImageUrl(null)
+         }
+      }
+   }
+
+   const handleCropDialogClose = (open: boolean) => {
+      setIsCropperOpen(open)
+      if (!open && originalImageUrl) {
+         URL.revokeObjectURL(originalImageUrl)
+         setOriginalImageUrl(null)
+      }
    }
 
    const onSubmit: SubmitHandler<UpdateAvatarFormValues> = (data, e) => {
@@ -91,6 +127,16 @@ export const UpdateAvatarForm = ({
             style={{ display: 'none' }}
          />
          {import.meta.env.DEV && <DevTool control={control} />}
+
+         {originalImageUrl && (
+            <CropImageDialog
+               open={isCropperOpen}
+               onOpenChange={handleCropDialogClose}
+               image={originalImageUrl}
+               onCropComplete={handleCropComplete}
+               aspect={1}
+            />
+         )}
       </form>
    )
 }

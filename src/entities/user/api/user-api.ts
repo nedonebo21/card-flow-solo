@@ -26,6 +26,25 @@ export const userApi = baseApi.injectEndpoints({
                body: formData,
             }
          },
+         onQueryStarted: async ({ name, avatar }, { dispatch, queryFulfilled }) => {
+            const patchResult = dispatch(
+               userApi.util.updateQueryData('me', undefined, (draft: User) => {
+                  if (name !== undefined) {
+                     draft.name = name
+                  }
+                  if (avatar) {
+                     draft.avatar = URL.createObjectURL(avatar)
+                  }
+                  draft.updated = new Date().toISOString()
+               })
+            )
+
+            try {
+               await queryFulfilled
+            } catch {
+               patchResult.undo()
+            }
+         },
          invalidatesTags: ['Me'],
       }),
    }),

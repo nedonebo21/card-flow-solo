@@ -52,7 +52,7 @@ export const DeleteDeck = ({
          isConfirmDisabled={isLoading}
          showCancelButton
          trigger={
-            <Button variant={'ghost'} size={size} {...rest}>
+            <Button disabled={isLoading} variant={'ghost'} size={size} {...rest}>
                <TrashIcon width={16} height={16} />
                {label ? <Typography variant={'caption'}>{label}</Typography> : ''}
             </Button>

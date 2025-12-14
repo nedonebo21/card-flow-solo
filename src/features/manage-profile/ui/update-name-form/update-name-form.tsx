@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 
-import type { UpdateNameFormValues } from '../../model/update-name-schema'
+import type { UpdateNameFormValues } from '@/features/manage-profile'
 
 import { useForm } from 'react-hook-form'
 
@@ -19,9 +19,10 @@ type Props = {
    username: string
    onSubmit?: SubmitHandler<UpdateNameFormValues>
    onCancel: () => void
+   isLoading: boolean
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const UpdateNameForm = ({ username, onCancel, ...rest }: Props) => {
+export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props) => {
    const {
       handleSubmit,
       control,
@@ -56,7 +57,12 @@ export const UpdateNameForm = ({ username, onCancel, ...rest }: Props) => {
             >
                Cancel
             </Button>
-            <Button className={styles.save} disabled={!isDirty} fullWidth type={'submit'}>
+            <Button
+               className={styles.save}
+               disabled={!isDirty || isLoading}
+               fullWidth
+               type={'submit'}
+            >
                Save Changes
             </Button>
          </div>

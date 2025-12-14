@@ -46,15 +46,15 @@ export const ViewPersonalInfo = ({
       setIsEditMode(false)
    }
 
-   const [updateUser] = useUpdateUserMutation()
+   const [updateUser, { isLoading }] = useUpdateUserMutation()
 
    const handleNicknameSubmit: SubmitHandler<UpdateNameFormValues> = async (data, e) => {
       if (onSubmit) {
          await onSubmit(data, e)
       } else {
          try {
-            await updateUser({ name: data.name }).unwrap()
             setIsEditMode(false)
+            await updateUser({ name: data.name }).unwrap()
          } catch (error) {
             console.error(error)
          }
@@ -128,6 +128,7 @@ export const ViewPersonalInfo = ({
                   username={username ?? ''}
                   onSubmit={handleNicknameSubmit}
                   onCancel={handleCancel}
+                  isLoading={isLoading}
                />
             )}
          </div>

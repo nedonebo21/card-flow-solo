@@ -71,7 +71,7 @@ export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
                         {isOwner && (
                            <>
                               <UpdateDeck id={deck.id} />
-                              <DeleteDeck id={deck.id} />
+                              <DeleteDeck id={deck.id} deckName={deck?.name} />
                            </>
                         )}
                      </TableCell>
