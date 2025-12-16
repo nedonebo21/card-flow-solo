@@ -37,6 +37,28 @@ export const cardsApi = baseApi.injectEndpoints({
                method: 'DELETE',
             }
          },
+         async onQueryStarted(cardId, { dispatch, queryFulfilled, getState }) {
+            const state = getState()
+            const queryCacheKey = cardsApi.util
+               .selectInvalidatedBy(state, ['Cards'])
+               .find(entry => entry.endpointName === 'getCards')
+
+            const patchResult = dispatch(
+               cardsApi.util.updateQueryData('getCards', queryCacheKey?.originalArgs, draft => {
+                  const index = draft.items?.findIndex(card => card.id === cardId)
+
+                  if (index !== undefined && index !== -1 && draft.items) {
+                     draft.items.splice(index, 1)
+                  }
+               })
+            )
+
+            try {
+               await queryFulfilled
+            } catch {
+               patchResult.undo()
+            }
+         },
          invalidatesTags: ['Cards'],
       }),
       updateCard: builder.mutation<unknown, { id: string; body: UpdateCardArgs }>({

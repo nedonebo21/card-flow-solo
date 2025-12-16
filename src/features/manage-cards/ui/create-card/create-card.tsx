@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
 import { useCreateCardMutation } from '@/entities/card'
 import { Button, Dialog } from '@/shared/ui'
@@ -50,6 +51,7 @@ export const CreateCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: Add
          try {
             await addCard({ body: data, id: deckId }).unwrap()
             handleOpenChange(false)
+            toast.success(`Card "${data.question}" has been created`)
          } catch (error) {
             console.error(error)
          }
