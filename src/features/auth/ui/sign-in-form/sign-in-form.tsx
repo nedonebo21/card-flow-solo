@@ -47,6 +47,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
             await signIn(data).unwrap()
             navigate(ROUTE_PATHS.HOME)
          } catch (error) {
+            navigate(ROUTE_PATHS.SIGN_IN)
             console.error(error)
          }
       }
@@ -67,6 +68,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      label={'Email'}
                      placeholder={'example@example.com'}
                      errorMessage={errors.email?.message}
+                     disabled={isLoading}
                   />
                   <ControlledInput
                      InputComponent={InputPassword}
@@ -74,13 +76,19 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      name={'password'}
                      label={'Password'}
                      errorMessage={errors.password?.message}
+                     disabled={isLoading}
                   />
                   <Typography variant={'error'}>
                      {isError ? 'Invalid email or password' : ''}
                   </Typography>
                </div>
                <div className={styles.options}>
-                  <ControlledCheckbox control={control} name={'rememberMe'} label={'Remember me'} />
+                  <ControlledCheckbox
+                     control={control}
+                     name={'rememberMe'}
+                     label={'Remember me'}
+                     disabled={isLoading}
+                  />
                   <Button
                      className={styles.forgotPassword}
                      variant={'link'}

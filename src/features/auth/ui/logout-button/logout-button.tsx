@@ -18,7 +18,7 @@ export const LogoutButton = ({
    children,
    ...rest
 }: LogoutButtonProps) => {
-   const [logout] = useLogoutMutation()
+   const [logout, { isLoading }] = useLogoutMutation()
 
    const navigate = useNavigate()
 
@@ -28,7 +28,7 @@ export const LogoutButton = ({
       } else {
          try {
             await logout().unwrap()
-            navigate(ROUTE_PATHS.HOME)
+            navigate(ROUTE_PATHS.SIGN_IN)
          } catch (error) {
             console.error(error)
          }
@@ -36,7 +36,7 @@ export const LogoutButton = ({
    }
 
    return (
-      <Button onClick={handleLogout} variant={variant} {...rest}>
+      <Button onClick={handleLogout} disabled={isLoading} variant={variant} {...rest}>
          <LogOutIcon width={16} height={16} />
          {children}
       </Button>
