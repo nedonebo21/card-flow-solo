@@ -13,6 +13,7 @@ type DeleteDeckProps = {
    id: string
    deckName?: string
    redirectOnDelete?: boolean
+   refetch: () => void
 } & Omit<ComponentProps<typeof Button>, 'onClick'>
 
 export const DeleteDeck = ({
@@ -22,6 +23,7 @@ export const DeleteDeck = ({
    label,
    deckName,
    redirectOnDelete,
+   refetch,
    ...rest
 }: DeleteDeckProps) => {
    const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
@@ -38,6 +40,7 @@ export const DeleteDeck = ({
       }
       setIsOpen(false)
       deleteDeck(id).unwrap()
+      refetch()
 
       if (redirectOnDelete) {
          navigate(ROUTE_PATHS.HOME)

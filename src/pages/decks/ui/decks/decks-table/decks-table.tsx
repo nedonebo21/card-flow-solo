@@ -24,12 +24,14 @@ type DecksTableProps = {
    decks?: Deck[]
    userId?: string
    isLoading?: boolean
+   isFetching: boolean
+   refetch: () => void
 }
 
-export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
+export const DecksTable = ({ decks, userId, isLoading, isFetching, refetch }: DecksTableProps) => {
    const { sort, handleSort } = useTableSort()
 
-   if (isLoading) {
+   if (isLoading || isFetching) {
       return <DecksTableSkeletons />
    }
 
@@ -71,7 +73,7 @@ export const DecksTable = ({ decks, userId, isLoading }: DecksTableProps) => {
                         {isOwner && (
                            <>
                               <UpdateDeck id={deck.id} />
-                              <DeleteDeck id={deck.id} deckName={deck?.name} />
+                              <DeleteDeck id={deck.id} deckName={deck?.name} refetch={refetch} />
                            </>
                         )}
                      </TableCell>

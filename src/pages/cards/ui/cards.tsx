@@ -29,7 +29,7 @@ export const Cards = () => {
 
    const [debouncedQuestion] = useDebounce(queryParams.question, 500)
 
-   const { data, isLoading } = useGetCardsQuery({
+   const { data, isLoading, isFetching, refetch } = useGetCardsQuery({
       id: id ?? '',
       question: debouncedQuestion,
       orderBy: queryParams.orderBy,
@@ -41,9 +41,14 @@ export const Cards = () => {
 
    return (
       <div className={styles.wrapper}>
-         <CardsHeader deckId={id} />
+         <CardsHeader deckId={id} refetch={refetch} />
          <CardsSearch />
-         <CardsTable isLoading={isLoading} cards={cards} />
+         <CardsTable
+            isLoading={isLoading}
+            refetch={refetch}
+            isFetching={isFetching}
+            cards={cards}
+         />
          <CardsPagination totalCount={totalCount} />
       </div>
    )

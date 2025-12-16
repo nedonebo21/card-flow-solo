@@ -20,9 +20,10 @@ import styles from './cards-header.module.scss'
 
 type CardsHeaderProps = {
    deckId?: string
+   refetch: () => void
 }
 
-export const CardsHeader = ({ deckId }: CardsHeaderProps) => {
+export const CardsHeader = ({ deckId, refetch }: CardsHeaderProps) => {
    const { data: userData } = useMeQuery()
    const { data: deck } = useGetDeckByIdQuery({ id: deckId ?? '' }, { skip: !deckId })
 
@@ -61,6 +62,7 @@ export const CardsHeader = ({ deckId }: CardsHeaderProps) => {
                      <Dropdown.Item asChild={false}>
                         <DeleteDeck
                            id={deckId ?? ''}
+                           refetch={refetch}
                            deckName={deck?.name}
                            redirectOnDelete
                            label={'Delete'}
@@ -71,7 +73,7 @@ export const CardsHeader = ({ deckId }: CardsHeaderProps) => {
                )}
             </div>
             {isOwner ? (
-               <CreateCard deckId={deckId ?? ''} />
+               <CreateCard refetch={refetch} deckId={deckId ?? ''} />
             ) : (
                <Button as={Link} to={routeHelpers.createLearnPath(deckId ?? '')}>
                   Learn to pack

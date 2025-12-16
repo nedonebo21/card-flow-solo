@@ -51,8 +51,8 @@ export const CreateDeck = ({
          await onSubmitFormProps(data, e)
       } else {
          try {
-            refetch()
             await createDeck(data).unwrap()
+            refetch()
             setIsOpen(false)
             toast.success(`Deck '${data.name}' created successfully`)
          } catch (error) {

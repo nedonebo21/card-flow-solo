@@ -19,12 +19,14 @@ type UpdateCardProps = {
    onSubmit?: SubmitHandler<CardFormValues>
    id: string
    label?: string
+   refetch: () => void
 } & Omit<ComponentProps<'form'>, 'onSubmit' | 'id'>
 export const UpdateCard = ({
    onSubmit: onSubmitFormProps,
    id,
    label,
    className,
+   refetch,
    ...rest
 }: UpdateCardProps) => {
    const [isOpen, setIsOpen] = useState(false)
@@ -54,6 +56,7 @@ export const UpdateCard = ({
       } else {
          try {
             await updateCard({ id, body: data }).unwrap()
+            refetch()
             setIsOpen(false)
             toast.success('Card has been updated')
          } catch (error) {

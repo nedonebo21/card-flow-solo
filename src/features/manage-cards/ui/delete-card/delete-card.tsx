@@ -13,6 +13,7 @@ type DeleteCardProps = {
    id: string
    cardName?: string
    redirectOnDelete?: boolean
+   refetch: () => void
 } & Omit<ComponentProps<typeof Button>, 'onClick'>
 
 export const DeleteCard = ({
@@ -22,6 +23,7 @@ export const DeleteCard = ({
    label,
    cardName,
    redirectOnDelete,
+   refetch,
    ...rest
 }: DeleteCardProps) => {
    const [deleteCard, { isLoading }] = useDeleteCardMutation()
@@ -38,6 +40,7 @@ export const DeleteCard = ({
       } else {
          try {
             await deleteCard(id).unwrap()
+            refetch()
             setIsOpen(false)
             toast.success(`Deck '${cardName}' deleted successfully`)
             if (redirectOnDelete) {

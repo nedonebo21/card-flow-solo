@@ -25,9 +25,11 @@ import styles from './cards-table.module.scss'
 type CardsTableProps = {
    cards: Card[]
    isLoading: boolean
+   isFetching: boolean
+   refetch: () => void
 }
 
-export const CardsTable = ({ cards, isLoading }: CardsTableProps) => {
+export const CardsTable = ({ cards, isLoading, isFetching, refetch }: CardsTableProps) => {
    const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({})
    const { data } = useMeQuery()
    const userId = data?.id ?? ''
@@ -43,7 +45,7 @@ export const CardsTable = ({ cards, isLoading }: CardsTableProps) => {
 
    const isLongQuestion = (question: string) => question.length > 30
 
-   if (isLoading) {
+   if (isLoading || isFetching) {
       return <CardsTableSkeletons />
    }
 
@@ -81,8 +83,8 @@ export const CardsTable = ({ cards, isLoading }: CardsTableProps) => {
                      </TableCell>
                      {isOwner && (
                         <TableCell className={styles.actions}>
-                           <UpdateCard id={card.id} />
-                           <DeleteCard id={card.id} cardName={card.question} />
+                           <UpdateCard id={card.id} refetch={refetch} />
+                           <DeleteCard id={card.id} refetch={refetch} cardName={card.question} />
                         </TableCell>
                      )}
                   </TableRow>

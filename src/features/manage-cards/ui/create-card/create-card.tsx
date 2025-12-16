@@ -18,9 +18,15 @@ import { CardFieldsSection } from '../card-fileds-section/card-fields-section'
 type AddNewCardProps = {
    onSubmit?: SubmitHandler<CardFormValues>
    deckId: string
+   refetch: () => void
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const CreateCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: AddNewCardProps) => {
+export const CreateCard = ({
+   onSubmit: onSubmitFormProps,
+   deckId,
+   refetch,
+   ...rest
+}: AddNewCardProps) => {
    const {
       handleSubmit,
       register,
@@ -51,6 +57,7 @@ export const CreateCard = ({ onSubmit: onSubmitFormProps, deckId, ...rest }: Add
          try {
             await addCard({ body: data, id: deckId }).unwrap()
             handleOpenChange(false)
+            refetch()
             toast.success(`Card "${data.question}" has been created`)
          } catch (error) {
             console.error(error)
