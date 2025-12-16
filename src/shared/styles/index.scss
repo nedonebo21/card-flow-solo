@@ -2,6 +2,8 @@
 @use 'variables/global' as global;
 @use 'reset';
 
+@import 'animate.css';
+
 body {
    font: var(--font-base-regular);
    color: var(--color-light-100);

@@ -52,7 +52,15 @@ export const Input = ({
 
             {!!endIcon && <span className={styles.iconWrapper}>{endIcon}</span>}
          </label>
-         {isError && <Typography variant={'error'}>{errorMessage}</Typography>}
+         {isError && (
+            <Typography
+               key={`error-${new Date()}`}
+               className={clsx(styles.error, 'animate__animated', 'animate__shakeX')}
+               variant={'error'}
+            >
+               {errorMessage}
+            </Typography>
+         )}
       </div>
    )
 }

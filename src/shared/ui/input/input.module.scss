@@ -90,6 +90,10 @@
    color: var(--color-dark-100);
 }
 
+.error {
+  display: inline-block;
+}
+
 input[type='text']::-ms-clear {
    display: none;
    width: 0;

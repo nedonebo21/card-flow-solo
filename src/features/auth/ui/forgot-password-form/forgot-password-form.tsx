@@ -52,7 +52,7 @@ export const ForgotPasswordForm = ({
             await recoverPassword({
                email: data.email,
                subject: 'Password Recover',
-               html: `<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173$/create-new-password/##token##">here</a> to recover your password</p>`,
+               html: `<h1>Hi, ##name##</h1><p>Click <a href="${import.meta.env.VITE_APP_URL}create-new-password/##token##">here</a> to recover your password</p>`,
             }).unwrap()
             setIsEmailSubmitted(true)
             setSubmittedEmail(data.email)
