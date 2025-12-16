@@ -36,8 +36,8 @@ export const DeleteDeck = ({
       if (!!id && id.length < 0) {
          return
       }
-      deleteDeck(id).unwrap()
       setIsOpen(false)
+      deleteDeck(id).unwrap()
 
       if (redirectOnDelete) {
          navigate(ROUTE_PATHS.HOME)

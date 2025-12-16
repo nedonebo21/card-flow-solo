@@ -36,7 +36,7 @@ export const Decks = () => {
    const authorId = queryParams.show === 'my' ? currentUserId : ''
    const favoritedBy = queryParams.show === 'favorite' ? currentUserId : ''
 
-   const { data, isLoading } = useGetDecksQuery({
+   const { data, isLoading, refetch } = useGetDecksQuery({
       name: debouncedName,
       maxCardsCount: queryParams.max,
       minCardsCount: queryParams.min,
@@ -58,7 +58,7 @@ export const Decks = () => {
 
    return (
       <div className={styles.wrapper}>
-         <DecksHeader />
+         <DecksHeader refetch={refetch} />
          <DecksFilters onClear={handleClearFilter} />
          <div className={styles.decks}>
             <DecksTable decks={decks} isLoading={isLoading} userId={currentUserId} />

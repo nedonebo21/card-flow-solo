@@ -1,4 +1,10 @@
-import type { Deck, GetDecksArgs, GetDecksResponse, GetCardsCount } from '../model/decks.types'
+import type {
+   Deck,
+   GetDecksArgs,
+   GetDecksResponse,
+   GetCardsCount,
+   CreateDeckArgs,
+} from '../model/decks.types'
 
 import { baseApi } from '@/shared/api'
 
@@ -21,12 +27,21 @@ export const decksApi = baseApi.injectEndpoints({
          },
          providesTags: ['Decks'],
       }),
-      createDeck: builder.mutation<Omit<Deck, 'author' | 'isFavorite'>, FormData>({
+      createDeck: builder.mutation<Omit<Deck, 'author' | 'isFavorite'>, CreateDeckArgs>({
          query: body => {
+            const formData = new FormData()
+
+            if (body.cover) {
+               formData.append('cover', body.cover)
+            }
+
+            formData.append('name', body.name)
+            formData.append('isPrivate', String(body.isPrivate))
+
             return {
                url: `v1/decks`,
                method: 'POST',
-               body,
+               body: formData,
             }
          },
          invalidatesTags: ['Decks'],
@@ -49,6 +64,29 @@ export const decksApi = baseApi.injectEndpoints({
             return {
                url: `v1/decks/${id}`,
                method: 'DELETE',
+            }
+         },
+         async onQueryStarted(id, { dispatch, queryFulfilled, getState }) {
+            const state = getState()
+            const queryCacheKey = decksApi.util
+               .selectInvalidatedBy(state, ['Decks'])
+               .find(entry => entry.endpointName === 'getDecks')
+
+            const patchResult = dispatch(
+               decksApi.util.updateQueryData('getDecks', queryCacheKey?.originalArgs, draft => {
+                  const index = draft.items?.findIndex(deck => deck.id === id)
+
+                  if (index !== undefined && index !== -1 && draft.items) {
+                     draft.items.splice(index, 1)
+                     draft.pagination.totalItems -= 1
+                  }
+               })
+            )
+
+            try {
+               await queryFulfilled
+            } catch {
+               patchResult.undo()
             }
          },
          invalidatesTags: ['Decks'],

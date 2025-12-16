@@ -16,9 +16,14 @@ import { useDeckForm } from '../../model/use-deck-form'
 
 type CreateDeckFormProps = {
    onSubmit?: SubmitHandler<DeckFormValues>
+   refetch: () => void
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
-export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckFormProps) => {
+export const CreateDeck = ({
+   onSubmit: onSubmitFormProps,
+   refetch,
+   ...rest
+}: CreateDeckFormProps) => {
    const [createDeck, { isLoading }] = useCreateDeckMutation()
    const [isOpen, setIsOpen] = useState(false)
 
@@ -42,20 +47,12 @@ export const CreateDeck = ({ onSubmit: onSubmitFormProps, ...rest }: CreateDeckF
    } = useDeckForm()
 
    const onSubmit: typeof onSubmitFormProps = async (data, e) => {
-      const formData = new FormData()
-
-      formData.append('name', data.name)
-      formData.append('isPrivate', String(data.isPrivate))
-
-      if (data.cover instanceof File) {
-         formData.append('cover', data.cover)
-      }
-
       if (onSubmitFormProps) {
          await onSubmitFormProps(data, e)
       } else {
          try {
-            await createDeck(formData).unwrap()
+            refetch()
+            await createDeck(data).unwrap()
             setIsOpen(false)
             toast.success(`Deck '${data.name}' created successfully`)
          } catch (error) {

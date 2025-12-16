@@ -19,6 +19,12 @@ export type GetCardsCount = {
    max: number
 }
 
+export type CreateDeckArgs = {
+   isPrivate?: boolean
+   name: string
+   cover?: File
+}
+
 type Pagination = {
    totalItems: number
    currentPage: number
