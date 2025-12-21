@@ -22,10 +22,23 @@ export const cardsApi = baseApi.injectEndpoints({
       }),
       createCard: builder.mutation<Card, { body: CreateCardArgs; id: string }>({
          query: ({ body, id }) => {
+            const formData = new FormData()
+
+            if (body.questionImg) {
+               formData.append('questionImg', body.questionImg)
+            }
+
+            if (body.answerImg) {
+               formData.append('answerImg', body.answerImg)
+            }
+
+            formData.append('question', body.question)
+            formData.append('answer', body.answer)
+
             return {
                url: `/v1/decks/${id}/cards`,
                method: 'POST',
-               body,
+               body: formData,
             }
          },
          invalidatesTags: ['Cards'],

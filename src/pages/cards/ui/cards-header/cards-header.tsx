@@ -31,7 +31,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
    const isOwner = userData?.id === deck?.userId
 
    const showLearn = hasCards
-   const showCreateCardButton = isOwner && hasCards && !showLearn
+   const showCreateCardButton = isOwner && hasCards
 
    return (
       <div className={styles.wrapper}>
@@ -79,7 +79,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
 
             {showCreateCardButton && <CreateCard refetch={refetch} deckId={deckId ?? ''} />}
 
-            {showLearn && (
+            {!isOwner && showLearn && (
                <Button as={Link} to={routeHelpers.createLearnPath(deckId ?? '')}>
                   Learn to pack
                </Button>
