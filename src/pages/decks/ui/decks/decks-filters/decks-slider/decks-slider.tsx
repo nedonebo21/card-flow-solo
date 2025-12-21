@@ -23,12 +23,14 @@ export const DecksSlider = () => {
 
          if (newMin !== minCards) {
             searchParams.set('min', newMin.toString())
+            searchParams.delete('page')
          } else {
             searchParams.delete('min')
          }
 
          if (newMax !== maxCards) {
             searchParams.set('max', newMax.toString())
+            searchParams.delete('page')
          } else {
             searchParams.delete('max')
          }

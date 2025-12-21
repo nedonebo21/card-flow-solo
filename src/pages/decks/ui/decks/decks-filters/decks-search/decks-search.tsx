@@ -19,6 +19,7 @@ export const DecksSearch = () => {
             searchParams.delete('name')
          } else {
             searchParams.set('name', e.target.value)
+            searchParams.delete('page')
          }
          setSearchParams(searchParams)
       },

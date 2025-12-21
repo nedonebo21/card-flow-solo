@@ -16,7 +16,7 @@ export const DecksTableSkeletons = () => {
                   <TableRow key={index}>
                      <TableCell>
                         <div className={styles.link}>
-                           <Skeleton width={118} height={40} className={styles.cover} />
+                           <Skeleton width={118} height={43} />
                            <Skeleton width={120} height={14} />
                         </div>
                      </TableCell>

@@ -5,6 +5,7 @@ import { useDebounce } from 'use-debounce'
 
 import { useGetDecksQuery } from '@/entities/deck'
 import { useMeQuery } from '@/entities/user'
+import { clearFilters } from '@/shared/lib'
 
 import styles from './decks.module.scss'
 
@@ -48,10 +49,11 @@ export const Decks = () => {
    })
 
    const handleClearFilter = useCallback(() => {
-      searchParams.delete('name')
-      searchParams.delete('min')
-      searchParams.delete('max')
-      setSearchParams(searchParams)
+      const nextParams = new URLSearchParams(searchParams)
+
+      clearFilters(nextParams)
+
+      setSearchParams(nextParams)
    }, [searchParams, setSearchParams])
 
    const decks = data?.items

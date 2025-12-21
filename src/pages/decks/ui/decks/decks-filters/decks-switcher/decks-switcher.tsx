@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
+import { clearFilters } from '@/shared/lib'
 import { HeartOutlineIcon, Tabs, Typography } from '@/shared/ui'
 
 import styles from './decks-switcher.module.scss'
@@ -12,13 +13,17 @@ export const DecksSwitcher = () => {
 
    const setShow = useCallback(
       (show: string) => {
+         const nextParams = new URLSearchParams(searchParams)
+
          if (show === 'all') {
             searchParams.delete('show')
+            clearFilters(nextParams)
          } else {
             searchParams.set('show', show)
+            clearFilters(nextParams)
          }
 
-         setSearchParams(searchParams)
+         setSearchParams(nextParams)
       },
       [searchParams, setSearchParams]
    )
