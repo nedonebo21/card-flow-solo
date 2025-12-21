@@ -6,7 +6,10 @@
 
 .question {
    overflow: hidden;
+  display: flex;
+
    max-width: 200px;
+
    text-overflow: ellipsis;
    white-space: nowrap;
 }

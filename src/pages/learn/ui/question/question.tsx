@@ -30,7 +30,9 @@ export const Question = ({
          <div className={styles.question}>
             <div className={styles.questionText}>
                <Typography variant={'subtitle1'}>Question:</Typography>
-               <Typography variant={'body1'}>{question}</Typography>
+               <Typography variant={'body1'} textAlign={'left'}>
+                  {question}
+               </Typography>
             </div>
             {haveQuestionImg && (
                <div className={styles.image}>

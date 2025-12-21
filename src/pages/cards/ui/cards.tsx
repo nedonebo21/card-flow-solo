@@ -4,6 +4,8 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 
 import { useGetCardsQuery } from '@/entities/card'
+import { CreateCard } from '@/features/manage-cards'
+import { Typography } from '@/shared/ui'
 
 import styles from './cards.module.scss'
 
@@ -39,17 +41,30 @@ export const Cards = () => {
    const cards = data?.items ?? []
    const totalCount = data?.pagination?.totalItems ?? 0
 
+   const hasCards = totalCount > 0
+
    return (
       <div className={styles.wrapper}>
-         <CardsHeader deckId={id} refetch={refetch} />
-         <CardsSearch />
-         <CardsTable
-            isLoading={isLoading}
-            refetch={refetch}
-            isFetching={isFetching}
-            cards={cards}
-         />
-         <CardsPagination totalCount={totalCount} />
+         <CardsHeader hasCards={hasCards} deckId={id} refetch={refetch} />
+         {hasCards ? (
+            <>
+               <CardsSearch />
+               <CardsTable
+                  isLoading={isLoading}
+                  refetch={refetch}
+                  isFetching={isFetching}
+                  cards={cards}
+               />
+               <CardsPagination totalCount={totalCount} />
+            </>
+         ) : (
+            <div className={styles.empty}>
+               <Typography className={styles.emptyText}>
+                  Deck is empty. Press on &#39;Add New Card&#39;
+               </Typography>
+               <CreateCard deckId={id ?? ''} refetch={refetch} />
+            </div>
+         )}
       </div>
    )
 }

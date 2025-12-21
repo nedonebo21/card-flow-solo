@@ -42,7 +42,7 @@ export const DeleteCard = ({
             await deleteCard(id).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success(`Deck '${cardName}' deleted successfully`)
+            toast.success(`Card '${cardName}' deleted successfully`)
             if (redirectOnDelete) {
                navigate(ROUTE_PATHS.HOME)
             }

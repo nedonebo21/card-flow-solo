@@ -21,6 +21,7 @@ export const Learn = () => {
       data: card,
       isLoading: isCardLoading,
       isFetching,
+      isError,
       refetch: refetchRandomCard,
    } = useGetRandomCardQuery({ id: id ?? '' }, { skip: !id })
 
@@ -46,32 +47,36 @@ export const Learn = () => {
                <ArrowLeftIcon width={16} height={16} /> Back to previous page
             </Button>
          </div>
-         <Card as={'section'} className={styles.learn}>
-            <header className={styles.header}>
-               <Typography variant={'h1'} as={'h1'}>
-                  Learn &#34;{deck?.name}&#34;
-               </Typography>
-            </header>
-            <Question
-               question={card?.question}
-               questionImg={card?.questionImg}
-               shots={card?.shots}
-               showAnswer={showAnswer}
-               setShowAnswer={handleAnswerShow}
-            />
-            {showAnswer && (
-               <RateCard
-                  answerImg={card?.answerImg}
-                  answer={card?.answer}
-                  deckId={id ?? ''}
-                  cardId={card?.id ?? ''}
-                  onNextCard={() => {
-                     refetchRandomCard()
-                     setShowAnswer(false)
-                  }}
+         {isError ? (
+            <Typography variant={'warning'}>This deck is empty. See you later ^_^</Typography>
+         ) : (
+            <Card as={'section'} className={styles.learn}>
+               <header className={styles.header}>
+                  <Typography variant={'h1'} as={'h1'}>
+                     Learn &#34;{deck?.name}&#34;
+                  </Typography>
+               </header>
+               <Question
+                  question={card?.question}
+                  questionImg={card?.questionImg}
+                  shots={card?.shots}
+                  showAnswer={showAnswer}
+                  setShowAnswer={handleAnswerShow}
                />
-            )}
-         </Card>
+               {showAnswer && (
+                  <RateCard
+                     answerImg={card?.answerImg}
+                     answer={card?.answer}
+                     deckId={id ?? ''}
+                     cardId={card?.id ?? ''}
+                     onNextCard={() => {
+                        refetchRandomCard()
+                        setShowAnswer(false)
+                     }}
+                  />
+               )}
+            </Card>
+         )}
       </>
    )
 }
