@@ -35,16 +35,14 @@ export const UpdateCard = ({
 
    const {
       handleSubmit,
-      register,
       control,
+      setValue,
       formState: { errors },
    } = useForm<CardFormValues>({
       resolver: zodResolver(cardFormSchema),
       defaultValues: {
          answer: card?.answer ?? '',
          question: card?.question ?? '',
-         answerImg: card?.answerImg ?? '',
-         questionImg: card?.questionImg ?? '',
       },
    })
 
@@ -88,7 +86,7 @@ export const UpdateCard = ({
          >
             <CardFieldsSection
                control={control}
-               register={register}
+               setValue={setValue}
                inputName={'question'}
                errorMessage={errors.question?.message}
                inputLabel={'Question'}
@@ -97,7 +95,7 @@ export const UpdateCard = ({
 
             <CardFieldsSection
                control={control}
-               register={register}
+               setValue={setValue}
                inputName={'answer'}
                errorMessage={errors.answer?.message}
                inputLabel={'Answer'}

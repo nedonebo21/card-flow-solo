@@ -12,8 +12,8 @@ export const cardFormSchema = z.object({
       .string()
       .min(MIN_LENGTH, `Question should be more than ${MIN_LENGTH} characters`)
       .max(MAX_LENGTH, `Question should be less than ${MAX_LENGTH}`),
-   questionImg: z.string(),
-   answerImg: z.string(),
+   questionImg: z.instanceof(File).optional(),
+   answerImg: z.instanceof(File).optional(),
 })
 
 export type CardFormValues = z.infer<typeof cardFormSchema>

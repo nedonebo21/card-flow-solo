@@ -29,17 +29,11 @@ export const CreateCard = ({
 }: AddNewCardProps) => {
    const {
       handleSubmit,
-      register,
       control,
+      setValue,
       formState: { errors },
    } = useForm<CardFormValues>({
       resolver: zodResolver(cardFormSchema),
-      defaultValues: {
-         answer: '',
-         question: '',
-         answerImg: '',
-         questionImg: '',
-      },
    })
 
    const [addCard, { isLoading }] = useCreateCardMutation()
@@ -80,7 +74,7 @@ export const CreateCard = ({
          >
             <CardFieldsSection
                control={control}
-               register={register}
+               setValue={setValue}
                inputName={'question'}
                errorMessage={errors.question?.message}
                inputLabel={'Question'}
@@ -89,7 +83,7 @@ export const CreateCard = ({
 
             <CardFieldsSection
                control={control}
-               register={register}
+               setValue={setValue}
                inputName={'answer'}
                errorMessage={errors.answer?.message}
                inputLabel={'Answer'}

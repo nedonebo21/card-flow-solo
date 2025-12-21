@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react'
-import type { Control, UseFormRegister } from 'react-hook-form'
+import type { Control, UseFormSetValue } from 'react-hook-form'
 
 import type { CardFormValues } from '../../model/card-form-schema'
 
@@ -11,20 +11,20 @@ import { Button, CropImageDialog, ImageIcon } from '@/shared/ui'
 
 type CardFieldsSectionProps = {
    control: Control<CardFormValues>
-   register: UseFormRegister<CardFormValues>
    errorMessage?: string
    inputName: 'question' | 'answer'
    imageFieldName: 'questionImg' | 'answerImg'
    inputLabel: string
+   setValue: UseFormSetValue<CardFormValues>
 }
 
 export const CardFieldsSection = ({
    control,
-   register,
    errorMessage,
    inputName,
    imageFieldName,
    inputLabel,
+   setValue,
 }: CardFieldsSectionProps) => {
    const [imagePreview, setImagePreview] = useState<string | null>(null)
    const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null)
@@ -42,6 +42,8 @@ export const CardFieldsSection = ({
       if (!file) {
          return
       }
+
+      setValue(imageFieldName, file, { shouldValidate: true, shouldDirty: true })
 
       const url = URL.createObjectURL(file)
 
@@ -83,7 +85,6 @@ export const CardFieldsSection = ({
             <img className={'cover'} src={imagePreview} alt={`${inputLabel} Preview`} />
          )}
          <input
-            {...register(imageFieldName)}
             type={'file'}
             accept={VALID_FILE_FORMATS.values.join(',')}
             ref={fileInputRef}

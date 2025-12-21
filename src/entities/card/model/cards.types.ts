@@ -20,8 +20,8 @@ export type CardsPagination = {
 }
 
 export type UpdateCardArgs = {
-   questionImg?: string
-   answerImg?: string
+   questionImg?: File
+   answerImg?: File
    question?: string
    answer?: string
 }
@@ -29,9 +29,9 @@ export type UpdateCardArgs = {
 export type CreateCardArgs = {
    answer: string
    question: string
-   answerImg?: string
+   answerImg?: File
    answerVideo?: string
-   questionImg?: string
+   questionImg?: File
    questionVideo?: string
 }
 
