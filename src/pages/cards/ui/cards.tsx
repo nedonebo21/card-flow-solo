@@ -4,6 +4,8 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 
 import { useGetCardsQuery } from '@/entities/card'
+import { useGetDeckByIdQuery } from '@/entities/deck'
+import { useMeQuery } from '@/entities/user'
 import { CreateCard } from '@/features/manage-cards'
 import { Typography } from '@/shared/ui'
 
@@ -16,6 +18,10 @@ import { CardsTable } from './cards-table/cards-table'
 
 export const Cards = () => {
    const { id } = useParams()
+
+   const { data: userData } = useMeQuery()
+
+   const { data: deck } = useGetDeckByIdQuery({ id: id ?? '' }, { skip: !id })
 
    const searchParams = useSearchParams()[0]
 
@@ -42,6 +48,7 @@ export const Cards = () => {
    const totalCount = data?.pagination?.totalItems ?? 0
 
    const hasCards = totalCount > 0
+   const isOwner = deck?.userId === userData?.id
 
    return (
       <div className={styles.wrapper}>
@@ -60,9 +67,9 @@ export const Cards = () => {
          ) : (
             <div className={styles.empty}>
                <Typography className={styles.emptyText}>
-                  Deck is empty. Press on &#39;Add New Card&#39;
+                  Deck is empty. {isOwner && "Press on 'Add New Card'"}
                </Typography>
-               <CreateCard deckId={id ?? ''} refetch={refetch} />
+               {isOwner && <CreateCard deckId={id ?? ''} refetch={refetch} />}
             </div>
          )}
       </div>
