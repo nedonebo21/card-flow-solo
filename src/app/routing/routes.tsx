@@ -14,7 +14,7 @@ import { Profile } from '@/pages/profile'
 import { SignIn } from '@/pages/sign-in'
 import { SignUp } from '@/pages/sign-up'
 import { VerifyEmail } from '@/pages/verify-email'
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 
 const publicRoutes: RouteObject[] = [
    {

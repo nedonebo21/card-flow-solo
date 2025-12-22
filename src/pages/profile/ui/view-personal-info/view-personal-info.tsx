@@ -12,7 +12,7 @@ import { toast } from 'sonner'
 import { useUpdateUserMutation } from '@/entities/user'
 import { LogoutButton } from '@/features/auth'
 import { UpdateAvatarForm, UpdateNameForm } from '@/features/manage-profile'
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Card, Typography, PencilIcon, CheckIcon } from '@/shared/ui'
 
 import styles from './view-personal-info.module.scss'

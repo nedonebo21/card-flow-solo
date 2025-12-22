@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { useMeQuery } from '@/entities/user'
-import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Card, CheckEmailIcon, Typography } from '@/shared/ui'
 
 import styles from './verify-email-form.module.scss'

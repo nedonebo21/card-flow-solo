@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button } from '@/shared/ui'
 import { LogOutIcon } from '@/shared/ui/icons'
 

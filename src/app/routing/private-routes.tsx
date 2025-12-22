@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/entities/user'
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Loader } from '@/shared/ui'
 
 export const PrivateRoutes = () => {

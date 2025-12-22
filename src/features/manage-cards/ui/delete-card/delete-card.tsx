@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 import { useDeleteCardMutation } from '@/entities/card'
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Dialog, TrashIcon, Typography } from '@/shared/ui'
 
 type DeleteCardProps = {

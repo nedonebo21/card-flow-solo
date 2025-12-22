@@ -4,8 +4,8 @@ import { useGetDeckByIdQuery } from '@/entities/deck'
 import { useMeQuery } from '@/entities/user'
 import { CreateCard } from '@/features/manage-cards'
 import { DeleteDeck, UpdateDeck } from '@/features/manage-decks'
-import { ROUTE_PATHS } from '@/shared/constants'
 import { routeHelpers } from '@/shared/lib'
+import { ROUTE_PATHS } from '@/shared/routes'
 import {
    ArrowLeftIcon,
    Button,

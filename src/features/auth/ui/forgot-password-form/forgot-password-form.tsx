@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Card, InputEmail, Typography } from '@/shared/ui'
 
 import styles from './forgot-password-form.module.scss'

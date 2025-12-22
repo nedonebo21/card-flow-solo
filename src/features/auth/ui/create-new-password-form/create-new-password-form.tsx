@@ -11,8 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 
 import { useResetPasswordMutation } from '@/features/auth/api/auth-api'
-import { ROUTE_PATHS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Card, InputPassword, Typography } from '@/shared/ui'
 
 import styles from './create-new-password-form.module.scss'

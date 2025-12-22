@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Error404Icon, Typography } from '@/shared/ui'
 
 import styles from './error-404.module.scss'
