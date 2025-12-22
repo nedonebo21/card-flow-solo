@@ -6,7 +6,7 @@ import { clsx } from 'clsx'
 
 import { useMeQuery } from '@/entities/user'
 import { LogoutButton } from '@/features/auth'
-import { ROUTE_PATHS } from '@/shared/constants'
+import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Dropdown, LogoIcon, Typography, UserFilledIcon } from '@/shared/ui'
 
 import styles from './header.module.scss'
