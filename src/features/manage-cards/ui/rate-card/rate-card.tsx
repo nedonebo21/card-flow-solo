@@ -9,6 +9,8 @@ import { clsx } from 'clsx'
 
 import { useSaveCardGradeMutation } from '@/entities/card'
 import { rateCardSchema } from '@/features/manage-cards/model/rate-card-schema'
+import { AnswerImg } from '@/features/manage-cards/ui/rate-card/answer-img/answer-img'
+import { AnswerText } from '@/features/manage-cards/ui/rate-card/answer-text/answer-text'
 import { RATING_OPTIONS } from '@/shared/constants'
 import { ControlledRadioGroup } from '@/shared/forms'
 import { Button, Typography } from '@/shared/ui'
@@ -22,6 +24,7 @@ type RateCardProps = {
    deckId: string
    cardId: string
    onNextCard: () => void
+   isLoading: boolean
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
 export const RateCard = ({
@@ -31,6 +34,7 @@ export const RateCard = ({
    deckId,
    cardId,
    onNextCard,
+   isLoading,
    ...rest
 }: RateCardProps) => {
    const {
@@ -44,7 +48,7 @@ export const RateCard = ({
       },
    })
 
-   const [saveCardGrade, { isLoading }] = useSaveCardGradeMutation()
+   const [saveCardGrade, { isLoading: isSaveLoading }] = useSaveCardGradeMutation()
 
    const haveAnswerImg = !!answerImg && answerImg.length > 0
 
@@ -70,21 +74,10 @@ export const RateCard = ({
             <div className={clsx(styles.answerWrapper, haveAnswerImg && styles.withImage)}>
                <Typography as={'span'} textAlign={'left'} variant={'subtitle1'}>
                   Answer:
-                  <Typography
-                     className={styles.answerText}
-                     textAlign={'left'}
-                     as={'span'}
-                     variant={'body1'}
-                  >
-                     {answer}
-                  </Typography>
+                  <AnswerText answer={answer} isLoading={isLoading} />
                </Typography>
             </div>
-            {haveAnswerImg && (
-               <div className={styles.image}>
-                  <img src={answerImg} alt={'answer image'} />
-               </div>
-            )}
+            <AnswerImg isLoading={isLoading} answerImg={answerImg} haveAnswerImg={haveAnswerImg} />
             <div className={styles.rate}>
                <Typography className={styles.label} textAlign={'left'} variant={'subtitle1'}>
                   Rate yourself:
@@ -96,7 +89,7 @@ export const RateCard = ({
                   options={RATING_OPTIONS}
                />
             </div>
-            <Button className={styles.next} disabled={isLoading} fullWidth>
+            <Button className={styles.next} disabled={isSaveLoading} fullWidth>
                Next Question
             </Button>
          </form>

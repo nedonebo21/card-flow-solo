@@ -6,7 +6,7 @@ import { useGetDeckByIdQuery } from '@/entities/deck'
 import { RateCard } from '@/features/manage-cards'
 import { Question } from '@/pages/learn/ui/question/question'
 import { routeHelpers } from '@/shared/lib'
-import { ArrowLeftIcon, Button, Card, Loader, Typography } from '@/shared/ui'
+import { ArrowLeftIcon, Button, Card, Typography } from '@/shared/ui'
 
 import styles from './learn.module.scss'
 
@@ -15,7 +15,7 @@ export const Learn = () => {
 
    const { id } = useParams()
 
-   const { data: deck, isLoading: isDeckLoading } = useGetDeckByIdQuery({ id: id ?? '' })
+   const { data: deck } = useGetDeckByIdQuery({ id: id ?? '' })
 
    const {
       data: card,
@@ -29,11 +29,7 @@ export const Learn = () => {
       setShowAnswer(prev => !prev)
    }
 
-   const isLoading = isDeckLoading || (isCardLoading && deck?.id) || isFetching
-
-   if (isLoading) {
-      return <Loader />
-   }
+   const isLoading = isCardLoading || isFetching
 
    return (
       <>
@@ -57,6 +53,7 @@ export const Learn = () => {
                   </Typography>
                </header>
                <Question
+                  isLoading={isLoading}
                   question={card?.question}
                   questionImg={card?.questionImg}
                   shots={card?.shots}
@@ -67,6 +64,7 @@ export const Learn = () => {
                   <RateCard
                      answerImg={card?.answerImg}
                      answer={card?.answer}
+                     isLoading={isLoading}
                      deckId={id ?? ''}
                      cardId={card?.id ?? ''}
                      onNextCard={() => {
