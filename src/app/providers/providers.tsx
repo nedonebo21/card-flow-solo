@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 
 import { Toaster } from 'sonner'
 
+import '../../app/lib/i18n'
+
 import { store } from '../store/store'
 
 export const Providers = ({ children }: { children: ReactNode }) => {
