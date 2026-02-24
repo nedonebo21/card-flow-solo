@@ -1,13 +1,15 @@
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
-import { CARDS_COLUMNS } from '@/shared/constants'
+import { useCardColumns } from '@/shared/constants'
 import { Table, TableBody, TableCell, TableRow, TableSortHeader } from '@/shared/ui'
 
 export const CardsTableSkeletons = () => {
+   const columns = useCardColumns()
+
    return (
       <SkeletonTheme baseColor={'#4c4c4c'} highlightColor={'#808080'}>
          <Table>
-            <TableSortHeader columns={CARDS_COLUMNS} />
+            <TableSortHeader columns={columns} />
             <TableBody>
                {Array(10)
                   .fill(0)

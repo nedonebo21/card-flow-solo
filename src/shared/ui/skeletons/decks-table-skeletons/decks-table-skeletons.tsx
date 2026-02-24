@@ -1,16 +1,18 @@
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-import { DECK_COLUMNS } from '@/shared/constants'
+import { useDecksColumns } from '@/shared/constants'
 import { Table, TableBody, TableCell, TableRow, TableSortHeader } from '@/shared/ui'
 
 import styles from './decks-table-skeletons.module.scss'
 
 export const DecksTableSkeletons = () => {
+   const columns = useDecksColumns()
+
    return (
       <SkeletonTheme baseColor={'#4c4c4c'} highlightColor={'#808080'}>
          <Table>
-            <TableSortHeader columns={DECK_COLUMNS} />
+            <TableSortHeader columns={columns} />
             <TableBody>
                {Array.from({ length: 10 }).map((_, index) => (
                   <TableRow key={index}>

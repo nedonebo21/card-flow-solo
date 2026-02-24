@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react'
 import type { RateCardFormValues } from '@/features/manage-cards/model/rate-card-schema'
 
 import { type SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { clsx } from 'clsx'
@@ -11,7 +12,7 @@ import { useSaveCardGradeMutation } from '@/entities/card'
 import { rateCardSchema } from '@/features/manage-cards/model/rate-card-schema'
 import { AnswerImg } from '@/features/manage-cards/ui/rate-card/answer-img/answer-img'
 import { AnswerText } from '@/features/manage-cards/ui/rate-card/answer-text/answer-text'
-import { RATING_OPTIONS } from '@/shared/constants'
+import { useRatingOptions } from '@/shared/constants'
 import { ControlledRadioGroup } from '@/shared/forms'
 import { Button, Typography } from '@/shared/ui'
 
@@ -48,6 +49,10 @@ export const RateCard = ({
       },
    })
 
+   const { t } = useTranslation()
+
+   const ratingOptions = useRatingOptions()
+
    const [saveCardGrade, { isLoading: isSaveLoading }] = useSaveCardGradeMutation()
 
    const haveAnswerImg = !!answerImg && answerImg.length > 0
@@ -80,17 +85,17 @@ export const RateCard = ({
             <AnswerImg isLoading={isLoading} answerImg={answerImg} haveAnswerImg={haveAnswerImg} />
             <div className={styles.rate}>
                <Typography className={styles.label} textAlign={'left'} variant={'subtitle1'}>
-                  Rate yourself:
+                  {t('rate-yourself')}:
                </Typography>
                <ControlledRadioGroup
                   name={'grade'}
                   control={control}
                   errorMessage={errors.grade?.message}
-                  options={RATING_OPTIONS}
+                  options={ratingOptions}
                />
             </div>
             <Button className={styles.next} disabled={isSaveLoading} fullWidth>
-               Next Question
+               {t('next-question')}
             </Button>
          </form>
       </div>

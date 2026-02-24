@@ -3,7 +3,7 @@ import type { Deck } from '@/entities/deck'
 import { Link } from 'react-router-dom'
 
 import { DeleteDeck, ToggleDeckFavorite, UpdateDeck } from '@/features/manage-decks'
-import { DECK_COLUMNS } from '@/shared/constants'
+import { useDecksColumns } from '@/shared/constants/tables/use-decks-columns'
 import { formatDate, routeHelpers, useTableSort } from '@/shared/lib'
 import {
    Button,
@@ -30,6 +30,7 @@ type DecksTableProps = {
 
 export const DecksTable = ({ decks, userId, isLoading, isFetching, refetch }: DecksTableProps) => {
    const { sort, handleSort } = useTableSort()
+   const columns = useDecksColumns()
 
    if (isLoading || isFetching) {
       return <DecksTableSkeletons />
@@ -37,7 +38,7 @@ export const DecksTable = ({ decks, userId, isLoading, isFetching, refetch }: De
 
    return (
       <Table>
-         <TableSortHeader columns={DECK_COLUMNS} sort={sort} onSort={handleSort} />
+         <TableSortHeader columns={columns} sort={sort} onSort={handleSort} />
          <TableBody>
             {decks?.map(deck => {
                const coverUrl = deck.cover ?? DefaultCover

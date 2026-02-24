@@ -1,12 +1,13 @@
 import type { Card } from '@/entities/card'
 
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { clsx } from 'clsx'
 
 import { useMeQuery } from '@/entities/user'
 import { DeleteCard, UpdateCard } from '@/features/manage-cards'
-import { CARDS_COLUMNS } from '@/shared/constants'
+import { useCardColumns } from '@/shared/constants'
 import { formatDate, useTableSort } from '@/shared/lib'
 import {
    Typography,
@@ -33,6 +34,8 @@ export const CardsTable = ({ cards, isLoading, isFetching, refetch }: CardsTable
    const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({})
    const { data } = useMeQuery()
    const userId = data?.id ?? ''
+   const columns = useCardColumns()
+   const { t } = useTranslation()
 
    const { sort, handleSort } = useTableSort()
 
@@ -51,7 +54,7 @@ export const CardsTable = ({ cards, isLoading, isFetching, refetch }: CardsTable
 
    return (
       <Table>
-         <TableSortHeader columns={CARDS_COLUMNS} sort={sort} onSort={handleSort} />
+         <TableSortHeader columns={columns} sort={sort} onSort={handleSort} />
          <TableBody>
             {cards.map(card => {
                const isExpanded = expandedRows[card.id]
@@ -70,7 +73,7 @@ export const CardsTable = ({ cards, isLoading, isFetching, refetch }: CardsTable
                         </Typography>
                         {shouldButtonShow && (
                            <Button variant={'link'} onClick={() => toggleRowExpansion(card.id)}>
-                              {isExpanded ? 'Hide' : 'More'}
+                              {isExpanded ? t('hide') : t('more')}
                            </Button>
                         )}
                      </TableCell>
