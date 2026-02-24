@@ -1,11 +1,13 @@
 import type { ComponentProps } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { clsx } from 'clsx'
 
 import { useMeQuery } from '@/entities/user'
 import { LogoutButton } from '@/features/auth'
+import { SwitchLanguageButton } from '@/features/switch-language'
 import { ROUTE_PATHS } from '@/shared/routes'
 import { Button, Dropdown, LogoIcon, Typography, UserFilledIcon } from '@/shared/ui'
 
@@ -15,6 +17,7 @@ type HeaderProps = Omit<ComponentProps<'header'>, 'children'>
 
 export const Header = ({ className, ...rest }: HeaderProps) => {
    const { isError, data: userData } = useMeQuery()
+   const { t } = useTranslation()
    const name = userData?.name ?? 'Name'
    const email = userData?.email ?? 'example@example.com'
    const isAuth = !isError
@@ -28,24 +31,25 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
                <LogoIcon color={'white'} width={120} height={24} />
             </Button>
             <div className={styles.actions}>
+               <SwitchLanguageButton />
                {isAuth ? (
                   <Dropdown name={name} triggerIcon={hasAvatar ? avatar : null}>
                      <Dropdown.Label email={email} nickname={name} avatarUrl={userData?.avatar} />
                      <Dropdown.Item>
                         <Button variant={'ghost'} as={Link} to={ROUTE_PATHS.PROFILE}>
                            <UserFilledIcon width={16} height={16} />
-                           <Typography variant={'caption'}>My Profile</Typography>
+                           <Typography variant={'caption'}>{t('my-profile')}</Typography>
                         </Button>
                      </Dropdown.Item>
                      <Dropdown.Item>
                         <LogoutButton variant={'ghost'}>
-                           <Typography variant={'caption'}>Sign Out</Typography>
+                           <Typography variant={'caption'}>{t('sign-out')}</Typography>
                         </LogoutButton>
                      </Dropdown.Item>
                   </Dropdown>
                ) : (
                   <Button variant={'secondary'} as={Link} to={ROUTE_PATHS.SIGN_IN}>
-                     Sign In
+                     {t('sign-in')}
                   </Button>
                )}
             </div>
