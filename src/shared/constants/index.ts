@@ -1,5 +1,5 @@
 export { ACCESS_TOKEN } from './constants'
 export { VALID_FILE_FORMATS } from './file-formats'
-export { RATING_OPTIONS } from './rating-options'
-export { CARDS_COLUMNS } from './tables/cards-columns'
-export { DECK_COLUMNS } from './tables/decks-columns'
+export { useDecksColumns } from './tables/use-decks-columns'
+export { useCardColumns } from './tables/use-card-columns'
+export { useRatingOptions } from './use-rating-options'

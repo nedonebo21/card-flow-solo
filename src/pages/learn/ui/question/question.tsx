@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { clsx } from 'clsx'
 
 import { QuestionImage } from '@/pages/learn/ui/question/question-image/question-image'
@@ -24,6 +26,8 @@ export const Question = ({
    showAnswer,
    isLoading,
 }: QuestionProps) => {
+   const { t } = useTranslation()
+
    const haveQuestionImg = !!questionImg && questionImg.length > 0
 
    const handleAnswerShow = () => {
@@ -34,7 +38,7 @@ export const Question = ({
       <>
          <div className={styles.question}>
             <div className={styles.questionText}>
-               <Typography variant={'subtitle1'}>Question:</Typography>
+               <Typography variant={'subtitle1'}>{t('question')}:</Typography>
                <QuestionText question={question} isLoading={isLoading} />
             </div>
             <QuestionImage
@@ -43,7 +47,7 @@ export const Question = ({
                haveQuestionImg={haveQuestionImg}
             />
             <div className={styles.count}>
-               <Typography variant={'body2'}>Number of attempts:</Typography>
+               <Typography variant={'body2'}>{t('number-of-attempts')}:</Typography>
                <Shots shots={shots} isLoading={isLoading} />
             </div>
          </div>
@@ -56,7 +60,7 @@ export const Question = ({
                onClick={handleAnswerShow}
                fullWidth
             >
-               Show Answer
+               {t('show-answer')}
             </Button>
          )}
       </>

@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from 'sonner'
@@ -29,6 +30,7 @@ export const DeleteDeck = ({
    const [deleteDeck, { isLoading }] = useDeleteDeckMutation()
    const navigate = useNavigate()
    const [isOpen, setIsOpen] = useState(false)
+   const { t } = useTranslation()
 
    const handleOpenChange = () => {
       setIsOpen(prev => !prev)
@@ -45,15 +47,17 @@ export const DeleteDeck = ({
       if (redirectOnDelete) {
          navigate(ROUTE_PATHS.HOME)
       }
-      toast.success(`Deck '${deckName}' deleted successfully`)
+      toast.success(`${t('deck')} '${deckName}' ${t('deleted-successfully')}`)
    }
 
    return (
       <Dialog
-         heading={'Confirm your action'}
+         heading={t('confirm-action')}
          onConfirm={handleDelete}
          isConfirmDisabled={isLoading}
          showCancelButton
+         cancelButtonLabel={t('cancel')}
+         confirmButtonLabel={t('confirm')}
          trigger={
             <Button disabled={isLoading} variant={'ghost'} size={size} {...rest}>
                <TrashIcon width={16} height={16} />
@@ -64,7 +68,7 @@ export const DeleteDeck = ({
          open={isOpen}
       >
          <Typography variant={'body2'} textAlign={'left'}>
-            Are you sure you want to delete this deck?
+            {t('sure-want-delete-deck')}
          </Typography>
       </Dialog>
    )

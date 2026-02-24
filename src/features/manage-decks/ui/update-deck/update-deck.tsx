@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { DeckFormValues } from '../../model/deck-form-schema'
 
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { useGetDeckByIdQuery, useUpdateDeckMutation } from '@/entities/deck'
 import { VALID_FILE_FORMATS } from '@/shared/constants'
@@ -28,6 +29,8 @@ export const UpdateDeck = ({
    className,
 }: UpdateDeckProps) => {
    const [updateDeck, { isLoading }] = useUpdateDeckMutation()
+
+   const { t } = useTranslation()
 
    const [isOpen, setIsOpen] = useState(false)
    const [hasCoverChanged, setHasCoverChanged] = useState(false)
@@ -120,10 +123,10 @@ export const UpdateDeck = ({
                   {label ? <Typography variant={'caption'}>{label}</Typography> : ''}
                </Button>
             }
-            heading={'Edit Deck'}
-            confirmButtonLabel={'Confirm changes'}
+            heading={t('edit-deck')}
+            confirmButtonLabel={t('confirm')}
             showCancelButton
-            cancelButtonLabel={'Cancel'}
+            cancelButtonLabel={t('cancel')}
             confirmButtonFormId={'update-deck-form'}
             isConfirmDisabled={isConfirmDisabled}
          >
@@ -138,7 +141,7 @@ export const UpdateDeck = ({
                <ControlledInput
                   control={control}
                   name={'name'}
-                  label={'Name Pack'}
+                  label={t('name-pack')}
                   errorMessage={errors.name?.message}
                />
                <Button
@@ -148,7 +151,7 @@ export const UpdateDeck = ({
                   variant={'secondary'}
                >
                   <ImageIcon width={16} height={16} />
-                  {isCoverSelect ? 'Change Image' : 'Update Image'}
+                  {isCoverSelect ? t('change-image') : t('update-image')}
                </Button>
                <input
                   {...register('cover')}
@@ -158,7 +161,7 @@ export const UpdateDeck = ({
                   onChange={handleFileChange}
                   style={{ display: 'none' }}
                />
-               <ControlledCheckbox control={control} name={'isPrivate'} label={'Private Pack'} />
+               <ControlledCheckbox control={control} name={'isPrivate'} label={t('private-pack')} />
             </form>
          </Dialog>
          {originalCoverUrl && (

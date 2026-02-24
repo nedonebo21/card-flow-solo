@@ -5,6 +5,7 @@ import type { CardFormValues } from '../../model/card-form-schema'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
@@ -38,6 +39,8 @@ export const CreateCard = ({
 
    const [addCard, { isLoading }] = useCreateCardMutation()
 
+   const { t } = useTranslation()
+
    const [isOpen, setIsOpen] = useState(false)
 
    const handleOpenChange = (open: boolean) => {
@@ -52,7 +55,7 @@ export const CreateCard = ({
             await addCard({ body: data, id: deckId }).unwrap()
             handleOpenChange(false)
             refetch()
-            toast.success(`Card "${data.question}" has been created`)
+            toast.success(`${t('card')} "${data.question}" ${t('created-successfully')}`)
          } catch (error) {
             console.error(error)
          }
@@ -62,22 +65,22 @@ export const CreateCard = ({
    return (
       <form id={'add-card-form'} onSubmit={handleSubmit(onSubmit)} {...rest}>
          <Dialog
-            trigger={<Button>Add New Card</Button>}
+            trigger={<Button>{t('add-card')}</Button>}
             open={isOpen}
             onOpenChange={handleOpenChange}
             showCancelButton
             isConfirmDisabled={isLoading}
-            confirmButtonLabel={'Add Card'}
+            confirmButtonLabel={t('add-card')}
             confirmButtonFormId={'add-card-form'}
-            cancelButtonLabel={'Cancel'}
-            heading={'Add Card'}
+            cancelButtonLabel={t('cancel')}
+            heading={t('add-card')}
          >
             <CardFieldsSection
                control={control}
                setValue={setValue}
                inputName={'question'}
                errorMessage={errors.question?.message}
-               inputLabel={'Question'}
+               inputLabel={t('question')}
                imageFieldName={'questionImg'}
             />
 
@@ -86,7 +89,7 @@ export const CreateCard = ({
                setValue={setValue}
                inputName={'answer'}
                errorMessage={errors.answer?.message}
-               inputLabel={'Answer'}
+               inputLabel={t('answer')}
                imageFieldName={'answerImg'}
             />
          </Dialog>

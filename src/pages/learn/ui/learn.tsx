@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 
 import { useGetRandomCardQuery } from '@/entities/card'
@@ -12,6 +13,8 @@ import styles from './learn.module.scss'
 
 export const Learn = () => {
    const [showAnswer, setShowAnswer] = useState(false)
+
+   const { t } = useTranslation()
 
    const { id } = useParams()
 
@@ -40,16 +43,16 @@ export const Learn = () => {
                as={Link}
                to={routeHelpers.createDeckPath(id ?? '')}
             >
-               <ArrowLeftIcon width={16} height={16} /> Back to previous page
+               <ArrowLeftIcon width={16} height={16} /> {t('back-to-prev')}
             </Button>
          </div>
          {isError ? (
-            <Typography variant={'warning'}>This deck is empty. See you later ^_^</Typography>
+            <Typography variant={'warning'}>{t('deck-is-empty')}</Typography>
          ) : (
             <Card as={'section'} className={styles.learn}>
                <header className={styles.header}>
                   <Typography variant={'h1'} as={'h1'}>
-                     Learn &#34;{deck?.name}&#34;
+                     {deck?.name}
                   </Typography>
                </header>
                <Question

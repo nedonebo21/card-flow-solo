@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { toast } from 'sonner'
 
 import { useMeQuery } from '@/entities/user'
@@ -11,6 +13,8 @@ export const SendVerifyEmail = () => {
 
    const [sendVerifyEmail] = useSendVerifyEmailMutation()
 
+   const { t } = useTranslation()
+
    const handleSend = async () => {
       try {
          await sendVerifyEmail({
@@ -18,7 +22,7 @@ export const SendVerifyEmail = () => {
             subject: 'Email Confirm',
             html: `<b>Hello, ##name##!</b><br/>Please confirm your email by code below:<br/><h2>##token##</h2>`,
          }).unwrap()
-         toast.success('Confirm email has been send')
+         toast.success(t('confirm-has-been-sent'))
       } catch (error) {
          console.error(error)
       }
@@ -26,7 +30,7 @@ export const SendVerifyEmail = () => {
 
    return (
       <Button onClick={handleSend} variant={'link'}>
-         Send code again
+         {t('send-code-again')}
       </Button>
    )
 }

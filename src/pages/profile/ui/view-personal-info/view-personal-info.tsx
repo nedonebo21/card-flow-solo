@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { UpdateAvatarFormValues, UpdateNameFormValues } from '@/features/manage-profile'
 
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { clsx } from 'clsx'
@@ -37,6 +38,7 @@ export const ViewPersonalInfo = ({
    ...rest
 }: ViewPersonalInfoProps) => {
    const [isEditMode, setIsEditMode] = useState(false)
+   const { t } = useTranslation()
 
    const handleEditModeOn = () => {
       setIsEditMode(true)
@@ -67,7 +69,7 @@ export const ViewPersonalInfo = ({
       } else {
          try {
             await updateUser({ avatar: data.avatar }).unwrap()
-            toast.success('Avatar has been changed')
+            toast.success(t('changed-avatar'))
          } catch (error) {
             console.error(error)
          }
@@ -77,7 +79,7 @@ export const ViewPersonalInfo = ({
    return (
       <Card as={'section'} className={clsx(styles.wrapper, className)} {...rest}>
          <header className={styles.header}>
-            <Typography variant={'h1'}>Personal Information</Typography>
+            <Typography variant={'h1'}>{t('personal-information')}</Typography>
          </header>
          <div className={styles.content}>
             <UpdateAvatarForm
@@ -113,13 +115,13 @@ export const ViewPersonalInfo = ({
                            to={ROUTE_PATHS.VERIFY_EMAIL}
                            variant={'error'}
                         >
-                           Confirm
+                           {t('confirm')}
                         </Typography>
                      )}
                   </div>
                   <div className={styles.footer}>
                      <LogoutButton onLogout={onLogout}>
-                        <Typography variant={'subtitle2'}>Sign Out</Typography>
+                        <Typography variant={'subtitle2'}>{t('sign-out')}</Typography>
                      </LogoutButton>
                   </div>
                </>

@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { UpdateNameFormValues } from '@/features/manage-profile'
 
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -35,6 +36,8 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
       },
    })
 
+   const { t } = useTranslation()
+
    const onSubmit: SubmitHandler<UpdateNameFormValues> = async (data, e) => {
       rest?.onSubmit?.(data, e)
    }
@@ -44,7 +47,7 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
          <ControlledInput
             control={control}
             name={'name'}
-            label={`Nickname`}
+            label={t('nickname')}
             errorMessage={errors.name?.message}
          />
          <div className={styles.buttons}>
@@ -55,7 +58,7 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
                fullWidth
                type={'button'}
             >
-               Cancel
+               {t('cancel')}
             </Button>
             <Button
                className={styles.save}
@@ -63,7 +66,7 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
                fullWidth
                type={'submit'}
             >
-               Save Changes
+               {t('save-changes')}
             </Button>
          </div>
          {import.meta.env.DEV && <DevTool control={control} />}

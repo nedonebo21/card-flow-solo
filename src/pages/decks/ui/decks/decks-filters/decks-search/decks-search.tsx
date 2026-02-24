@@ -1,6 +1,7 @@
 import type { ChangeEvent } from 'react'
 
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
 import { InputSearch } from '@/shared/ui'
@@ -10,6 +11,8 @@ import styles from './decks-search.module.scss'
 export const DecksSearch = () => {
    const [searchParams, setSearchParams] = useSearchParams()
    const name = searchParams.get('name')
+
+   const { t } = useTranslation()
 
    const handleNameChange = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,7 @@ export const DecksSearch = () => {
    return (
       <InputSearch
          className={styles.input}
-         placeholder={'...'}
+         placeholder={t('search')}
          value={name ?? ''}
          onChange={handleNameChange}
          onClear={handleClear}

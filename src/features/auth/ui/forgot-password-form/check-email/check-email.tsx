@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { ROUTE_PATHS } from '@/shared/routes'
@@ -10,21 +11,23 @@ type CheckEmailProps = {
 }
 
 export const CheckEmail = ({ email }: CheckEmailProps) => {
+   const { t } = useTranslation()
+
    return (
       <Card className={styles.wrapper}>
          <div className={styles.header}>
             <Typography variant={'h1'} className={styles.title}>
-               Check Email
+               {t('check-email')}
             </Typography>
          </div>
          <div className={styles.content}>
             <CheckEmailIcon width={96} height={96} />
             <Typography variant={'body2'} className={styles.text}>
-               We’ve sent an Email with instructions to {email}
+               {t('we-send-instructions')} {email}
             </Typography>
          </div>
          <Button as={Link} to={ROUTE_PATHS.SIGN_IN}>
-            Back to Sign In
+            {t('back-to-sign-in')}
          </Button>
       </Card>
    )

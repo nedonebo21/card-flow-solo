@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { DeckFormValues } from '../../model/deck-form-schema'
 
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { toast } from 'sonner'
 
@@ -46,6 +47,8 @@ export const CreateDeck = ({
       handleCropDialogOpenChange,
    } = useDeckForm()
 
+   const { t } = useTranslation()
+
    const onSubmit: typeof onSubmitFormProps = async (data, e) => {
       if (onSubmitFormProps) {
          await onSubmitFormProps(data, e)
@@ -54,7 +57,7 @@ export const CreateDeck = ({
             await createDeck(data).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success(`Deck '${data.name}' created successfully`)
+            toast.success(`${t('deck')} '${data.name}' ${t('created-successfully')}`)
          } catch (error) {
             console.error(error)
          }
@@ -79,10 +82,10 @@ export const CreateDeck = ({
                open={isOpen}
                onOpenChange={handleOpenChange}
                trigger={<Button>New Deck</Button>}
-               heading={'Add New Deck'}
-               confirmButtonLabel={'Add New Pack'}
+               heading={t('add-new-deck')}
+               confirmButtonLabel={t('add-new-deck')}
                showCancelButton
-               cancelButtonLabel={'Cancel'}
+               cancelButtonLabel={t('cancel')}
                confirmButtonFormId={'create-deck-form'}
                isConfirmDisabled={isLoading}
             >
@@ -96,7 +99,7 @@ export const CreateDeck = ({
                <ControlledInput
                   control={control}
                   name={'name'}
-                  label={'Name Pack'}
+                  label={t('name-pack')}
                   errorMessage={errors.name?.message}
                />
                <Button
@@ -106,7 +109,7 @@ export const CreateDeck = ({
                   variant={'secondary'}
                >
                   <ImageIcon width={16} height={16} />
-                  {isCoverSelect ? 'Change Image' : 'Upload Image'}
+                  {isCoverSelect ? t('change-image') : t('update-image')}
                </Button>
                <input
                   {...register('cover')}
@@ -116,7 +119,7 @@ export const CreateDeck = ({
                   onChange={handleFileChange}
                   style={{ display: 'none' }}
                />
-               <ControlledCheckbox control={control} name={'isPrivate'} label={'Private Pack'} />
+               <ControlledCheckbox control={control} name={'isPrivate'} label={t('private-pack')} />
             </Dialog>
          </form>
          {originalCoverUrl && (

@@ -5,6 +5,7 @@ import type { ForgotPasswordFormValues } from '../../model/forgot-password-schem
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
@@ -39,6 +40,8 @@ export const ForgotPasswordForm = ({
       },
    })
 
+   const { t } = useTranslation()
+
    const [isEmailSubmitted, setIsEmailSubmitted] = useState(false)
    const [submittedEmail, setSubmittedEmail] = useState('')
 
@@ -69,7 +72,7 @@ export const ForgotPasswordForm = ({
          <Card className={styles.wrapper}>
             <div className={styles.header}>
                <Typography variant={'h1'} className={styles.title}>
-                  Forgot your password?
+                  {t('forgot-password')}
                </Typography>
             </div>
             <div className={styles.content}>
@@ -78,19 +81,19 @@ export const ForgotPasswordForm = ({
                   control={control}
                   placeholder={'example@example.com'}
                   name={'email'}
-                  label={'Email'}
+                  label={t('email')}
                   errorMessage={errors.email?.message}
                />
                <Typography textAlign={'left'} className={styles.text} variant={'body2'}>
-                  Enter your email address and we will send you further instructions
+                  {t('enter-email-for-instructions')}
                </Typography>
             </div>
             <div className={styles.footer}>
                <Button fullWidth type={'submit'}>
-                  Send Instructions
+                  {t('send-instructions')}
                </Button>
                <Typography className={styles.footerText} variant={'body2'}>
-                  Did you remember your password?
+                  {t('did-remember-password')}
                </Typography>
                <Typography
                   className={styles.footerLink}
@@ -98,7 +101,7 @@ export const ForgotPasswordForm = ({
                   as={Link}
                   to={ROUTE_PATHS.SIGN_IN}
                >
-                  Try logging in
+                  {t('try-logging-in')}
                </Typography>
             </div>
          </Card>

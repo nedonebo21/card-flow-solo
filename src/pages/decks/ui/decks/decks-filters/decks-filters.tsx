@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 import { Button, TrashIcon } from '@/shared/ui'
 
 import styles from './decks-filters.module.scss'
@@ -11,6 +13,8 @@ type DecksFiltersProps = {
 }
 
 export const DecksFilters = ({ onClear }: DecksFiltersProps) => {
+   const { t } = useTranslation()
+
    return (
       <div className={styles.filters}>
          <DecksSearch />
@@ -18,7 +22,7 @@ export const DecksFilters = ({ onClear }: DecksFiltersProps) => {
          <DecksSlider />
          <Button onClick={onClear} className={styles.clear} variant={'secondary'}>
             <TrashIcon width={16} height={16} />
-            Clear Filter
+            {t('clear-filter')}
          </Button>
       </div>
    )

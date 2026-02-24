@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 import { useGetDeckByIdQuery } from '@/entities/deck'
@@ -27,6 +28,7 @@ type CardsHeaderProps = {
 export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => {
    const { data: userData } = useMeQuery()
    const { data: deck } = useGetDeckByIdQuery({ id: deckId ?? '' }, { skip: !deckId })
+   const { t } = useTranslation()
 
    const isOwner = userData?.id === deck?.userId
 
@@ -37,7 +39,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
       <div className={styles.wrapper}>
          <div className={styles.linkContainer}>
             <Button className={styles.link} variant={'link'} as={Link} to={ROUTE_PATHS.DECKS}>
-               <ArrowLeftIcon width={16} height={16} /> Back to Decks List
+               <ArrowLeftIcon width={16} height={16} /> {t('back-to-decks')}
             </Button>
          </div>
          <div className={styles.learnContainer}>
@@ -52,14 +54,14 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
                            variant={'ghost'}
                         >
                            <CirclePlayIcon width={16} height={16} />
-                           <Typography variant={'caption'}>Learn</Typography>
+                           <Typography variant={'caption'}>{t('learn')}</Typography>
                         </Button>
                      </Dropdown.Item>
                      <Dropdown.Item asChild>
                         <UpdateDeck
                            className={styles.update}
                            id={deckId ?? ''}
-                           label={'Edit'}
+                           label={t('edit')}
                            size={'default'}
                         />
                      </Dropdown.Item>
@@ -69,7 +71,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
                            refetch={refetch}
                            deckName={deck?.name}
                            redirectOnDelete
-                           label={'Delete'}
+                           label={t('delete')}
                            size={'default'}
                         />
                      </Dropdown.Item>
@@ -81,7 +83,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
 
             {!isOwner && showLearn && (
                <Button as={Link} to={routeHelpers.createLearnPath(deckId ?? '')}>
-                  Learn to pack
+                  {t('learn-to-pack')}
                </Button>
             )}
          </div>

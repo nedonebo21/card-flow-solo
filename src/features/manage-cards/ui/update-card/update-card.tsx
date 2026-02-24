@@ -5,6 +5,7 @@ import type { CardFormValues } from '../../model/card-form-schema'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
@@ -33,6 +34,8 @@ export const UpdateCard = ({
 
    const { data: card } = useGetCardByIdQuery({ id }, { skip: !isOpen })
 
+   const { t } = useTranslation()
+
    const {
       handleSubmit,
       control,
@@ -56,7 +59,7 @@ export const UpdateCard = ({
             await updateCard({ id, body: data }).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success('Card has been updated')
+            toast.success(t('card-updated'))
          } catch (error) {
             console.error(error)
          }
@@ -79,17 +82,17 @@ export const UpdateCard = ({
             onOpenChange={handleOpenChange}
             showCancelButton
             isConfirmDisabled={isLoading}
-            confirmButtonLabel={'Confirm'}
+            confirmButtonLabel={t('confirm')}
             confirmButtonFormId={'update-card-form'}
-            cancelButtonLabel={'Cancel'}
-            heading={'Update Card'}
+            cancelButtonLabel={t('cancel')}
+            heading={t('update-card')}
          >
             <CardFieldsSection
                control={control}
                setValue={setValue}
                inputName={'question'}
                errorMessage={errors.question?.message}
-               inputLabel={'Question'}
+               inputLabel={t('question')}
                imageFieldName={'questionImg'}
             />
 
@@ -98,7 +101,7 @@ export const UpdateCard = ({
                setValue={setValue}
                inputName={'answer'}
                errorMessage={errors.answer?.message}
-               inputLabel={'Answer'}
+               inputLabel={t('answer')}
                imageFieldName={'answerImg'}
             />
          </Dialog>

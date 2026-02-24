@@ -2,6 +2,7 @@ import type { Point, Area } from 'react-easy-crop'
 
 import { useState, useCallback } from 'react'
 import Cropper from 'react-easy-crop'
+import { useTranslation } from 'react-i18next'
 
 import { getCroppedImg } from '@/shared/lib'
 import { Dialog } from '@/shared/ui'
@@ -25,6 +26,8 @@ export const CropImageDialog = ({
 }: CropImageDialogProps) => {
    const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
    const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
+
+   const { t } = useTranslation()
 
    const onCropChange = useCallback((crop: Point) => {
       setCrop(crop)
@@ -53,9 +56,9 @@ export const CropImageDialog = ({
       <Dialog
          open={open}
          onOpenChange={onOpenChange}
-         heading={'Crop Cover'}
-         confirmButtonLabel={'Confirm'}
-         cancelButtonLabel={'Cancel'}
+         heading={t('crop-cover')}
+         confirmButtonLabel={t('confirm')}
+         cancelButtonLabel={t('cancel')}
          onConfirm={handleCropComplete}
          trigger={null}
          showCancelButton

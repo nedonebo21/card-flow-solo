@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { SignUpFormValues } from '../../model/sign-up-schema'
 
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
@@ -36,6 +37,8 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
       },
    })
 
+   const { t } = useTranslation()
+
    const [signUp, { isLoading }] = useSignUpMutation()
    const navigate = useNavigate()
 
@@ -56,7 +59,7 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
-               <Typography variant={'h1'}>Sign Up</Typography>
+               <Typography variant={'h1'}>{t('sign-up')}</Typography>
             </div>
             <div className={styles.content}>
                <ControlledInput
@@ -64,33 +67,33 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
                   control={control}
                   placeholder={'example@example.com'}
                   name={'email'}
-                  label={'Email'}
+                  label={t('email')}
                   errorMessage={errors.email?.message}
                />
                <ControlledInput
                   InputComponent={InputPassword}
                   control={control}
                   name={'password'}
-                  label={'Password'}
+                  label={t('password')}
                   errorMessage={errors.password?.message}
                />
                <ControlledInput
                   InputComponent={InputPassword}
                   control={control}
                   name={'confirm'}
-                  label={'Confirm Password'}
+                  label={t('confirm-password')}
                   errorMessage={errors.confirm?.message}
                />
             </div>
             <div className={styles.footer}>
                <Button disabled={isLoading} fullWidth type={'submit'}>
-                  Sign Up
+                  {t('register')}
                </Button>
                <Typography className={styles.footerText} variant={'body2'}>
-                  Already have an account?
+                  {t('have-account')}
                </Typography>
                <Button variant={'link'} as={Link} to={ROUTE_PATHS.SIGN_IN}>
-                  Sign In
+                  {t('sign-in')}
                </Button>
             </div>
          </Card>

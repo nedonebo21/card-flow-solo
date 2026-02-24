@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
 import { clearFilters } from '@/shared/lib'
@@ -7,6 +8,7 @@ import { HeartOutlineIcon, Tabs, Typography } from '@/shared/ui'
 import styles from './decks-switcher.module.scss'
 
 export const DecksSwitcher = () => {
+   const { t } = useTranslation()
    const [searchParams, setSearchParams] = useSearchParams()
 
    const show = searchParams.get('show') || 'all'
@@ -31,14 +33,14 @@ export const DecksSwitcher = () => {
    return (
       <Tabs onValueChange={setShow} value={show ?? undefined}>
          <Typography className={styles.label} textAlign={'left'} variant={'body2'}>
-            Show decks cards
+            {t('show-decks')}
          </Typography>
          <Tabs.List className={styles.tabs}>
             <Tabs.Trigger className={styles.favorite} value={'favorite'}>
                <HeartOutlineIcon />
             </Tabs.Trigger>
-            <Tabs.Trigger value={'my'}>My Cards</Tabs.Trigger>
-            <Tabs.Trigger value={'all'}>All Cards</Tabs.Trigger>
+            <Tabs.Trigger value={'my'}>{t('my-decks')}</Tabs.Trigger>
+            <Tabs.Trigger value={'all'}>{t('all-decks')}</Tabs.Trigger>
          </Tabs.List>
       </Tabs>
    )

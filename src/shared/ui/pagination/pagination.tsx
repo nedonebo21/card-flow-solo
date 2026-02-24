@@ -1,4 +1,5 @@
 import { type ComponentProps, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { clsx } from 'clsx'
 
@@ -29,6 +30,8 @@ export const Pagination = ({
    currentPage,
    pageSize,
 }: PaginationProps) => {
+   const { t } = useTranslation()
+
    const paginationRange = usePagination({ currentPage, totalCount, siblingCount, pageSize })
 
    const options = useMemo(
@@ -57,14 +60,14 @@ export const Pagination = ({
             )}
          </div>
          <div className={styles.itemsCountWrapper}>
-            <Typography variant={'body2'}>Показать</Typography>
+            <Typography variant={'body2'}>{t('show')}</Typography>
             <Select
                className={styles.select}
                options={options}
                placeholder={options[0].label}
                onValueChange={handlePageSizeChange}
             />
-            <Typography variant={'body2'}>на странице</Typography>
+            <Typography variant={'body2'}>{t('on-page')}</Typography>
          </div>
       </div>
    )

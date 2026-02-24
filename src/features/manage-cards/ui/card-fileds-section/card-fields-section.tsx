@@ -4,6 +4,7 @@ import type { Control, UseFormSetValue } from 'react-hook-form'
 import type { CardFormValues } from '../../model/card-form-schema'
 
 import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { VALID_FILE_FORMATS } from '@/shared/constants'
 import { ControlledInput } from '@/shared/forms'
@@ -29,6 +30,8 @@ export const CardFieldsSection = ({
    const [imagePreview, setImagePreview] = useState<string | null>(null)
    const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null)
    const [isCropperOpen, setIsCropperOpen] = useState(false)
+
+   const { t } = useTranslation()
 
    const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -79,7 +82,7 @@ export const CardFieldsSection = ({
          />
          <Button fullWidth onClick={handleImageChangeClick} type={'button'} variant={'secondary'}>
             <ImageIcon width={16} height={16} />
-            {imagePreview ? 'Change Image' : 'Upload Image'}
+            {imagePreview ? t('change-image') : t('update-image')}
          </Button>
          {imagePreview && (
             <img className={'cover'} src={imagePreview} alt={`${inputLabel} Preview`} />

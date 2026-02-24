@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
 import { useGetCardsCountQuery } from '@/entities/deck/api/decks-api'
@@ -7,6 +8,7 @@ import { Slider, Typography } from '@/shared/ui'
 import styles from './decks-slider.module.scss'
 
 export const DecksSlider = () => {
+   const { t } = useTranslation()
    const [searchParams, setSearchParams] = useSearchParams()
 
    const { data } = useGetCardsCountQuery()
@@ -43,7 +45,7 @@ export const DecksSlider = () => {
    return (
       <div>
          <Typography className={styles.label} textAlign={'left'} variant={'body2'}>
-            Number of cards
+            {t('number-of-cards')}
          </Typography>
          <Slider
             values={[minCount, maxCount]}

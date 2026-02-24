@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { SignInFormValues } from '../../model/sign-in-schema'
 
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { DevTool } from '@hookform/devtools'
@@ -36,6 +37,8 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
       },
    })
 
+   const { t } = useTranslation()
+
    const [signIn, { isError, isLoading }] = useSignInMutation()
    const navigate = useNavigate()
 
@@ -57,7 +60,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
-               <Typography variant={'h1'}>Sign In</Typography>
+               <Typography variant={'h1'}>{t('sign-in')}</Typography>
             </div>
             <div className={styles.content}>
                <div className={styles.inputs}>
@@ -65,7 +68,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      InputComponent={InputEmail}
                      control={control}
                      name={'email'}
-                     label={'Email'}
+                     label={t('email')}
                      placeholder={'example@example.com'}
                      errorMessage={errors.email?.message}
                      disabled={isLoading}
@@ -74,7 +77,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      InputComponent={InputPassword}
                      control={control}
                      name={'password'}
-                     label={'Password'}
+                     label={t('password')}
                      errorMessage={errors.password?.message}
                      disabled={isLoading}
                   />
@@ -86,7 +89,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                   <ControlledCheckbox
                      control={control}
                      name={'rememberMe'}
-                     label={'Remember me'}
+                     label={t('remember-me')}
                      disabled={isLoading}
                   />
                   <Button
@@ -95,19 +98,19 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      as={Link}
                      to={ROUTE_PATHS.FORGOT_PASSWORD}
                   >
-                     Forgot password?
+                     {t('forgot-password')}
                   </Button>
                </div>
             </div>
             <Button disabled={isLoading} fullWidth type={'submit'}>
-               Sign In
+               {t('login')}
             </Button>
             <div className={styles.footer}>
                <Typography className={styles.footerText} variant={'body2'}>
-                  Don&#39;t have an account?
+                  {t('dont-have-account')}
                </Typography>
                <Button variant={'link'} as={Link} to={ROUTE_PATHS.SIGN_UP}>
-                  Sign Up
+                  {t('sign-up')}
                </Button>
             </div>
          </Card>

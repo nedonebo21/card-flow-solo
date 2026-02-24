@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from 'use-debounce'
@@ -18,6 +19,7 @@ import { CardsTable } from './cards-table/cards-table'
 
 export const Cards = () => {
    const { id } = useParams()
+   const { t } = useTranslation()
 
    const { data: userData } = useMeQuery()
 
@@ -66,9 +68,7 @@ export const Cards = () => {
             </>
          ) : (
             <div className={styles.empty}>
-               <Typography className={styles.emptyText}>
-                  Deck is empty. {isOwner && "Press on 'Add New Card'"}
-               </Typography>
+               <Typography className={styles.emptyText}>{t('own-deck-empty')}</Typography>
                {isOwner && <CreateCard deckId={id ?? ''} refetch={refetch} />}
             </div>
          )}

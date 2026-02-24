@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { toast } from 'sonner'
@@ -29,6 +30,7 @@ export const DeleteCard = ({
    const [deleteCard, { isLoading }] = useDeleteCardMutation()
    const navigate = useNavigate()
    const [isOpen, setIsOpen] = useState(false)
+   const { t } = useTranslation()
 
    const handleOpenChange = () => {
       setIsOpen(prev => !prev)
@@ -42,7 +44,7 @@ export const DeleteCard = ({
             await deleteCard(id).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success(`Card '${cardName}' deleted successfully`)
+            toast.success(`${t('card')} '${cardName}' ${t('deleted-successfully')}`)
             if (redirectOnDelete) {
                navigate(ROUTE_PATHS.HOME)
             }
@@ -54,10 +56,12 @@ export const DeleteCard = ({
 
    return (
       <Dialog
-         heading={'Confirm your action'}
+         heading={t('confirm-action')}
          onConfirm={handleDelete}
          isConfirmDisabled={isLoading}
          showCancelButton
+         cancelButtonLabel={t('cancel')}
+         confirmButtonLabel={t('confirm')}
          trigger={
             <Button variant={'ghost'} size={size} {...rest}>
                <TrashIcon width={16} height={16} />
@@ -68,7 +72,7 @@ export const DeleteCard = ({
          open={isOpen}
       >
          <Typography variant={'body2'} textAlign={'left'}>
-            Are you sure you want to delete this card?
+            {t('sure-want-delete-card')}
          </Typography>
       </Dialog>
    )
