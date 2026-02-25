@@ -9,7 +9,7 @@ import { Button, Card, Typography } from '@/shared/ui'
 import styles from './dropdown.module.scss'
 
 type DropdownProps = {
-   triggerIcon?: string | null
+   triggerIcon?: string | null | ReactNode
    triggerButton?: ReactNode
    name?: string
    alignItems?: ComponentProps<typeof RadixDropdown.Content>['align']
@@ -31,11 +31,19 @@ const Dropdown = ({
 
    const defaultAvatar = name?.[0].toUpperCase()
 
+   let avatarContent: ReactNode = null
+
+   if (typeof triggerIcon === 'string') {
+      avatarContent = <img src={triggerIcon} alt={'avatar'} />
+   } else if (triggerIcon) {
+      avatarContent = triggerIcon
+   }
+
    return (
       <RadixDropdown.Root {...rest}>
          <RadixDropdown.Trigger className={styles.trigger} asChild>
             <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
-               {triggerIcon && <img src={triggerIcon} alt={'avatar'} />}
+               {avatarContent}
                {triggerButton}
                {!triggerIcon && !triggerButton && <div>{defaultAvatar}</div>}
             </Button>
