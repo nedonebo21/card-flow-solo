@@ -26,11 +26,5 @@ export { Dialog } from './dialog'
 export { Slider } from './slider'
 export { CropImageDialog } from './crop-image-dialog'
 export { Loader } from './loader'
-export {
-   LearnTextSkeleton,
-   ShotsSkeleton,
-   ImgSkeleton,
-   CardsTableSkeletons,
-   DecksTableSkeletons,
-} from './skeletons'
+export * from './skeletons'
 export * from './icons'
