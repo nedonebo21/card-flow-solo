@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -9,20 +9,30 @@ import { useMeQuery } from '@/entities/user'
 import { LogoutButton } from '@/features/auth'
 import { SwitchLanguageButton } from '@/features/switch-language'
 import { ROUTE_PATHS } from '@/shared/routes'
-import { Button, Dropdown, LogoIcon, Typography, UserFilledIcon } from '@/shared/ui'
+import { Button, Dropdown, LogoIcon, Typography, UserFilledIcon, AvatarSkeleton } from '@/shared/ui'
 
 import styles from './header.module.scss'
 
 type HeaderProps = Omit<ComponentProps<'header'>, 'children'>
 
 export const Header = ({ className, ...rest }: HeaderProps) => {
-   const { isError, data: userData } = useMeQuery()
+   const { isError, data: userData, isLoading } = useMeQuery()
    const { t } = useTranslation()
    const name = userData?.name ?? 'Name'
    const email = userData?.email ?? 'example@example.com'
    const isAuth = !isError
    const avatar = userData?.avatar
    const hasAvatar = !!avatar && avatar.length > 0
+
+   let triggerIcon: string | null | ReactNode = null
+
+   if (isAuth) {
+      if (isLoading) {
+         triggerIcon = <AvatarSkeleton />
+      } else if (hasAvatar) {
+         triggerIcon = avatar
+      }
+   }
 
    return (
       <header className={clsx(styles.header, className)} {...rest}>
@@ -33,7 +43,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
             <div className={styles.actions}>
                <SwitchLanguageButton />
                {isAuth ? (
-                  <Dropdown name={name} triggerIcon={hasAvatar ? avatar : null}>
+                  <Dropdown name={name} triggerIcon={triggerIcon}>
                      <Dropdown.Label email={email} nickname={name} avatarUrl={userData?.avatar} />
                      <Dropdown.Item>
                         <Button variant={'ghost'} as={Link} to={ROUTE_PATHS.PROFILE}>
