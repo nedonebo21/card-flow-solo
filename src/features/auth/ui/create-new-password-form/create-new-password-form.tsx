@@ -72,7 +72,7 @@ export const CreateNewPasswordForm = ({
                   InputComponent={InputPassword}
                   control={control}
                   name={'password'}
-                  label={t(t('password'))}
+                  label={t('password')}
                   errorMessage={errors.password?.message}
                />
                <Typography textAlign={'left'} className={styles.text} variant={'body2'}>
