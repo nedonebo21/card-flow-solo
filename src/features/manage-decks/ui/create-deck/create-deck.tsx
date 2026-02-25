@@ -81,7 +81,7 @@ export const CreateDeck = ({
             <Dialog
                open={isOpen}
                onOpenChange={handleOpenChange}
-               trigger={<Button>New Deck</Button>}
+               trigger={<Button>{t('add-new-deck')}</Button>}
                heading={t('add-new-deck')}
                confirmButtonLabel={t('add-new-deck')}
                showCancelButton

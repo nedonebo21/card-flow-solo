@@ -6,16 +6,15 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import enTranslations from '@/shared/config/i18n/locales/en.json'
 import ruTranslations from '@/shared/config/i18n/locales/ru.json'
 
-i18n
-   .use(LanguageDetector)
-   .use(initReactI18next)
-   .init({
-      debug: true,
-      fallbackLng: 'en',
-      resources: {
-         en: { translation: enTranslations },
-         ru: { translation: ruTranslations },
-      },
-   })
+export const resources = {
+   en: { translation: enTranslations },
+   ru: { translation: ruTranslations },
+}
+
+i18n.use(LanguageDetector).use(initReactI18next).init({
+   debug: true,
+   fallbackLng: 'en',
+   resources,
+})
 
 export default i18n
