@@ -47,7 +47,7 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
          <ControlledInput
             control={control}
             name={'name'}
-            label={t('nickname')}
+            label={t('features.manage-profile.nickname')}
             errorMessage={errors.name?.message}
          />
          <div className={styles.buttons}>
@@ -58,7 +58,7 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
                fullWidth
                type={'button'}
             >
-               {t('cancel')}
+               {t('shared.cancel')}
             </Button>
             <Button
                className={styles.save}
@@ -66,7 +66,7 @@ export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props
                fullWidth
                type={'submit'}
             >
-               {t('save-changes')}
+               {t('features.manage-profile.save-changes')}
             </Button>
          </div>
          {import.meta.env.DEV && <DevTool control={control} />}

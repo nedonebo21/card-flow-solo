@@ -22,7 +22,7 @@ export const SendVerifyEmail = () => {
             subject: 'Email Confirm',
             html: `<b>Hello, ##name##!</b><br/>Please confirm your email by code below:<br/><h2>##token##</h2>`,
          }).unwrap()
-         toast.success(t('confirm-has-been-sent'))
+         toast.success(t('features.auth.confirm-has-been-sent'))
       } catch (error) {
          console.error(error)
       }
@@ -30,7 +30,7 @@ export const SendVerifyEmail = () => {
 
    return (
       <Button onClick={handleSend} variant={'link'}>
-         {t('send-code-again')}
+         {t('features.auth.send-code-again')}
       </Button>
    )
 }

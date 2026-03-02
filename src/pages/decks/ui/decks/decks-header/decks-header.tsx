@@ -15,7 +15,7 @@ export const DecksHeader = ({ refetch }: DecksHeaderProps) => {
    return (
       <div className={styles.header}>
          <Typography textAlign={'left'} variant={'h1'}>
-            {t('decks-list')}
+            {t('pages.decks.decks-list')}
          </Typography>
          <CreateDeck refetch={refetch} />
       </div>

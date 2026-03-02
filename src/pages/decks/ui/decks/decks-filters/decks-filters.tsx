@@ -22,7 +22,7 @@ export const DecksFilters = ({ onClear }: DecksFiltersProps) => {
          <DecksSlider />
          <Button onClick={onClear} className={styles.clear} variant={'secondary'}>
             <TrashIcon width={16} height={16} />
-            {t('clear-filter')}
+            {t('pages.decks.clear-filter')}
          </Button>
       </div>
    )

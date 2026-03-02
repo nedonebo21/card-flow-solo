@@ -82,7 +82,7 @@ export const CardFieldsSection = ({
          />
          <Button fullWidth onClick={handleImageChangeClick} type={'button'} variant={'secondary'}>
             <ImageIcon width={16} height={16} />
-            {imagePreview ? t('change-image') : t('update-image')}
+            {imagePreview ? t('shared.change-image') : t('shared.update-image')}
          </Button>
          {imagePreview && (
             <img className={'cover'} src={imagePreview} alt={`${inputLabel} Preview`} />

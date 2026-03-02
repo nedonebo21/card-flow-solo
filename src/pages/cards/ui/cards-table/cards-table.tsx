@@ -73,7 +73,7 @@ export const CardsTable = ({ cards, isLoading, isFetching, refetch }: CardsTable
                         </Typography>
                         {shouldButtonShow && (
                            <Button variant={'link'} onClick={() => toggleRowExpansion(card.id)}>
-                              {isExpanded ? t('hide') : t('more')}
+                              {isExpanded ? t('pages.cards.hide') : t('pages.cards.more')}
                            </Button>
                         )}
                      </TableCell>

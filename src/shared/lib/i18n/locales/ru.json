@@ -1,0 +1,118 @@
+{
+   "pages": {
+      "cards": {
+         "learn": "Учиться",
+         "edit": "Изменить",
+         "delete": "Удалить",
+         "own-deck-empty": "Колода пуста.",
+         "hide": "Скрыть",
+         "more": "Показать",
+         "back-to-decks": "Вернуться к колодам",
+         "learn-to-pack": "Начать обучение"
+      },
+      "decks": {
+         "decks-list": "Колоды",
+         "clear-filter": "Очистить фильтр",
+         "my-decks": "Мои колоды",
+         "all-decks": "Все колоды",
+         "show-decks": "Показать колоды",
+         "number-of-cards": "Кол-во карточек"
+      },
+      "not-found": {
+         "page-not-found": "Извините! Страница не найдена!",
+         "back-to-home": "Вернуться на главную страницу"
+      },
+      "learn": {
+         "deck-is-empty": "Эта колода пуста. Заходите позже ^_^",
+         "back-to-prev": "Назад",
+         "show-answer": "Показать ответ",
+         "number-of-attempts": "Количество попыток"
+      },
+      "profile": {
+         "changed-avatar": "Аватар изменен",
+         "personal-information": "Персональная информация"
+      }
+   },
+   "features": {
+      "auth": {
+         "we-send-instructions": "Мы отправили инструкции на",
+         "didnt-receive": "Не пришло письмо?",
+         "enter-code": "Введите код",
+         "confirm-email": "Подтвердите почту",
+         "send-code-again": "Отправить код повторно",
+         "confirm-has-been-sent": "Подтверждение было выслано на ваш Email",
+         "sign-up": "Регистрация",
+         "register": "Зарегистрироваться",
+         "have-account": "У вас уже есть аккаунт?",
+         "confirm-password": "Подтвердите пароль",
+         "email": "Email",
+         "password": "Пароль",
+         "invalid-data": "Неправильный Email или пароль",
+         "remember-me": "Запомнить меня",
+         "forgot-password": "Забыли пароль?",
+         "login": "Войти",
+         "dont-have-account": "У вас нет аккаунта?",
+         "enter-email-for-instructions": "Введите свой Email, а мы вышлем Вам дальнейшие инструкции",
+         "send-instructions": "Отправить инструкции",
+         "did-remember-password": "Вспомнили пароль?",
+         "try-logging-in": "Попробуйте войти",
+         "check-email": "Проверьте Email",
+         "back-to-sign-in": "Вернуться к авторизации",
+         "create-password-submit": "Создать новый пароль",
+         "create-new-password-instructions": "Создайте новый пароль, а мы вышлем Вам дальнейшие инструкции",
+         "create-new-password": "Придумайте новый пароль",
+         "password-reset-success": "Ваш пароль успешно обновлён"
+      },
+      "manage-decks": {
+         "edit-deck": "Изменение колоды",
+         "private-pack": "Приватная колода",
+         "added-to-favorite": "добавлена в избранное",
+         "removed-from-favorite": "удалена из избранного",
+         "deck": "Колода",
+         "sure-want-delete-deck": "Вы действительно хотите удалить выбранную колоду?",
+         "add-new-deck": "Добавить колоду",
+         "name-pack": "Название колоды",
+         "name": "Название",
+         "cards": "Карточки",
+         "created-by": "Создано"
+      },
+      "manage-profile": {
+         "nickname": "Ник",
+         "save-changes": "Сохранить изменения"
+      },
+      "manage-cards": {
+         "card-updated": "Карточка изменена",
+         "update-card": "Изменение карточки",
+         "grade": "Оценка",
+         "rate-yourself": "Оцените себя",
+         "next-question": "Следующий вопрос",
+         "card": "Карточка",
+         "sure-want-delete-card": "Вы действительно хотите удалить выбранную карточку?",
+         "add-card": "Добавить карточку"
+      }
+   },
+   "shared": {
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "sign-in": "Авторизация",
+      "sign-out": "Выйти",
+      "my-profile": "Мой профиль",
+      "change-image": "Загрузить изображение",
+      "update-image": "Изменить изображение",
+      "deleted-successfully": "успешно удалена",
+      "created-successfully": "успешно создана",
+      "last-updated": "Последнее изменение",
+      "confirm-action": "Подтвердите действие",
+      "search": "Поиск...",
+      "show": "Показать",
+      "on-page": "на странице",
+      "answer": "Ответ",
+      "question": "Вопрос",
+      "did-not-know": "Не знал",
+      "forgot": "Забыл",
+      "a-lot-of-thought": "Долго думал",
+      "confused": "Озадачился",
+      "knew-the-answer": "Знал ответ",
+      "crop-cover": "Выбор миниатюры"
+   }
+}

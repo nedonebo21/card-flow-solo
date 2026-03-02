@@ -59,7 +59,7 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
-               <Typography variant={'h1'}>{t('sign-up')}</Typography>
+               <Typography variant={'h1'}>{t('features.auth.sign-up')}</Typography>
             </div>
             <div className={styles.content}>
                <ControlledInput
@@ -67,33 +67,33 @@ export const SignUpForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignUpFormP
                   control={control}
                   placeholder={'example@example.com'}
                   name={'email'}
-                  label={t('email')}
+                  label={t('features.auth.email')}
                   errorMessage={errors.email?.message}
                />
                <ControlledInput
                   InputComponent={InputPassword}
                   control={control}
                   name={'password'}
-                  label={t('password')}
+                  label={t('features.auth.password')}
                   errorMessage={errors.password?.message}
                />
                <ControlledInput
                   InputComponent={InputPassword}
                   control={control}
                   name={'confirm'}
-                  label={t('confirm-password')}
+                  label={t('features.auth.confirm-password')}
                   errorMessage={errors.confirm?.message}
                />
             </div>
             <div className={styles.footer}>
                <Button disabled={isLoading} fullWidth type={'submit'}>
-                  {t('register')}
+                  {t('features.auth.register')}
                </Button>
                <Typography className={styles.footerText} variant={'body2'}>
-                  {t('have-account')}
+                  {t('features.auth.have-account')}
                </Typography>
                <Button variant={'link'} as={Link} to={ROUTE_PATHS.SIGN_IN}>
-                  {t('sign-in')}
+                  {t('shared.sign-in')}
                </Button>
             </div>
          </Card>

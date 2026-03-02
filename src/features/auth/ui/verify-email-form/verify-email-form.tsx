@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import type { VerifyEmailFormValues } from '../../model/verify-email-schema'
 
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -42,6 +43,7 @@ export const VerifyEmailForm = ({
 
    const { data } = useMeQuery()
    const navigate = useNavigate()
+   const { t } = useTranslation()
 
    const userEmail = email ?? data?.email
 
@@ -65,26 +67,26 @@ export const VerifyEmailForm = ({
          <Card className={styles.wrapper} as={'section'}>
             <div className={styles.header}>
                <Typography variant={'h1'} className={styles.title}>
-                  Confirm your email
+                  {t('features.auth.confirm-email')}
                </Typography>
             </div>
             <div className={styles.content}>
                <CheckEmailIcon width={96} height={96} />
                <Typography variant={'body2'} className={styles.text}>
-                  We’ve sent an Email with instructions to {userEmail}
+                  {t('features.auth.we-send-instructions')} {userEmail}
                </Typography>
             </div>
             <div className={styles.field}>
                <ControlledInput
                   control={control}
                   name={'code'}
-                  label={'Enter your code'}
+                  label={t('features.auth.enter-code')}
                   errorMessage={errors.code?.message}
                />
             </div>
-            <Button type={'submit'}>Confirm</Button>
+            <Button type={'submit'}>{t('shared.confirm')}</Button>
             <div className={styles.footer}>
-               <Typography variant={'body2'}>Didn&#39;t receive the letter?</Typography>
+               <Typography variant={'body2'}>{t('features.auth.didnt-receive')}</Typography>
                <SendVerifyEmail />
             </div>
          </Card>

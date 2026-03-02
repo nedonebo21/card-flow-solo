@@ -57,7 +57,9 @@ export const CreateDeck = ({
             await createDeck(data).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success(`${t('deck')} '${data.name}' ${t('created-successfully')}`)
+            toast.success(
+               `${t('features.manage-decks.deck')} '${data.name}' ${t('shared.created-successfully')}`
+            )
          } catch (error) {
             console.error(error)
          }
@@ -81,11 +83,11 @@ export const CreateDeck = ({
             <Dialog
                open={isOpen}
                onOpenChange={handleOpenChange}
-               trigger={<Button>{t('add-new-deck')}</Button>}
-               heading={t('add-new-deck')}
-               confirmButtonLabel={t('add-new-deck')}
+               trigger={<Button>{t('features.manage-decks.add-new-deck')}</Button>}
+               heading={t('features.manage-decks.add-new-deck')}
+               confirmButtonLabel={t('features.manage-decks.add-new-deck')}
                showCancelButton
-               cancelButtonLabel={t('cancel')}
+               cancelButtonLabel={t('shared.cancel')}
                confirmButtonFormId={'create-deck-form'}
                isConfirmDisabled={isLoading}
             >
@@ -99,7 +101,7 @@ export const CreateDeck = ({
                <ControlledInput
                   control={control}
                   name={'name'}
-                  label={t('name-pack')}
+                  label={t('features.manage-decks.name-pack')}
                   errorMessage={errors.name?.message}
                />
                <Button
@@ -109,7 +111,7 @@ export const CreateDeck = ({
                   variant={'secondary'}
                >
                   <ImageIcon width={16} height={16} />
-                  {isCoverSelect ? t('change-image') : t('update-image')}
+                  {isCoverSelect ? t('shared.change-image') : t('shared.update-image')}
                </Button>
                <input
                   {...register('cover')}
@@ -119,7 +121,11 @@ export const CreateDeck = ({
                   onChange={handleFileChange}
                   style={{ display: 'none' }}
                />
-               <ControlledCheckbox control={control} name={'isPrivate'} label={t('private-pack')} />
+               <ControlledCheckbox
+                  control={control}
+                  name={'isPrivate'}
+                  label={t('features.manage-decks.private-pack')}
+               />
             </Dialog>
          </form>
          {originalCoverUrl && (

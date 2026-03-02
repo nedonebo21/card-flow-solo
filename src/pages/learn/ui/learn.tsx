@@ -43,11 +43,11 @@ export const Learn = () => {
                as={Link}
                to={routeHelpers.createDeckPath(id ?? '')}
             >
-               <ArrowLeftIcon width={16} height={16} /> {t('back-to-prev')}
+               <ArrowLeftIcon width={16} height={16} /> {t('pages.learn.back-to-prev')}
             </Button>
          </div>
          {isError ? (
-            <Typography variant={'warning'}>{t('deck-is-empty')}</Typography>
+            <Typography variant={'warning'}>{t('pages.learn.deck-is-empty')}</Typography>
          ) : (
             <Card as={'section'} className={styles.learn}>
                <header className={styles.header}>

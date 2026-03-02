@@ -44,7 +44,9 @@ export const DeleteCard = ({
             await deleteCard(id).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success(`${t('card')} '${cardName}' ${t('deleted-successfully')}`)
+            toast.success(
+               `${t('features.manage-cards.card')} '${cardName}' ${t('shared.deleted-successfully')}`
+            )
             if (redirectOnDelete) {
                navigate(ROUTE_PATHS.HOME)
             }
@@ -56,12 +58,12 @@ export const DeleteCard = ({
 
    return (
       <Dialog
-         heading={t('confirm-action')}
+         heading={t('shared.confirm-action')}
          onConfirm={handleDelete}
          isConfirmDisabled={isLoading}
          showCancelButton
-         cancelButtonLabel={t('cancel')}
-         confirmButtonLabel={t('confirm')}
+         cancelButtonLabel={t('shared.cancel')}
+         confirmButtonLabel={t('shared.confirm')}
          trigger={
             <Button variant={'ghost'} size={size} {...rest}>
                <TrashIcon width={16} height={16} />
@@ -72,7 +74,7 @@ export const DeleteCard = ({
          open={isOpen}
       >
          <Typography variant={'body2'} textAlign={'left'}>
-            {t('sure-want-delete-card')}
+            {t('features.manage-cards.sure-want-delete-card')}
          </Typography>
       </Dialog>
    )

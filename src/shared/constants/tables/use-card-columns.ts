@@ -6,9 +6,9 @@ export const useCardColumns = (): Column[] => {
    const { t } = useTranslation()
 
    return [
-      { key: 'question', title: t('question') },
-      { key: 'answer', title: t('answer') },
-      { key: 'updated', title: t('last-updated') },
-      { key: 'grade', title: t('grade') },
+      { key: 'question', title: t('shared.question') },
+      { key: 'answer', title: t('shared.answer') },
+      { key: 'updated', title: t('shared.last-updated') },
+      { key: 'grade', title: t('features.manage-cards.grade') },
    ]
 }

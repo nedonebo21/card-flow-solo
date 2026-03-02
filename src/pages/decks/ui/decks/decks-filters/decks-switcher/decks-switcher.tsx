@@ -33,14 +33,14 @@ export const DecksSwitcher = () => {
    return (
       <Tabs onValueChange={setShow} value={show ?? undefined}>
          <Typography className={styles.label} textAlign={'left'} variant={'body2'}>
-            {t('show-decks')}
+            {t('pages.decks.show-decks')}
          </Typography>
          <Tabs.List className={styles.tabs}>
             <Tabs.Trigger className={styles.favorite} value={'favorite'}>
                <HeartOutlineIcon />
             </Tabs.Trigger>
-            <Tabs.Trigger value={'my'}>{t('my-decks')}</Tabs.Trigger>
-            <Tabs.Trigger value={'all'}>{t('all-decks')}</Tabs.Trigger>
+            <Tabs.Trigger value={'my'}>{t('pages.decks.my-decks')}</Tabs.Trigger>
+            <Tabs.Trigger value={'all'}>{t('pages.decks.all-decks')}</Tabs.Trigger>
          </Tabs.List>
       </Tabs>
    )

@@ -69,7 +69,7 @@ export const ViewPersonalInfo = ({
       } else {
          try {
             await updateUser({ avatar: data.avatar }).unwrap()
-            toast.success(t('changed-avatar'))
+            toast.success(t('pages.profile.changed-avatar'))
          } catch (error) {
             console.error(error)
          }
@@ -79,7 +79,7 @@ export const ViewPersonalInfo = ({
    return (
       <Card as={'section'} className={clsx(styles.wrapper, className)} {...rest}>
          <header className={styles.header}>
-            <Typography variant={'h1'}>{t('personal-information')}</Typography>
+            <Typography variant={'h1'}>{t('pages.profile.personal-information')}</Typography>
          </header>
          <div className={styles.content}>
             <UpdateAvatarForm
@@ -115,13 +115,13 @@ export const ViewPersonalInfo = ({
                            to={ROUTE_PATHS.VERIFY_EMAIL}
                            variant={'error'}
                         >
-                           {t('confirm')}
+                           {t('shared.confirm')}
                         </Typography>
                      )}
                   </div>
                   <div className={styles.footer}>
                      <LogoutButton onLogout={onLogout}>
-                        <Typography variant={'subtitle2'}>{t('sign-out')}</Typography>
+                        <Typography variant={'subtitle2'}>{t('shared.sign-out')}</Typography>
                      </LogoutButton>
                   </div>
                </>

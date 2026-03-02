@@ -59,7 +59,7 @@ export const UpdateCard = ({
             await updateCard({ id, body: data }).unwrap()
             refetch()
             setIsOpen(false)
-            toast.success(t('card-updated'))
+            toast.success(t('features.manage-cards.card-updated'))
          } catch (error) {
             console.error(error)
          }
@@ -82,17 +82,17 @@ export const UpdateCard = ({
             onOpenChange={handleOpenChange}
             showCancelButton
             isConfirmDisabled={isLoading}
-            confirmButtonLabel={t('confirm')}
+            confirmButtonLabel={t('shared.confirm')}
             confirmButtonFormId={'update-card-form'}
-            cancelButtonLabel={t('cancel')}
-            heading={t('update-card')}
+            cancelButtonLabel={t('shared.cancel')}
+            heading={t('features.manage-cards.update-card')}
          >
             <CardFieldsSection
                control={control}
                setValue={setValue}
                inputName={'question'}
                errorMessage={errors.question?.message}
-               inputLabel={t('question')}
+               inputLabel={t('shared.question')}
                imageFieldName={'questionImg'}
             />
 
@@ -101,7 +101,7 @@ export const UpdateCard = ({
                setValue={setValue}
                inputName={'answer'}
                errorMessage={errors.answer?.message}
-               inputLabel={t('answer')}
+               inputLabel={t('shared.answer')}
                imageFieldName={'answerImg'}
             />
          </Dialog>

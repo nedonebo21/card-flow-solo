@@ -37,7 +37,7 @@ export const DecksSearch = () => {
    return (
       <InputSearch
          className={styles.input}
-         placeholder={t('search')}
+         placeholder={t('shared.search')}
          value={name ?? ''}
          onChange={handleNameChange}
          onClear={handleClear}

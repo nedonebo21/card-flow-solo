@@ -45,7 +45,7 @@ export const DecksSlider = () => {
    return (
       <div>
          <Typography className={styles.label} textAlign={'left'} variant={'body2'}>
-            {t('number-of-cards')}
+            {t('pages.decks.number-of-cards')}
          </Typography>
          <Slider
             values={[minCount, maxCount]}

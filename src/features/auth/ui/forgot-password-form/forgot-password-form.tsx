@@ -72,7 +72,7 @@ export const ForgotPasswordForm = ({
          <Card className={styles.wrapper}>
             <div className={styles.header}>
                <Typography variant={'h1'} className={styles.title}>
-                  {t('forgot-password')}
+                  {t('features.auth.forgot-password')}
                </Typography>
             </div>
             <div className={styles.content}>
@@ -81,19 +81,19 @@ export const ForgotPasswordForm = ({
                   control={control}
                   placeholder={'example@example.com'}
                   name={'email'}
-                  label={t('email')}
+                  label={t('features.auth.email')}
                   errorMessage={errors.email?.message}
                />
                <Typography textAlign={'left'} className={styles.text} variant={'body2'}>
-                  {t('enter-email-for-instructions')}
+                  {t('features.auth.enter-email-for-instructions')}
                </Typography>
             </div>
             <div className={styles.footer}>
                <Button fullWidth type={'submit'}>
-                  {t('send-instructions')}
+                  {t('features.auth.send-instructions')}
                </Button>
                <Typography className={styles.footerText} variant={'body2'}>
-                  {t('did-remember-password')}
+                  {t('features.auth.did-remember-password')}
                </Typography>
                <Typography
                   className={styles.footerLink}
@@ -101,7 +101,7 @@ export const ForgotPasswordForm = ({
                   as={Link}
                   to={ROUTE_PATHS.SIGN_IN}
                >
-                  {t('try-logging-in')}
+                  {t('features.auth.try-logging-in')}
                </Typography>
             </div>
          </Card>

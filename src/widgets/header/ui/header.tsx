@@ -48,18 +48,18 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
                      <Dropdown.Item>
                         <Button variant={'ghost'} as={Link} to={ROUTE_PATHS.PROFILE}>
                            <UserFilledIcon width={16} height={16} />
-                           <Typography variant={'caption'}>{t('my-profile')}</Typography>
+                           <Typography variant={'caption'}>{t('shared.my-profile')}</Typography>
                         </Button>
                      </Dropdown.Item>
                      <Dropdown.Item>
                         <LogoutButton variant={'ghost'}>
-                           <Typography variant={'caption'}>{t('sign-out')}</Typography>
+                           <Typography variant={'caption'}>{t('shared.sign-out')}</Typography>
                         </LogoutButton>
                      </Dropdown.Item>
                   </Dropdown>
                ) : (
                   <Button variant={'secondary'} as={Link} to={ROUTE_PATHS.SIGN_IN}>
-                     {t('sign-in')}
+                     {t('shared.sign-in')}
                   </Button>
                )}
             </div>
