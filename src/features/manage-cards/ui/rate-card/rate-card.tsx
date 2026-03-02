@@ -85,7 +85,7 @@ export const RateCard = ({
             <AnswerImg isLoading={isLoading} answerImg={answerImg} haveAnswerImg={haveAnswerImg} />
             <div className={styles.rate}>
                <Typography className={styles.label} textAlign={'left'} variant={'subtitle1'}>
-                  {t('rate-yourself')}:
+                  {t('features.manage-cards.rate-yourself')}:
                </Typography>
                <ControlledRadioGroup
                   name={'grade'}
@@ -95,7 +95,7 @@ export const RateCard = ({
                />
             </div>
             <Button className={styles.next} disabled={isSaveLoading} fullWidth>
-               {t('next-question')}
+               {t('features.manage-cards.next-question')}
             </Button>
          </form>
       </div>

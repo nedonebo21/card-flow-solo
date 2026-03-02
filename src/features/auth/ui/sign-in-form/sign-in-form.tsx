@@ -60,7 +60,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
-               <Typography variant={'h1'}>{t('sign-in')}</Typography>
+               <Typography variant={'h1'}>{t('shared.sign-in')}</Typography>
             </div>
             <div className={styles.content}>
                <div className={styles.inputs}>
@@ -68,7 +68,7 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      InputComponent={InputEmail}
                      control={control}
                      name={'email'}
-                     label={t('email')}
+                     label={t('features.auth.email')}
                      placeholder={'example@example.com'}
                      errorMessage={errors.email?.message}
                      disabled={isLoading}
@@ -77,19 +77,19 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      InputComponent={InputPassword}
                      control={control}
                      name={'password'}
-                     label={t('password')}
+                     label={t('features.auth.password')}
                      errorMessage={errors.password?.message}
                      disabled={isLoading}
                   />
                   <Typography variant={'error'}>
-                     {isError ? 'Invalid email or password' : ''}
+                     {isError ? t('features.auth.invalid-data') : ''}
                   </Typography>
                </div>
                <div className={styles.options}>
                   <ControlledCheckbox
                      control={control}
                      name={'rememberMe'}
-                     label={t('remember-me')}
+                     label={t('features.auth.remember-me')}
                      disabled={isLoading}
                   />
                   <Button
@@ -98,19 +98,19 @@ export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormP
                      as={Link}
                      to={ROUTE_PATHS.FORGOT_PASSWORD}
                   >
-                     {t('forgot-password')}
+                     {t('features.auth.forgot-password')}
                   </Button>
                </div>
             </div>
             <Button disabled={isLoading} fullWidth type={'submit'}>
-               {t('login')}
+               {t('features.auth.login')}
             </Button>
             <div className={styles.footer}>
                <Typography className={styles.footerText} variant={'body2'}>
-                  {t('dont-have-account')}
+                  {t('features.auth.dont-have-account')}
                </Typography>
                <Button variant={'link'} as={Link} to={ROUTE_PATHS.SIGN_UP}>
-                  {t('sign-up')}
+                  {t('features.auth.sign-up')}
                </Button>
             </div>
          </Card>

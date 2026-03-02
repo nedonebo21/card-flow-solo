@@ -55,7 +55,9 @@ export const CreateCard = ({
             await addCard({ body: data, id: deckId }).unwrap()
             handleOpenChange(false)
             refetch()
-            toast.success(`${t('card')} "${data.question}" ${t('created-successfully')}`)
+            toast.success(
+               `${t('features.manage-cards.card')} "${data.question}" ${t('shared.created-successfully')}`
+            )
          } catch (error) {
             console.error(error)
          }
@@ -65,22 +67,22 @@ export const CreateCard = ({
    return (
       <form id={'add-card-form'} onSubmit={handleSubmit(onSubmit)} {...rest}>
          <Dialog
-            trigger={<Button>{t('add-card')}</Button>}
+            trigger={<Button>{t('features.manage-cards.add-card')}</Button>}
             open={isOpen}
             onOpenChange={handleOpenChange}
             showCancelButton
             isConfirmDisabled={isLoading}
-            confirmButtonLabel={t('add-card')}
+            confirmButtonLabel={t('features.manage-cards.add-card')}
             confirmButtonFormId={'add-card-form'}
-            cancelButtonLabel={t('cancel')}
-            heading={t('add-card')}
+            cancelButtonLabel={t('shared.cancel')}
+            heading={t('features.manage-cards.add-card')}
          >
             <CardFieldsSection
                control={control}
                setValue={setValue}
                inputName={'question'}
                errorMessage={errors.question?.message}
-               inputLabel={t('question')}
+               inputLabel={t('features.manage-cards.question')}
                imageFieldName={'questionImg'}
             />
 
@@ -89,7 +91,7 @@ export const CreateCard = ({
                setValue={setValue}
                inputName={'answer'}
                errorMessage={errors.answer?.message}
-               inputLabel={t('answer')}
+               inputLabel={t('features.manage-cards.answer')}
                imageFieldName={'answerImg'}
             />
          </Dialog>

@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 
 import { Toaster } from 'sonner'
 
-import '../lib/i18n.types'
-import '../../app/lib/i18n'
+import '../../shared/lib/i18n/i18n.types'
+import '../../shared/lib/i18n/i18n'
 
 import { store } from '../store/store'
 

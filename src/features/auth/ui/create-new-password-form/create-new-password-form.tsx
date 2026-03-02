@@ -53,7 +53,7 @@ export const CreateNewPasswordForm = ({
       } else {
          try {
             await resetPassword({ password: data.password, token: token || '' })
-            toast.success(t('password-reset-success'))
+            toast.success(t('features.auth.password-reset-success'))
             navigate(ROUTE_PATHS.HOME)
          } catch (error) {
             console.error(error)
@@ -65,22 +65,22 @@ export const CreateNewPasswordForm = ({
       <form onSubmit={handleSubmit(onSubmit)} {...rest} noValidate>
          <Card className={styles.wrapper}>
             <div className={styles.header}>
-               <Typography variant={'h1'}>{t('create-new-password')}</Typography>
+               <Typography variant={'h1'}>{t('features.auth.create-new-password')}</Typography>
             </div>
             <div className={styles.content}>
                <ControlledInput
                   InputComponent={InputPassword}
                   control={control}
                   name={'password'}
-                  label={t('password')}
+                  label={t('features.auth.password')}
                   errorMessage={errors.password?.message}
                />
                <Typography textAlign={'left'} className={styles.text} variant={'body2'}>
-                  {t('create-new-password-instructions')}
+                  {t('features.auth.create-new-password-instructions')}
                </Typography>
             </div>
             <Button fullWidth type={'submit'}>
-               {t('create-password-submit')}
+               {t('features.auth.create-password-submit')}
             </Button>
          </Card>
 

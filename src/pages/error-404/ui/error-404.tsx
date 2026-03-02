@@ -15,10 +15,10 @@ export const Error404 = () => {
             <Error404Icon width={451} height={192} />
          </div>
          <Typography className={styles.title} variant={'body1'} as={'h1'}>
-            {t('page-not-found')}
+            {t('pages.not-found.page-not-found')}
          </Typography>
          <Button as={Link} to={ROUTE_PATHS.HOME}>
-            {t('back-to-home')}
+            {t('pages.not-found.back-to-home')}
          </Button>
       </>
    )

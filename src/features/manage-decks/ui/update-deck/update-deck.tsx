@@ -123,10 +123,10 @@ export const UpdateDeck = ({
                   {label ? <Typography variant={'caption'}>{label}</Typography> : ''}
                </Button>
             }
-            heading={t('edit-deck')}
-            confirmButtonLabel={t('confirm')}
+            heading={t('features.manage-decks.edit-deck')}
+            confirmButtonLabel={t('shared.confirm')}
             showCancelButton
-            cancelButtonLabel={t('cancel')}
+            cancelButtonLabel={t('shared.cancel')}
             confirmButtonFormId={'update-deck-form'}
             isConfirmDisabled={isConfirmDisabled}
          >
@@ -141,7 +141,7 @@ export const UpdateDeck = ({
                <ControlledInput
                   control={control}
                   name={'name'}
-                  label={t('name-pack')}
+                  label={t('features.manage-decks.name-pack')}
                   errorMessage={errors.name?.message}
                />
                <Button
@@ -151,7 +151,7 @@ export const UpdateDeck = ({
                   variant={'secondary'}
                >
                   <ImageIcon width={16} height={16} />
-                  {isCoverSelect ? t('change-image') : t('update-image')}
+                  {isCoverSelect ? t('shared.change-image') : t('shared.update-image')}
                </Button>
                <input
                   {...register('cover')}
@@ -161,7 +161,11 @@ export const UpdateDeck = ({
                   onChange={handleFileChange}
                   style={{ display: 'none' }}
                />
-               <ControlledCheckbox control={control} name={'isPrivate'} label={t('private-pack')} />
+               <ControlledCheckbox
+                  control={control}
+                  name={'isPrivate'}
+                  label={t('features.manage-decks.private-pack')}
+               />
             </form>
          </Dialog>
          {originalCoverUrl && (

@@ -56,9 +56,9 @@ export const CropImageDialog = ({
       <Dialog
          open={open}
          onOpenChange={onOpenChange}
-         heading={t('crop-cover')}
-         confirmButtonLabel={t('confirm')}
-         cancelButtonLabel={t('cancel')}
+         heading={t('shared.crop-cover')}
+         confirmButtonLabel={t('shared.confirm')}
+         cancelButtonLabel={t('shared.cancel')}
          onConfirm={handleCropComplete}
          trigger={null}
          showCancelButton

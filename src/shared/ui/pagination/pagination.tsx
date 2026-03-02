@@ -60,14 +60,14 @@ export const Pagination = ({
             )}
          </div>
          <div className={styles.itemsCountWrapper}>
-            <Typography variant={'body2'}>{t('show')}</Typography>
+            <Typography variant={'body2'}>{t('shared.show')}</Typography>
             <Select
                className={styles.select}
                options={options}
                placeholder={options[0].label}
                onValueChange={handlePageSizeChange}
             />
-            <Typography variant={'body2'}>{t('on-page')}</Typography>
+            <Typography variant={'body2'}>{t('shared.on-page')}</Typography>
          </div>
       </div>
    )

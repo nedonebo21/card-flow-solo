@@ -47,17 +47,19 @@ export const DeleteDeck = ({
       if (redirectOnDelete) {
          navigate(ROUTE_PATHS.HOME)
       }
-      toast.success(`${t('deck')} '${deckName}' ${t('deleted-successfully')}`)
+      toast.success(
+         `${t('features.manage-decks.deck')} '${deckName}' ${t('shared.deleted-successfully')}`
+      )
    }
 
    return (
       <Dialog
-         heading={t('confirm-action')}
+         heading={t('shared.confirm-action')}
          onConfirm={handleDelete}
          isConfirmDisabled={isLoading}
          showCancelButton
-         cancelButtonLabel={t('cancel')}
-         confirmButtonLabel={t('confirm')}
+         cancelButtonLabel={t('shared.cancel')}
+         confirmButtonLabel={t('shared.confirm')}
          trigger={
             <Button disabled={isLoading} variant={'ghost'} size={size} {...rest}>
                <TrashIcon width={16} height={16} />
@@ -68,7 +70,7 @@ export const DeleteDeck = ({
          open={isOpen}
       >
          <Typography variant={'body2'} textAlign={'left'}>
-            {t('sure-want-delete-deck')}
+            {t('features.manage-decks.sure-want-delete-deck')}
          </Typography>
       </Dialog>
    )

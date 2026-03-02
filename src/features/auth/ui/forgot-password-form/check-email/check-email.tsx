@@ -17,17 +17,17 @@ export const CheckEmail = ({ email }: CheckEmailProps) => {
       <Card className={styles.wrapper}>
          <div className={styles.header}>
             <Typography variant={'h1'} className={styles.title}>
-               {t('check-email')}
+               {t('features.auth.check-email')}
             </Typography>
          </div>
          <div className={styles.content}>
             <CheckEmailIcon width={96} height={96} />
             <Typography variant={'body2'} className={styles.text}>
-               {t('we-send-instructions')} {email}
+               {t('features.auth.we-send-instructions')} {email}
             </Typography>
          </div>
          <Button as={Link} to={ROUTE_PATHS.SIGN_IN}>
-            {t('back-to-sign-in')}
+            {t('features.auth.back-to-sign-in')}
          </Button>
       </Card>
    )

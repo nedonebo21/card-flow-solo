@@ -38,7 +38,7 @@ export const Question = ({
       <>
          <div className={styles.question}>
             <div className={styles.questionText}>
-               <Typography variant={'subtitle1'}>{t('question')}:</Typography>
+               <Typography variant={'subtitle1'}>{t('shared.question')}:</Typography>
                <QuestionText question={question} isLoading={isLoading} />
             </div>
             <QuestionImage
@@ -47,7 +47,7 @@ export const Question = ({
                haveQuestionImg={haveQuestionImg}
             />
             <div className={styles.count}>
-               <Typography variant={'body2'}>{t('number-of-attempts')}:</Typography>
+               <Typography variant={'body2'}>{t('pages.learn.number-of-attempts')}:</Typography>
                <Shots shots={shots} isLoading={isLoading} />
             </div>
          </div>
@@ -60,7 +60,7 @@ export const Question = ({
                onClick={handleAnswerShow}
                fullWidth
             >
-               {t('show-answer')}
+               {t('pages.learn.show-answer')}
             </Button>
          )}
       </>

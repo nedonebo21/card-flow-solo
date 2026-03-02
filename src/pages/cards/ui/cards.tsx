@@ -68,7 +68,9 @@ export const Cards = () => {
             </>
          ) : (
             <div className={styles.empty}>
-               <Typography className={styles.emptyText}>{t('own-deck-empty')}</Typography>
+               <Typography className={styles.emptyText}>
+                  {t('pages.cards.own-deck-empty')}
+               </Typography>
                {isOwner && <CreateCard deckId={id ?? ''} refetch={refetch} />}
             </div>
          )}

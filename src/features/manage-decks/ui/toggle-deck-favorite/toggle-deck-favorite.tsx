@@ -20,14 +20,18 @@ export const ToggleDeckFavorite = ({ id, isFavorite, deckName }: ToggleDeckFavor
       if (isFavorite) {
          try {
             await deleteDeckFavorite(id).unwrap()
-            toast.success(`${t('deck')} "${deckName}" ${t('removed-from-favorite')}`)
+            toast.success(
+               `${t('features.manage-decks.deck')} "${deckName}" ${t('features.manage-decks.removed-from-favorite')}`
+            )
          } catch (error) {
             console.error(error)
          }
       } else {
          try {
             await addDeckFavorite(id).unwrap()
-            toast.success(`${t('deck')} "${deckName}" ${t('added-to-favorite')}`)
+            toast.success(
+               `${t('features.manage-decks.deck')} "${deckName}" ${t('features.manage-decks.added-to-favorite')}`
+            )
          } catch (error) {
             console.error(error)
          }

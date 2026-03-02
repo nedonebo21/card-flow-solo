@@ -36,7 +36,7 @@ export const CardsSearch = () => {
    return (
       <InputSearch
          className={styles.input}
-         placeholder={t('search')}
+         placeholder={t('shared.search')}
          value={question ?? ''}
          onChange={handleQuestionChange}
          onClear={handleClear}

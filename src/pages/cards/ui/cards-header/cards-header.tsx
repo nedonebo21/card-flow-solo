@@ -39,7 +39,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
       <div className={styles.wrapper}>
          <div className={styles.linkContainer}>
             <Button className={styles.link} variant={'link'} as={Link} to={ROUTE_PATHS.DECKS}>
-               <ArrowLeftIcon width={16} height={16} /> {t('back-to-decks')}
+               <ArrowLeftIcon width={16} height={16} /> {t('pages.cards.back-to-decks')}
             </Button>
          </div>
          <div className={styles.learnContainer}>
@@ -54,14 +54,14 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
                            variant={'ghost'}
                         >
                            <CirclePlayIcon width={16} height={16} />
-                           <Typography variant={'caption'}>{t('learn')}</Typography>
+                           <Typography variant={'caption'}>{t('pages.cards.learn')}</Typography>
                         </Button>
                      </Dropdown.Item>
                      <Dropdown.Item asChild>
                         <UpdateDeck
                            className={styles.update}
                            id={deckId ?? ''}
-                           label={t('edit')}
+                           label={t('pages.cards.edit')}
                            size={'default'}
                         />
                      </Dropdown.Item>
@@ -71,7 +71,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
                            refetch={refetch}
                            deckName={deck?.name}
                            redirectOnDelete
-                           label={t('delete')}
+                           label={t('pages.cards.delete')}
                            size={'default'}
                         />
                      </Dropdown.Item>
@@ -83,7 +83,7 @@ export const CardsHeader = ({ deckId, refetch, hasCards }: CardsHeaderProps) => 
 
             {!isOwner && showLearn && (
                <Button as={Link} to={routeHelpers.createLearnPath(deckId ?? '')}>
-                  {t('learn-to-pack')}
+                  {t('pages.cards.learn-to-pack')}
                </Button>
             )}
          </div>
