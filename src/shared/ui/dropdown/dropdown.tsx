@@ -40,7 +40,7 @@ const Dropdown = ({
    }
 
    return (
-      <RadixDropdown.Root {...rest}>
+      <RadixDropdown.Root modal={false} {...rest}>
          <RadixDropdown.Trigger className={styles.trigger} asChild>
             <Button variant={buttonVariant} size={buttonSize} className={buttonClassname}>
                {avatarContent}
