@@ -31,6 +31,10 @@ a:focus {
    outline: none;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 html,
 body {
    min-width: 320px;
