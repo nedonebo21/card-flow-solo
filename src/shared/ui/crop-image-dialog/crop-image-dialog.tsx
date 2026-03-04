@@ -25,6 +25,7 @@ export const CropImageDialog = ({
    aspect = 3 / 2,
 }: CropImageDialogProps) => {
    const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
+   const [zoom, setZoom] = useState(1)
    const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
 
    const { t } = useTranslation()
@@ -67,6 +68,8 @@ export const CropImageDialog = ({
             <Cropper
                image={image}
                crop={crop}
+               zoom={zoom}
+               onZoomChange={setZoom}
                aspect={aspect}
                showGrid
                onCropChange={onCropChange}
