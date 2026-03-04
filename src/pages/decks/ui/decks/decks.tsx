@@ -1,10 +1,7 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { useDebounce } from 'use-debounce'
-
-import { useGetDecksQuery } from '@/entities/deck'
-import { useMeQuery } from '@/entities/user'
+import { useDecksQueryArgs, useGetDecksQuery } from '@/entities/deck'
 import { clearFilters } from '@/shared/lib'
 
 import styles from './decks.module.scss'
@@ -16,43 +13,14 @@ import { DecksTable } from './decks-table/decks-table'
 
 export const Decks = () => {
    const [searchParams, setSearchParams] = useSearchParams()
+   const queryArgs = useDecksQueryArgs()
 
-   const queryParams = useMemo(
-      () => ({
-         name: searchParams.get('name') || undefined,
-         show: searchParams.get('show') || 'all',
-         min: Number(searchParams.get('min')) || 0,
-         max: Number(searchParams.get('max')) || 100,
-         orderBy: searchParams.get('orderBy') || null,
-         page: Number(searchParams.get('page')) || 1,
-         perPage: Number(searchParams.get('perPage')) || 10,
-      }),
-      [searchParams]
-   )
-
-   const [debouncedName] = useDebounce(queryParams.name, 500)
-
-   const { data: userData } = useMeQuery()
-   const currentUserId = userData?.id
-   const authorId = queryParams.show === 'my' ? currentUserId : ''
-   const favoritedBy = queryParams.show === 'favorite' ? currentUserId : ''
-
-   const { data, isLoading, isFetching, refetch } = useGetDecksQuery({
-      name: debouncedName,
-      maxCardsCount: queryParams.max,
-      minCardsCount: queryParams.min,
-      currentPage: queryParams.page,
-      itemsPerPage: queryParams.perPage,
-      favoritedBy,
-      authorId,
-      orderBy: queryParams.orderBy,
-   })
+   const { data, isLoading, isFetching, refetch } = useGetDecksQuery(queryArgs)
 
    const handleClearFilter = useCallback(() => {
       const nextParams = new URLSearchParams(searchParams)
 
       clearFilters(nextParams)
-
       setSearchParams(nextParams)
    }, [searchParams, setSearchParams])
 
@@ -68,7 +36,7 @@ export const Decks = () => {
                refetch={refetch}
                isLoading={isLoading}
                isFetching={isFetching}
-               userId={currentUserId}
+               userId={queryArgs.authorId || queryArgs.favoritedBy}
             />
             <DecksPagination totalCount={data?.pagination.totalItems ?? 10} />
          </div>
