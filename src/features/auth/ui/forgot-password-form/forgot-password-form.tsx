@@ -29,18 +29,19 @@ export const ForgotPasswordForm = ({
    onSubmit: onSubmitFormProps,
    ...rest
 }: ForgotPasswordFormProps) => {
+   const { t } = useTranslation()
+   const schema = forgotPasswordSchema(t)
+
    const {
       handleSubmit,
       control,
       formState: { errors },
    } = useForm<ForgotPasswordFormValues>({
-      resolver: zodResolver(forgotPasswordSchema),
+      resolver: zodResolver(schema),
       defaultValues: {
          email: '',
       },
    })
-
-   const { t } = useTranslation()
 
    const [isEmailSubmitted, setIsEmailSubmitted] = useState(false)
    const [submittedEmail, setSubmittedEmail] = useState('')

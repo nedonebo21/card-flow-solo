@@ -28,12 +28,16 @@ export const CreateNewPasswordForm = ({
    onSubmit: onSubmitFormProps,
    ...rest
 }: NewPasswordFormProps) => {
+   const { t } = useTranslation()
+
+   const schema = newPasswordSchema(t)
+
    const {
       handleSubmit,
       control,
       formState: { errors },
    } = useForm<NewPasswordFormValues>({
-      resolver: zodResolver(newPasswordSchema),
+      resolver: zodResolver(schema),
       defaultValues: {
          password: '',
       },
@@ -44,8 +48,6 @@ export const CreateNewPasswordForm = ({
    const navigate = useNavigate()
 
    const [resetPassword] = useResetPasswordMutation()
-
-   const { t } = useTranslation()
 
    const onSubmit: typeof onSubmitFormProps = async (data, e) => {
       if (onSubmitFormProps) {
