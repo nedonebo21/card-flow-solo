@@ -24,20 +24,21 @@ type SignInFormProps = Omit<ComponentProps<'form'>, 'onSubmit'> & {
 }
 
 export const SignInForm = ({ onSubmit: onSubmitFormProps, ...rest }: SignInFormProps) => {
+   const { t } = useTranslation()
+   const schema = signInSchema(t)
+
    const {
       handleSubmit,
       control,
       formState: { errors },
    } = useForm<SignInFormValues>({
-      resolver: zodResolver(signInSchema),
+      resolver: zodResolver(schema),
       defaultValues: {
          email: '',
          password: '',
          rememberMe: false,
       },
    })
-
-   const { t } = useTranslation()
 
    const [signIn, { isError, isLoading }] = useSignInMutation()
    const navigate = useNavigate()

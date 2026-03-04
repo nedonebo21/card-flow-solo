@@ -61,7 +61,14 @@
          "create-password-submit": "Create new password",
          "create-new-password-instructions": "Create new password and we will send you further instructions to email",
          "create-new-password": "Create new password",
-         "password-reset-success": "Password has successfully reset"
+         "password-reset-success": "Password has successfully reset",
+         "errors": {
+            "pass-contains-spaces": "Password must not contain leading or trailing spaces",
+            "enter-valid-email": "Enter a valid email address",
+            "password-must-longer": "Password must be longer than",
+            "characters": "characters",
+            "password-must-match": "Passwords must be match"
+         }
       },
       "manage-decks": {
          "edit-deck": "Edit Deck",

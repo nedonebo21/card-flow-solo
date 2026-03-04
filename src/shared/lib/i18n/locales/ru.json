@@ -61,7 +61,14 @@
          "create-password-submit": "Создать новый пароль",
          "create-new-password-instructions": "Создайте новый пароль, а мы вышлем Вам дальнейшие инструкции",
          "create-new-password": "Придумайте новый пароль",
-         "password-reset-success": "Ваш пароль успешно обновлён"
+         "password-reset-success": "Ваш пароль успешно обновлён",
+         "errors": {
+            "pass-contains-spaces": "Пароль не должен содержать пробелы в начале или в конце",
+            "enter-valid-email": "Введите корректный Email",
+            "password-must-longer": "Пароль должен содержать больше чем",
+            "characters": "символов",
+            "password-must-match": "Пароли должны совпадать"
+         }
       },
       "manage-decks": {
          "edit-deck": "Изменение колоды",
