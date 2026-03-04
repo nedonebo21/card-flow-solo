@@ -48,7 +48,7 @@ export const authApi = baseApi.injectEndpoints({
 
                localStorage.removeItem(ACCESS_TOKEN)
 
-               baseApi.util.invalidateTags(['Me'])
+               baseApi.util.resetApiState()
             } catch (error) {
                console.error(error)
             }
