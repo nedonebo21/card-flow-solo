@@ -99,13 +99,13 @@
 
 .triggerIcon {
    user-select: none;
-   width: 36px;
-   height: 36px;
+   width: 40px;
+   height: 40px;
    border-radius: 50%;
 
    img {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
    }
 }
@@ -124,9 +124,11 @@
 }
 
 .email {
-   color: var(--color-dark-100);
    overflow: hidden;
+
    max-width: 160px;
+
+   color: var(--color-dark-100);
    text-overflow: ellipsis;
    white-space: nowrap;
 }
