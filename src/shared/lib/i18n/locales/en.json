@@ -85,7 +85,14 @@
       },
       "manage-profile": {
          "nickname": "Nickname",
-         "save-changes": "Save Changes"
+         "save-changes": "Save Changes",
+         "errors": {
+            "avatar-size": "Avatar size should be less than",
+            "image-required": "Image is required",
+            "select-image": "Please select an image file",
+            "nickname-must-less": "Nickname must be less than",
+            "characters": "characters"
+         }
       },
       "manage-cards": {
          "card-updated": "Card has been updated",

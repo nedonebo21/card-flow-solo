@@ -5,6 +5,7 @@ import type { UpdateAvatarFormValues } from '@/features/manage-profile'
 
 import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -29,6 +30,10 @@ export const UpdateAvatarForm = ({
    isEditMode,
    ...rest
 }: UpdateAvatarFormProps) => {
+   const { t } = useTranslation()
+
+   const schema = updateAvatarSchema(t)
+
    const {
       control,
       register,
@@ -36,7 +41,7 @@ export const UpdateAvatarForm = ({
       setValue,
       formState: { errors },
    } = useForm<UpdateAvatarFormValues>({
-      resolver: zodResolver(updateAvatarSchema),
+      resolver: zodResolver(schema),
    })
 
    const [originalImageUrl, setOriginalImageUrl] = useState<string | null>('')

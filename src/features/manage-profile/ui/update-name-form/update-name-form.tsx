@@ -24,19 +24,21 @@ type Props = {
 } & Omit<ComponentProps<'form'>, 'onSubmit'>
 
 export const UpdateNameForm = ({ username, onCancel, isLoading, ...rest }: Props) => {
+   const { t } = useTranslation()
+
+   const schema = updateNameSchema(t)
+
    const {
       handleSubmit,
       control,
       formState: { errors, isDirty },
    } = useForm<UpdateNameFormValues>({
-      resolver: zodResolver(updateNameSchema),
+      resolver: zodResolver(schema),
       mode: 'onChange',
       defaultValues: {
          name: username ?? '',
       },
    })
-
-   const { t } = useTranslation()
 
    const onSubmit: SubmitHandler<UpdateNameFormValues> = async (data, e) => {
       rest?.onSubmit?.(data, e)

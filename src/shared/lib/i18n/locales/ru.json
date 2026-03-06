@@ -85,7 +85,14 @@
       },
       "manage-profile": {
          "nickname": "Ник",
-         "save-changes": "Сохранить изменения"
+         "save-changes": "Сохранить изменения",
+         "errors": {
+            "avatar-size": "Размер аватара должен быть меньше чем",
+            "image-required": "Выберите изображение",
+            "select-image": "Выберите файл формата картинки",
+            "nickname-must-less": "Ник не должен превышать",
+            "characters": "символов"
+         }
       },
       "manage-cards": {
          "card-updated": "Карточка изменена",
