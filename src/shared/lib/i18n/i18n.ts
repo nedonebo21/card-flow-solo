@@ -12,6 +12,7 @@ export const resources = {
    ru: { translation: ruTranslations },
 }
 
+// eslint-disable-next-line import/no-named-as-default-member
 i18n.use(HttpBackend).use(LanguageDetector).use(initReactI18next).init({
    debug: false,
    fallbackLng: 'en',
