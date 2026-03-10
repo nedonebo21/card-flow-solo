@@ -1,3 +1,5 @@
+import type { TFunction } from 'i18next'
+
 import { z } from 'zod'
 
 import { VALID_FILE_FORMATS } from '@/shared/constants'
@@ -7,22 +9,23 @@ const MAX_SIZE = {
    label: '10 MB',
 }
 
-export const deckFormSchema = z.object({
-   cover: z
-      .custom<File>(file => file instanceof File, {
-         message: 'Image is required',
-      })
-      .refine(
-         file => VALID_FILE_FORMATS.values.includes(file.type),
-         `Please select an image file (${VALID_FILE_FORMATS.labels})`
-      )
-      .refine(
-         file => file.size <= MAX_SIZE.value,
-         `Avatar size should be less than ${MAX_SIZE.label}`
-      )
-      .optional(),
-   name: z.string().min(1, 'Name is required'),
-   isPrivate: z.boolean().optional(),
-})
+export const deckFormSchema = (t: TFunction) =>
+   z.object({
+      cover: z
+         .custom<File>(file => file instanceof File, {
+            message: t('features.manage-decks.errors.image-required'),
+         })
+         .refine(
+            file => VALID_FILE_FORMATS.values.includes(file.type),
+            `${t('features.manage-decks.errors.image-file')} (${VALID_FILE_FORMATS.labels})`
+         )
+         .refine(
+            file => file.size <= MAX_SIZE.value,
+            `${t('features.manage-decks.errors.image-size')} ${MAX_SIZE.label}`
+         )
+         .optional(),
+      name: z.string().min(1, t('features.manage-decks.errors.name-required')),
+      isPrivate: z.boolean().optional(),
+   })
 
-export type DeckFormValues = z.infer<typeof deckFormSchema>
+export type DeckFormValues = z.infer<ReturnType<typeof deckFormSchema>>

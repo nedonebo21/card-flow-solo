@@ -4,6 +4,7 @@ import type { DeckFormValues } from './deck-form-schema'
 
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -18,8 +19,11 @@ export const useDeckForm = ({
    defaultName = '',
    defaultIsPrivate = false,
 }: UseDeckFormProps = {}) => {
+   const { t } = useTranslation()
+   const schema = deckFormSchema(t)
+
    const form = useForm<DeckFormValues>({
-      resolver: zodResolver(deckFormSchema),
+      resolver: zodResolver(schema),
       defaultValues: {
          name: defaultName,
          isPrivate: defaultIsPrivate,

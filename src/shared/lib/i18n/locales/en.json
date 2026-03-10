@@ -81,7 +81,13 @@
          "name-pack": "Name pack",
          "name": "Name",
          "cards": "Cards",
-         "created-by": "Created By"
+         "created-by": "Created By",
+         "errors": {
+            "image-required": "Image is Required",
+            "image-file": "Please select an image file",
+            "image-size": "Image size should be less than",
+            "name-required": "Name is required"
+         }
       },
       "manage-profile": {
          "nickname": "Nickname",
@@ -135,6 +141,7 @@
       "a-lot-of-thought": "A lot of thought",
       "confused": "Confused",
       "knew-the-answer": "Knew the answer",
-      "crop-cover": "Crop Cover"
+      "crop-cover": "Crop Cover",
+      "characters": "characters"
    }
 }
