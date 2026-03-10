@@ -8,3 +8,4 @@ export {
    useSaveCardGradeMutation,
 } from './api/cards-api'
 export type { Card } from './model/cards.types'
+export { useCardsQueryArgs } from './model/use-cards-query-args'

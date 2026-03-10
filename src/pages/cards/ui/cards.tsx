@@ -1,10 +1,7 @@
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import { useDebounce } from 'use-debounce'
-
-import { useGetCardsQuery } from '@/entities/card'
+import { useCardsQueryArgs, useGetCardsQuery } from '@/entities/card'
 import { useGetDeckByIdQuery } from '@/entities/deck'
 import { useMeQuery } from '@/entities/user'
 import { CreateCard } from '@/features/manage-cards'
@@ -25,27 +22,13 @@ export const Cards = () => {
 
    const { data: deck } = useGetDeckByIdQuery({ id: id ?? '' }, { skip: !id })
 
-   const searchParams = useSearchParams()[0]
-
-   const queryParams = useMemo(
-      () => ({
-         question: searchParams.get('question') || undefined,
-         orderBy: searchParams.get('orderBy') || null,
-         page: Number(searchParams.get('page')) || 1,
-         perPage: Number(searchParams.get('perPage')) || 10,
-      }),
-      [searchParams]
-   )
-
-   const [debouncedQuestion] = useDebounce(queryParams.question, 500)
+   const queryArgs = useCardsQueryArgs()
 
    const { data, isLoading, isFetching, refetch } = useGetCardsQuery({
       id: id ?? '',
-      question: debouncedQuestion,
-      orderBy: queryParams.orderBy,
-      currentPage: queryParams.page,
-      itemsPerPage: queryParams.perPage,
+      ...queryArgs,
    })
+
    const cards = data?.items ?? []
    const totalCount = data?.pagination?.totalItems ?? 0
 
