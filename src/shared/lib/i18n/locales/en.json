@@ -102,7 +102,15 @@
          "next-question": "Next question",
          "card": "Card",
          "sure-want-delete-card": "Are you sure you want to delete this card?",
-         "add-card": "Add Card"
+         "add-card": "Add Card",
+         "errors": {
+            "answer-should-more": "Answer should be more than",
+            "answer-should-less": "Answer should be less than",
+            "question-should-more": "Question should be more than",
+            "question-should-less": "Question should be less than",
+            "rate-answer": "Please rate your answer",
+            "grade-must-be": "Grade must be at most 5"
+         }
       }
    },
    "shared": {

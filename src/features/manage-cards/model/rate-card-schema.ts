@@ -1,7 +1,13 @@
+import type { TFunction } from 'i18next'
+
 import { z } from 'zod'
 
-export const rateCardSchema = z.object({
-   grade: z.number().min(1, 'Please rate your answer').max(5, 'Grade must be at most 5'),
-})
+export const rateCardSchema = (t: TFunction) =>
+   z.object({
+      grade: z
+         .number()
+         .min(1, t('features.manage-cards.errors.rate-answer'))
+         .max(5, t('features.manage-cards.errors.grade-must-be')),
+   })
 
-export type RateCardFormValues = z.infer<typeof rateCardSchema>
+export type RateCardFormValues = z.infer<ReturnType<typeof rateCardSchema>>

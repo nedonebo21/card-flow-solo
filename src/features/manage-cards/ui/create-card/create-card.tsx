@@ -28,18 +28,19 @@ export const CreateCard = ({
    refetch,
    ...rest
 }: AddNewCardProps) => {
+   const { t } = useTranslation()
+
+   const schema = cardFormSchema(t)
    const {
       handleSubmit,
       control,
       setValue,
       formState: { errors },
    } = useForm<CardFormValues>({
-      resolver: zodResolver(cardFormSchema),
+      resolver: zodResolver(schema),
    })
 
    const [addCard, { isLoading }] = useCreateCardMutation()
-
-   const { t } = useTranslation()
 
    const [isOpen, setIsOpen] = useState(false)
 

@@ -38,18 +38,20 @@ export const RateCard = ({
    isLoading,
    ...rest
 }: RateCardProps) => {
+   const { t } = useTranslation()
+
+   const schema = rateCardSchema(t)
+
    const {
       handleSubmit,
       control,
       formState: { errors },
    } = useForm<RateCardFormValues>({
-      resolver: zodResolver(rateCardSchema),
+      resolver: zodResolver(schema),
       defaultValues: {
          grade: 1,
       },
    })
-
-   const { t } = useTranslation()
 
    const ratingOptions = useRatingOptions()
 

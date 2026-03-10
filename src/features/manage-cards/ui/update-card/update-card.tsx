@@ -35,6 +35,7 @@ export const UpdateCard = ({
    const { data: card } = useGetCardByIdQuery({ id }, { skip: !isOpen })
 
    const { t } = useTranslation()
+   const schema = cardFormSchema(t)
 
    const {
       handleSubmit,
@@ -42,7 +43,7 @@ export const UpdateCard = ({
       setValue,
       formState: { errors },
    } = useForm<CardFormValues>({
-      resolver: zodResolver(cardFormSchema),
+      resolver: zodResolver(schema),
       defaultValues: {
          answer: card?.answer ?? '',
          question: card?.question ?? '',
